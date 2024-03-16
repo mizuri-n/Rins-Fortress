@@ -1,0 +1,27 @@
+[
+{
+  "name": "shield_mod:workbench/wooden.shield",
+  "type": "minecraft:crafting/shaped",
+  "pattern": [
+    "PXP",
+    "PPP",
+    " P "
+  ],
+  "symbols": [
+    {
+    "symbol": "P",
+    "key": "minecraft:logs"
+    },
+    {
+      "symbol": "X",
+      "key": "minecraft:planks"
+    }
+  ],
+  "result": {
+    "key": "item.shield_mod.wooden.shield",
+    "amount": 1,
+    "meta": 0
+  },
+  "consumeContainers": true
+  }
+]
