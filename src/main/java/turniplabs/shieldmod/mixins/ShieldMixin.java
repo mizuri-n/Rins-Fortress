@@ -61,9 +61,9 @@ public abstract class ShieldMixin extends Entity {
 						int newDamage = Math.round(damage * (shield.tool.getEfficiency(true)));
 						if (!this.gamemode.isPlayerInvulnerable()) {
 							if (stack.getData().getBoolean("active")) {
-								//if (shield.tool == ShieldMaterials.TOOL_WOOD){
-								//	attacker.push(1, 1, 1);
-								//}
+								if (shield.tool == ShieldMaterials.TOOL_WOOD){
+									attacker.push(0,1,0);
+								}
 								super.hurt(attacker, newDamage, type);
 								world.playSoundAtEntity(
 									attacker, ("mob.ghast.fireball"),

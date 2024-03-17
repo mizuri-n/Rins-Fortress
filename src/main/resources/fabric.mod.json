@@ -3,13 +3,13 @@
   "id": "shieldmod",
   "version": "${version}",
 
-  "name": "Shield Mod",
-  "description": "shield test",
+  "name": "Better with defense",
+  "description": "A simple mod adding shields",
   "authors": [
     "Mizuri-n"
   ],
   "contact": {
-    "homepage": "",
+    "homepage": "https://github.com/mizuri-n/Better-with-defense",
     "sources": ""
   },
 
