@@ -14,11 +14,13 @@ import net.minecraft.core.item.tool.ItemTool;
 import net.minecraft.core.util.helper.MathHelper;
 import java.util.Random;
 import net.minecraft.core.util.helper.DamageType;
+import turniplabs.shieldmod.ShieldMod;
 
 import javax.tools.Tool;
 
 public class ShieldItem extends ItemToolSword {
 	public ToolMaterial tool;
+	public int weaponDamage;
 	private static final int ticksToAdd = 5;
 
 
@@ -27,17 +29,25 @@ public class ShieldItem extends ItemToolSword {
 		maxStackSize = 1;
 		setMaxDamage(toolMaterial.getDurability());
 		this.tool = toolMaterial;
+		this.weaponDamage = 4 + toolMaterial.getDamage();
 
 
 	}
 	@Override
 	public boolean hitEntity(ItemStack itemstack, EntityLiving target, EntityLiving player) {
-	//target.health -= (int) 1.5;
-		target.knockBack(player, 3, player.x - target.x, player.z - target.z);
+		if(itemstack.getItem() == ShieldMod.goldShield){
+			target.knockBack(player, 1, (player.x - target.x), (player.z - target.z ));
+			target.push((target.x - player.x)/7, 0, (target.z - player.z)/7);
+		} else {
+			target.knockBack(player, 3, player.x - target.x, player.z - target.z);
+		}
 		// Decrease durability
 		itemstack.damageItem(1, player);
 
 		return true;
+	}
+	public int getDamageVsEntity(Entity entity) {
+		return this.weaponDamage;
 	}
 
 	@Override
@@ -50,6 +60,8 @@ public class ShieldItem extends ItemToolSword {
 	@Override
 	public void inventoryTick(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
 		if(itemstack.getData().getBoolean("active")){
+			entity.xd *= 0.4D;
+			entity.zd *= 0.4D;
 			int ticks = itemstack.getData().getInteger("ticks");
 
 			if (ticks > 0){
