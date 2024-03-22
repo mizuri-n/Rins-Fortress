@@ -2,6 +2,7 @@ package turniplabs.shieldmod;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.data.DataLoader;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.item.tag.ItemTags;
@@ -30,9 +31,11 @@ public class ShieldMod implements ModInitializer, RecipeEntrypoint {
 
 
 
+
     @Override
     public void onInitialize() {
         LOGGER.info("Shield mod loaded");
+		LookupFuelFurnace.instance.addFuelEntry(ShieldMod.woodenShield.id, 600);
     }
 	@Override
 	public void onRecipesReady() {

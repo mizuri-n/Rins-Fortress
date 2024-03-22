@@ -4,7 +4,8 @@
     "package": "turniplabs.shieldmod.mixins",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
-      "ShieldMixin"
+      "ShieldMixin",
+      "ItemMixin"
     ],
     "client": [
     ],
