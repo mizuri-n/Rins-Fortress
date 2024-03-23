@@ -65,7 +65,7 @@ public abstract class ShieldMixin extends Entity {
 									attacker.push(0,1,0);
 								}
 								super.hurt(attacker, newDamage, type);
-								world.playSoundAtEntity(
+								world.playSoundAtEntity(attacker,
 									attacker, ("mob.ghast.fireball"),
 									1.0F,
 									9.0F + world.rand.nextFloat()
