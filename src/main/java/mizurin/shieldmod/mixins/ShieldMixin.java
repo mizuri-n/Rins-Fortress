@@ -1,23 +1,19 @@
-package turniplabs.shieldmod.mixins;
+package mizurin.shieldmod.mixins;
 
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.player.inventory.InventoryPlayer;
-import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import turniplabs.shieldmod.ShieldMod;
-import turniplabs.shieldmod.item.ShieldItem;
-import turniplabs.shieldmod.item.ShieldMaterials;
+import mizurin.shieldmod.item.ShieldItem;
+import mizurin.shieldmod.item.ShieldMaterials;
 
 
 // mixin to EntityPlayer, do not remap(forgot what remap does)

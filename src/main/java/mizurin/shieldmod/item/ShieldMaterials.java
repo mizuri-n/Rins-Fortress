@@ -1,4 +1,4 @@
-package turniplabs.shieldmod.item;
+package mizurin.shieldmod.item;
 
 import net.minecraft.core.item.material.ToolMaterial;
 

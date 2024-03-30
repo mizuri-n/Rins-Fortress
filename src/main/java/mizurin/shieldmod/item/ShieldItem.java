@@ -1,22 +1,12 @@
-package turniplabs.shieldmod.item;
+package mizurin.shieldmod.item;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.Item;
-import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolSword;
 import net.minecraft.core.world.World;
-import net.minecraft.core.item.tool.ItemTool;
-import net.minecraft.core.util.helper.MathHelper;
-import java.util.Random;
-import net.minecraft.core.util.helper.DamageType;
-import turniplabs.shieldmod.ShieldMod;
-
-import javax.tools.Tool;
 
 public class ShieldItem extends ItemToolSword {
 	public ToolMaterial tool;
@@ -35,7 +25,7 @@ public class ShieldItem extends ItemToolSword {
 	}
 	@Override
 	public boolean hitEntity(ItemStack itemstack, EntityLiving target, EntityLiving player) {
-		if(itemstack.getItem() == ShieldMod.goldShield){
+		if(itemstack.getItem() == Shields.goldShield){
 			target.knockBack(player, 1, (player.x - target.x), (player.z - target.z ));
 			target.push((target.x - player.x)/7, 0, (target.z - player.z)/7);
 		} else {

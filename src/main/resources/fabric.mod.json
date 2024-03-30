@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Better with defense",
-  "description": "A simple mod adding shields",
+  "description": "This mod aims to add shields to bta",
   "authors": [
     "Mizuri-n"
   ],
@@ -18,10 +18,16 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-        "turniplabs.shieldmod.ShieldMod"
+        "mizurin.shieldmod.ShieldMod"
     ],
+		"beforeGameStart": [
+			"mizurin.shieldmod.ShieldMod"
+		],
+		"afterGameStart": [
+			"mizurin.shieldmod.ShieldMod"
+		],
 		"recipesReady": [
-			"turniplabs.shieldmod.ShieldMod"
+			"mizurin.shieldmod.recipes"
 		]
   },
   "mixins": [
