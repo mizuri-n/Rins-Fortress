@@ -85,14 +85,8 @@ public abstract class ShieldMixin extends Entity {
 								super.hurt(attacker, damage, type);
 							}
 						}
-
-
-						// yeet attacker
-						//attacker.push(world.rand.nextFloat(), world.rand.nextFloat(), world.rand.nextFloat());
-						// play some sound
-
+						ci.setReturnValue(false);
 					}
-					ci.setReturnValue(false);
 				}
 			}
 		}
