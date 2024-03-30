@@ -1,6 +1,5 @@
-package turniplabs.shieldmod.mixins;
-import turniplabs.shieldmod.ShieldMod;
-import turniplabs.shieldmod.item.ShieldItem;
+package mizurin.shieldmod.mixins;
+import mizurin.shieldmod.item.ShieldItem;
 import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.client.render.entity.PlayerRenderer;
 import net.minecraft.client.render.model.ModelBase;
