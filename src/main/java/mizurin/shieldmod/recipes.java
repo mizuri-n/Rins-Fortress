@@ -1,16 +1,19 @@
 package mizurin.shieldmod;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 import net.minecraft.core.item.Item;
 import turniplabs.halplibe.helper.RecipeBuilder;
 import net.minecraft.core.data.DataLoader;
+import java.awt.*;
 
 import mizurin.shieldmod.item.Shields;
 
@@ -62,6 +65,16 @@ public class recipes implements RecipeEntrypoint {
 			.addInput('P', Item.ingotSteel)
 			.addInput('L',"minecraft:planks")
 			.create("steelShield", Shields.steelShield.getDefaultStack());
+
+
+		RecipeBuilder.Shaped(MOD_ID)
+			.setShape(" P ","PLP"," P ")
+			.addInput('P', Item.leather)
+			.addInput('L', Block.wool)
+			.create("leatherShield", Shields.leatherShield.getDefaultStack());
+
+		Registries.RECIPE_TYPES.register("colored/shield", recipeColor.class);
+		WORKBENCH.register("leather", new recipeColor());
 
 	}
 }

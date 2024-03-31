@@ -1,5 +1,7 @@
 package mizurin.shieldmod.item;
 
+import mizurin.shieldmod.ShieldAchievements;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -25,13 +27,12 @@ public class ShieldItem extends ItemToolSword {
 	}
 	@Override
 	public boolean hitEntity(ItemStack itemstack, EntityLiving target, EntityLiving player) {
-		if(itemstack.getItem() == Shields.goldShield){
+		if(itemstack.getItem() == Shields.leatherShield){
 			target.knockBack(player, 1, (player.x - target.x), (player.z - target.z ));
 			target.push((target.x - player.x)/7, 0, (target.z - player.z)/7);
 		} else {
 			target.knockBack(player, 3, player.x - target.x, player.z - target.z);
 		}
-		// Decrease durability
 		itemstack.damageItem(1, player);
 
 		return true;
@@ -58,6 +59,14 @@ public class ShieldItem extends ItemToolSword {
 				itemstack.getData().putInt("ticks", ticks - 1);
 			} else {
 				itemstack.getData().putBoolean("active", false);
+			}
+		}
+		if (itemstack != null && itemstack.getItem() instanceof ShieldItem) {
+			EntityPlayer thePlayer = Minecraft.getMinecraft(this).thePlayer;
+			thePlayer.triggerAchievement(ShieldAchievements.SHIELD_GOT);
+			ShieldItem shield = ((ShieldItem) itemstack.getItem());
+			if(shield.tool == ShieldMaterials.TOOL_STEEL){
+				thePlayer.triggerAchievement(ShieldAchievements.MODERN_AGE);
 			}
 		}
 	}

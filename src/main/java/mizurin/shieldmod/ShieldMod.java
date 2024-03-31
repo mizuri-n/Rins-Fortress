@@ -4,8 +4,10 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import turniplabs.halplibe.helper.AchievementHelper;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import mizurin.shieldmod.item.Shields;
+import turniplabs.halplibe.util.achievements.AchievementPage;
 
 public class ShieldMod implements ModInitializer, GameStartEntrypoint {
     public static final String MOD_ID = "shieldmod";
@@ -21,6 +23,9 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint {
 	@Override
 	public void beforeGameStart() {
 		new Shields().initializeItems();
+		AchievementPage SHIELDACHIEVEMENTS;
+		SHIELDACHIEVEMENTS = new ShieldAchievements();
+		AchievementHelper.addPage(SHIELDACHIEVEMENTS);
 
 	}
 
