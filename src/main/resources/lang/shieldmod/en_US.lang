@@ -1,12 +1,27 @@
+item.shieldmod.leather.shield.name=Leather Shield
+item.shieldmod.leather.shield.desc=A tool to block and knockback enemies!
 item.shieldmod.wooden.shield.name=Wooden Shield
-item.shieldmod.wooden.shield.desc=A tool to block attacks and knockback enemies!
+item.shieldmod.wooden.shield.desc=A tool to block and knockback enemies!
 item.shieldmod.stone.shield.name=Stone Shield
-item.shieldmod.stone.shield.desc=A tool to block attacks and knockback enemies!
+item.shieldmod.stone.shield.desc=A tool to block and knockback enemies!
 item.shieldmod.iron.shield.name=Iron Shield
-item.shieldmod.iron.shield.desc=A tool to block attacks and knockback enemies!
+item.shieldmod.iron.shield.desc=A tool to block and knockback enemies!
 item.shieldmod.gold.shield.name=Gold Shield
-item.shieldmod.gold.shield.desc=A tool to block attacks and knockback enemies!
+item.shieldmod.gold.shield.desc=A tool to block and knockback enemies!
 item.shieldmod.diamond.shield.name=Diamond Shield
-item.shieldmod.diamond.shield.desc=A tool to block attacks and knockback enemies!
+item.shieldmod.diamond.shield.desc=A tool to block and knockback enemies!
 item.shieldmod.steel.shield.name=Steel Shield
-item.shieldmod.steel.shield.desc=A tool to block attacks and knockback enemies!
+item.shieldmod.steel.shield.desc=A tool to block and knockback enemies!
+achievements.page.defense.desc=Shield achievements
+achievement.shieldmod.block=Block Blocked
+achievement.shieldmod.block.desc=Block an attack
+achievement.shieldmod.shield.got=Shield Get!
+achievement.shieldmod.shield.got.desc=Make yourself a Shield
+achievement.shieldmod.modern.age=The Modern Age
+achievement.shieldmod.modern.age.desc=Make a Steel Shield
+achievement.shieldmod.fly.high=Fly High
+achievement.shieldmod.fly.high.desc=Knock an enemy into the air!
+achievement.shieldmod.gold.retal=Golden Retaliation
+achievement.shieldmod.gold.retal.desc=Damage attackers by blocking
+
+

@@ -1,5 +1,7 @@
 package mizurin.shieldmod.mixins;
+import mizurin.shieldmod.ShieldAchievements;
 import mizurin.shieldmod.item.ShieldItem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.client.render.entity.PlayerRenderer;
 import net.minecraft.client.render.model.ModelBase;
@@ -27,6 +29,8 @@ public abstract class ItemMixin extends LivingRenderer<EntityPlayer> {
 		ItemStack itemstack = entity.inventory.getCurrentItem();
 
 		if (itemstack != null && itemstack.getItem() instanceof ShieldItem) {
+			EntityPlayer thePlayer = Minecraft.getMinecraft(this).thePlayer;
+			thePlayer.triggerAchievement(ShieldAchievements.SHIELD_GOT);
 			if (itemstack.getData().getBoolean("active")) {
 				GL11.glPushMatrix();
 				modelBipedMain.bipedRightArm.postRender(0.0625F);
