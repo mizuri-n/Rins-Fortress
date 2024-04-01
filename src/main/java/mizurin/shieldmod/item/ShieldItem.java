@@ -61,14 +61,14 @@ public class ShieldItem extends ItemToolSword {
 				itemstack.getData().putBoolean("active", false);
 			}
 		}
-		if (itemstack != null && itemstack.getItem() instanceof ShieldItem) {
-			EntityPlayer thePlayer = Minecraft.getMinecraft(this).thePlayer;
-			thePlayer.triggerAchievement(ShieldAchievements.SHIELD_GOT);
-			ShieldItem shield = ((ShieldItem) itemstack.getItem());
-			if(shield.tool == ShieldMaterials.TOOL_STEEL){
-				thePlayer.triggerAchievement(ShieldAchievements.MODERN_AGE);
-			}
-		}
+		//if (itemstack != null && itemstack.getItem() instanceof ShieldItem) {
+		//	EntityPlayer thePlayer = Minecraft.getMinecraft(this).thePlayer;
+		//	thePlayer.triggerAchievement(ShieldAchievements.SHIELD_GOT);
+		//	ShieldItem shield = ((ShieldItem) itemstack.getItem());
+		//	if(shield.tool == ShieldMaterials.TOOL_STEEL){
+		//		thePlayer.triggerAchievement(ShieldAchievements.MODERN_AGE);
+		//	}
+		//}
 	}
 }
 

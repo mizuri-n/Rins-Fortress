@@ -5,6 +5,7 @@ import net.minecraft.client.util.helper.Colors;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryCrafting;
 import net.minecraft.core.util.helper.Color;
@@ -21,8 +22,10 @@ public class recipeColor extends RecipeEntryCraftingDynamic {
 	private static final Map<Integer, Color> vanillaDye;
 	static {
 		vanillaDye = new HashMap<>();
+		ItemDye.field_31002_bk[7] = 13027014;
+		ItemDye.field_31002_bk[15] = 16777215;
 		for (int color = 0; color < 16; color++) {
-			vanillaDye.put(color, Colors.allSignColors[15 - color]);
+			vanillaDye.put(color, new Color().setARGB(ItemDye.field_31002_bk[color]));
 		}
 		dyeMap.put(Item.dye, vanillaDye);
 	}
