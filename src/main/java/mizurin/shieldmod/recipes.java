@@ -73,9 +73,11 @@ public class recipes implements RecipeEntrypoint {
 			.addInput('L', Block.wool)
 			.create("leatherShield", Shields.leatherShield.getDefaultStack());
 
+
+	}
+	public void initializeRecipe(){
 		Registries.RECIPE_TYPES.register("colored/shield", recipeColor.class);
 		WORKBENCH.register("leather", new recipeColor());
-
 	}
 }
 

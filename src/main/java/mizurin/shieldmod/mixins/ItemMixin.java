@@ -29,8 +29,7 @@ public abstract class ItemMixin extends LivingRenderer<EntityPlayer> {
 		ItemStack itemstack = entity.inventory.getCurrentItem();
 
 		if (itemstack != null && itemstack.getItem() instanceof ShieldItem) {
-			EntityPlayer thePlayer = Minecraft.getMinecraft(this).thePlayer;
-			thePlayer.triggerAchievement(ShieldAchievements.SHIELD_GOT);
+			//entity.triggerAchievement(ShieldAchievements.SHIELD_GOT);
 			if (itemstack.getData().getBoolean("active")) {
 				GL11.glPushMatrix();
 				modelBipedMain.bipedRightArm.postRender(0.0625F);

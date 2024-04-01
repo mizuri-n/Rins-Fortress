@@ -2,6 +2,7 @@ package mizurin.shieldmod;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.crafting.LookupFuelFurnace;
+import net.minecraft.core.data.registry.Registries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.AchievementHelper;
@@ -32,6 +33,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint {
 	@Override
 	public void afterGameStart() {
 		LookupFuelFurnace.instance.addFuelEntry(Shields.woodenShield.id, 600);
+		new recipes().initializeRecipe();
 		LOGGER.info("Time to Block!");
 	}
 }

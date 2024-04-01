@@ -63,7 +63,7 @@ public abstract class ShieldMixin extends Entity {
 		}
 
 		// check if we are holding the shield item.
-		EntityPlayer thePlayer = Minecraft.getMinecraft(this).thePlayer;
+		//EntityPlayer thePlayer = Minecraft.getMinecraft(this).thePlayer;
 		ItemStack stack = inventory.mainInventory[inventory.currentItem];
 		if (stack != null) {
 			if (stack.getItem() instanceof ShieldItem) {
@@ -78,14 +78,14 @@ public abstract class ShieldMixin extends Entity {
 								int newDamage = Math.round(damage * (shield.tool.getEfficiency(true)));
 								if (shield.tool == ShieldMaterials.TOOL_LEATHER){
 									attacker.push(0 ,1,0);
-									thePlayer.triggerAchievement(ShieldAchievements.FLY_HIGH);
+			//						thePlayer.triggerAchievement(ShieldAchievements.FLY_HIGH);
 								}
 								if(shield.tool == ShieldMaterials.TOOL_GOLD){
 									attacker.hurt(attacker, newDamage, type);
-									thePlayer.triggerAchievement(ShieldAchievements.GOLD_RETAL);
+			//						thePlayer.triggerAchievement(ShieldAchievements.GOLD_RETAL);
 								}
 								super.hurt(attacker, newDamage, type);
-								thePlayer.triggerAchievement(ShieldAchievements.BLOCK);
+			//					thePlayer.triggerAchievement(ShieldAchievements.BLOCK);
 
 								world.playSoundAtEntity(attacker,
 									attacker, ("mob.ghast.fireball"),
