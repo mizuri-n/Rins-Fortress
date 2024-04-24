@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.ItemHelper;
 import mizurin.shieldmod.ShieldMod;
 import org.slf4j.Logger;
-import useless.prismaticlibe.IColoredArmor;
-import useless.prismaticlibe.debug.ItemArmorColored;
 import net.minecraft.core.item.material.ArmorMaterial;
-import turniplabs.halplibe.helper.ArmorHelper;
 
 public class Shields {
 	public static final String MOD_ID = ShieldMod.MOD_ID;

@@ -13,13 +13,13 @@ import useless.prismaticlibe.IColoredArmor;
 
 import java.awt.*;
 
-public class ArmorColored extends ItemArmor implements IColoredArmor, IColored {
+public class ArmorColored extends ItemArmor implements IColored, IColoredArmor {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
-	public static final int[][] baseColor = new int[][] {
-		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "leather_helmet.png"),
-		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "leather_chestplate.png"),
-		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "leather_leggings.png"),
-		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "leather_boots.png")};
+	private final int[][] armorColor = new int[][] {
+		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "armor/leather_helmet.png"),
+		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "armor/leather_chestplate.png"),
+		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "armor/leather_leggings.png"),
+		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "armor/leather_boots.png")};
 
 	public ArmorColored(String name, int id, ArmorMaterial material, int armorPiece) {
 		super(name, id, material, armorPiece);
@@ -36,10 +36,9 @@ public class ArmorColored extends ItemArmor implements IColoredArmor, IColored {
 	}
 	@Override
 	public ColoredTexture[] getTextures(ItemStack itemStack) {
-		return new ColoredTexture[]{new ColoredTexture(baseColor[armorPiece], getColor(itemStack))};
+		return new ColoredTexture[]{new ColoredTexture(armorColor[armorPiece], getColor(itemStack))};
 	}
 
-	@Override
 	public ColoredArmorTexture[] getArmorTextures(ItemStack itemStack) {
 		return new ColoredArmorTexture[]{new ColoredArmorTexture("leather", getColor(itemStack))};
 	}
