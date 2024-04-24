@@ -1,7 +1,6 @@
 package mizurin.shieldmod;
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.client.util.helper.Colors;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
 import net.minecraft.core.item.Item;
