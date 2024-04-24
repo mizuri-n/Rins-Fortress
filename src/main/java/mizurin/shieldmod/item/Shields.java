@@ -6,6 +6,10 @@ import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.ItemHelper;
 import mizurin.shieldmod.ShieldMod;
 import org.slf4j.Logger;
+import useless.prismaticlibe.IColoredArmor;
+import useless.prismaticlibe.debug.ItemArmorColored;
+import net.minecraft.core.item.material.ArmorMaterial;
+import turniplabs.halplibe.helper.ArmorHelper;
 
 public class Shields {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
@@ -17,6 +21,12 @@ public class Shields {
 	public static final Item goldShield = ItemHelper.createItem(MOD_ID, new ShieldItem("gold.shield", 17003, ShieldMaterials.TOOL_GOLD), "gold_shield.png").withTags(ItemTags.preventCreativeMining);
 	public static final Item diamondShield = ItemHelper.createItem(MOD_ID, new ShieldItem("diamond.shield", 17004, ShieldMaterials.TOOL_DIAMOND), "diamond_shield.png").withTags(ItemTags.preventCreativeMining);
 	public static final Item steelShield = ItemHelper.createItem(MOD_ID, new ShieldItem("steel.shield", 17005, ShieldMaterials.TOOL_STEEL), "steel_shield.png").withTags(ItemTags.preventCreativeMining);
+
+	public static final Item armorLeatherHelmet = ItemHelper.createItem(MOD_ID, new ArmorColored("Leather Cap", 16426,ArmorMaterial.LEATHER , 0 ), "armor.helmet.leather");
+	public static final Item armorLeatherChest = ItemHelper.createItem(MOD_ID, new ArmorColored("Leather Tunic", 16427,ArmorMaterial.LEATHER , 1 ), "armor.chestplate.leather");
+	public static final Item armorLeatherLeg = ItemHelper.createItem(MOD_ID, new ArmorColored("Leather Pants", 16428,ArmorMaterial.LEATHER , 2 ), "armor.leggings.leather");
+	public static final Item armorLeatherBoot = ItemHelper.createItem(MOD_ID, new ArmorColored("Leather Boots", 16429,ArmorMaterial.LEATHER , 3 ), "armor.boots.leather");
+
 
 	public void initializeItems(){}
 }

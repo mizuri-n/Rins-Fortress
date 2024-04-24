@@ -70,7 +70,7 @@ public class recipes implements RecipeEntrypoint {
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(" P ","PLP"," P ")
 			.addInput('P', Item.leather)
-			.addInput('L', Block.wool)
+			.addInput('L', "minecraft:wools")
 			.create("leatherShield", Shields.leatherShield.getDefaultStack());
 
 

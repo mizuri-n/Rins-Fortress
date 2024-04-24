@@ -12,6 +12,17 @@ item.shieldmod.diamond.shield.name=Diamond Shield
 item.shieldmod.diamond.shield.desc=A tool to block and knockback enemies!
 item.shieldmod.steel.shield.name=Steel Shield
 item.shieldmod.steel.shield.desc=A tool to block and knockback enemies!
+item.shieldmod.armor.helmet.leather.name=Leather Cap
+item.shieldmod.armor.helmet.leather.desc=A hat made from a cow's hide
+item.shieldmod.armor.chestplate.leather.name=Leather Tunic
+item.shieldmod.armor.chestplate.leather.desc=A tunic made from a cow's hide
+item.shieldmod.armor.leggings.leather.name=Leather Pants
+item.shieldmod.armor.leggings.leather.desc=A pair of trousers made from a cow's hide
+item.shieldmod.armor.boots.leather.name=Leather Boots
+item.shieldmod.armor.boots.leather.desc=A pair of boots made from a cow's hide
+
+
+
 achievements.page.defense.desc=Shield achievements
 achievement.shieldmod.block=Block Blocked
 achievement.shieldmod.block.desc=Block an attack
