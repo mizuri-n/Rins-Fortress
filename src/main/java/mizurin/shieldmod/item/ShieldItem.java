@@ -33,6 +33,9 @@ public class ShieldItem extends ItemToolSword {
 		} else {
 			target.knockBack(player, 3, player.x - target.x, player.z - target.z);
 		}
+		if(itemstack.getItem() == Shields.steelShield){
+			target.fireHurt();
+		}
 		itemstack.damageItem(1, player);
 
 		return true;
