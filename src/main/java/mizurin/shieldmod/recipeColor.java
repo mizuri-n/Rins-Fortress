@@ -1,8 +1,11 @@
 package mizurin.shieldmod;
 
 import com.mojang.nbt.CompoundTag;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.Global;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
+import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemStack;
@@ -17,6 +20,7 @@ import java.util.Map;
 
 //Special thanks to UselessBullets for being extremely awesome https://github.com/UselessBullets/Lunacy/tree/7.1
 public class recipeColor extends RecipeEntryCraftingDynamic {
+
 	public static HashMap<Item, Map<Integer, Color>> dyeMap = new HashMap<>();
 	private static final Map<Integer, Color> vanillaDye;
 	static {
