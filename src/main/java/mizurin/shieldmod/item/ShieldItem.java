@@ -1,7 +1,6 @@
 package mizurin.shieldmod.item;
 
 import mizurin.shieldmod.ShieldAchievements;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -51,6 +50,7 @@ public class ShieldItem extends ItemToolSword {
 		return itemstack;
 	}
 
+
 	@Override
 	public void inventoryTick(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
 		if(itemstack.getData().getBoolean("active")){
@@ -64,14 +64,20 @@ public class ShieldItem extends ItemToolSword {
 				itemstack.getData().putBoolean("active", false);
 			}
 		}
-		//if (itemstack != null && itemstack.getItem() instanceof ShieldItem) {
-		//	EntityPlayer thePlayer = Minecraft.getMinecraft(this).thePlayer;
-		//	thePlayer.triggerAchievement(ShieldAchievements.SHIELD_GOT);
-		//	ShieldItem shield = ((ShieldItem) itemstack.getItem());
-		//	if(shield.tool == ShieldMaterials.TOOL_STEEL){
-		//		thePlayer.triggerAchievement(ShieldAchievements.MODERN_AGE);
-		//	}
-		//}
+	}
+
+	@Override
+	public void onCraftedBy(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+		super.onCraftedBy(itemstack, world, entityplayer);
+		if (itemstack != null && itemstack.getItem() instanceof ShieldItem) {
+			ShieldItem shield = ((ShieldItem) itemstack.getItem());
+			if(shield.tool == ShieldMaterials.TOOL_WOOD) {
+				entityplayer.addStat(ShieldAchievements.SHIELD_GOT, 1);
+			}
+			if(shield.tool == ShieldMaterials.TOOL_STEEL) {
+				entityplayer.addStat(ShieldAchievements.MODERN_AGE, 1);
+			}
+		}
 	}
 }
 

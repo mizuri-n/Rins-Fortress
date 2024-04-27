@@ -23,16 +23,20 @@ item.shieldmod.armor.boots.leather.desc=A pair of boots made from a cow's hide
 
 
 
-achievements.page.defense.desc=Shield achievements
+achievements.page.defense.desc=BWD achievements
 achievement.shieldmod.block=Block Blocked
 achievement.shieldmod.block.desc=Block an attack
-achievement.shieldmod.shield.got=Shield Get!
-achievement.shieldmod.shield.got.desc=Make yourself a Shield
+achievement.shieldmod.shield.got=Time to Defend!
+achievement.shieldmod.shield.got.desc=Use planks and a log to make a shield
 achievement.shieldmod.modern.age=The Modern Age
-achievement.shieldmod.modern.age.desc=Make a Steel Shield
+achievement.shieldmod.modern.age.desc=Obtain a Steel Shield
 achievement.shieldmod.fly.high=Fly High
 achievement.shieldmod.fly.high.desc=Knock an enemy into the air!
 achievement.shieldmod.gold.retal=Golden Retaliation
-achievement.shieldmod.gold.retal.desc=Damage attackers by blocking
+achievement.shieldmod.gold.retal.desc=Send damage back to an enemy
+achievement.shieldmod.colorful.world=Colorful World
+achievement.shieldmod.colorful.world.desc=Obtain a dyed shield or armor
 
+achievement.shieldmod.undying.shield=Invincible!
+achievement.shieldmod.undying.shield.desc=Survive a Lethal blow
 

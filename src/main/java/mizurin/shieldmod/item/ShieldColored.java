@@ -30,4 +30,5 @@ public class ShieldColored extends ShieldItem implements IColored {
 	public ColoredTexture[] getTextures(ItemStack itemStack) {
 		return new ColoredTexture[]{new ColoredTexture(baseColor, getColor(itemStack)), new ColoredTexture(overlayShield, getColor(itemStack))};
 	}
+
 }

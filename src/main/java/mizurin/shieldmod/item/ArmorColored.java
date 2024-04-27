@@ -42,4 +42,5 @@ public class ArmorColored extends ItemArmor implements IColored, IColoredArmor {
 	public ColoredArmorTexture[] getArmorTextures(ItemStack itemStack) {
 		return new ColoredArmorTexture[]{new ColoredArmorTexture("leather", getColor(itemStack))};
 	}
+
 }

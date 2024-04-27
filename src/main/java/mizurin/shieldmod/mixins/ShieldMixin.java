@@ -1,6 +1,6 @@
 package mizurin.shieldmod.mixins;
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.core.achievement.stat.Stat;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -43,6 +43,10 @@ public abstract class ShieldMixin extends Entity {
 	@Shadow
 	public abstract ItemStack getHeldItem();
 
+	@Shadow
+	public abstract void addStat(Stat statbase, int i);
+
+
 
 
 	// inject at the top(HEAD) of hurt(), allow us to call return(cancel/set return value)
@@ -63,7 +67,6 @@ public abstract class ShieldMixin extends Entity {
 		}
 
 		// check if we are holding the shield item.
-		//EntityPlayer thePlayer = Minecraft.getMinecraft(this).thePlayer;
 		ItemStack stack = inventory.mainInventory[inventory.currentItem];
 		if (stack != null) {
 			if (stack.getItem() instanceof ShieldItem) {
@@ -76,16 +79,20 @@ public abstract class ShieldMixin extends Entity {
 						if (!this.gamemode.isPlayerInvulnerable()) {
 							if (stack.getData().getBoolean("active")) {
 								int newDamage = Math.round(damage * (shield.tool.getEfficiency(true)));
+
 								if (shield.tool == ShieldMaterials.TOOL_LEATHER){
 									attacker.push(0 ,1,0);
-			//						thePlayer.triggerAchievement(ShieldAchievements.FLY_HIGH);
+									addStat(ShieldAchievements.FLY_HIGH, 1);
 								}
 								if(shield.tool == ShieldMaterials.TOOL_GOLD){
 									attacker.hurt(attacker, newDamage, type);
-			//						thePlayer.triggerAchievement(ShieldAchievements.GOLD_RETAL);
+									addStat(ShieldAchievements.GOLD_RETAL, 1);
 								}
 								super.hurt(attacker, newDamage, type);
-			//					thePlayer.triggerAchievement(ShieldAchievements.BLOCK);
+								addStat(ShieldAchievements.BLOCK, 1);
+								if( damage > 20 && isAlive()){
+									addStat(ShieldAchievements.INVINCIBLE, 1);
+								}
 
 								world.playSoundAtEntity(attacker,
 									attacker, ("mob.ghast.fireball"),

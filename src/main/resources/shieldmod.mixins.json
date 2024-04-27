@@ -1,15 +1,16 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "mizurin.shieldmod.mixins",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-      "ShieldMixin",
-      "ItemMixin"
-    ],
-    "client": [
-    ],
-    "injectors": {
-        "defaultRequire": 1
+  "required": true,
+  "minVersion": "0.8",
+  "package": "mizurin.shieldmod.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "dyeMixin",
+    "ItemMixin",
+    "ShieldMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
   }
 }
