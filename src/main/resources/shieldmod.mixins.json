@@ -9,6 +9,7 @@
     "ShieldMixin"
   ],
   "client": [
+    "dyeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

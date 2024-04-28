@@ -66,7 +66,7 @@ public class ShieldItem extends ItemToolSword {
 		}
 	}
 
-	@Override
+	/*@Override
 	public void onCraftedBy(ItemStack itemstack, World world, EntityPlayer entityplayer) {
 		super.onCraftedBy(itemstack, world, entityplayer);
 		if (itemstack != null && itemstack.getItem() instanceof ShieldItem) {
@@ -78,6 +78,6 @@ public class ShieldItem extends ItemToolSword {
 				entityplayer.addStat(ShieldAchievements.MODERN_AGE, 1);
 			}
 		}
-	}
+	} */
 }
 
