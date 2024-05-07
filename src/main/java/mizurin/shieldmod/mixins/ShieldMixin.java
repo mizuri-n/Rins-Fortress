@@ -20,6 +20,7 @@ import mizurin.shieldmod.item.ShieldMaterials;
 import mizurin.shieldmod.ShieldAchievements;
 
 
+
 // mixin to EntityPlayer, do not remap(forgot what remap does)
 @Mixin(value = EntityPlayer.class, remap = false)
 
@@ -47,7 +48,8 @@ public abstract class ShieldMixin extends Entity {
 	public abstract void addStat(Stat statbase, int i);
 
 
-
+	@Shadow
+	public abstract void triggerAchievement(Stat statbase);
 
 	// inject at the top(HEAD) of hurt(), allow us to call return(cancel/set return value)
 	@Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
@@ -82,17 +84,18 @@ public abstract class ShieldMixin extends Entity {
 
 								if (shield.tool == ShieldMaterials.TOOL_LEATHER){
 									attacker.push(0 ,1,0);
-									addStat(ShieldAchievements.FLY_HIGH, 1);
+									//addStat(ShieldAchievements.FLY_HIGH, 1);
 								}
 								if(shield.tool == ShieldMaterials.TOOL_GOLD){
 									attacker.hurt(attacker, newDamage, type);
-									addStat(ShieldAchievements.GOLD_RETAL, 1);
+									//addStat(ShieldAchievements.GOLD_RETAL, 1);
 								}
 								super.hurt(attacker, newDamage, type);
-								addStat(ShieldAchievements.BLOCK, 1);
-								if( damage > 20 && isAlive()){
-									addStat(ShieldAchievements.INVINCIBLE, 1);
-								}
+									//addStat(ShieldAchievements.BLOCK, 1);
+
+								//if( damage > 20 && isAlive()){
+									//addStat(ShieldAchievements.INVINCIBLE, 1);
+								//}
 
 								world.playSoundAtEntity(attacker,
 									attacker, ("mob.ghast.fireball"),
@@ -113,6 +116,7 @@ public abstract class ShieldMixin extends Entity {
 										dx, dy, dz
 									);
 								}
+
 								stack.damageItem(4, inventory.player);
 							} else {
 								super.hurt(attacker, damage, type);

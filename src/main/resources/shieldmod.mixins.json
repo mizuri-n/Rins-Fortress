@@ -4,12 +4,11 @@
   "package": "mizurin.shieldmod.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "dyeMixin",
     "ItemMixin",
-    "ShieldMixin"
+    "ShieldMixin",
+    "achievement.dyeMixin"
   ],
   "client": [
-    "dyeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
