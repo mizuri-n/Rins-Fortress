@@ -4,7 +4,6 @@ import net.minecraft.client.render.TextureFX;
 import net.minecraft.core.Global;
 import net.minecraft.core.achievement.Achievement;
 import net.minecraft.core.achievement.AchievementList;
-import net.minecraft.core.achievement.stat.Stat;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.util.helper.Side;
@@ -26,7 +25,6 @@ public class ShieldAchievements extends AchievementPage {
 
 	public ShieldAchievements(){
 		super("Better with defense", "achievements.page.defense");
-		((Stat) BLOCK).registerStat();
 		achievementList.add(SHIELD_GOT);
 		achievementList.add(BLOCK);
 		achievementList.add(MODERN_AGE);

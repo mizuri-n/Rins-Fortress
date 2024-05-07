@@ -7,17 +7,18 @@ import turniplabs.halplibe.helper.ItemHelper;
 import mizurin.shieldmod.ShieldMod;
 import org.slf4j.Logger;
 import net.minecraft.core.item.material.ArmorMaterial;
+import static mizurin.shieldmod.ShieldMod.itemID;
 
 public class Shields {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static final Item leatherShield = ItemHelper.createItem(MOD_ID, new ShieldColored("leather.shield", 17006, ShieldMaterials.TOOL_LEATHER), "wooden_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item woodenShield = ItemHelper.createItem(MOD_ID, new ShieldItem("wooden.shield", 17000, ShieldMaterials.TOOL_WOOD),"wooden_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item stoneShield = ItemHelper.createItem(MOD_ID, new ShieldItem("stone.shield", 17001, ShieldMaterials.TOOL_STONE), "stone_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item ironShield = ItemHelper.createItem(MOD_ID, new ShieldItem("iron.shield", 17002, ShieldMaterials.TOOL_IRON), "iron_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item goldShield = ItemHelper.createItem(MOD_ID, new ShieldItem("gold.shield", 17003, ShieldMaterials.TOOL_GOLD), "gold_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item diamondShield = ItemHelper.createItem(MOD_ID, new ShieldItem("diamond.shield", 17004, ShieldMaterials.TOOL_DIAMOND), "diamond_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item steelShield = ItemHelper.createItem(MOD_ID, new ShieldItem("steel.shield", 17005, ShieldMaterials.TOOL_STEEL), "steel_shield.png").withTags(ItemTags.preventCreativeMining);
+	public static final Item woodenShield = ItemHelper.createItem(MOD_ID, new ShieldItem("wooden.shield", ++itemID, ShieldMaterials.TOOL_WOOD),"wooden_shield.png").withTags(ItemTags.preventCreativeMining);
+	public static final Item stoneShield = ItemHelper.createItem(MOD_ID, new ShieldItem("stone.shield", ++itemID, ShieldMaterials.TOOL_STONE), "stone_shield.png").withTags(ItemTags.preventCreativeMining);
+	public static final Item ironShield = ItemHelper.createItem(MOD_ID, new ShieldItem("iron.shield", ++itemID, ShieldMaterials.TOOL_IRON), "iron_shield.png").withTags(ItemTags.preventCreativeMining);
+	public static final Item goldShield = ItemHelper.createItem(MOD_ID, new ShieldItem("gold.shield", ++itemID, ShieldMaterials.TOOL_GOLD), "gold_shield.png").withTags(ItemTags.preventCreativeMining);
+	public static final Item diamondShield = ItemHelper.createItem(MOD_ID, new ShieldItem("diamond.shield", ++itemID, ShieldMaterials.TOOL_DIAMOND), "diamond_shield.png").withTags(ItemTags.preventCreativeMining);
+	public static final Item steelShield = ItemHelper.createItem(MOD_ID, new ShieldItem("steel.shield", ++itemID, ShieldMaterials.TOOL_STEEL), "steel_shield.png").withTags(ItemTags.preventCreativeMining);
+	public static final Item leatherShield = ItemHelper.createItem(MOD_ID, new ShieldColored("leather.shield", ++itemID, ShieldMaterials.TOOL_LEATHER), "wooden_shield.png").withTags(ItemTags.preventCreativeMining);
 
 	public static final Item armorLeatherHelmet = ItemHelper.createItem(MOD_ID, new ArmorColored("Leather Cap", 16426,ArmorMaterial.LEATHER , 0 ), "armor.helmet.leather");
 	public static final Item armorLeatherChest = ItemHelper.createItem(MOD_ID, new ArmorColored("Leather Tunic", 16427,ArmorMaterial.LEATHER , 1 ), "armor.chestplate.leather");
