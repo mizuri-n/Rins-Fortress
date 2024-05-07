@@ -5,8 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ItemMixin",
-    "ShieldMixin",
-    "achievement.dyeMixin"
+    "ShieldMixin"
   ],
   "client": [
   ],
