@@ -1,4 +1,4 @@
-package mizurin.shieldmod.mixins.achievement;
+/*package mizurin.shieldmod.mixins.achievement;
 
 import mizurin.shieldmod.ShieldAchievements;
 import mizurin.shieldmod.item.Shields;
@@ -20,7 +20,7 @@ public class dyeMixin {
 
 	@Inject(method = "onPickupFromSlot", at = @At("TAIL"))
 	private void injectPickup(ItemStack itemStack, CallbackInfo ci){
-		/*Item item = itemStack.getItem();
+		Item item = itemStack.getItem();
 		if(item.id == Shields.woodenShield.id){
 			thePlayer.triggerAchievement(ShieldAchievements.SHIELD_GOT);
 		}
@@ -43,5 +43,6 @@ public class dyeMixin {
 			thePlayer.addStat(ShieldAchievements.COLORS, 1);
 		}
 
-	*/}
+	}
 }
+*/
