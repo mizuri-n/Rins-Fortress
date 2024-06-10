@@ -1,6 +1,7 @@
 package mizurin.shieldmod.mixins;
 
-import mizurin.shieldmod.item.Shields;
+import mizurin.shieldmod.item.ShieldItem;
+import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.achievement.stat.Stat;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
@@ -9,17 +10,14 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.entity.projectile.EntityArrow;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
-import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.player.inventory.InventoryPlayer;
+import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import mizurin.shieldmod.item.ShieldItem;
-import mizurin.shieldmod.item.ShieldMaterials;
-import mizurin.shieldmod.ShieldAchievements;
 
 
 
