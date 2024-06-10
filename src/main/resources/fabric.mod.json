@@ -24,6 +24,9 @@
 		"beforeGameStart": [
 			"mizurin.shieldmod.ShieldMod"
 		],
+		"beforeClientStart": [
+			"mizurin.shieldmod.ShieldMod"
+		],
 		"afterGameStart": [
 			"mizurin.shieldmod.ShieldMod"
 		],
