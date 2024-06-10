@@ -7,6 +7,7 @@ import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryRepairable;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import turniplabs.halplibe.util.RecipeEntrypoint;
@@ -74,6 +75,7 @@ public class recipes implements RecipeEntrypoint {
 			.create("leatherShield", Shields.leatherShield.getDefaultStack());
 
 
+		WORKBENCH.register("tearstoneShield", new RecipeEntryRepairable(Shields.tearShield, Item.ingotIron));
 	}
 	public void initializeRecipe(){
 		Registries.RECIPE_TYPES.register("colored/shield", recipeColor.class);

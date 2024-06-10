@@ -1,7 +1,9 @@
 package mizurin.shieldmod.mixins;
 
+import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.achievement.stat.Stat;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.entity.projectile.EntityArrow;
@@ -26,7 +28,7 @@ import mizurin.shieldmod.ShieldAchievements;
 
 // extend Entity so we get access to entity methods and fields.
 // abstract so we don't have to implement interfaces, constructor is not used but required.
-public abstract class ShieldMixin extends Entity {
+public abstract class ShieldMixin extends EntityLiving {
 	public ShieldMixin(World world) {
 		super(world);
 	}
@@ -40,6 +42,7 @@ public abstract class ShieldMixin extends Entity {
 
 	@Shadow
 	public Gamemode gamemode;
+
 
 	@Shadow
 	public abstract ItemStack getHeldItem();
@@ -79,6 +82,9 @@ public abstract class ShieldMixin extends Entity {
 						World world = attacker.world;
 
 						if (!this.gamemode.isPlayerInvulnerable()) {
+							if(shield.tool == ShieldMaterials.TOOL_TEAR && getHealth() <= 6){
+								damage = Math.round(damage * 0.5f);
+							}
 							if (stack.getData().getBoolean("active")) {
 								int newDamage = Math.round(damage * (shield.tool.getEfficiency(true)));
 

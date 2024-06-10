@@ -4,8 +4,11 @@
   "package": "mizurin.shieldmod.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BlockFarmlandMixin",
+    "FieldMixin",
     "ItemMixin",
-    "ShieldMixin"
+    "ShieldMixin",
+    "WorldFeatureLabyrinthMixin"
   ],
   "client": [
   ],
