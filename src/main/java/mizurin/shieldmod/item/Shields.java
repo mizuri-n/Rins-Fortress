@@ -22,10 +22,10 @@ public class Shields {
 	public static final Item tearShield = ItemHelper.createItem(MOD_ID, new ThrowShield("tear.shield", ++itemID, ShieldMaterials.TOOL_TEAR), "tearstone_shield.png").withTags(ItemTags.preventCreativeMining);
 	public static final Item ammotearShield = ItemHelper.createItem(MOD_ID, new Item("tear.shield.ammo", ++itemID), "ammotearstone_shield.png").setNotInCreativeMenu();
 
-	public static final Item armorLeatherHelmet = ItemHelper.createItem(MOD_ID, new ArmorColored("Leather Cap", 16426,ArmorMaterial.LEATHER , 0 ), "armor.helmet.leather");
-	public static final Item armorLeatherChest = ItemHelper.createItem(MOD_ID, new ArmorColored("Leather Tunic", 16427,ArmorMaterial.LEATHER , 1 ), "armor.chestplate.leather");
-	public static final Item armorLeatherLeg = ItemHelper.createItem(MOD_ID, new ArmorColored("Leather Pants", 16428,ArmorMaterial.LEATHER , 2 ), "armor.leggings.leather");
-	public static final Item armorLeatherBoot = ItemHelper.createItem(MOD_ID, new ArmorColored("Leather Boots", 16429,ArmorMaterial.LEATHER , 3 ), "armor.boots.leather");
+	public static final Item armorLeatherHelmet = ItemHelper.createItem(MOD_ID, new ArmorColored("armor.helmet.leather", 16426,ArmorMaterial.LEATHER , 0 ));
+	public static final Item armorLeatherChest = ItemHelper.createItem(MOD_ID, new ArmorColored("armor.chestplate.leather", 16427,ArmorMaterial.LEATHER , 1 ));
+	public static final Item armorLeatherLeg = ItemHelper.createItem(MOD_ID, new ArmorColored("armor.leggings.leather", 16428,ArmorMaterial.LEATHER , 2 ));
+	public static final Item armorLeatherBoot = ItemHelper.createItem(MOD_ID, new ArmorColored("armor.boots.leather", 16429,ArmorMaterial.LEATHER , 3 ));
 
 	public void initializeItems(){}
 }
