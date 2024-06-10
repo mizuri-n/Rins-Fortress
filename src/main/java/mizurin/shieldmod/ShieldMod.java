@@ -1,11 +1,16 @@
 package mizurin.shieldmod;
 
+import mizurin.shieldmod.item.EntityShield;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.entity.projectile.EntitySnowball;
+import net.minecraft.core.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.AchievementHelper;
+import turniplabs.halplibe.helper.EntityHelper;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import mizurin.shieldmod.item.Shields;
@@ -39,6 +44,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint {
 		//AchievementPage SHIELDACHIEVEMENTS;
 		//SHIELDACHIEVEMENTS = new ShieldAchievements();
 		AchievementHelper.addPage(new ShieldAchievements());
+		EntityHelper.Client.assignEntityRenderer(EntityShield.class, new SnowballRenderer(Shields.ammotearShield.getIconFromDamage(0)));
 
 	}
 

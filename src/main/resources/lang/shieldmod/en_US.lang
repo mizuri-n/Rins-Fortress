@@ -12,6 +12,10 @@ item.shieldmod.diamond.shield.name=Diamond Shield
 item.shieldmod.diamond.shield.desc=A rare and pretty shield.
 item.shieldmod.steel.shield.name=Steel Shield
 item.shieldmod.steel.shield.desc=A tool to block and set enemies on fire.
+
+item.shieldmod.tear.shield.name=Tearstone Shield
+item.shieldmod.tear.shield.desc=Bolsters defense when close to death
+
 item.shieldmod.armor.helmet.leather.name=Leather Cap
 item.shieldmod.armor.helmet.leather.desc=A hat made from a cow's hide
 item.shieldmod.armor.chestplate.leather.name=Leather Tunic
@@ -23,7 +27,7 @@ item.shieldmod.armor.boots.leather.desc=A pair of boots made from a cow's hide
 
 
 
-achievements.page.defense.desc=BWD achievements
+achievements.page.defense.desc=BWD achievements WIP
 achievement.shieldmod.block=Block Blocked
 achievement.shieldmod.block.desc=Block an attack
 achievement.shieldmod.shield.got=Time to Defend!

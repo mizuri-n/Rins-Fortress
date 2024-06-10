@@ -22,7 +22,7 @@ public abstract class ItemMixin extends LivingRenderer<EntityPlayer> {
 	@Shadow
 	private ModelBiped modelBipedMain;
 
-	@Inject(method = "renderSpecials", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "renderSpecials", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/player/inventory/InventoryPlayer;getCurrentItem()Lnet/minecraft/core/item/ItemStack;"), cancellable = true)
 	public void injectRenderer(EntityPlayer entity, float f, CallbackInfo ci) {
 		ItemStack itemstack = entity.inventory.getCurrentItem();
 
@@ -64,8 +64,6 @@ public abstract class ItemMixin extends LivingRenderer<EntityPlayer> {
 			GL11.glPopMatrix();
 			ci.cancel();
 			}
-
-
 		}
 	}
 

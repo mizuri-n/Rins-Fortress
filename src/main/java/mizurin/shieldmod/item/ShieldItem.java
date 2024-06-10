@@ -23,6 +23,7 @@ public class ShieldItem extends ItemToolSword {
 
 
 	}
+
 	@Override
 	public boolean hitEntity(ItemStack itemstack, EntityLiving target, EntityLiving player) {
 		if(itemstack.getItem() == Shields.leatherShield){
