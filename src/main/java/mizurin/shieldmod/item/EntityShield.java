@@ -52,14 +52,13 @@ public class EntityShield extends EntityPebble {
 		}
 		if (hitResult.entity != null) {
 			hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
-			//hitResult.entity.push(this.xd * 0.2, 0, this.zd * 0.2);
 		}
 				if (!this.world.isClientSide) {
 					this.world.playSoundAtEntity((Entity) null, this, "mob.ghast.fireball", 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
 				}
 			if (this.modelItem != null) {
 				for(int j = 0; j < 8; ++j) {
-					this.world.spawnParticle("item", this.x, this.y, this.z, (double)this.modelItem.id, 0.0, 0.0);
+					this.world.spawnParticle("item", this.x, this.y, this.z, (double)this.modelItem.id, 0.0, 0.0, 0);
 				}
 			}
 		this.remove();

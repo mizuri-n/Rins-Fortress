@@ -2,9 +2,10 @@ package mizurin.shieldmod.item;
 
 import com.mojang.nbt.CompoundTag;
 import mizurin.shieldmod.ShieldMod;
+import net.minecraft.client.render.stitcher.IconCoordinate;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.material.ArmorMaterial;
-import turniplabs.halplibe.helper.TextureHelper;
 import net.minecraft.core.item.ItemStack;
 import useless.prismaticlibe.ColoredArmorTexture;
 import useless.prismaticlibe.ColoredTexture;
@@ -15,11 +16,12 @@ import java.awt.*;
 
 public class ArmorColored extends ItemArmor implements IColored, IColoredArmor {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
-	private final int[][] armorColor = new int[][] {
-		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "armor/leather_helmet.png"),
-		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "armor/leather_chestplate.png"),
-		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "armor/leather_leggings.png"),
-		TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "armor/leather_boots.png")};
+	private final IconCoordinate[] armorColor = new IconCoordinate[]{
+		TextureRegistry.getTexture(MOD_ID + "item/armor/leather_helmet.png"),
+		TextureRegistry.getTexture(MOD_ID + "item/armor/leather_chestplate.png"),
+		TextureRegistry.getTexture(MOD_ID + "item/armor/leather_leggings.png"),
+		TextureRegistry.getTexture(MOD_ID + "item/armor/leather_boots.png")};
+
 
 	public ArmorColored(String name, int id, ArmorMaterial material, int armorPiece) {
 		super(name, id, material, armorPiece);

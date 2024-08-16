@@ -2,9 +2,10 @@ package mizurin.shieldmod.item;
 
 import com.mojang.nbt.CompoundTag;
 import mizurin.shieldmod.ShieldMod;
+import net.minecraft.client.render.stitcher.IconCoordinate;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.world.World;
-import turniplabs.halplibe.helper.TextureHelper;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import useless.prismaticlibe.ColoredTexture;
@@ -13,8 +14,8 @@ import java.awt.*;
 
 public class ShieldColored extends ShieldItem implements IColored {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
-	public static final int[] baseColor = TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "colored.png");
-	public static final int[] overlayShield = TextureHelper.getOrCreateItemTexture(ShieldMod.MOD_ID, "outline.png");
+	public static final IconCoordinate baseColor = TextureRegistry.getTexture(MOD_ID + "item/colored.png");
+	public static final IconCoordinate overlayShield = TextureRegistry.getTexture(MOD_ID + "item/outline.png");
 	public ShieldColored(String name, int id, ToolMaterial toolMaterial) {
 		super(name, id, toolMaterial);
 	}
