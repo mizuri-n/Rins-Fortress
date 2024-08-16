@@ -1,17 +1,14 @@
 package mizurin.shieldmod;
 
 import com.mojang.nbt.CompoundTag;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.Global;
+import mizurin.shieldmod.item.ShieldColored;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
-import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryCrafting;
 import net.minecraft.core.util.helper.Color;
-import useless.prismaticlibe.IColored;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +37,7 @@ public class recipeColor extends RecipeEntryCraftingDynamic {
 			for (int y = 0; y < 3; ++y) {
 				ItemStack stack = inventorycrafting.getItemStackAt(x, y);
 				if (stack == null) continue;
-				if (stack.getItem() instanceof IColored) {
+				if (stack.getItem() instanceof ShieldColored) {
 					shieldStack = stack;
 				} else if (dyeMap.containsKey(stack.getItem())) {
 					dyeStacks.add(stack);
@@ -105,7 +102,7 @@ public class recipeColor extends RecipeEntryCraftingDynamic {
 			for (int y = 0; y < 3; ++y) {
 				ItemStack stack = crafting.getItemStackAt(x, y);
 				if (stack == null) continue;
-				if (stack.getItem() instanceof IColored) {
+				if (stack.getItem() instanceof ShieldColored) {
 					if (shieldStack != null) {
 						return false;
 					}
