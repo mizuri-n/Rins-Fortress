@@ -117,7 +117,7 @@ public abstract class ShieldMixin extends EntityLiving {
 										attacker.x + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
 										attacker.y - attacker.bbHeight + (double) (world.rand.nextFloat() * width),
 										attacker.z + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
-										dx, dy, dz
+										dx, dy, dz, 0
 									);
 								}
 

@@ -2,6 +2,7 @@ package mizurin.shieldmod;
 
 import mizurin.shieldmod.item.EntityShield;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.data.registry.Registries;
@@ -18,17 +19,21 @@ import mizurin.shieldmod.item.Shields;
 import turniplabs.halplibe.util.achievements.AchievementPage;
 
 import java.util.Properties;
+import java.util.function.Supplier;
 
 public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint {
     public static final String MOD_ID = "shieldmod";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static int itemID;
+	public static int entityID;
 	static {
 		Properties prop = new Properties();
 		prop.setProperty("starting_item_id", "17000");
+		prop.setProperty("starting_entity_id", "100");
 		ConfigHandler config = new ConfigHandler(ShieldMod.MOD_ID, prop);
 		itemID = config.getInt("starting_item_id");
+		entityID = config.getInt("starting_entity_id");
 		config.updateConfig();
 	}
 
@@ -56,11 +61,10 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 
 	@Override
 	public void beforeClientStart() {
-		EntityHelper.Client.assignEntityRenderer(EntityShield.class, new SnowballRenderer(Shields.ammotearShield.getIconFromDamage(0)));
+		EntityHelper.createEntity(EntityShield.class, entityID, "ammoShield", () -> new SnowballRenderer(Shields.ammotearShield));
 	}
 
 	@Override
 	public void afterClientStart() {
-
 	}
 }

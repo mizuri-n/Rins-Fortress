@@ -3,7 +3,11 @@ package mizurin.shieldmod.item;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.tag.ItemTags;
 import org.slf4j.LoggerFactory;
+import turniplabs.halplibe.helper.ItemBuilder;
 import turniplabs.halplibe.helper.ItemHelper;
+import net.minecraft.client.render.item.model.ItemModel;
+import net.minecraft.client.render.item.model.ItemModelStandard;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import mizurin.shieldmod.ShieldMod;
 import org.slf4j.Logger;
 import net.minecraft.core.item.material.ArmorMaterial;
@@ -12,20 +16,36 @@ import static mizurin.shieldmod.ShieldMod.itemID;
 public class Shields {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-	public static final Item woodenShield = ItemHelper.createItem(MOD_ID, new LightShield("wooden.shield", ++itemID, ShieldMaterials.TOOL_WOOD),"wooden_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item stoneShield = ItemHelper.createItem(MOD_ID, new ShieldItem("stone.shield", ++itemID, ShieldMaterials.TOOL_STONE), "stone_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item ironShield = ItemHelper.createItem(MOD_ID, new ShieldItem("iron.shield", ++itemID, ShieldMaterials.TOOL_IRON), "iron_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item goldShield = ItemHelper.createItem(MOD_ID, new ShieldItem("gold.shield", ++itemID, ShieldMaterials.TOOL_GOLD), "gold_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item diamondShield = ItemHelper.createItem(MOD_ID, new ShieldItem("diamond.shield", ++itemID, ShieldMaterials.TOOL_DIAMOND), "diamond_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item steelShield = ItemHelper.createItem(MOD_ID, new ShieldItem("steel.shield", ++itemID, ShieldMaterials.TOOL_STEEL), "steel_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item leatherShield = ItemHelper.createItem(MOD_ID, new ShieldColored("leather.shield", ++itemID, ShieldMaterials.TOOL_LEATHER), "wooden_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item tearShield = ItemHelper.createItem(MOD_ID, new ThrowShield("tear.shield", ++itemID, ShieldMaterials.TOOL_TEAR), "tearstone_shield.png").withTags(ItemTags.preventCreativeMining);
-	public static final Item ammotearShield = ItemHelper.createItem(MOD_ID, new Item("tear.shield.ammo", ++itemID), "ammotearstone_shield.png").setNotInCreativeMenu();
+	public static Item woodenShield;
+	public static Item stoneShield;
+	public static Item ironShield;
+	public static Item goldShield;
+	public static Item diamondShield;
+	public static Item steelShield;
+	public static Item leatherShield;
+	public static Item tearShield;
+	public static Item ammotearShield;
 
-	public static final Item armorLeatherHelmet = ItemHelper.createItem(MOD_ID, new ArmorColored("armor.helmet.leather", 16426,ArmorMaterial.LEATHER , 0 ));
-	public static final Item armorLeatherChest = ItemHelper.createItem(MOD_ID, new ArmorColored("armor.chestplate.leather", 16427,ArmorMaterial.LEATHER , 1 ));
-	public static final Item armorLeatherLeg = ItemHelper.createItem(MOD_ID, new ArmorColored("armor.leggings.leather", 16428,ArmorMaterial.LEATHER , 2 ));
-	public static final Item armorLeatherBoot = ItemHelper.createItem(MOD_ID, new ArmorColored("armor.boots.leather", 16429,ArmorMaterial.LEATHER , 3 ));
+	public static Item armorLeatherHelmet;
+	public static Item armorLeatherChest;
+	public static Item armorLeatherLeg;
+	public static Item armorLeatherBoot;
 
-	public void initializeItems(){}
+
+	public void initializeItems(){
+		woodenShield = new ItemBuilder(MOD_ID).setIcon("shieldmod:item/wooden_shield.png").setStackSize(1).setItemModel(item -> new ItemModelShield(item, null).setFull3D()).build(new LightShield("wooden.shield", ++itemID, ShieldMaterials.TOOL_WOOD)).withTags(ItemTags.PREVENT_CREATIVE_MINING);
+		stoneShield = new ItemBuilder(MOD_ID).setIcon("shieldmod:item/stone_shield.png").setStackSize(1).setItemModel(item -> new ItemModelShield(item, null).setFull3D()).build(new ShieldItem("stone.shield", ++itemID, ShieldMaterials.TOOL_STONE)).withTags(ItemTags.PREVENT_CREATIVE_MINING);
+		ironShield = new ItemBuilder(MOD_ID).setIcon("shieldmod:item/iron_shield.png").setStackSize(1).setItemModel(item -> new ItemModelShield(item, null).setFull3D()).build(new ShieldItem("iron.shield", ++itemID, ShieldMaterials.TOOL_IRON)).withTags(ItemTags.PREVENT_CREATIVE_MINING);
+		goldShield = new ItemBuilder(MOD_ID).setIcon("shieldmod:item/gold_shield.png").setStackSize(1).setItemModel(item -> new ItemModelShield(item, null).setFull3D()).build(new ShieldItem("gold.shield", ++itemID, ShieldMaterials.TOOL_GOLD)).withTags(ItemTags.PREVENT_CREATIVE_MINING);
+		diamondShield = new ItemBuilder(MOD_ID).setIcon("shieldmod:item/diamond_shield.png").setStackSize(1).setItemModel(item -> new ItemModelShield(item, null).setFull3D()).build(new ShieldItem("diamond.shield", ++itemID, ShieldMaterials.TOOL_DIAMOND)).withTags(ItemTags.PREVENT_CREATIVE_MINING);
+		steelShield = new ItemBuilder(MOD_ID).setIcon("shieldmod:item/steel_shield.png").setStackSize(1).setItemModel(item -> new ItemModelShield(item, null).setFull3D()).build(new ShieldItem("steel.shield", ++itemID, ShieldMaterials.TOOL_STEEL)).withTags(ItemTags.PREVENT_CREATIVE_MINING);
+		leatherShield = new ItemBuilder(MOD_ID).setIcon("shieldmod:item/wooden_shield.png").setStackSize(1).setItemModel(item -> new ItemModelShield(item, null).setFull3D()).build(new ShieldColored("leather.shield", ++itemID, ShieldMaterials.TOOL_LEATHER)).withTags(ItemTags.PREVENT_CREATIVE_MINING);
+		tearShield = new ItemBuilder(MOD_ID).setIcon("shieldmod:item/tearstone_shield.png").setStackSize(1).setItemModel(item -> new ItemModelShield(item, null).setFull3D()).build(new ThrowShield("tear.shield", ++itemID, ShieldMaterials.TOOL_TEAR)).withTags(ItemTags.PREVENT_CREATIVE_MINING);
+		ammotearShield = new ItemBuilder(MOD_ID).setIcon("shieldmod:item/ammotearstone_shield.png").setStackSize(1).setItemModel(item -> new ItemModelShield(item, null).setFull3D()).build(new Item("tear.shield.ammo", ++itemID)).withTags(ItemTags.NOT_IN_CREATIVE_MENU);
+
+		armorLeatherHelmet = new ItemBuilder(MOD_ID).build(new ArmorColored("armor.helmet.leather", 16426, ArmorMaterial.LEATHER, 0));
+		armorLeatherChest = new ItemBuilder(MOD_ID).build(new ArmorColored("armor.chestplate.leather", 16427, ArmorMaterial.LEATHER, 1));
+		armorLeatherLeg = new  ItemBuilder(MOD_ID).build(new ArmorColored("armor.leggings.leather", 16428, ArmorMaterial.LEATHER, 2));
+		armorLeatherBoot = new ItemBuilder(MOD_ID).build(new ArmorColored("armor.boots.leather", 16429, ArmorMaterial.LEATHER, 3));
+	}
 }
