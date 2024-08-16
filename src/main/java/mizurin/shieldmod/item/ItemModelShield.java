@@ -1,16 +1,33 @@
 package mizurin.shieldmod.item;
 
+import com.mojang.nbt.CompoundTag;
 import net.minecraft.client.render.ItemRenderer;
-import net.minecraft.client.render.item.model.ItemModelStandard;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
-public class ItemModelShield extends ItemModelStandard {
-	public ItemModelShield(Item item, String namespace) {
-		super(item, namespace);
+import java.util.ArrayList;
+
+import static mizurin.shieldmod.ShieldMod.MOD_ID;
+
+public class ItemModelShield extends ItemModelColored {
+	public ItemModelShield(Item item, ColoredTextureEntry[] textureEntries) {
+		super(item, textureEntries);
 	}
+
+	public static int shieldColor(ItemStack itemStack){
+		if (itemStack.getData().containsKey("dyed_color")){
+			CompoundTag colorTag = itemStack.getData().getCompound("dyed_color");
+			int red = colorTag.getShort("red");
+			int green = colorTag.getShort("green");
+			int blue = colorTag.getShort("blue");
+			return (0xFF << 24 | red << 16 | green << 8 | blue);
+		}
+		return 0xFFFFFFFF;
+	}
+
 	@Override
 	public void heldTransformThirdPerson(ItemRenderer renderer, Entity entity, ItemStack itemstack) {
 		if (itemstack.getData().getBoolean("active")) {

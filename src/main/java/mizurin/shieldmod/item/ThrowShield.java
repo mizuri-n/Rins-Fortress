@@ -19,7 +19,7 @@ public class ThrowShield extends ShieldItem{
 
 	}
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
 		itemstack.getData().putBoolean("active", true);
 		itemstack.getData().putInt("ticks", ticksToAdd);
 		onBlock(itemstack, world, entityplayer);

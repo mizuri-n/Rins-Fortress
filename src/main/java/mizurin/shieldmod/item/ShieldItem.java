@@ -44,12 +44,11 @@ public class ShieldItem extends ItemToolSword {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
 		itemstack.getData().putBoolean("active", true);
 		itemstack.getData().putInt("ticks",ticksToAdd);
 		return itemstack;
 	}
-
 
 	@Override
 	public void inventoryTick(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
