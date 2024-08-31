@@ -29,6 +29,7 @@ import java.util.function.Supplier;
 public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint{
     public static final String MOD_ID = "shieldmod";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static int playerArmorRenderOffset = 0;
 
 	public static int itemID;
 	public static int entityID;
