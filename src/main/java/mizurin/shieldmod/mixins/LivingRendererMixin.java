@@ -2,6 +2,7 @@ package mizurin.shieldmod.mixins;
 
 import mizurin.shieldmod.ColoredArmorTexture;
 import mizurin.shieldmod.IColoredArmor;
+import mizurin.shieldmod.ShieldMod;
 import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.client.render.model.ModelBase;
 import net.minecraft.core.entity.EntityLiving;
@@ -50,7 +51,7 @@ public abstract class LivingRendererMixin<T extends EntityLiving> {
 	}
 	@Redirect(method = "render(Lnet/minecraft/core/entity/EntityLiving;DDDFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/LivingRenderer;shouldRenderPass(Lnet/minecraft/core/entity/EntityLiving;IF)Z"))
 	private boolean hijackRenderPass(LivingRenderer instance, T entity, int renderPass, float partialTick){
-		PrismaticLibe.playerArmorRenderOffset = 0;
+		ShieldMod.playerArmorRenderOffset = 0;
 		if (entity instanceof EntityPlayer){
 			ItemStack itemstack = ((EntityPlayer) entity).inventory.armorItemInSlot(3 - renderPass);
 			if (itemstack != null && itemstack.getItem() instanceof IColoredArmor){
@@ -63,9 +64,9 @@ public abstract class LivingRendererMixin<T extends EntityLiving> {
 					this.renderPassModel.render(limbSwing, limbYaw, ticksExisted, headYaw - headYawOffset, headPitch, scale);
 					GL11.glDisable(3042);
 					GL11.glEnable(3008);
-					PrismaticLibe.playerArmorRenderOffset++;
+					ShieldMod.playerArmorRenderOffset++;
 				}
-				PrismaticLibe.playerArmorRenderOffset = 0;
+				ShieldMod.playerArmorRenderOffset = 0;
 				return false;
 			}
 		}

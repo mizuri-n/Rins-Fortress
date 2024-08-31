@@ -6,9 +6,10 @@
   "mixins": [
     "BlockFarmlandMixin",
     "FieldMixin",
+    "LivingRendererMixin",
+    "PlayerRendererMixin",
     "ShieldMixin",
-    "WorldFeatureLabyrinthMixin",
-    "PlayerRendererMixin"
+    "WorldFeatureLabyrinthMixin"
   ],
   "injectors": {
     "defaultRequire": 1
