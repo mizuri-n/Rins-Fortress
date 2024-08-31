@@ -2,11 +2,16 @@ package mizurin.shieldmod;
 
 import mizurin.shieldmod.item.EntityShield;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.client.render.entity.ArmoredZombieRenderer;
 import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.PaintingRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
+import net.minecraft.client.render.model.ModelZombie;
+import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.entity.projectile.EntitySnowball;
+import net.minecraft.core.enums.ArtType;
 import net.minecraft.core.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +26,13 @@ import turniplabs.halplibe.util.achievements.AchievementPage;
 import java.util.Properties;
 import java.util.function.Supplier;
 
-public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint {
+public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint{
     public static final String MOD_ID = "shieldmod";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static int itemID;
 	public static int entityID;
+	public static ArtType paintingSeal;
 	static {
 		Properties prop = new Properties();
 		prop.setProperty("starting_item_id", "17000");
@@ -36,7 +42,6 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 		entityID = config.getInt("starting_entity_id");
 		config.updateConfig();
 	}
-
 
 
     @Override
@@ -61,7 +66,9 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 
 	@Override
 	public void beforeClientStart() {
+		paintingSeal = new ArtType("paintingSeal", "The Orb", "Rin", "shieldmod:art/seal", 32, 32);
 		EntityHelper.createEntity(EntityShield.class, entityID, "ammoShield", () -> new SnowballRenderer(Shields.ammotearShield));
+		EntityHelper.createEntity(ShieldZombie.class, ++entityID, "ShieldZombie", () -> new ArmoredZombieRenderer(new ModelZombie(), 0.1F));
 	}
 
 	@Override
