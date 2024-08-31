@@ -8,6 +8,7 @@
     "FieldMixin",
     "ShieldMixin",
     "WorldFeatureLabyrinthMixin",
+    "PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
