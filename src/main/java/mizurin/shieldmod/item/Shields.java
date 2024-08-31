@@ -1,7 +1,9 @@
 package mizurin.shieldmod.item;
 
 import net.minecraft.client.render.stitcher.TextureRegistry;
+import net.minecraft.core.enums.ArtType;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemPainting;
 import net.minecraft.core.item.tag.ItemTags;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.ItemBuilder;
@@ -29,6 +31,7 @@ public class Shields {
 	public static Item armorLeatherChest;
 	public static Item armorLeatherLeg;
 	public static Item armorLeatherBoot;
+
 
 
 	@SuppressWarnings("unchecked")
@@ -118,5 +121,6 @@ public class Shields {
 		armorLeatherChest = new ItemBuilder(MOD_ID).build(new ArmorColored("armor.chestplate.leather", 16427, ArmorMaterial.LEATHER, 1));
 		armorLeatherLeg = new  ItemBuilder(MOD_ID).build(new ArmorColored("armor.leggings.leather", 16428, ArmorMaterial.LEATHER, 2));
 		armorLeatherBoot = new ItemBuilder(MOD_ID).build(new ArmorColored("armor.boots.leather", 16429, ArmorMaterial.LEATHER, 3));
+
 	}
 }

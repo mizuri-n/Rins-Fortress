@@ -8,7 +8,6 @@
     "FieldMixin",
     "ShieldMixin",
     "WorldFeatureLabyrinthMixin",
-    "ZombieShieldMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -58,10 +58,12 @@ public class EntityShield extends EntityPebble {
 				}
 			if (this.modelItem != null) {
 				for(int j = 0; j < 8; ++j) {
-					this.world.spawnParticle("item", this.x, this.y, this.z, (double)this.modelItem.id, 0.0, 0.0, 0);
+					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, this.modelItem.id);
 				}
 			}
 		this.remove();
-		storeOrDropItem((EntityPlayer) owner, ((IThrownItem)owner).getThrownItem());
+			if (this.owner != null) {
+				storeOrDropItem((EntityPlayer) owner, ((IThrownItem) owner).getThrownItem());
+			}
 		}
 	}

@@ -5,14 +5,18 @@ import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.achievement.stat.Stat;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.EntityTNT;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.entity.projectile.EntityArrow;
+import net.minecraft.core.entity.projectile.EntityCannonball;
+import net.minecraft.core.entity.projectile.EntityProjectile;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.chunk.ChunkCoordinates;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -52,6 +56,9 @@ public abstract class ShieldMixin extends EntityLiving {
 	@Shadow
 	public abstract void triggerAchievement(Stat statbase);
 
+	@Shadow
+	private ChunkCoordinates playerSpawnCoordinate;
+
 	// inject at the top(HEAD) of hurt(), allow us to call return(cancel/set return value)
 	@Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
 	public void injectHurt(Entity attacker, int damage, DamageType type, CallbackInfoReturnable<Boolean> ci) {
@@ -86,8 +93,14 @@ public abstract class ShieldMixin extends EntityLiving {
 							if (stack.getData().getBoolean("active")) {
 								int newDamage = Math.round(damage * (shield.tool.getEfficiency(true)));
 
+								double _dx = attacker.x - this.x;
+								double _dz = attacker.z - this.z;
+								double length = Math.hypot(_dx, _dz);
+								_dx /= length;
+								_dz /= length;
+
 								if (shield.tool == ShieldMaterials.TOOL_LEATHER){
-									attacker.push(0 ,1,0);
+									attacker.push(_dx * 1.2 ,0.75,_dz * 1.2);
 									//addStat(ShieldAchievements.FLY_HIGH, 1);
 								}
 								if(shield.tool == ShieldMaterials.TOOL_GOLD){
