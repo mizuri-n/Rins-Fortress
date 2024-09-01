@@ -1,5 +1,6 @@
 package mizurin.shieldmod.mixins;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import mizurin.shieldmod.ColoredArmorTexture;
 import mizurin.shieldmod.IColoredArmor;
 import mizurin.shieldmod.ShieldMod;
@@ -38,9 +39,17 @@ public abstract class LivingRendererMixin<T extends EntityLiving> {
 	@Unique
 	float scale;
 	@Inject(method = "render(Lnet/minecraft/core/entity/EntityLiving;DDDFF)V",
-		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/LivingRenderer;shouldRenderPass(Lnet/minecraft/core/entity/EntityLiving;IF)Z", shift = At.Shift.BEFORE),
-		locals = LocalCapture.CAPTURE_FAILHARD)
-	private void captureLocals(T entity, double x, double y, double z, float yaw1, float partialTick1, CallbackInfo ci, float headYawOffset, float headYaw, float headPitch, float ticksExisted, float scale, float limbYaw, float limbSwing, int renderPass){
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/LivingRenderer;shouldRenderPass(Lnet/minecraft/core/entity/EntityLiving;IF)Z"))
+	private void captureLocals(
+		T entity, double x, double y, double z, float yaw, float partialTick, CallbackInfo ci,
+							   @Local(name = "limbSwing") float limbSwing,
+							   @Local(name = "limbYaw") float limbYaw,
+							   @Local(name = "ticksExisted") float ticksExisted,
+							   @Local(name = "headYaw") float headYaw,
+							   @Local(name = "headYawOffset") float headYawOffset,
+							   @Local(name = "headPitch") float headPitch,
+							   @Local(name = "scale") float scale
+	){
 		this.limbSwing = limbSwing;
 		this.limbYaw = limbYaw;
 		this.ticksExisted = ticksExisted;
