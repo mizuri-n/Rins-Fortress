@@ -1,11 +1,12 @@
 package mizurin.shieldmod.item;
 
+import mizurin.shieldmod.IColorable;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.world.World;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 
-public class ShieldColored extends ShieldItem {
+public class ShieldColored extends ShieldItem implements IColorable {
 	public ShieldColored(String name, int id, ToolMaterial toolMaterial) {
 		super(name, id, toolMaterial);
 	}

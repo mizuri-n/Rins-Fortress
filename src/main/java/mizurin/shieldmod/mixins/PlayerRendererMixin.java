@@ -1,14 +1,13 @@
 package mizurin.shieldmod.mixins;
 
 import mizurin.shieldmod.ColoredArmorTexture;
-import mizurin.shieldmod.EntityRendererAccessor;
 import mizurin.shieldmod.IColoredArmor;
 import mizurin.shieldmod.ShieldMod;
-import mizurin.shieldmod.item.ArmorColored;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.entity.PlayerRenderer;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.collection.NamespaceID;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -49,9 +48,10 @@ public class PlayerRendererMixin {
 			if (ShieldMod.playerArmorRenderOffset > armorTextures.length) return;
 			String tmp = string.replace(".png", "");
 			int renderPass = Integer.decode(String.valueOf(tmp.charAt(tmp.length()-1)));
-			((EntityRendererAccessor)instance).invokeLoadTexture("/armor/" + armorTextures[ShieldMod.playerArmorRenderOffset].getArmorTexture() + "_" + (renderPass != 2 ? 1 : 2) + ".png");
+			NamespaceID armorTexture = armorTextures[ShieldMod.playerArmorRenderOffset].getArmorTexture();
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft(Minecraft.class).renderEngine.getTexture("/assets/" + armorTexture.namespace + "/textures/armor/" + armorTexture.value + "_" + (renderPass != 2 ? 1 : 2) + ".png"));
 		} else {
-			((EntityRendererAccessor)instance).invokeLoadTexture(string);
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, Minecraft.getMinecraft(Minecraft.class).renderEngine.getTexture(string));
 		}
 	}
 }
