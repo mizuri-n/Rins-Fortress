@@ -1,18 +1,13 @@
 package mizurin.shieldmod;
 
+import mizurin.shieldmod.entities.ShieldZombie;
 import mizurin.shieldmod.item.EntityShield;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.entity.ArmoredZombieRenderer;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.PaintingRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.model.ModelZombie;
-import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.crafting.LookupFuelFurnace;
-import net.minecraft.core.data.registry.Registries;
-import net.minecraft.core.entity.projectile.EntitySnowball;
 import net.minecraft.core.enums.ArtType;
-import net.minecraft.core.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.AchievementHelper;
@@ -21,10 +16,8 @@ import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import mizurin.shieldmod.item.Shields;
-import turniplabs.halplibe.util.achievements.AchievementPage;
 
 import java.util.Properties;
-import java.util.function.Supplier;
 
 public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint{
     public static final String MOD_ID = "shieldmod";

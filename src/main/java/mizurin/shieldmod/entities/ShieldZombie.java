@@ -1,4 +1,4 @@
-package mizurin.shieldmod;
+package mizurin.shieldmod.entities;
 
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.entity.Entity;
