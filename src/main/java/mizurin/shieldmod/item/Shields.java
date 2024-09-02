@@ -25,6 +25,7 @@ public class Shields {
 	public static Item steelShield;
 	public static Item leatherShield;
 	public static Item tearShield;
+	public static Item treasureShield;
 	public static Item ammotearShield;
 
 	public static Item armorLeatherHelmet;
@@ -106,6 +107,15 @@ public class Shields {
 					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/tearstone_shield"), (s) -> -1)
 				}).setFull3D())
 			.build(new ThrowShield("tear.shield", ++itemID, ShieldMaterials.TOOL_TEAR))
+			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
+
+		treasureShield = new ItemBuilder(MOD_ID)
+			.setStackSize(1)
+			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
+				{
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/steel_shield"), (s) -> -1)
+				}).setFull3D())
+			.build(new ShieldItem("treasure.shield", ++itemID, ShieldMaterials.TOOL_TREASURE))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 		ammotearShield = new ItemBuilder(MOD_ID)
