@@ -28,23 +28,21 @@ public class TreasureShield extends ShieldItem{
 				itemstack.getData().putBoolean("active", false);
 			}
 		}
-		if(itemstack.getData().getBoolean("blocked")){
+
 			int ticksB = itemstack.getData().getInteger("ticksB");
 
 			if (ticksB > 0){
 				itemstack.getData().putInt("ticksB", ticksB - 1);
-			} else {
-				itemstack.getData().putBoolean("blocked", false);
 			}
-		}
 	}
 	@Override
 	public boolean hitEntity(ItemStack itemstack, EntityLiving target, EntityLiving player) {
-		if(itemstack.getData().getBoolean("blocked")){
+		int ticksB = itemstack.getData().getInteger("ticksB");
+		if(ticksB > 0){
 			target.knockBack(player, 1, (player.x - target.x), (player.z - target.z ));
 			target.push((target.x - player.x)/7, 1, (target.z - player.z)/7);
 			target.hurt(player, 5, DamageType.COMBAT);
-			itemstack.getData().putBoolean("blocked", false);
+			itemstack.getData().putInt("ticksB", 0);
 		}
 
 		if(itemstack.getItem() == Shields.leatherShield){

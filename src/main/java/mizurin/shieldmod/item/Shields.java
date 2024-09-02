@@ -1,5 +1,6 @@
 package mizurin.shieldmod.item;
 
+import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.enums.ArtType;
 import net.minecraft.core.item.Item;
@@ -127,10 +128,29 @@ public class Shields {
 			.build(new Item("tear.shield.ammo", ++itemID))
 			.withTags(ItemTags.NOT_IN_CREATIVE_MENU);
 
-		armorLeatherHelmet = new ItemBuilder(MOD_ID).build(new ArmorColored("armor.helmet.leather", 16426, ArmorMaterial.LEATHER, 0));
-		armorLeatherChest = new ItemBuilder(MOD_ID).build(new ArmorColored("armor.chestplate.leather", 16427, ArmorMaterial.LEATHER, 1));
-		armorLeatherLeg = new  ItemBuilder(MOD_ID).build(new ArmorColored("armor.leggings.leather", 16428, ArmorMaterial.LEATHER, 2));
-		armorLeatherBoot = new ItemBuilder(MOD_ID).build(new ArmorColored("armor.boots.leather", 16429, ArmorMaterial.LEATHER, 3));
+		armorLeatherHelmet = new ItemBuilder(MOD_ID).setItemModel(item -> new ItemModelColored(item, new ItemModelColored.ColoredTextureEntry[]
+			{
+				new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture(MOD_ID + ":item/leather_helmet"), ItemModelShield::shieldColor)
+			}))
+			.build(new ArmorColored("armor.helmet.leather", 16426, ArmorMaterial.LEATHER, 0));
+
+		armorLeatherChest = new ItemBuilder(MOD_ID).setItemModel(item -> new ItemModelColored(item, new ItemModelColored.ColoredTextureEntry[]
+				{
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture(MOD_ID + ":item/leather_chestplate"), ItemModelShield::shieldColor)
+				}))
+			.build(new ArmorColored("armor.chestplate.leather", 16427, ArmorMaterial.LEATHER, 1));
+
+		armorLeatherLeg = new  ItemBuilder(MOD_ID).setItemModel(item -> new ItemModelColored(item, new ItemModelColored.ColoredTextureEntry[]
+				{
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture(MOD_ID + ":item/leather_leggings"), ItemModelShield::shieldColor)
+				}))
+			.build(new ArmorColored("armor.leggings.leather", 16428, ArmorMaterial.LEATHER, 2));
+
+		armorLeatherBoot = new ItemBuilder(MOD_ID).setItemModel(item -> new ItemModelColored(item, new ItemModelColored.ColoredTextureEntry[]
+				{
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture(MOD_ID + ":item/leather_boots"), ItemModelShield::shieldColor)
+				}))
+			.build(new ArmorColored("armor.boots.leather", 16429, ArmorMaterial.LEATHER, 3));
 
 	}
 }

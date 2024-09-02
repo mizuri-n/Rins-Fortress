@@ -5,12 +5,9 @@ import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.achievement.stat.Stat;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
-import net.minecraft.core.entity.EntityTNT;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.entity.projectile.EntityArrow;
-import net.minecraft.core.entity.projectile.EntityCannonball;
-import net.minecraft.core.entity.projectile.EntityProjectile;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.InventoryPlayer;
@@ -108,7 +105,6 @@ public abstract class ShieldMixin extends EntityLiving {
 									//addStat(ShieldAchievements.GOLD_RETAL, 1);
 								}
 								if (shield.tool == ShieldMaterials.TOOL_TREASURE){
-									stack.getData().putBoolean("blocked", true);
 									stack.getData().putInt("ticksB", 20);
 								}
 								super.hurt(attacker, newDamage, type);
