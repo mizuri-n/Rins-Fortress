@@ -107,6 +107,10 @@ public abstract class ShieldMixin extends EntityLiving {
 									attacker.hurt(attacker, newDamage, type);
 									//addStat(ShieldAchievements.GOLD_RETAL, 1);
 								}
+								if (shield.tool == ShieldMaterials.TOOL_TREASURE){
+									stack.getData().putBoolean("blocked", true);
+									stack.getData().putInt("ticksB", 20);
+								}
 								super.hurt(attacker, newDamage, type);
 									//addStat(ShieldAchievements.BLOCK, 1);
 
