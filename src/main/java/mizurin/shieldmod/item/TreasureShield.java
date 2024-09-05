@@ -18,8 +18,8 @@ public class TreasureShield extends ShieldItem{
 	@Override
 	public void inventoryTick(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
 		if(itemstack.getData().getBoolean("active")){
-			entity.xd *= 0.4D;
-			entity.zd *= 0.4D;
+			entity.xd *= 0.20D;
+			entity.zd *= 0.20D;
 			int ticks = itemstack.getData().getInteger("ticks");
 
 			if (ticks > 0){
@@ -41,7 +41,8 @@ public class TreasureShield extends ShieldItem{
 		if(ticksB > 0){
 			target.knockBack(player, 1, (player.x - target.x), (player.z - target.z ));
 			target.push((target.x - player.x)/7, 1, (target.z - player.z)/7);
-			target.hurt(player, 5, DamageType.COMBAT);
+			target.push(target.xd, target.yd, target.zd);
+			target.hurt(player, 14, DamageType.COMBAT);
 			itemstack.getData().putInt("ticksB", 0);
 		}
 

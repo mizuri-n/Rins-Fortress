@@ -1,6 +1,7 @@
 package mizurin.shieldmod.item;
 
 import mizurin.shieldmod.IThrownItem;
+import mizurin.shieldmod.entities.EntityShield;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;

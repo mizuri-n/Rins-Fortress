@@ -5,8 +5,11 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BlockFarmlandMixin",
+    "EntityZombieArmoredMixin",
     "FieldMixin",
+    "KnockBackMixin",
     "LivingRendererMixin",
+    "PaintingMixin",
     "PlayerRendererMixin",
     "ShieldMixin",
     "WorldFeatureLabyrinthMixin"

@@ -1,29 +1,33 @@
 item.shieldmod.leather.shield.name=Leather Shield
-item.shieldmod.leather.shield.desc=A tool to block and bounce back enemies.
+item.shieldmod.leather.shield.desc=Send monsters flying with this colorful shield.
 item.shieldmod.wooden.shield.name=Wooden Shield
-item.shieldmod.wooden.shield.desc=A tool to block and deal knockback.
+item.shieldmod.wooden.shield.desc=A light wooden shield.
 item.shieldmod.stone.shield.name=Stone Shield
-item.shieldmod.stone.shield.desc=A tool to block and deal knockback.
+item.shieldmod.stone.shield.desc=A basic stone shield to defend against monsters.
 item.shieldmod.iron.shield.name=Iron Shield
-item.shieldmod.iron.shield.desc=A tool to block and deal knockback.
+item.shieldmod.iron.shield.desc=A shield that turns your skin into iron.
 item.shieldmod.gold.shield.name=Gold Shield
-item.shieldmod.gold.shield.desc=A tool to block and return damage to enemies.
+item.shieldmod.gold.shield.desc=Return damage back to monsters with this golden shield!
 item.shieldmod.diamond.shield.name=Diamond Shield
 item.shieldmod.diamond.shield.desc=A rare and pretty shield.
 item.shieldmod.steel.shield.name=Steel Shield
-item.shieldmod.steel.shield.desc=A tool to block and set enemies on fire.
+item.shieldmod.steel.shield.desc=Set monsters ablaze with this steel shield!
 
 item.shieldmod.tear.shield.name=Tearstone Shield
-item.shieldmod.tear.shield.desc=Bolsters defense when close to death
+item.shieldmod.tear.shield.desc=A throwable frozen shield that boosts defense when close to death.
+
+item.shieldmod.food.stew.pumpkin.name=Pumpkin Stew
+item.shieldmod.food.stew.pumpkin.desc=So hearty... tasty!
+
 
 item.shieldmod.armor.helmet.leather.name=Leather Cap
-item.shieldmod.armor.helmet.leather.desc=A hat made from a cow's hide
+item.shieldmod.armor.helmet.leather.desc=A hat made from a cow's hide.
 item.shieldmod.armor.chestplate.leather.name=Leather Tunic
-item.shieldmod.armor.chestplate.leather.desc=A tunic made from a cow's hide
+item.shieldmod.armor.chestplate.leather.desc=A tunic made from a cow's hide.
 item.shieldmod.armor.leggings.leather.name=Leather Pants
-item.shieldmod.armor.leggings.leather.desc=A pair of trousers made from a cow's hide
+item.shieldmod.armor.leggings.leather.desc=A pair of trousers made from a cow's hide.
 item.shieldmod.armor.boots.leather.name=Leather Boots
-item.shieldmod.armor.boots.leather.desc=A pair of boots made from a cow's hide
+item.shieldmod.armor.boots.leather.desc=A pair of boots made from a cow's hide.
 
 
 

@@ -8,6 +8,7 @@ import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.entity.projectile.EntityArrow;
+import net.minecraft.core.entity.projectile.EntityProjectile;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.InventoryPlayer;
@@ -56,6 +57,7 @@ public abstract class ShieldMixin extends EntityLiving {
 	@Shadow
 	private ChunkCoordinates playerSpawnCoordinate;
 
+
 	// inject at the top(HEAD) of hurt(), allow us to call return(cancel/set return value)
 	@Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
 	public void injectHurt(Entity attacker, int damage, DamageType type, CallbackInfoReturnable<Boolean> ci) {
@@ -72,7 +74,6 @@ public abstract class ShieldMixin extends EntityLiving {
 				damage = damage * 3 / 2;
 			}
 		}
-
 		// check if we are holding the shield item.
 		ItemStack stack = inventory.mainInventory[inventory.currentItem];
 		if (stack != null) {
@@ -96,15 +97,16 @@ public abstract class ShieldMixin extends EntityLiving {
 								_dx /= length;
 								_dz /= length;
 
-								if (shield.tool == ShieldMaterials.TOOL_LEATHER){
+
+								if (shield.tool == ShieldMaterials.TOOL_LEATHER && attacker != this){
 									attacker.push(_dx * 1.2 ,0.75,_dz * 1.2);
 									//addStat(ShieldAchievements.FLY_HIGH, 1);
 								}
-								if(shield.tool == ShieldMaterials.TOOL_GOLD){
+								if(shield.tool == ShieldMaterials.TOOL_GOLD && attacker != this){
 									attacker.hurt(attacker, newDamage, type);
 									//addStat(ShieldAchievements.GOLD_RETAL, 1);
 								}
-								if (shield.tool == ShieldMaterials.TOOL_TREASURE){
+								if (shield.tool == ShieldMaterials.TOOL_DIAMOND){
 									stack.getData().putInt("ticksB", 20);
 								}
 								super.hurt(attacker, newDamage, type);

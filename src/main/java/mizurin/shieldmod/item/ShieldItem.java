@@ -43,6 +43,7 @@ public class ShieldItem extends ItemToolSword {
 		return this.weaponDamage;
 	}
 
+
 	@Override
 	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
 		itemstack.getData().putBoolean("active", true);
