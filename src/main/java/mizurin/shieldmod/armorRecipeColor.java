@@ -2,11 +2,8 @@ package mizurin.shieldmod;
 
 import com.mojang.nbt.CompoundTag;
 import mizurin.shieldmod.item.ArmorColored;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.Global;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
-import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemStack;

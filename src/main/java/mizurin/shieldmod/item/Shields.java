@@ -1,10 +1,7 @@
 package mizurin.shieldmod.item;
 
-import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.stitcher.TextureRegistry;
-import net.minecraft.core.enums.ArtType;
 import net.minecraft.core.item.Item;
-import net.minecraft.core.item.ItemPainting;
 import net.minecraft.core.item.ItemSoup;
 import net.minecraft.core.item.tag.ItemTags;
 import org.slf4j.LoggerFactory;
@@ -13,7 +10,6 @@ import mizurin.shieldmod.ShieldMod;
 import org.slf4j.Logger;
 import net.minecraft.core.item.material.ArmorMaterial;
 
-import static mizurin.shieldmod.ShieldMod.MOD_ID;
 import static mizurin.shieldmod.ShieldMod.itemID;
 
 public class Shields {
@@ -111,14 +107,6 @@ public class Shields {
 			.build(new ThrowShield("tear.shield", ++itemID, ShieldMaterials.TOOL_TEAR))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
-		/*treasureShield = new ItemBuilder(MOD_ID)
-			.setStackSize(1)
-			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
-				{
-					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/steel_shield"), (s) -> -1)
-				}).setFull3D())
-			.build(new TreasureShield("treasure.shield", ++itemID, ShieldMaterials.TOOL_TREASURE))
-			.withTags(ItemTags.PREVENT_CREATIVE_MINING);*/
 
 		ammotearShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
