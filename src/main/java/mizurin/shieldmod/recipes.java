@@ -1,6 +1,5 @@
 package mizurin.shieldmod;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
@@ -8,13 +7,10 @@ import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryRepairable;
-import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 import net.minecraft.core.item.Item;
 import turniplabs.halplibe.helper.RecipeBuilder;
-import net.minecraft.core.data.DataLoader;
-import java.awt.*;
 
 import mizurin.shieldmod.item.Shields;
 

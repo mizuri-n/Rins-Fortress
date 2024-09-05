@@ -2,15 +2,11 @@ package mizurin.shieldmod.item;
 
 import com.mojang.nbt.CompoundTag;
 import net.minecraft.client.render.ItemRenderer;
-import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-
-import static mizurin.shieldmod.ShieldMod.MOD_ID;
 
 public class ItemModelShield extends ItemModelColored {
 	public ItemModelShield(Item item, ColoredTextureEntry[] textureEntries) {

@@ -1,6 +1,5 @@
 package mizurin.shieldmod;
 
-import mizurin.shieldmod.entities.ShieldZombie;
 import mizurin.shieldmod.entities.EntityShield;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.entity.ArmoredZombieRenderer;
@@ -50,7 +49,6 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 		paintingSeal = new ArtType("paintingSeal", "The Orb", "Rin", "shieldmod:art/seal", 32, 32);
 		paintingRice = new ArtType("paintingRice", "Lunch", "Rin", "shieldmod:art/onigiri", 32, 32);
 		EntityHelper.createEntity(EntityShield.class, entityID, "ammoShield", () -> new SnowballRenderer(Shields.ammotearShield));
-		EntityHelper.createEntity(ShieldZombie.class, ++entityID, "ShieldedZombie", () -> new ArmoredZombieRenderer(new ModelZombie(), 0.1F));
 		//AchievementPage SHIELDACHIEVEMENTS;
 		//SHIELDACHIEVEMENTS = new ShieldAchievements();
 		AchievementHelper.addPage(new ShieldAchievements());

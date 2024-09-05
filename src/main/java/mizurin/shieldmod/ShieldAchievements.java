@@ -1,12 +1,9 @@
 package mizurin.shieldmod;
 import mizurin.shieldmod.item.Shields;
-import net.minecraft.core.Global;
 import net.minecraft.core.achievement.Achievement;
 import net.minecraft.core.achievement.AchievementList;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemDye;
-import net.minecraft.core.util.helper.Side;
-import org.lwjgl.opengl.GL11;
 import turniplabs.halplibe.util.achievements.AchievementPage;
 import turniplabs.halplibe.util.achievements.GuiAchievements;
 

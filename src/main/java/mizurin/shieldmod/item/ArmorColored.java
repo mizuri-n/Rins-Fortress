@@ -14,11 +14,6 @@ import java.awt.*;
 
 public class ArmorColored extends ItemArmor implements IColoredArmor, IColorable {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
-//	private final IconCoordinate[] armorColor = new IconCoordinate[]{
-//		TextureRegistry.getTexture(MOD_ID + "item/armor/leather_helmet"),
-//		TextureRegistry.getTexture(MOD_ID + "item/armor/leather_chestplate"),
-//		TextureRegistry.getTexture(MOD_ID + "item/armor/leather_leggings"),
-//		TextureRegistry.getTexture(MOD_ID + "item/armor/leather_boots")};
 
 
 	public ArmorColored(String name, int id, ArmorMaterial material, int armorPiece) {
@@ -34,10 +29,6 @@ public class ArmorColored extends ItemArmor implements IColoredArmor, IColorable
 		}
 		return new Color(255, 255,255);
 	}
-//	@Override
-//	public ColoredTexture[] getTextures(ItemStack itemStack) {
-//		return new ColoredTexture[]{new ColoredTexture(armorColor[armorPiece], getColor(itemStack))};
-//	}
 
 	public ColoredArmorTexture[] getArmorTextures(ItemStack itemStack) {
 		return new ColoredArmorTexture[]{new ColoredArmorTexture(new NamespaceID("shieldmod","leather"), getColor(itemStack))};
