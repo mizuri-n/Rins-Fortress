@@ -1,4 +1,4 @@
-package mizurin.shieldmod.item;
+package mizurin.shieldmod.entities;
 
 import mizurin.shieldmod.IThrownItem;
 import net.minecraft.core.HitResult;

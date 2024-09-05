@@ -5,6 +5,7 @@ import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.enums.ArtType;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemPainting;
+import net.minecraft.core.item.ItemSoup;
 import net.minecraft.core.item.tag.ItemTags;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.ItemBuilder;
@@ -26,8 +27,8 @@ public class Shields {
 	public static Item steelShield;
 	public static Item leatherShield;
 	public static Item tearShield;
-	public static Item treasureShield;
 	public static Item ammotearShield;
+	public static Item pumpkinStew;
 
 	public static Item armorLeatherHelmet;
 	public static Item armorLeatherChest;
@@ -80,7 +81,7 @@ public class Shields {
 				{
 					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/diamond_shield"), (s) -> -1)
 				}).setFull3D())
-			.build(new ShieldItem("diamond.shield", ++itemID, ShieldMaterials.TOOL_DIAMOND))
+			.build(new TreasureShield("diamond.shield", ++itemID, ShieldMaterials.TOOL_DIAMOND))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 		steelShield = new ItemBuilder(MOD_ID)
@@ -110,14 +111,14 @@ public class Shields {
 			.build(new ThrowShield("tear.shield", ++itemID, ShieldMaterials.TOOL_TEAR))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
-		treasureShield = new ItemBuilder(MOD_ID)
+		/*treasureShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
 				{
 					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/steel_shield"), (s) -> -1)
 				}).setFull3D())
-			.build(new ShieldItem("treasure.shield", ++itemID, ShieldMaterials.TOOL_TREASURE))
-			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
+			.build(new TreasureShield("treasure.shield", ++itemID, ShieldMaterials.TOOL_TREASURE))
+			.withTags(ItemTags.PREVENT_CREATIVE_MINING);*/
 
 		ammotearShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
@@ -127,6 +128,10 @@ public class Shields {
 				}).setFull3D())
 			.build(new Item("tear.shield.ammo", ++itemID))
 			.withTags(ItemTags.NOT_IN_CREATIVE_MENU);
+
+		pumpkinStew = new ItemBuilder(MOD_ID)
+			.setIcon("shieldmod:item/pumpkin_stew")
+			.build(new ItemSoup("food.stew.pumpkin", ++itemID, 16, 30));
 
 		armorLeatherHelmet = new ItemBuilder(MOD_ID).setItemModel(item -> new ItemModelColored(item, new ItemModelColored.ColoredTextureEntry[]
 			{

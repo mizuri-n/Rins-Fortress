@@ -1,7 +1,7 @@
 package mizurin.shieldmod;
 
 import mizurin.shieldmod.entities.ShieldZombie;
-import mizurin.shieldmod.item.EntityShield;
+import mizurin.shieldmod.entities.EntityShield;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.entity.ArmoredZombieRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
@@ -27,6 +27,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	public static int itemID;
 	public static int entityID;
 	public static ArtType paintingSeal;
+	public static ArtType paintingRice;
 	static {
 		Properties prop = new Properties();
 		prop.setProperty("starting_item_id", "17000");
@@ -46,6 +47,10 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	@Override
 	public void beforeGameStart() {
 		new Shields().initializeItems();
+		paintingSeal = new ArtType("paintingSeal", "The Orb", "Rin", "shieldmod:art/seal", 32, 32);
+		paintingRice = new ArtType("paintingRice", "Lunch", "Rin", "shieldmod:art/onigiri", 32, 32);
+		EntityHelper.createEntity(EntityShield.class, entityID, "ammoShield", () -> new SnowballRenderer(Shields.ammotearShield));
+		EntityHelper.createEntity(ShieldZombie.class, ++entityID, "ShieldedZombie", () -> new ArmoredZombieRenderer(new ModelZombie(), 0.1F));
 		//AchievementPage SHIELDACHIEVEMENTS;
 		//SHIELDACHIEVEMENTS = new ShieldAchievements();
 		AchievementHelper.addPage(new ShieldAchievements());
@@ -60,9 +65,6 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 
 	@Override
 	public void beforeClientStart() {
-		paintingSeal = new ArtType("paintingSeal", "The Orb", "Rin", "shieldmod:art/seal", 32, 32);
-		EntityHelper.createEntity(EntityShield.class, entityID, "ammoShield", () -> new SnowballRenderer(Shields.ammotearShield));
-		EntityHelper.createEntity(ShieldZombie.class, ++entityID, "ShieldZombie", () -> new ArmoredZombieRenderer(new ModelZombie(), 0.1F));
 	}
 
 	@Override

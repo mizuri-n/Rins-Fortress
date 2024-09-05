@@ -74,6 +74,12 @@ public class recipes implements RecipeEntrypoint {
 			.addInput('L', "minecraft:wools")
 			.create("leatherShield", Shields.leatherShield.getDefaultStack());
 
+		RecipeBuilder.Shapeless(MOD_ID)
+			.addInput(Block.pumpkin)
+			.addInput(Item.foodPorkchopCooked)
+			.addInput(Item.bowl)
+			.create("pumpkinstew", Shields.pumpkinStew.getDefaultStack());
+
 
 		WORKBENCH.register("tearstoneShield", new RecipeEntryRepairable(Shields.tearShield, Item.ingotIron));
 	}
