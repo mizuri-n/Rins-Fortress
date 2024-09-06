@@ -1,10 +1,10 @@
 # Better with defense mod
-7 new shields added to BTA.
+Adds 8 shields and more
 
 ## Dependencies:
 [HalpLibe 3.5.1](<https://github.com/Turnip-Labs/bta-halplibe>) 
 
-[PrismaticLibe](<https://github.com/UselessSolutions/BTA_Babric_PrismaticLibe>)
+[PrismaticLibe](<https://github.com/UselessSolutions/BTA_Babric_PrismaticLibe>) (Outdated)
 ### Special thanks
 Thank you to the people at the BTA modding discord for help.
 
