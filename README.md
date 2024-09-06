@@ -2,7 +2,7 @@
 Adds 8 shields and more
 
 ## Dependencies:
-[HalpLibe 3.5.1](<https://github.com/Turnip-Labs/bta-halplibe>) 
+[HalpLibe 4.1.3](<https://github.com/Turnip-Labs/bta-halplibe>) 
 
 [PrismaticLibe](<https://github.com/UselessSolutions/BTA_Babric_PrismaticLibe>) (Outdated)
 ### Special thanks
