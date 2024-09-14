@@ -115,6 +115,7 @@ public abstract class ShieldMixin extends EntityLiving {
 									//addStat(ShieldAchievements.INVINCIBLE, 1);
 								//}
 
+
 								world.playSoundAtEntity(attacker,
 									attacker, ("mob.ghast.fireball"),
 									1.0F,
@@ -140,7 +141,7 @@ public abstract class ShieldMixin extends EntityLiving {
 								super.hurt(attacker, damage, type);
 							}
 						}
-						ci.setReturnValue(false);
+						ci.setReturnValue(true);
 					}
 				}
 			}

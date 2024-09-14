@@ -35,12 +35,14 @@ public abstract class EntityZombieArmoredMixin extends EntityZombie implements I
 	@Override
 	public void spawnInit(){
 		super.spawnInit();
-		if ((random.nextInt(2) == 0) && isHoldingSword){
+		if ((random.nextInt(5) == 0)){
 			setHealthRaw(80);
+			attackStrength = 6;
 			this.mobDrops.add(new WeightedRandomLootObject(Item.ingotIron.getDefaultStack(), 1, 2));
 			entityData.set(21, (byte)1);
 		}
 	}
+
 
 	@Override
 	public boolean better_with_defense$isShieldZombie() {
@@ -50,7 +52,7 @@ public abstract class EntityZombieArmoredMixin extends EntityZombie implements I
 
 	@Inject(method = "getHeldItem()Lnet/minecraft/core/item/ItemStack;", at = @At("HEAD"), cancellable = true)
 	private void sword(CallbackInfoReturnable<ItemStack> cir){
-		if (isHoldingSword && better_with_defense$isShieldZombie()){
+		if (better_with_defense$isShieldZombie()){
 			cir.setReturnValue(new ItemStack(Shields.ironShield));
 		}
 	}
