@@ -5,6 +5,7 @@ import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.entity.projectile.EntityArrow;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
@@ -51,6 +52,7 @@ public abstract class KnockBackMixin {
 
 						ci.cancel();
 					}
+
 				}
 			}
 		}

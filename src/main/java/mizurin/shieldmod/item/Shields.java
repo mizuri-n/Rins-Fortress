@@ -48,7 +48,7 @@ public class Shields {
 			.setStackSize(1)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
 				{
-					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/stone_shield"), (s) -> -1)
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/stone_shield_test"), (s) -> -1)
 				}).setFull3D())
 			.build(new ShieldItem("stone.shield", ++itemID, ShieldMaterials.TOOL_STONE))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
@@ -57,7 +57,7 @@ public class Shields {
 			.setStackSize(1)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
 				{
-					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/iron_shield"), (s) -> -1)
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/iron_shield_test"), (s) -> -1)
 				}).setFull3D())
 			.build(new ShieldItem("iron.shield", ++itemID, ShieldMaterials.TOOL_IRON))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
@@ -66,7 +66,7 @@ public class Shields {
 			.setStackSize(1)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
 				{
-					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/gold_shield"), (s) -> -1)
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/gold_shield_test"), (s) -> -1)
 				}).setFull3D())
 			.build(new ShieldItem("gold.shield", ++itemID, ShieldMaterials.TOOL_GOLD))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
@@ -75,7 +75,7 @@ public class Shields {
 			.setStackSize(1)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
 				{
-					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/diamond_shield"), (s) -> -1)
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/diamond_shield_test"), (s) -> -1)
 				}).setFull3D())
 			.build(new TreasureShield("diamond.shield", ++itemID, ShieldMaterials.TOOL_DIAMOND))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
