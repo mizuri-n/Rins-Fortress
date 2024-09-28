@@ -8,6 +8,8 @@ import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryCrafting;
 import net.minecraft.core.util.helper.Color;
+import goocraft4evr.nonamedyes.item.ModItems;
+import turniplabs.halplibe.helper.ModVersionHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,15 +18,36 @@ import java.util.Map;
 
 //Special thanks to UselessBullets for being extremely awesome https://github.com/UselessBullets/Lunacy/tree/7.1
 public class recipeColor extends RecipeEntryCraftingDynamic {
+	public static boolean nonamedyesOn = ModVersionHelper.isModPresent("nonamedyes");
 
 	public static HashMap<Item, Map<Integer, Color>> dyeMap = new HashMap<>();
 	private static final Map<Integer, Color> vanillaDye;
+	private static final Map<Integer, Color> nonameDye;
 	static {
 		vanillaDye = new HashMap<>();
+		nonameDye = new HashMap<>();
 		ItemDye.field_31002_bk[7] = 13027014;
 		ItemDye.field_31002_bk[15] = 16777215;
 		for (int color = 0; color < 16; color++) {
 			vanillaDye.put(color, new Color().setARGB(ItemDye.field_31002_bk[color]));
+		}
+		if (nonamedyesOn){
+			nonameDye.put(0, new Color().setARGB(11540279)); //crimson
+			nonameDye.put(1, new Color().setARGB(6627104)); //maroon
+			nonameDye.put(2, new Color().setARGB(10005149)); //ash.gray
+			nonameDye.put(3, new Color().setARGB(7236357)); // olive
+			nonameDye.put(4, new Color().setARGB(13007915)); //ochre
+			nonameDye.put(5, new Color().setARGB(14063170)); //buff L
+			nonameDye.put(6, new Color().setARGB(3591599)); //verdigris
+			nonameDye.put(7, new Color().setARGB(16772730)); //light.yellow L
+			nonameDye.put(8, new Color().setARGB(3878540)); //indigo
+			nonameDye.put(9, new Color().setARGB(13887232)); //xanthic
+			nonameDye.put(10, new Color().setARGB(9191711)); //cinnamon
+			nonameDye.put(11, new Color().setARGB(2171241)); //navy.blue
+			nonameDye.put(12, new Color().setARGB(6631797)); //royal.purple
+			nonameDye.put(13, new Color().setARGB(2788193)); //viridian
+
+			dyeMap.put(ModItems.dye, nonameDye);
 		}
 		dyeMap.put(Item.dye, vanillaDye);
 	}

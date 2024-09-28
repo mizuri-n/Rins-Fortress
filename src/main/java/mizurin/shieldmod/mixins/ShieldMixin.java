@@ -4,6 +4,7 @@ import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.achievement.stat.Stat;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.EntityBobber;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -55,6 +56,7 @@ public abstract class ShieldMixin extends EntityLiving {
 
 	@Shadow
 	private ChunkCoordinates playerSpawnCoordinate;
+
 
 
 	// inject at the top(HEAD) of hurt(), allow us to call return(cancel/set return value)

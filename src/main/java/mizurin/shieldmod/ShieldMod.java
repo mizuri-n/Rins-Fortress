@@ -29,7 +29,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	public static ArtType paintingRice;
 	static {
 		Properties prop = new Properties();
-		prop.setProperty("starting_item_id", "17000");
+		prop.setProperty("starting_item_id", "21000");
 		prop.setProperty("starting_entity_id", "100");
 		ConfigHandler config = new ConfigHandler(ShieldMod.MOD_ID, prop);
 		itemID = config.getInt("starting_item_id");
