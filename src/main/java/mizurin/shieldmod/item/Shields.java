@@ -4,6 +4,7 @@ import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemSoup;
 import net.minecraft.core.item.tag.ItemTags;
+import net.minecraft.core.util.helper.DamageType;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.ItemBuilder;
 import mizurin.shieldmod.ShieldMod;
@@ -102,7 +103,7 @@ public class Shields {
 		tearShield = new ItemBuilder(MOD_ID)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
 				{
-					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/tearstone_shield"), (s) -> -1)
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/tearstone_shield_test"), (s) -> -1)
 				}).setFull3D())
 			.build(new ThrowShield("tear.shield", ++itemID, ShieldMaterials.TOOL_TEAR))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
@@ -112,7 +113,7 @@ public class Shields {
 			.setStackSize(1)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
 				{
-					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/ammotearstone_shield"), (s) -> -1)
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/ammotearstone_shield_test"), (s) -> -1)
 				}).setFull3D())
 			.build(new Item("tear.shield.ammo", ++itemID))
 			.withTags(ItemTags.NOT_IN_CREATIVE_MENU);
@@ -144,6 +145,7 @@ public class Shields {
 					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture(MOD_ID + ":item/leather_boots"), ItemModelShield::shieldColor)
 				}))
 			.build(new ArmorColored("armor.boots.leather", 16429, ArmorMaterial.LEATHER, 3));
+
 
 	}
 }

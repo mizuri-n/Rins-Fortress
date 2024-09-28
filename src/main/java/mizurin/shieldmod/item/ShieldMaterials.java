@@ -25,4 +25,5 @@ public class ShieldMaterials extends ToolMaterial {
 		this.guard = guard;
 		return super.setEfficiency(efficiency, guard);
 	}
+
 }
