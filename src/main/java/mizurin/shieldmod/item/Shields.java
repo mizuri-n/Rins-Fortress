@@ -69,7 +69,7 @@ public class Shields {
 				{
 					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/gold_shield_test"), (s) -> -1)
 				}).setFull3D())
-			.build(new ShieldItem("gold.shield", ++itemID, ShieldMaterials.TOOL_GOLD))
+			.build(new ParryShield("gold.shield", ++itemID, ShieldMaterials.TOOL_GOLD))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 		diamondShield = new ItemBuilder(MOD_ID)
