@@ -64,6 +64,11 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 
 
 	@Override
+	public boolean better_with_defense$isShieldZombie() {
+		return false;
+	}
+
+	@Override
 	public boolean better_with_defense$isSnowJack() {
 		return entityData.getByte(22) == 1;
 	}
