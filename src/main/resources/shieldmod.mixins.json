@@ -4,6 +4,7 @@
   "package": "mizurin.shieldmod.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BipedRendererMixin",
     "BlockFarmlandMixin",
     "EntitySnowManMixin",
     "EntityZombieArmoredMixin",
