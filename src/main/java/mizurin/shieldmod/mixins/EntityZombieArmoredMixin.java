@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = EntityArmoredZombie.class, remap = false)
-public abstract class EntityZombieArmoredMixin extends EntityZombie implements IShieldZombie {
+public class EntityZombieArmoredMixin extends EntityZombie implements IShieldZombie {
 	@Shadow
 	@Final
 	private boolean isHoldingSword;
@@ -47,6 +47,11 @@ public abstract class EntityZombieArmoredMixin extends EntityZombie implements I
 	@Override
 	public boolean better_with_defense$isShieldZombie() {
 		return entityData.getByte(21) == 1;
+	}
+
+	@Override
+	public boolean better_with_defense$isSnowJack() {
+		return false;
 	}
 
 
