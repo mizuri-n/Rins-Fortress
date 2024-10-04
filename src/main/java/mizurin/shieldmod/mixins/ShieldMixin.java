@@ -1,10 +1,10 @@
 package mizurin.shieldmod.mixins;
 
+import mizurin.shieldmod.item.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.achievement.stat.Stat;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityBobber;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -17,6 +17,7 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -28,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 // extend Entity so we get access to entity methods and fields.
 // abstract so we don't have to implement interfaces, constructor is not used but required.
-public abstract class ShieldMixin extends EntityLiving {
+public abstract class ShieldMixin extends EntityLiving implements ParryInterface {
 	public ShieldMixin(World world) {
 		super(world);
 	}
@@ -56,6 +57,18 @@ public abstract class ShieldMixin extends EntityLiving {
 
 	@Shadow
 	private ChunkCoordinates playerSpawnCoordinate;
+
+	@Unique
+	private int parryTicks;
+
+	@Override
+	public void shieldmod$Parry(int parryTicks){
+		this.parryTicks = parryTicks;
+	}
+	@Override
+	public int shieldmod$getParryTicks(){
+		return parryTicks;
+	}
 
 
 
@@ -103,10 +116,11 @@ public abstract class ShieldMixin extends EntityLiving {
 									attacker.push(_dx * 1.2 ,0.75,_dz * 1.2);
 									//addStat(ShieldAchievements.FLY_HIGH, 1);
 								}
-								if(shield.tool == ShieldMaterials.TOOL_GOLD && attacker != this){
-									attacker.hurt(attacker, newDamage, type);
+								/*if(shield.tool == ShieldMaterials.TOOL_GOLD && attacker != this){
+
+									//attacker.hurt(attacker, newDamage, type);
 									//addStat(ShieldAchievements.GOLD_RETAL, 1);
-								}
+								}*/
 								if (shield.tool == ShieldMaterials.TOOL_DIAMOND){
 									stack.getData().putInt("ticksB", 20);
 								}
