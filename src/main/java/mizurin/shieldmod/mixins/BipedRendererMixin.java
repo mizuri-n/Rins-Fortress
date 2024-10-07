@@ -17,20 +17,22 @@ import net.minecraft.core.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(MobRenderer.class)
+@Mixin(value = MobRenderer.class, remap = false)
 public class BipedRendererMixin<T extends EntityLiving> extends LivingRenderer<T> {
 
 	@Shadow
-	public ModelBiped modelBipedMain;
+	protected ModelBiped modelBipedMain;
 
 	public BipedRendererMixin(ModelBiped model, float shadowSize) {
 		super(model, shadowSize);
 	}
 
-	@Override
-	public void renderEquippedItems(T entity, float f) {
-		GL11.glColor4f(1, 1, 1, 1);
+	@Inject(method = "renderEquippedItems", at = @At("HEAD"))
+	public void inject(T entity, float f, CallbackInfo ci){
 		if (entity instanceof IShieldZombie && ((IShieldZombie)entity).better_with_defense$isSnowJack()) {
 
 			ItemStack itemstack = Block.pumpkinCarvedIdle.getDefaultStack();
@@ -47,6 +49,5 @@ public class BipedRendererMixin<T extends EntityLiving> extends LivingRenderer<T
 				GL11.glPopMatrix();
 			}
 		}
-		super.renderEquippedItems(entity, f);
 	}
 }

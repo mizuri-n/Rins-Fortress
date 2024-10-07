@@ -79,6 +79,18 @@ public class recipes implements RecipeEntrypoint {
 			.addInput(Item.bowl)
 			.create("pumpkinstew", Shields.pumpkinStew.getDefaultStack());
 
+		RecipeBuilder.Shapeless(MOD_ID)
+			.addInput(Item.dustRedstone)
+			.addInput(Item.dustRedstone)
+			.addInput(Item.bucketWater)
+			.addInput(Block.flowerLightBlue)
+			.addInput(Block.flowerLightBlue)
+			.addInput(Block.flowerLightBlue)
+			.addInput(Item.jar)
+			.addInput(Item.jar)
+			.addInput(Item.jar)
+			.create("poisonbottle", new ItemStack(Shields.poisonBottle, 3));
+
 
 		WORKBENCH.register("tearstoneShield", new RecipeEntryRepairable(Shields.tearShield, Item.ingotIron));
 	}

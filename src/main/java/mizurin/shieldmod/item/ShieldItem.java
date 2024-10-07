@@ -6,6 +6,7 @@ import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolSword;
+import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 
 public class ShieldItem extends ItemToolSword {
@@ -34,6 +35,10 @@ public class ShieldItem extends ItemToolSword {
 		}
 		if(itemstack.getItem() == Shields.steelShield){
 			target.fireHurt();
+		}
+		if(itemstack.getItem() == Shields.goldShield){
+			((IDazed)target).better_with_defense$dazedHurt();
+			target.push((target.x - player.x)/20, 0, (target.z - player.z)/20);
 		}
 		itemstack.damageItem(1, player);
 

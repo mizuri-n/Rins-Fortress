@@ -6,6 +6,7 @@
   "mixins": [
     "BipedRendererMixin",
     "BlockFarmlandMixin",
+    "DazedMixin",
     "EntitySnowManMixin",
     "EntityZombieArmoredMixin",
     "FieldMixin",

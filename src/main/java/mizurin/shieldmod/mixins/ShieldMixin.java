@@ -1,5 +1,7 @@
 package mizurin.shieldmod.mixins;
 
+import mizurin.shieldmod.entities.EntityPB;
+import mizurin.shieldmod.entities.EntityRock;
 import mizurin.shieldmod.item.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
@@ -9,6 +11,7 @@ import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.entity.projectile.EntityArrow;
+import net.minecraft.core.entity.projectile.EntityPebble;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.InventoryPlayer;
@@ -116,11 +119,14 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 									attacker.push(_dx * 1.2 ,0.75,_dz * 1.2);
 									//addStat(ShieldAchievements.FLY_HIGH, 1);
 								}
-								/*if(shield.tool == ShieldMaterials.TOOL_GOLD && attacker != this){
+								if (shield.tool == ShieldMaterials.TOOL_STONE && attacker != this){
+									attacker.hurt(this, 4, DamageType.FALL);
+									attacker.heartsFlashTime = 0;
+									if (!world.isClientSide) {
+										world.entityJoinedWorld(new EntityRock(world, this));
+									}
+								}
 
-									//attacker.hurt(attacker, newDamage, type);
-									//addStat(ShieldAchievements.GOLD_RETAL, 1);
-								}*/
 								if (shield.tool == ShieldMaterials.TOOL_DIAMOND){
 									stack.getData().putInt("ticksB", 20);
 								}

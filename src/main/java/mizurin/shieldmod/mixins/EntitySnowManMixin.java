@@ -7,7 +7,6 @@ import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.*;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,7 +47,7 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 	@Override
 	protected Entity findPlayerToAttack() {
 		if (better_with_defense$isSnowJack()) {
-			List nearbyMon = this.world.getEntitiesWithinAABB(EntityZombie.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0));
+			List<Entity> nearbyMon = this.world.getEntitiesWithinAABB(EntityZombie.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0));
 			nearbyMon.addAll(this.world.getEntitiesWithinAABB(EntitySkeleton.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0)));
 			nearbyMon.addAll(this.world.getEntitiesWithinAABB(EntitySpider.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0)));
 			nearbyMon.addAll(this.world.getEntitiesWithinAABB(EntitySlime.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0)));
@@ -91,8 +90,5 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 		} else {
 			return true;
 		}
-	}
-	protected void renderSpecials(EntityPlayer entity, float partialTick) {
-
 	}
 }

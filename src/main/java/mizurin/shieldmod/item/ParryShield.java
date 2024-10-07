@@ -1,6 +1,8 @@
 package mizurin.shieldmod.item;
 
+import mizurin.shieldmod.entities.EntityPB;
 import mizurin.shieldmod.entities.EntityShield;
+import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
@@ -110,7 +112,16 @@ public class ParryShield extends ThrowShield {
 				world.entityJoinedWorld(newTS);
 				world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
 			}
+			if(entity instanceof EntityPB){
+				double oldSBX = entity.x;
+				double oldSBY = entity.y;
+				double oldSBZ = entity.z;
 
+				entity.remove();
+				EntityPB newPS = new EntityPB(world, player);
+				world.entityJoinedWorld(newPS);
+				world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+			}
 
 	}
 

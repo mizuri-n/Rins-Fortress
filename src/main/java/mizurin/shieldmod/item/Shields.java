@@ -1,5 +1,6 @@
 package mizurin.shieldmod.item;
 
+import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemSoup;
@@ -31,6 +32,7 @@ public class Shields {
 	public static Item armorLeatherChest;
 	public static Item armorLeatherLeg;
 	public static Item armorLeatherBoot;
+	public static Item poisonBottle;
 
 
 
@@ -146,6 +148,6 @@ public class Shields {
 				}))
 			.build(new ArmorColored("armor.boots.leather", 16429, ArmorMaterial.LEATHER, 3));
 
-
+		poisonBottle = new ItemBuilder(MOD_ID).setStackSize(16).setIcon(String.format("%s:item/poison_bottle",MOD_ID)).build(new ItemPB("poison.bottle", ++itemID));
 	}
 }
