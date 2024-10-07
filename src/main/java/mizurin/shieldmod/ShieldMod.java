@@ -3,6 +3,7 @@ package mizurin.shieldmod;
 import mizurin.shieldmod.entities.EntityPB;
 import mizurin.shieldmod.entities.EntityRock;
 import mizurin.shieldmod.entities.EntityShield;
+import mizurin.shieldmod.entities.NetShieldEntry;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.client.render.entity.ArmoredZombieRenderer;
@@ -13,6 +14,8 @@ import net.minecraft.core.entity.SpawnListEntry;
 import net.minecraft.core.enums.ArtType;
 import net.minecraft.core.enums.EnumCreatureType;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.net.entity.NetEntityHandler;
+import net.minecraft.core.net.entity.entries.ArrowNetEntry;
 import net.minecraft.core.world.biome.Biomes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,6 +65,8 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 		//AchievementPage SHIELDACHIEVEMENTS;
 		//SHIELDACHIEVEMENTS = new ShieldAchievements();
 		AchievementHelper.addPage(new ShieldAchievements());
+
+		NetEntityHandler.registerNetworkEntry(new NetShieldEntry(), 8000);
 	}
 
 	@Override
