@@ -24,7 +24,7 @@ public class EntityShield extends EntityPebble {
 	private int fuse = 4;
 	public EntityShield(World world) {
 		super(world);
-		this.modelItem = Item.ammoPebble;
+		this.modelItem = Shields.ammotearShield;
 		this.setSize(0.9F, 0.9F);
 	}
 
@@ -35,7 +35,7 @@ public class EntityShield extends EntityPebble {
 
 	public EntityShield(World world, double d, double d1, double d2) {
 		super(world, d, d1, d2);
-		this.modelItem = Item.ammoPebble;
+		this.modelItem = Shields.ammotearShield;
 	}
 
 	public void init() {
