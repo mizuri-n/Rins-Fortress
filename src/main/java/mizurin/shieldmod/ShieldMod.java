@@ -1,12 +1,19 @@
 package mizurin.shieldmod;
 
+import mizurin.shieldmod.entities.EntityPB;
+import mizurin.shieldmod.entities.EntityRock;
 import mizurin.shieldmod.entities.EntityShield;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.client.render.entity.ArmoredZombieRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.client.render.model.ModelZombie;
 import net.minecraft.core.crafting.LookupFuelFurnace;
+import net.minecraft.core.entity.SpawnListEntry;
 import net.minecraft.core.enums.ArtType;
+import net.minecraft.core.enums.EnumCreatureType;
+import net.minecraft.core.item.Item;
+import net.minecraft.core.world.biome.Biomes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.AchievementHelper;
@@ -41,14 +48,17 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
     @Override
     public void onInitialize() {
         LOGGER.info("Better with Defense has been initialized!");
+		new Shields().initializeItems();
+		Colorizers.registerColorizers();
     }
 
 	@Override
 	public void beforeGameStart() {
-		new Shields().initializeItems();
 		paintingSeal = new ArtType("paintingSeal", "The Orb", "Rin", "shieldmod:art/seal", 32, 32);
 		paintingRice = new ArtType("paintingRice", "Lunch", "Rin", "shieldmod:art/onigiri", 32, 32);
 		EntityHelper.createEntity(EntityShield.class, entityID, "ammoShield", () -> new SnowballRenderer(Shields.ammotearShield));
+		EntityHelper.createEntity(EntityPB.class, ++entityID, "poisonBottle", () -> new SnowballRenderer(Shields.poisonBottle));
+		EntityHelper.createEntity(EntityRock.class, ++entityID, "pebbleShield", () -> new SnowballRenderer(Item.ammoPebble));
 		//AchievementPage SHIELDACHIEVEMENTS;
 		//SHIELDACHIEVEMENTS = new ShieldAchievements();
 		AchievementHelper.addPage(new ShieldAchievements());
@@ -58,7 +68,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	public void afterGameStart() {
 		LookupFuelFurnace.instance.addFuelEntry(Shields.woodenShield.id, 600);
 		new recipes().initializeRecipe();
-		LOGGER.info("Time to Block!");
+		LOGGER.info("BWD initialized");
 	}
 
 	@Override

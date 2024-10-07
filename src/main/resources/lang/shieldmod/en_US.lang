@@ -3,11 +3,11 @@ item.shieldmod.leather.shield.desc=Send monsters flying with this colorful shiel
 item.shieldmod.wooden.shield.name=Wooden Shield
 item.shieldmod.wooden.shield.desc=A light wooden shield.
 item.shieldmod.stone.shield.name=Stone Shield
-item.shieldmod.stone.shield.desc=A basic stone shield to defend against monsters.
+item.shieldmod.stone.shield.desc=A crumbling stone shield.
 item.shieldmod.iron.shield.name=Iron Shield
 item.shieldmod.iron.shield.desc=A shield that turns your skin into iron.
 item.shieldmod.gold.shield.name=Gold Shield
-item.shieldmod.gold.shield.desc=Return damage back to monsters with this golden shield!
+item.shieldmod.gold.shield.desc=Send projectiles back to monsters with this golden shield!
 item.shieldmod.diamond.shield.name=Diamond Shield
 item.shieldmod.diamond.shield.desc=A rare and pretty shield.
 item.shieldmod.steel.shield.name=Steel Shield
@@ -18,6 +18,9 @@ item.shieldmod.tear.shield.desc=A throwable frozen shield that boosts defense wh
 
 item.shieldmod.food.stew.pumpkin.name=Pumpkin Stew
 item.shieldmod.food.stew.pumpkin.desc=Hearty... tasty!
+
+item.shieldmod.poison.bottle.name=Alchemist's Poison
+item.shieldmod.poison.bottle.desc=Full of a velvet gloom...
 
 
 item.shieldmod.armor.helmet.leather.name=Leather Cap
