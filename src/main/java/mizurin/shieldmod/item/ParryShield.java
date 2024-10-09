@@ -65,9 +65,11 @@ public class ParryShield extends ThrowShield {
 			if (!((EntityArrow) entity).isGrounded()) {
 				entity.remove();
 				EntityArrow newArrow = new EntityArrow(world, player, true, ((EntityArrow) entity).getArrowType());
-				world.entityJoinedWorld(newArrow);
-				newArrow.setPos(oldArrowX, oldArrowY, oldArrowZ);
-				world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+				if (!world.isClientSide) {
+					world.entityJoinedWorld(newArrow);
+					newArrow.setPos(oldArrowX, oldArrowY, oldArrowZ);
+					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+				}
 			}
 		}
 
@@ -84,13 +86,15 @@ public class ParryShield extends ThrowShield {
 
 			entity.remove();
 			EntityCannonball newCB = new EntityCannonball(world, player);
-			world.entityJoinedWorld(newCB);
-			newCB.setPos(oldCBX, oldCBY, oldCBZ);
-			double pushX = player.getLookAngle().xCoord;
-			double pushY = player.getLookAngle().yCoord;
-			double pushZ = player.getLookAngle().zCoord;
-			newCB.push(pushX * 1.2, pushY * 1.2, pushZ * 1.2);
-			world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+			if (!world.isClientSide) {
+				world.entityJoinedWorld(newCB);
+				newCB.setPos(oldCBX, oldCBY, oldCBZ);
+				double pushX = player.getLookAngle().xCoord;
+				double pushY = player.getLookAngle().yCoord;
+				double pushZ = player.getLookAngle().zCoord;
+				newCB.push(pushX * 1.2, pushY * 1.2, pushZ * 1.2);
+				world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+			}
 		}
 		if(entity instanceof EntitySnowball){
 			double oldSBX = entity.x;
@@ -99,8 +103,10 @@ public class ParryShield extends ThrowShield {
 
 			entity.remove();
 			EntitySnowball newSB = new EntitySnowball(world, player);
-			world.entityJoinedWorld(newSB);
-			world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+			if (!world.isClientSide) {
+				world.entityJoinedWorld(newSB);
+				world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+			}
 		}
 			if(entity instanceof EntityShield){
 				double oldSBX = entity.x;
@@ -109,8 +115,10 @@ public class ParryShield extends ThrowShield {
 
 				entity.remove();
 				EntityShield newTS = new EntityShield(world, player);
-				world.entityJoinedWorld(newTS);
-				world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+				if (!world.isClientSide) {
+					world.entityJoinedWorld(newTS);
+					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+				}
 			}
 			if(entity instanceof EntityPB){
 				double oldSBX = entity.x;
@@ -119,8 +127,10 @@ public class ParryShield extends ThrowShield {
 
 				entity.remove();
 				EntityPB newPS = new EntityPB(world, player);
-				world.entityJoinedWorld(newPS);
-				world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+				if (!world.isClientSide) {
+					world.entityJoinedWorld(newPS);
+					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+				}
 			}
 
 	}
