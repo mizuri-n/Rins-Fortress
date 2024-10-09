@@ -1,6 +1,7 @@
 package mizurin.shieldmod.entities;
 
 import mizurin.shieldmod.item.IDazed;
+import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.HitResult;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.projectile.EntityProjectile;
@@ -14,15 +15,15 @@ import net.minecraft.core.world.World;
 public class EntityPB extends EntityProjectile {
 	public EntityPB(World world, EntityLiving entityliving) {
 		super(world, entityliving);
-		this.modelItem = Item.doorGlass;
+		this.modelItem = Shields.poisonBottle;
 	}
 	public EntityPB(World world, double d, double d1, double d2) {
 		super(world, d, d1, d2);
-		this.modelItem = Item.doorGlass;
+		this.modelItem = Shields.poisonBottle;
 	}
 	public EntityPB(World world) {
 		super(world);
-		this.modelItem = Item.doorGlass;
+		this.modelItem = Shields.poisonBottle;
 	}
 	public void init() {
 		super.init();

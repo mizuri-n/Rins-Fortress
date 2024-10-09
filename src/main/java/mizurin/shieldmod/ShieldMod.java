@@ -1,9 +1,6 @@
 package mizurin.shieldmod;
 
-import mizurin.shieldmod.entities.EntityPB;
-import mizurin.shieldmod.entities.EntityRock;
-import mizurin.shieldmod.entities.EntityShield;
-import mizurin.shieldmod.entities.NetShieldEntry;
+import mizurin.shieldmod.entities.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.client.render.entity.ArmoredZombieRenderer;
@@ -67,6 +64,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 		AchievementHelper.addPage(new ShieldAchievements());
 
 		NetEntityHandler.registerNetworkEntry(new NetShieldEntry(), 8000);
+		NetEntityHandler.registerNetworkEntry(new NetPotionEntry(), 8001);
 	}
 
 	@Override

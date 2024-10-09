@@ -2,11 +2,12 @@ package mizurin.shieldmod.entities;
 
 import net.minecraft.core.HitResult;
 import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.projectile.EntityPebble;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 
-public class EntityRock extends EntityPB{
+public class EntityRock extends EntityPebble {
 	public EntityRock(World world, EntityLiving entityliving) {
 		super(world, entityliving);
 	}
