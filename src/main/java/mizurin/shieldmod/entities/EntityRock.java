@@ -7,6 +7,7 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 
+//This is just the pebble used for the stone shield to prevent infinite pebbles, give impact particles, and to increase the base damage.
 public class EntityRock extends EntityPebble {
 	public EntityRock(World world, EntityLiving entityliving) {
 		super(world, entityliving);

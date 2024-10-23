@@ -4,18 +4,22 @@
   "package": "mizurin.shieldmod.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BipedRendererMixin",
     "BlockFarmlandMixin",
     "DazedMixin",
+    "EntityLivingMixin",
     "EntitySnowManMixin",
     "EntityZombieArmoredMixin",
     "FieldMixin",
     "KnockBackMixin",
+    "ShieldMixin",
+    "WorldFeatureLabyrinthMixin",
+    "WorldMixin"
+  ],
+  "client": [
+    "BipedRendererMixin",
     "LivingRendererMixin",
     "PaintingMixin",
-    "PlayerRendererMixin",
-    "ShieldMixin",
-    "WorldFeatureLabyrinthMixin"
+    "PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

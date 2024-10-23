@@ -1,7 +1,7 @@
 package mizurin.shieldmod.mixins;
 
 import com.mojang.nbt.CompoundTag;
-import mizurin.shieldmod.IShieldZombie;
+import mizurin.shieldmod.interfaces.IShieldZombie;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.*;
@@ -26,14 +26,16 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 		entityData.define(22, (byte)0);
 	}
 
+	//Right click to put a carved pumpkin on the snowman's head
 	@Override
 	public boolean interact(EntityPlayer entityplayer) {
 		if (super.interact(entityplayer)) {
 			return true;
 		} else {
 				ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-				if (itemstack != null && itemstack.getItem() == Block.pumpkinCarvedIdle.asItem() && !better_with_defense$isSnowJack()) {
+				if (itemstack != null && itemstack.getItem() == Block.pumpkinCarvedIdle.asItem() && !shieldmod$isSnowJack()) {
 					setTarget(null);
+					//Snowman stops targeting player.
 					entityData.set(22, (byte) 1);
 					itemstack.consumeItem(entityplayer);
 
@@ -46,7 +48,9 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 
 	@Override
 	protected Entity findPlayerToAttack() {
-		if (better_with_defense$isSnowJack()) {
+		if (shieldmod$isSnowJack()) {
+			//creates a bounding box and grabs a list of monsters to attack.
+			//doing just monsters causes the snowman to attack itself, I also want to exclude creepers from being attacked.
 			List<Entity> nearbyMon = this.world.getEntitiesWithinAABB(EntityZombie.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0));
 			nearbyMon.addAll(this.world.getEntitiesWithinAABB(EntitySkeleton.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0)));
 			nearbyMon.addAll(this.world.getEntitiesWithinAABB(EntitySpider.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0)));
@@ -55,6 +59,7 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 				super.setTarget((Entity) nearbyMon.get(this.world.rand.nextInt(nearbyMon.size())));
 			}
 		} else {
+			//else statement for regular snowmen without carved pumpkins.
 			EntityPlayer entityplayer = this.world.getClosestPlayerToEntity(this, 16.0);
 			return entityplayer != null && this.canEntityBeSeen(entityplayer) && entityplayer.getGamemode().areMobsHostile() ? entityplayer : null;
 		}
@@ -63,12 +68,12 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 
 
 	@Override
-	public boolean better_with_defense$isShieldZombie() {
+	public boolean shieldmod$isShieldZombie() {
 		return false;
 	}
 
 	@Override
-	public boolean better_with_defense$isSnowJack() {
+	public boolean shieldmod$isSnowJack() {
 		return entityData.getByte(22) == 1;
 	}
 
@@ -76,16 +81,16 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-		tag.putByte("better_with_defense$isSnowJack", better_with_defense$isSnowJack() ? (byte) 1 : (byte)0);
+		tag.putByte("shieldmod$isSnowJack", shieldmod$isSnowJack() ? (byte) 1 : (byte)0);
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		entityData.set(22, tag.getByte("better_with_defense$isSnowJack"));
+		entityData.set(22, tag.getByte("shieldmod$isSnowJack"));
 	}
 	@Override public boolean canDespawn() {
-		if (better_with_defense$isSnowJack()) {
+		if (shieldmod$isSnowJack()) {
 			return false;
 		} else {
 			return true;

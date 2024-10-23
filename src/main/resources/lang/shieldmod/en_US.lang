@@ -11,16 +11,17 @@ item.shieldmod.gold.shield.desc=Send projectiles back to monsters with this gold
 item.shieldmod.diamond.shield.name=Diamond Shield
 item.shieldmod.diamond.shield.desc=A rare and pretty shield.
 item.shieldmod.steel.shield.name=Steel Shield
-item.shieldmod.steel.shield.desc=Set monsters ablaze with this steel shield!
-
+item.shieldmod.steel.shield.desc=A comically large steel fire striker
 item.shieldmod.tear.shield.name=Tearstone Shield
 item.shieldmod.tear.shield.desc=A throwable frozen shield that boosts defense when close to death.
-
 item.shieldmod.food.stew.pumpkin.name=Pumpkin Stew
 item.shieldmod.food.stew.pumpkin.desc=Hearty... tasty!
-
 item.shieldmod.poison.bottle.name=Alchemist's Poison
 item.shieldmod.poison.bottle.desc=Full of a velvet gloom...
+item.shieldmod.helmet.rock.name=Rocky Helmet
+item.shieldmod.helmet.rock.desc=A crumbling helmet.
+item.shieldmod.amulet.heart.name=Amulet of restoration
+item.shieldmod.amulet.heart.desc=An amulet that is warm to the touch and fills you with vigor.
 
 
 item.shieldmod.armor.helmet.leather.name=Leather Cap
@@ -32,22 +33,4 @@ item.shieldmod.armor.leggings.leather.desc=A pair of trousers made from a cow's 
 item.shieldmod.armor.boots.leather.name=Leather Boots
 item.shieldmod.armor.boots.leather.desc=A pair of boots made from a cow's hide.
 
-
-
-achievements.page.defense.desc=BWD achievements WIP
-achievement.shieldmod.block=Block Blocked
-achievement.shieldmod.block.desc=Block an attack
-achievement.shieldmod.shield.got=Time to Defend!
-achievement.shieldmod.shield.got.desc=Use planks and a log to make a shield
-achievement.shieldmod.modern.age=The Modern Age
-achievement.shieldmod.modern.age.desc=Obtain a Steel Shield
-achievement.shieldmod.fly.high=Fly High
-achievement.shieldmod.fly.high.desc=Knock an attacker into the air!
-achievement.shieldmod.gold.retal=Golden Retaliation
-achievement.shieldmod.gold.retal.desc=Send damage back to an attacker
-achievement.shieldmod.colorful.world=Colorful World
-achievement.shieldmod.colorful.world.desc=Obtain a dyed shield or armor
-
-achievement.shieldmod.undying.shield=Invincible!
-achievement.shieldmod.undying.shield.desc=Survive a Lethal blow
 

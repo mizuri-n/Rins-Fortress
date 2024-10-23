@@ -1,13 +1,12 @@
 package mizurin.shieldmod.entities;
 
-import mizurin.shieldmod.IThrownItem;
+import mizurin.shieldmod.interfaces.IThrownItem;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.HitResult;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.entity.projectile.EntityPebble;
-import net.minecraft.core.entity.projectile.EntityProjectile;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryPlayer;
@@ -21,7 +20,7 @@ import net.minecraft.core.world.World;
 import java.util.List;
 
 public class EntityShield extends EntityPebble {
-	private int fuse = 4;
+	private int bounce = 4; //Amount of bounces allowed. I set a limit as a failsafe as the entity can get stuck inside blocks and or fences.
 	public EntityShield(World world) {
 		super(world);
 		this.modelItem = Shields.ammotearShield;
@@ -44,6 +43,7 @@ public class EntityShield extends EntityPebble {
 		this.defaultGravity = 0.03F;
 		this.defaultProjectileSpeed = 0.99F;
 	}
+	//storeOrDropItem is a failsafe if the player's inventory is full. if not directly put the shield into the inventory.
 	public void storeOrDropItem(EntityPlayer player, ItemStack stack){
 		if(stack == null || stack.stackSize <= 0){
 			return;
@@ -56,7 +56,7 @@ public class EntityShield extends EntityPebble {
 	}
 		public void tick () {
 		this.baseTick();
-			++this.ticksInAir;
+			++this.ticksInAir; //Used for damage calc
 		float velocity;
 		if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
 			velocity = MathHelper.sqrt_double(this.xd * this.xd + this.zd * this.zd);
@@ -70,6 +70,7 @@ public class EntityShield extends EntityPebble {
 		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true);
 		float otherAxisScale;
 		float deceleration;
+		//This section is used to invert the velocity of the entity after it hits a tile. inverting it basically turns it around.
 		if (hit != null && hit.hitType == HitResult.HitType.TILE) {
 			float bounceAxisScale = 0.4F;
 			otherAxisScale = 0.6F;
@@ -100,12 +101,13 @@ public class EntityShield extends EntityPebble {
 				this.xd *= (double) otherAxisScale;
 				this.yd *= (double) otherAxisScale;
 			}
-			--this.fuse;
+			--this.bounce;
 		}
 
 
 		List<Entity> collidingEntities = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.getOffsetBoundingBox(this.xd, this.yd, this.zd).expand(0.5, 0.5, 0.5));
-		if ((collidingEntities == null || collidingEntities.size() <= 0) && this.fuse > 0 || collidingEntities != null && collidingEntities.size() == 1 && collidingEntities.get(0) == this.owner && this.tickCount < 4) {
+		if ((collidingEntities == null || collidingEntities.size() <= 0) && this.bounce > 0 || collidingEntities != null && collidingEntities.size() == 1 && collidingEntities.get(0) == this.owner && this.tickCount < 4) {
+			//This grabs a list of entities inside the bounding box
 			this.x += this.xd;
 			this.y += this.yd;
 			this.z += this.zd;
@@ -147,8 +149,10 @@ public class EntityShield extends EntityPebble {
 			this.setPos(this.x, this.y, this.z);
 			if (velocity == 0) {
 				this.remove();
+				//failsafe to prevent the entity from not removing itself
 				if (this.owner != null) {
 					storeOrDropItem((EntityPlayer) owner, ((IThrownItem) owner).getThrownItem());
+					//returns the item to the player who threw it.
 				}
 			}
 		} else {
@@ -156,6 +160,7 @@ public class EntityShield extends EntityPebble {
 				for (int j = 0; j < 8; ++j) {
 					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Item.ammoSnowball.id);
 					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, this.modelItem.id);
+					//spawns particles on impact.
 				}
 			}
 			damage = ticksInAir /3 + 3;
@@ -164,17 +169,19 @@ public class EntityShield extends EntityPebble {
 			}
 			if(collidingEntities != null && collidingEntities.size() == 1) {
 				if (collidingEntities.get(0) != null) {
-					collidingEntities.get(0).hurt(this, this.damage, DamageType.COMBAT);
+					collidingEntities.get(0).hurt((EntityPlayer)owner, this.damage, DamageType.COMBAT);
 				}
+				//this is used to hurt the entities hit directly with the entity through the bounding box.
 			}
 			this.remove();
 			if (this.owner != null) {
 				storeOrDropItem((EntityPlayer) owner, ((IThrownItem) owner).getThrownItem());
+				//returns item to the player who threw it.
 			}
 		}
 	}
 
-
+	//this is all leftover code for the original throwing mechanic. will be added to a config in the future.
 	public void onHit(HitResult hitResult) {
 		damage = ticksInAir /3 + 3;
 		if (damage > 14){

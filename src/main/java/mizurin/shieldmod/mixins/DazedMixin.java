@@ -1,6 +1,6 @@
 package mizurin.shieldmod.mixins;
 
-import mizurin.shieldmod.item.IDazed;
+import mizurin.shieldmod.interfaces.IDazed;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.util.helper.DamageType;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,6 +29,7 @@ public class DazedMixin implements IDazed {
 	@Unique
 	public int remainingDazedTicks;
 
+	//Mirrors the fire status effect but cannot be put out and slows the entity.
 	@Inject(method = "Lnet/minecraft/core/entity/Entity;baseTick()V", at = @At("HEAD"))
 	public void inject(CallbackInfo callbackInfo) {
 		if (this.remainingDazedTicks > 0) {
@@ -42,10 +43,13 @@ public class DazedMixin implements IDazed {
 			--this.remainingDazedTicks;
 			--this.remainingDazedTicks;
 			--this.remainingDazedTicks;
+			//the ticks are put in a way to deal small damage and slow while also being offset by fire status
+			//having it mimic the fire status countdown causes them to overlap and only deal damage once due to invulnerability frames.
 		}
+
 	}
 	@Override
-	public void better_with_defense$dazedHurt(){
+	public void shieldmod$dazedHurt(){
 		this.hurt((Entity) null, 1, DamageType.COMBAT);
 		this.remainingDazedTicks = 300;
 	}

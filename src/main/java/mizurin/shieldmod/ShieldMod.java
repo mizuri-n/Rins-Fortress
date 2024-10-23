@@ -1,29 +1,31 @@
 package mizurin.shieldmod;
 
+import com.mojang.nbt.CompoundTag;
 import mizurin.shieldmod.entities.*;
+import mizurin.shieldmod.item.ArmorColored;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.colorizer.Colorizers;
-import net.minecraft.client.render.entity.ArmoredZombieRenderer;
 import net.minecraft.client.render.entity.SnowballRenderer;
-import net.minecraft.client.render.model.ModelZombie;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.crafting.LookupFuelFurnace;
-import net.minecraft.core.entity.SpawnListEntry;
+import net.minecraft.core.data.registry.recipe.SearchQuery;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
 import net.minecraft.core.enums.ArtType;
-import net.minecraft.core.enums.EnumCreatureType;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemDye;
+import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.entity.NetEntityHandler;
-import net.minecraft.core.net.entity.entries.ArrowNetEntry;
-import net.minecraft.core.world.biome.Biomes;
+import net.minecraft.core.player.inventory.InventoryCrafting;
+import net.minecraft.core.util.helper.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import turniplabs.halplibe.helper.AchievementHelper;
 import turniplabs.halplibe.helper.EntityHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import mizurin.shieldmod.item.Shields;
 
-import java.util.Properties;
+import java.util.*;
 
 public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint{
     public static final String MOD_ID = "shieldmod";
@@ -32,22 +34,25 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 
 	public static int itemID;
 	public static int entityID;
+	public static boolean hurtSound;
 	public static ArtType paintingSeal;
 	public static ArtType paintingRice;
 	static {
 		Properties prop = new Properties();
 		prop.setProperty("starting_item_id", "21000");
 		prop.setProperty("starting_entity_id", "100");
+		prop.setProperty("enable_hit_sounds", "false");
 		ConfigHandler config = new ConfigHandler(ShieldMod.MOD_ID, prop);
 		itemID = config.getInt("starting_item_id");
 		entityID = config.getInt("starting_entity_id");
+		hurtSound = config.getBoolean("enable_hit_sounds");
 		config.updateConfig();
 	}
 
 
     @Override
     public void onInitialize() {
-        LOGGER.info("Better with Defense has been initialized!");
+        LOGGER.info("Rin's Fortress has been initialized.");
 		new Shields().initializeItems();
 		Colorizers.registerColorizers();
     }
@@ -59,19 +64,18 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 		EntityHelper.createEntity(EntityShield.class, entityID, "ammoShield", () -> new SnowballRenderer(Shields.ammotearShield));
 		EntityHelper.createEntity(EntityPB.class, ++entityID, "poisonBottle", () -> new SnowballRenderer(Shields.poisonBottle));
 		EntityHelper.createEntity(EntityRock.class, ++entityID, "pebbleShield", () -> new SnowballRenderer(Item.ammoPebble));
-		//AchievementPage SHIELDACHIEVEMENTS;
-		//SHIELDACHIEVEMENTS = new ShieldAchievements();
-		AchievementHelper.addPage(new ShieldAchievements());
+		EntityHelper.createEntity(EntityFire.class, ++entityID, "entityFire", () -> new SnowballRenderer(Block.fire.asItem()));
 
 		NetEntityHandler.registerNetworkEntry(new NetShieldEntry(), 8000);
 		NetEntityHandler.registerNetworkEntry(new NetPotionEntry(), 8001);
+		NetEntityHandler.registerNetworkEntry(new NetFireEntry(), 8002);
 	}
 
 	@Override
 	public void afterGameStart() {
 		LookupFuelFurnace.instance.addFuelEntry(Shields.woodenShield.id, 600);
 		new recipes().initializeRecipe();
-		LOGGER.info("BWD initialized");
+		LOGGER.info("RF initialized");
 	}
 
 	@Override
@@ -81,4 +85,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	@Override
 	public void afterClientStart() {
 	}
+
+
+
 }

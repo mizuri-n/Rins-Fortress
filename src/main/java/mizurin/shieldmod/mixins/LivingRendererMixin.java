@@ -2,7 +2,7 @@ package mizurin.shieldmod.mixins;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import mizurin.shieldmod.ColoredArmorTexture;
-import mizurin.shieldmod.IColoredArmor;
+import mizurin.shieldmod.interfaces.IColoredArmor;
 import mizurin.shieldmod.ShieldMod;
 import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.client.render.model.ModelBase;
@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//Mixin for colored armor renderer
 @Mixin(value = LivingRenderer.class, remap = false)
 public abstract class LivingRendererMixin<T extends EntityLiving> {
 	@Shadow protected abstract boolean shouldRenderPass(T entity, int renderPass, float partialTick);

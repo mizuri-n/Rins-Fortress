@@ -11,19 +11,19 @@ import net.minecraft.server.entity.EntityTrackerEntry;
 import org.jetbrains.annotations.NotNull;
 
 //This is used to render custom entities on servers
-//Entity Thrown Shield.
-public class NetShieldEntry
-	implements IVehicleEntry<EntityShield>,
-	ITrackedEntry<EntityShield> {
+//Entity Fire.
+public class NetFireEntry
+	implements IVehicleEntry<EntityFire>,
+	ITrackedEntry<EntityFire> {
 	@Override
 	@NotNull
-	public Class<EntityShield> getAppliedClass() {
-		return EntityShield.class;
+	public Class<EntityFire> getAppliedClass() {
+		return EntityFire.class;
 	}
 
 	@Override
 	public int getTrackingDistance() {
-		return 64;
+		return 1;
 	}
 
 	@Override
@@ -37,22 +37,23 @@ public class NetShieldEntry
 	}
 
 	@Override
-	public void onEntityTracked(EntityTracker tracker, EntityTrackerEntry trackerEntry, EntityShield trackedObject) {
+	public void onEntityTracked(EntityTracker tracker, EntityTrackerEntry trackerEntry, EntityFire trackedObject) {
 	}
 
 	@Override
 	public Entity getEntity(World world, double x, double y, double z, int metadata, boolean hasVelocity, double xd, double yd, double zd, Entity owner) {
 		if (owner instanceof EntityLiving) {
-			return new EntityShield(world, (EntityLiving) owner);
+			return new EntityFire(world, (EntityLiving) owner);
 		} else {
-			return new EntityShield(world, x, y, z);
+			return new EntityFire(world, x, y, z);
 		}
 	}
 
 	@Override
-	public Packet23VehicleSpawn getSpawnPacket(EntityTrackerEntry tracker, EntityShield trackedObject) {
-		System.out.println("SHIELD");
+	public Packet23VehicleSpawn getSpawnPacket(EntityTrackerEntry tracker, EntityFire trackedObject) {
+		System.out.println("FIRE");
 		EntityLiving entityliving = trackedObject.owner;
 		return new Packet23VehicleSpawn(trackedObject, 0, entityliving == null ? -1 : entityliving.id, trackedObject.xd, trackedObject.yd, trackedObject.zd);
 	}
 }
+

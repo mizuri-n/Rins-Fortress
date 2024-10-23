@@ -1,12 +1,12 @@
 package mizurin.shieldmod.item;
 
-import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemSoup;
 import net.minecraft.core.item.tag.ItemTags;
-import net.minecraft.core.util.helper.DamageType;
 import org.slf4j.LoggerFactory;
+import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.ItemBuilder;
 import mizurin.shieldmod.ShieldMod;
 import org.slf4j.Logger;
@@ -33,10 +33,15 @@ public class Shields {
 	public static Item armorLeatherLeg;
 	public static Item armorLeatherBoot;
 	public static Item poisonBottle;
+	public static Item rockyHelmet;
+	public static Item regenAmulet;
 
+	public static ArmorMaterial rockyArmor = ArmorHelper.createArmorMaterial(MOD_ID, "armor_stone", 256, 30f, 30f, 30f, 30f);
+	public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "armor_stone", 384, 5f, 5f, 5f, 5f);
 
 
 	@SuppressWarnings("unchecked")
+	//Initialize items at main.
 	public void initializeItems(){
 		woodenShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
@@ -44,8 +49,9 @@ public class Shields {
 				{
 					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/wooden_shield"), (s) -> -1)
 				}).setFull3D())
-			.build(new LightShield("wooden.shield", ++itemID, ShieldMaterials.TOOL_WOOD))
+			.build(new ShieldItem("wooden.shield", ++itemID, ShieldMaterials.TOOL_WOOD))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
+
 
 		stoneShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
@@ -56,6 +62,7 @@ public class Shields {
 			.build(new ShieldItem("stone.shield", ++itemID, ShieldMaterials.TOOL_STONE))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
+
 		ironShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
@@ -64,6 +71,7 @@ public class Shields {
 				}).setFull3D())
 			.build(new ShieldItem("iron.shield", ++itemID, ShieldMaterials.TOOL_IRON))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
+
 
 		goldShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
@@ -74,6 +82,7 @@ public class Shields {
 			.build(new ParryShield("gold.shield", ++itemID, ShieldMaterials.TOOL_GOLD))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
+
 		diamondShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
@@ -83,14 +92,16 @@ public class Shields {
 			.build(new TreasureShield("diamond.shield", ++itemID, ShieldMaterials.TOOL_DIAMOND))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
+
 		steelShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
 				{
 					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/steel_shield"), (s) -> -1)
 				}).setFull3D())
-			.build(new ShieldItem("steel.shield", ++itemID, ShieldMaterials.TOOL_STEEL))
+			.build(new SteelShield("steel.shield", ++itemID, ShieldMaterials.TOOL_STEEL))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
+
 
 		leatherShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
@@ -101,6 +112,7 @@ public class Shields {
 			}).setFull3D())
 			.build(new ShieldColored("leather.shield", ++itemID, ShieldMaterials.TOOL_LEATHER))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
+
 
 		tearShield = new ItemBuilder(MOD_ID)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
@@ -120,9 +132,11 @@ public class Shields {
 			.build(new Item("tear.shield.ammo", ++itemID))
 			.withTags(ItemTags.NOT_IN_CREATIVE_MENU);
 
+
 		pumpkinStew = new ItemBuilder(MOD_ID)
 			.setIcon("shieldmod:item/pumpkin_stew")
 			.build(new ItemSoup("food.stew.pumpkin", ++itemID, 16, 30));
+
 
 		armorLeatherHelmet = new ItemBuilder(MOD_ID).setItemModel(item -> new ItemModelColored(item, new ItemModelColored.ColoredTextureEntry[]
 			{
@@ -130,11 +144,13 @@ public class Shields {
 			}))
 			.build(new ArmorColored("armor.helmet.leather", 16426, ArmorMaterial.LEATHER, 0));
 
+
 		armorLeatherChest = new ItemBuilder(MOD_ID).setItemModel(item -> new ItemModelColored(item, new ItemModelColored.ColoredTextureEntry[]
 				{
 					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture(MOD_ID + ":item/leather_chestplate"), ItemModelShield::shieldColor)
 				}))
 			.build(new ArmorColored("armor.chestplate.leather", 16427, ArmorMaterial.LEATHER, 1));
+
 
 		armorLeatherLeg = new  ItemBuilder(MOD_ID).setItemModel(item -> new ItemModelColored(item, new ItemModelColored.ColoredTextureEntry[]
 				{
@@ -142,12 +158,24 @@ public class Shields {
 				}))
 			.build(new ArmorColored("armor.leggings.leather", 16428, ArmorMaterial.LEATHER, 2));
 
+
 		armorLeatherBoot = new ItemBuilder(MOD_ID).setItemModel(item -> new ItemModelColored(item, new ItemModelColored.ColoredTextureEntry[]
 				{
 					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture(MOD_ID + ":item/leather_boots"), ItemModelShield::shieldColor)
 				}))
 			.build(new ArmorColored("armor.boots.leather", 16429, ArmorMaterial.LEATHER, 3));
 
+
 		poisonBottle = new ItemBuilder(MOD_ID).setStackSize(16).setIcon(String.format("%s:item/poison_bottle",MOD_ID)).build(new ItemPB("poison.bottle", ++itemID));
+
+
+		rockyHelmet = new ItemBuilder(MOD_ID)
+			.setIcon("shieldmod:item/rocky_helmet")
+			.build(new ItemArmor("helmet.rock", ++itemID,  rockyArmor, 0));
+
+
+		regenAmulet = new ItemBuilder(MOD_ID)
+			.setIcon("shieldmod:item/regen_amulet")
+			.build(new ItemArmor("amulet.heart", ++itemID, heartAmulet, 1));
 	}
 }
