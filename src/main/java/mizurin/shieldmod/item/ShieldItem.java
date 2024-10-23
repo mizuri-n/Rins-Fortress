@@ -1,18 +1,18 @@
 package mizurin.shieldmod.item;
 
+import mizurin.shieldmod.interfaces.IDazed;
+import mizurin.shieldmod.interfaces.ParryInterface;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolSword;
-import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 
 public class ShieldItem extends ItemToolSword {
 	public ToolMaterial tool;
 	public int weaponDamage;
-	private static final int ticksToAdd = 5;
 
 
 	public ShieldItem(String name, int id, ToolMaterial toolMaterial){
@@ -25,6 +25,7 @@ public class ShieldItem extends ItemToolSword {
 
 	}
 
+	//Applies a knockback effect for all shields, bonus knockback to Leather Shields, and sets hitEntities on fire when hit by a Steel Shield.
 	@Override
 	public boolean hitEntity(ItemStack itemstack, EntityLiving target, EntityLiving player) {
 		if(itemstack.getItem() == Shields.leatherShield){
@@ -33,11 +34,8 @@ public class ShieldItem extends ItemToolSword {
 		} else {
 			target.knockBack(player, 3, player.x - target.x, player.z - target.z);
 		}
-		if(itemstack.getItem() == Shields.steelShield){
-			target.fireHurt();
-		}
 		if(itemstack.getItem() == Shields.goldShield){
-			((IDazed)target).better_with_defense$dazedHurt();
+			((IDazed)target).shieldmod$dazedHurt();
 			target.push((target.x - player.x)/20, 0, (target.z - player.z)/20);
 		}
 		itemstack.damageItem(1, player);
@@ -49,26 +47,15 @@ public class ShieldItem extends ItemToolSword {
 	}
 
 
+	//Activates ticks that determine if the player is blocking.
 	@Override
 	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-		itemstack.getData().putBoolean("active", true);
-		itemstack.getData().putInt("ticks",ticksToAdd);
+		//Set to true then add the ticks to the data.
+		((ParryInterface)entityplayer).shieldmod$setIsBlock(true);
+		((ParryInterface)entityplayer).shieldmod$Block(5);
+
 		return itemstack;
 	}
 
-	@Override
-	public void inventoryTick(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
-		if(itemstack.getData().getBoolean("active")) {
-			entity.xd *= 0.4D;
-			entity.zd *= 0.4D;
-			int ticks = itemstack.getData().getInteger("ticks");
-
-			if (ticks > 0) {
-				itemstack.getData().putInt("ticks", ticks - 1);
-			} else {
-				itemstack.getData().putBoolean("active", false);
-			}
-		}
-	}
 }
 

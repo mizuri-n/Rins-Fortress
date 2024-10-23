@@ -1,7 +1,7 @@
 package mizurin.shieldmod.mixins;
 
 import mizurin.shieldmod.ColoredArmorTexture;
-import mizurin.shieldmod.IColoredArmor;
+import mizurin.shieldmod.interfaces.IColoredArmor;
 import mizurin.shieldmod.ShieldMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.entity.PlayerRenderer;

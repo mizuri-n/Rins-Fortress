@@ -11,6 +11,7 @@ public class ShieldMaterials extends ToolMaterial {
 		this.guard = guard;
 		return this;
 	}
+	//ToolMaterials for shields. Haste efficiency is overridden for the shield's block percent. ex: 0.85 is a 15% damage reduction.
 	public static final ToolMaterial TOOL_LEATHER = new ToolMaterial().setDurability(64).setDamage(-2).setEfficiency(2.0f, 0.85f);
 	public static final ToolMaterial TOOL_WOOD = new ToolMaterial().setDurability(96).setDamage(-1).setEfficiency(2.0f, 0.80f);
 	public static final ToolMaterial TOOL_STONE = new ToolMaterial().setDurability(128).setDamage(0).setEfficiency(2.0f, 0.70f);

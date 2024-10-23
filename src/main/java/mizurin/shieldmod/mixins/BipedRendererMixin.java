@@ -1,8 +1,6 @@
 package mizurin.shieldmod.mixins;
 
-import mizurin.shieldmod.IShieldZombie;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.render.LightmapHelper;
+import mizurin.shieldmod.interfaces.IShieldZombie;
 import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.entity.LivingRenderer;
@@ -10,7 +8,6 @@ import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.model.ModelBiped;
 import net.minecraft.client.render.tessellator.Tessellator;
-import net.minecraft.core.Global;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.item.ItemStack;
@@ -21,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//Mixin to render carved pumpkins on snowmen.
 @Mixin(value = MobRenderer.class, remap = false)
 public class BipedRendererMixin<T extends EntityLiving> extends LivingRenderer<T> {
 
@@ -33,7 +31,7 @@ public class BipedRendererMixin<T extends EntityLiving> extends LivingRenderer<T
 
 	@Inject(method = "renderEquippedItems", at = @At("HEAD"))
 	public void inject(T entity, float f, CallbackInfo ci){
-		if (entity instanceof IShieldZombie && ((IShieldZombie)entity).better_with_defense$isSnowJack()) {
+		if (entity instanceof IShieldZombie && ((IShieldZombie)entity).shieldmod$isSnowJack()) {
 
 			ItemStack itemstack = Block.pumpkinCarvedIdle.getDefaultStack();
 			if (itemstack != null && itemstack.getItem().id < Block.blocksList.length) {

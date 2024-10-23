@@ -10,6 +10,8 @@ import net.minecraft.server.entity.EntityTracker;
 import net.minecraft.server.entity.EntityTrackerEntry;
 import org.jetbrains.annotations.NotNull;
 
+//This is used to render custom entities on servers
+//Entity Poison Bottle.
 public class NetPotionEntry
 	implements IVehicleEntry<EntityPB>,
 	ITrackedEntry<EntityPB> {

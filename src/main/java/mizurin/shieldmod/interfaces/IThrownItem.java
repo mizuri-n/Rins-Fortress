@@ -1,6 +1,5 @@
-package mizurin.shieldmod;
+package mizurin.shieldmod.interfaces;
 
-import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 
 public interface IThrownItem {

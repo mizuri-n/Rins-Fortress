@@ -1,7 +1,5 @@
 package mizurin.shieldmod;
 
-import goocraft4evr.nonamedyes.NoNameDyes;
-import goocraft4evr.nonamedyes.crafting.RecipeBuilderBleacher;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
@@ -21,6 +19,7 @@ public class recipes implements RecipeEntrypoint {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
 	public static final RecipeGroup<RecipeEntryCrafting<?, ?>> WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
 
+	//initNamespaces for recipes in servers.
 	@Override
 	public void initNamespaces() {
 		RecipeNamespace BETTERWITHDEFENSE = new RecipeNamespace();
@@ -93,6 +92,10 @@ public class recipes implements RecipeEntrypoint {
 
 
 		WORKBENCH.register("tearstoneShield", new RecipeEntryRepairable(Shields.tearShield, Item.ingotIron));
+
+		WORKBENCH.register("amuletRegenChest", new RecipeEntryRepairable(Shields.regenAmulet, Item.dustRedstone));
+
+		WORKBENCH.register("rockyHelmetHat", new RecipeEntryRepairable(Shields.rockyHelmet, Block.cobbleStone.asItem()));
 	}
 	public void initializeRecipe(){
 		Registries.RECIPE_TYPES.register("colored/shield", recipeColor.class);

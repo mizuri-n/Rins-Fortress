@@ -1,11 +1,11 @@
 package mizurin.shieldmod.mixins;
 
+import mizurin.shieldmod.interfaces.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.entity.projectile.EntityArrow;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//Mixin for knockback when blocking.
 @Mixin(value = EntityLiving.class, remap = false)
 
 
@@ -35,12 +36,17 @@ public abstract class KnockBackMixin {
 
 			if (stack != null) {
 				if (stack.getItem() instanceof ShieldItem) {
+					//checks if the player is holding a shield.
 
 					ShieldItem shield = ((ShieldItem) stack.getItem());
-					if (stack.getData().getBoolean("active") && shield.tool == ShieldMaterials.TOOL_IRON) {
+					if (((ParryInterface)((EntityPlayer)(Object)this)).shieldmod$getIsBlock() && shield.tool == ShieldMaterials.TOOL_IRON) {
+						//checks if the player is blocking and holding an iron shield
+						// cancels early and ignores knockback.
 						ci.cancel();
 					}
-					if (stack.getData().getBoolean("active") && shield.tool != ShieldMaterials.TOOL_IRON){
+					if (((ParryInterface)((EntityPlayer)(Object)this)).shieldmod$getIsBlock() && shield.tool != ShieldMaterials.TOOL_IRON){
+						//checks if the player is blocking and not holding an iron shield.
+						//removed the jump to the y value when being hit.
 						float f = MathHelper.sqrt_double(d * d + d1 * d1);
 						float f1 = 0.9F;
 						((EntityPlayer)(Object)this).xd /= 2.0;

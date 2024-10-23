@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+//Mixin to prevent crop trampling from the custom leather boots.
 @Mixin(value = BlockFarmland.class, remap = false)
 public class BlockFarmlandMixin {
 	@Redirect(method = "onEntityWalking(Lnet/minecraft/core/world/World;IIILnet/minecraft/core/entity/Entity;)V",

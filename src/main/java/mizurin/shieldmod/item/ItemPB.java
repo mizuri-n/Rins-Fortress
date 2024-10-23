@@ -6,6 +6,7 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 
+//ItemPB is short for Item Poison Bottle.
 public class ItemPB extends Item {
 	public ItemPB(String name, int id) {
 		super(name, id);
@@ -17,6 +18,7 @@ public class ItemPB extends Item {
 		if (!world.isClientSide) {
 			world.entityJoinedWorld(new EntityPB(world, entityplayer));
 		}
+		//For any devs looking at my code. This if statement (!world.isClientSide) is used for server compatibility, please use it when spawning items.
 
 		return itemstack;
 	}

@@ -2,8 +2,8 @@ package mizurin.shieldmod.item;
 
 import com.mojang.nbt.CompoundTag;
 import mizurin.shieldmod.ColoredArmorTexture;
-import mizurin.shieldmod.IColorable;
-import mizurin.shieldmod.IColoredArmor;
+import mizurin.shieldmod.interfaces.IColorable;
+import mizurin.shieldmod.interfaces.IColoredArmor;
 import mizurin.shieldmod.ShieldMod;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.material.ArmorMaterial;

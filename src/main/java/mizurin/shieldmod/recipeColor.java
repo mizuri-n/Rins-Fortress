@@ -1,6 +1,7 @@
 package mizurin.shieldmod;
 
 import com.mojang.nbt.CompoundTag;
+import mizurin.shieldmod.interfaces.IColorable;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
 import net.minecraft.core.item.Item;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 //Special thanks to UselessBullets for being extremely awesome https://github.com/UselessBullets/Lunacy/tree/7.1
+//Mixin for custom recipe colors.
 public class recipeColor extends RecipeEntryCraftingDynamic {
 	public static boolean nonamedyesOn = ModVersionHelper.isModPresent("nonamedyes");
 
@@ -32,6 +34,7 @@ public class recipeColor extends RecipeEntryCraftingDynamic {
 			vanillaDye.put(color, new Color().setARGB(ItemDye.field_31002_bk[color]));
 		}
 		if (nonamedyesOn){
+			//checks if nonamedyes is enabled, then adds them to the hasmap.
 			nonameDye.put(0, new Color().setARGB(11540279)); //crimson
 			nonameDye.put(1, new Color().setARGB(6627104)); //maroon
 			nonameDye.put(2, new Color().setARGB(10005149)); //ash.gray

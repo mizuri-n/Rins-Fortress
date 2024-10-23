@@ -1,8 +1,7 @@
-package mizurin.shieldmod;
+package mizurin.shieldmod.interfaces;
 
+import mizurin.shieldmod.ColoredArmorTexture;
 import net.minecraft.core.item.ItemStack;
-
-import java.awt.*;
 
 public interface IColoredArmor {
 	ColoredArmorTexture[] getArmorTextures(ItemStack stack);
