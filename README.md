@@ -1,10 +1,10 @@
-# Better with defense mod
-Adds 8 shields and more
+# Rin's Fortress
+A mod adding more defensive options to BTA. (Better Than Adventure)
 
 ## Dependencies:
 [HalpLibe 4.1.3](<https://github.com/Turnip-Labs/bta-halplibe>) 
 
-[PrismaticLibe](<https://github.com/UselessSolutions/BTA_Babric_PrismaticLibe>) (Outdated)
+
 ### Special thanks
 UselessBullets 
 Thank you to the people at the BTA modding discord for help.
