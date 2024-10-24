@@ -28,6 +28,7 @@ public class ThrowShield extends ShieldItem{
 		return itemstack;
 	}
 	//onBlock used so the player can shift right click to throw the shield.
+	@Override
 	public void onBlock(ItemStack itemstack, World world, EntityPlayer entityplayer){
 		if (entityplayer.isSneaking()){
 			((IThrownItem)entityplayer).setThrownItem(itemstack);

@@ -6,17 +6,17 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.world.World;
 
-public class ParryShield extends ThrowShield {
+public class ParryShield extends ShieldItem {
 
 	public ParryShield(String name, int id, ToolMaterial toolMaterial) {
 		super(name, id, toolMaterial);
 	}
 
 	@Override
-	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityPlayer) {
-		((ParryInterface)entityPlayer).shieldmod$setIsBlock(true);
-		((ParryInterface)entityPlayer).shieldmod$Block(5);
-		onBlock(itemstack, world, entityPlayer);
+	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+		((ParryInterface)entityplayer).shieldmod$setIsBlock(true);
+		((ParryInterface)entityplayer).shieldmod$Block(5);
+		onBlock(itemstack, world, entityplayer);
 
 		return itemstack;
 	}

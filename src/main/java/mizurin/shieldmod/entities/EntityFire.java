@@ -33,7 +33,7 @@ public class EntityFire extends EntityProjectile {
 	}
 
 	public void init() {
-		this.damage = 6;
+		this.damage = 5;
 		this.defaultGravity = 0.003F;
 		this.defaultProjectileSpeed = 0.15F;
 	}
@@ -46,7 +46,7 @@ public class EntityFire extends EntityProjectile {
 			hitResult.entity.yd = 0.0;
 			hitResult.entity.zd *= .33;
 
-			hitResult.entity.remainingFireTicks = 300;
+			hitResult.entity.remainingFireTicks = 150;
 			if (hitResult.entity instanceof EntityPlayer){
 				remove();
 			}

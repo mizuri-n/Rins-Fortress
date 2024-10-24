@@ -12,6 +12,7 @@
     "FieldMixin",
     "KnockBackMixin",
     "ShieldMixin",
+    "SynchedEntityMixin",
     "WorldFeatureLabyrinthMixin",
     "WorldMixin"
   ],
@@ -19,7 +20,8 @@
     "BipedRendererMixin",
     "LivingRendererMixin",
     "PaintingMixin",
-    "PlayerRendererMixin"
+    "PlayerRendererMixin",
+    "SoundMixin"
   ],
   "injectors": {
     "defaultRequire": 1

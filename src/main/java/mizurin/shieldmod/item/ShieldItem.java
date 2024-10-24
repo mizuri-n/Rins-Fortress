@@ -56,6 +56,10 @@ public class ShieldItem extends ItemToolSword {
 
 		return itemstack;
 	}
+	//this function is used for shift right click abilities.
+	public void onBlock(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+		return;
+	}
 
 }
 
