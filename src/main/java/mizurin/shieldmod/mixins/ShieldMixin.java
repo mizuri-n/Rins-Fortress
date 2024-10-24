@@ -39,6 +39,9 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 		super(world);
 	}
 
+	@Unique
+	private static final int DATA_BLOCKING = 23;
+
 	// shadows allow us to access variables in a class we are mixing to.
 	@Shadow
 	public InventoryPlayer inventory;
@@ -72,8 +75,11 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 	@Unique
 	private int fireTicks;
 
-	@Unique
-	private boolean isBlock;
+	@Inject(method = "init", at = @At("TAIL"))
+	public void defineSynchedData(CallbackInfo ci) {
+		entityData.define(DATA_BLOCKING, (byte)0);
+	}
+
 
 	@Override
 	public void shieldmod$Parry(int parryTicks) {
@@ -97,11 +103,11 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 
 	@Override
 	public boolean shieldmod$getIsBlock() {
-		return isBlock;
+		return entityData.getByte(DATA_BLOCKING) != 0;
 	}
 	@Override
 	public void shieldmod$setIsBlock(boolean bool) {
-        this.isBlock = bool;
+        this.entityData.set(DATA_BLOCKING, bool ? (byte)1 : (byte)0);
     }
 	@Override
 	public int shieldmod$getCounterTicks(){
@@ -341,15 +347,15 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 			if (stack.getItem() instanceof ShieldItem) {
 
 				ShieldItem shield = ((ShieldItem) stack.getItem());
-				if (isBlock && (shield.tool == ShieldMaterials.TOOL_LEATHER || shield.tool == ShieldMaterials.TOOL_WOOD)) {
+				if (shieldmod$getIsBlock() && (shield.tool == ShieldMaterials.TOOL_LEATHER || shield.tool == ShieldMaterials.TOOL_WOOD)) {
 					this.xd *= 0.65D;
 					this.zd *= 0.65D;
 				}
-				else if (isBlock && shield.tool == ShieldMaterials.TOOL_DIAMOND){
+				else if (shieldmod$getIsBlock() && shield.tool == ShieldMaterials.TOOL_DIAMOND){
 					this.xd *= 0.20D;
 					this.zd *= 0.20D;
 				}
-				else if (isBlock){
+				else if (shieldmod$getIsBlock()){
 					this.xd *= 0.4D;
 					this.zd *= 0.4D;
 				}
