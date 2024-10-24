@@ -23,17 +23,17 @@ public class NetFireEntry
 
 	@Override
 	public int getTrackingDistance() {
-		return 1;
+		return 128;
 	}
 
 	@Override
 	public int getPacketDelay() {
-		return 20;
+		return 1;
 	}
 
 	@Override
 	public boolean sendMotionUpdates() {
-		return false;
+		return true;
 	}
 
 	@Override

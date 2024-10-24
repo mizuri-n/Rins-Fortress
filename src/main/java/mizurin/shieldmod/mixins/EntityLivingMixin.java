@@ -9,9 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static mizurin.shieldmod.ShieldMod.hurtSound;
 
 @Mixin(value = EntityLiving.class, remap = false)
 public class EntityLivingMixin {
@@ -36,17 +34,4 @@ public class EntityLivingMixin {
 		}
 	}
 
-	//needs fixing.
-	@Inject(method = "getHurtSound()Ljava/lang/String;", at = @At(value = "HEAD"), cancellable = true)
-	public void insertHurt(CallbackInfoReturnable<String> cir){
-		if(hurtSound) {
-			cir.setReturnValue("damage.hurtflesh");
-		}
-	}
-	@Inject(method = "getDeathSound()Ljava/lang/String;", at = @At(value = "HEAD"), cancellable = true)
-	public void insertHurtDeath(CallbackInfoReturnable<String> cir){
-		if(hurtSound) {
-			cir.setReturnValue("damage.hurtflesh");
-		}
-	}
 }

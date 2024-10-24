@@ -11,9 +11,18 @@ import net.minecraft.core.world.World;
 
 
 
-public class SteelShield extends ThrowShield{
+public class SteelShield extends ShieldItem{
 	public SteelShield(String name, int id, ToolMaterial toolMaterial) {
 		super(name, id, toolMaterial);
+	}
+
+	@Override
+	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+		((ParryInterface)entityplayer).shieldmod$setIsBlock(true);
+		((ParryInterface)entityplayer).shieldmod$Block(5);
+		onBlock(itemstack, world, entityplayer);
+
+		return itemstack;
 	}
 
 	//currently working on fire.
