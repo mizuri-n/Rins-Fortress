@@ -9,13 +9,27 @@ import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
 
 public class EntityFire extends EntityProjectile {
+
+	public EntityFire(World world) {
+		super(world);
+		this.modelItem = Item.ammoFireball;
+	}
+
 	public EntityFire(World world, EntityLiving entityliving){
 		super(world, entityliving);
 		this.modelItem = Item.ammoFireball;
 	}
-	public EntityFire(World world, double d, double d1, double d2){
-		super(world, d, d1, d2);
+	public EntityFire(World world, double x, double y, double z){
+		super(world, x, y, z);
 		this.modelItem = Item.ammoFireball;
+	}
+
+	public EntityFire(World world, double x, double y, double z, double xd, double yd, double zd){
+		super(world, x, y, z);
+		this.modelItem = Item.ammoFireball;
+		this.xd = xd;
+		this.yd = yd;
+		this.zd = zd;
 	}
 
 	public void init() {
@@ -51,13 +65,16 @@ public class EntityFire extends EntityProjectile {
 	public void tick() {
 		super.tick();
 
-		this.xd *= 7.5;
-		this.yd *= 7.5;
-		this.zd *= 7.5;
+		if (!world.isClientSide) {
+			this.xd *= 7.5;
+			this.yd *= 7.5;
+			this.zd *= 7.5;
 
-		if(this.tickCount > 8){
-			this.remove();
+			if(this.tickCount > 8){
+				this.remove();
+			}
 		}
+
 		if(this.tickCount > 1) {
 			world.spawnParticle("flame", this.x, this.y, this.z, this.random.nextFloat()*.1, this.random.nextFloat()*.1, this.random.nextFloat()*.1, 0);
 		}

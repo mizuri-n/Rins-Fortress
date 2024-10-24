@@ -19,7 +19,7 @@ import java.util.Map;
 
 //Special thanks to UselessBullets for being extremely awesome https://github.com/UselessBullets/Lunacy/tree/7.1
 //Mixin for custom recipe colors.
-public class recipeColor extends RecipeEntryCraftingDynamic {
+public class RecipeColor extends RecipeEntryCraftingDynamic {
 	public static boolean nonamedyesOn = ModVersionHelper.isModPresent("nonamedyes");
 
 	public static HashMap<Item, Map<Integer, Color>> dyeMap = new HashMap<>();
