@@ -1,22 +1,14 @@
 package mizurin.shieldmod;
 
-import com.mojang.nbt.CompoundTag;
 import mizurin.shieldmod.entities.*;
-import mizurin.shieldmod.item.ArmorColored;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.crafting.LookupFuelFurnace;
-import net.minecraft.core.data.registry.recipe.SearchQuery;
-import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
 import net.minecraft.core.enums.ArtType;
 import net.minecraft.core.item.Item;
-import net.minecraft.core.item.ItemDye;
-import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.net.entity.NetEntityHandler;
-import net.minecraft.core.player.inventory.InventoryCrafting;
-import net.minecraft.core.util.helper.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.EntityHelper;
@@ -74,7 +66,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	@Override
 	public void afterGameStart() {
 		LookupFuelFurnace.instance.addFuelEntry(Shields.woodenShield.id, 600);
-		new recipes().initializeRecipe();
+		new Recipes().initializeRecipe();
 		LOGGER.info("RF initialized");
 	}
 

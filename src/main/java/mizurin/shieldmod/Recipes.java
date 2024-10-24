@@ -15,7 +15,7 @@ import turniplabs.halplibe.helper.RecipeBuilder;
 import mizurin.shieldmod.item.Shields;
 
 
-public class recipes implements RecipeEntrypoint {
+public class Recipes implements RecipeEntrypoint {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
 	public static final RecipeGroup<RecipeEntryCrafting<?, ?>> WORKBENCH = new RecipeGroup<>(new RecipeSymbol(new ItemStack(Block.workbench)));
 
@@ -98,8 +98,8 @@ public class recipes implements RecipeEntrypoint {
 		WORKBENCH.register("rockyHelmetHat", new RecipeEntryRepairable(Shields.rockyHelmet, Block.cobbleStone.asItem()));
 	}
 	public void initializeRecipe(){
-		Registries.RECIPE_TYPES.register("colored/shield", recipeColor.class);
-		WORKBENCH.register("leather", new recipeColor());
+		Registries.RECIPE_TYPES.register("colored/shield", RecipeColor.class);
+		WORKBENCH.register("leather", new RecipeColor());
 	}
 }
 
