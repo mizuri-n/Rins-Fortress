@@ -12,7 +12,6 @@
     "FieldMixin",
     "KnockBackMixin",
     "ShieldMixin",
-    "SynchedEntityMixin",
     "WorldFeatureLabyrinthMixin",
     "WorldMixin"
   ],
