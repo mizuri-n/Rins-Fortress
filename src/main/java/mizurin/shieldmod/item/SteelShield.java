@@ -22,16 +22,13 @@ public class SteelShield extends ThrowShield{
 		if (entityplayer.isSneaking() && ((ParryInterface)entityplayer).shieldmod$getFireTicks() == 0){
 			if(entityplayer.inventory.consumeInventoryItem(Item.flint.id)){
 				itemstack.damageItem(4, entityplayer);
-					for (int i = 4; i != 0; i--) {
+					for (int i = 0; i < 4; i++) {
 						Vec3d plylook = entityplayer.getLookAngle();
 						EntityFire flame = new EntityFire(world, entityplayer);
 						if (!world.isClientSide) {
 							world.entityJoinedWorld(flame);
 
-							flame.setHeading(flame.xd, flame.yd, flame.zd, .55f, 10);
-							double newX = flame.x + plylook.xCoord * .5;
-							double newY = flame.y + plylook.yCoord * .5;
-							double newZ = flame.z + plylook.zCoord * .5;
+							flame.setHeading(plylook.xCoord, plylook.yCoord, plylook.zCoord, .5f, 10);
 						}
 					}
 					world.playSoundAtEntity(entityplayer, entityplayer, "fire.ignite", 3.6F, 1.5F);

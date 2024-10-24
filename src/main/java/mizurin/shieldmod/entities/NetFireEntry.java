@@ -42,11 +42,11 @@ public class NetFireEntry
 
 	@Override
 	public Entity getEntity(World world, double x, double y, double z, int metadata, boolean hasVelocity, double xd, double yd, double zd, Entity owner) {
+		EntityFire fire = new EntityFire(world, x, y, z, xd, yd, zd);
 		if (owner instanceof EntityLiving) {
-			return new EntityFire(world, (EntityLiving) owner);
-		} else {
-			return new EntityFire(world, x, y, z);
+			fire.owner = (EntityLiving) owner;
 		}
+		return fire;
 	}
 
 	@Override
