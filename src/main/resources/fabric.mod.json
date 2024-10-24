@@ -31,7 +31,7 @@
 			"mizurin.shieldmod.ShieldMod"
 		],
 		"recipesReady": [
-			"mizurin.shieldmod.recipes"
+			"mizurin.shieldmod.Recipes"
 		]
   },
   "mixins": [

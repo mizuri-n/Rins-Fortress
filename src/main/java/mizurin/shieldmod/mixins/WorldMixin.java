@@ -30,12 +30,11 @@ public class WorldMixin {
 				entityplayer = entityPlayer1;
 			}
 		} else {
-			double armorTotal = 16;
 			double rSquared = radius * radius;
 			for (EntityPlayer entityPlayer1 : thisObject.players) {
+				double armorTotal = 16;
 				double currentDistance = entityPlayer1.distanceToSqr(x, y, z);
 				if (!(currentDistance < rSquared) || !(currentDistance < closestDistance)) continue;
-				closestDistance = currentDistance;
 
 				boolean plyInvis = false;
 
@@ -62,6 +61,7 @@ public class WorldMixin {
 
 				if(plyInvis & currentDistance < rThirdSquared || !plyInvis){
 					entityplayer = entityPlayer1;
+					closestDistance = currentDistance;
 				}
 			}
 		}
