@@ -58,6 +58,16 @@ public class EntityZombieArmoredMixin extends EntityZombie implements IShieldZom
 		return false;
 	}
 
+	@Override
+	public boolean shieldmod$isExpertSkeleton() {
+		return false;
+	}
+
+	@Override
+	public boolean shieldmod$isExpertSpider() {
+		return false;
+	}
+
 	//Used to give the zombie a shield.
 	@Inject(method = "getHeldItem()Lnet/minecraft/core/item/ItemStack;", at = @At("HEAD"), cancellable = true)
 	private void sword(CallbackInfoReturnable<ItemStack> cir){
