@@ -1,17 +1,23 @@
 package mizurin.shieldmod.mixins;
 
 import com.mojang.nbt.CompoundTag;
+import mizurin.shieldmod.entities.EntityIceBall;
 import mizurin.shieldmod.interfaces.IShieldZombie;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.*;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.entity.projectile.EntitySnowball;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 
 import java.util.List;
+
+import static mizurin.shieldmod.ShieldMod.expertMode;
 
 
 @Mixin(value = EntitySnowman.class, remap = false)
@@ -66,6 +72,67 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 		return entityToAttack;
 	}
 
+	/**
+	 * @author McRin
+	 * @reason Balls
+	 */
+	@Overwrite
+	public void attackEntity(Entity entity, float distance) {
+		if(expertMode) {
+			if (distance < 10.0F && distance > 4.0F) {
+				double dX = entity.x - this.x;
+				double dZ = entity.z - this.z;
+				if (this.attackTime == 0) {
+					if (!this.world.isClientSide) {
+						EntityIceBall snowball = new EntityIceBall(this.world, this);
+						if (this.world.getBlockId((int) this.x, (int) this.y - 1, (int) this.z) == Block.gravel.id) {
+							snowball.damage = 1;
+						}
+
+						double d2 = entity.y + (double) entity.getHeadHeight() - 0.2 - snowball.y;
+						float f1 = MathHelper.sqrt_double(dX * dX + dZ * dZ) * 0.2F;
+						this.world.playSoundAtEntity((Entity) null, this, "random.bow", 0.5F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F));
+						this.world.entityJoinedWorld(snowball);
+						snowball.setHeadingPrecise(dX, d2 + (double) f1, dZ, 0.8F);
+					}
+
+					this.attackTime = 30;
+				}
+
+				this.yRot = (float) (Math.atan2(dZ, dX) * 180.0 / Math.PI) - 90.0F;
+				this.hasAttacked = true;
+			} else if (distance <= 4.0F) {
+				super.attackEntity(entity, distance);
+			}
+		} else {
+			if (distance < 8.0F && distance > 4.0F) {
+				double dX = entity.x - this.x;
+				double dZ = entity.z - this.z;
+				if (this.attackTime == 0) {
+					if (!this.world.isClientSide) {
+						EntitySnowball snowball = new EntitySnowball(this.world, this);
+						if (this.world.getBlockId((int)this.x, (int)this.y - 1, (int)this.z) == Block.gravel.id) {
+							snowball.damage = 1;
+						}
+
+						++snowball.y;
+						double d2 = entity.y + (double)entity.getHeadHeight() - 0.2 - snowball.y;
+						float f1 = MathHelper.sqrt_double(dX * dX + dZ * dZ) * 0.2F;
+						this.world.playSoundAtEntity((Entity)null, this, "random.bow", 0.5F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F));
+						this.world.entityJoinedWorld(snowball);
+						snowball.setHeadingPrecise(dX, d2 + (double)f1, dZ, 0.6F);
+					}
+
+					this.attackTime = 30;
+				}
+
+				this.yRot = (float)(Math.atan2(dZ, dX) * 180.0 / Math.PI) - 90.0F;
+				this.hasAttacked = true;
+			} else if (distance <= 4.0F) {
+				super.attackEntity(entity, distance);
+			}
+		}
+	}
 
 	@Override
 	public boolean shieldmod$isShieldZombie() {

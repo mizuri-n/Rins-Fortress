@@ -1,8 +1,7 @@
 package mizurin.shieldmod.mixins;
 
-import mizurin.shieldmod.entities.EntityPB;
-import mizurin.shieldmod.entities.EntityRock;
-import mizurin.shieldmod.entities.EntityShield;
+import mizurin.shieldmod.entities.*;
+import mizurin.shieldmod.interfaces.IDazed;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
@@ -34,44 +33,31 @@ import java.util.List;
 
 // extend Entity so we get access to entity methods and fields.
 // abstract so we don't have to implement interfaces, constructor is not used but required.
-public abstract class ShieldMixin extends EntityLiving implements ParryInterface {
+public abstract class ShieldMixin extends EntityLiving implements ParryInterface{
 	public ShieldMixin(World world) {
 		super(world);
 	}
 
 	@Unique
 	private static final int DATA_BLOCKING = 23;
-
-	// shadows allow us to access variables in a class we are mixing to.
 	@Shadow
 	public InventoryPlayer inventory;
-
 	@Shadow
 	public abstract boolean hurt(Entity attacker, int damage, DamageType type);
-
 	@Shadow
 	public Gamemode gamemode;
-
-
 	@Shadow
 	public abstract ItemStack getHeldItem();
-
-
 	@Unique
 	public EntityLiving thisObject = (EntityLiving) (Object) this;
-
 	@Shadow
 	public abstract int getMaxHealth();
-
 	@Unique
 	private int parryTicks;
-
 	@Unique
 	private int blockTicks;
-
 	@Unique
 	private int counterTicks;
-
 	@Unique
 	private int fireTicks;
 
@@ -85,22 +71,18 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 	public void shieldmod$Parry(int parryTicks) {
 		this.parryTicks = parryTicks;
 	}
-
 	@Override
 	public int shieldmod$getParryTicks() {
 		return parryTicks;
 	}
-
 	@Override
 	public int shieldmod$getBlockTicks() {
 		return blockTicks;
 	}
-
 	@Override
 	public void shieldmod$Block(int blockTicks) {
 		this.blockTicks = blockTicks;
 	}
-
 	@Override
 	public boolean shieldmod$getIsBlock() {
 		return entityData.getByte(DATA_BLOCKING) != 0;
@@ -130,7 +112,7 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 	@Unique
 	public void parryHitbox(World world, EntityPlayer player) {
 
-		double bound = 1.75;
+		double bound = 3.75;
 		AABB aabb1 = new AABB(
 			player.x - bound,
 			player.y + player.getHeadHeight() - bound,
@@ -218,6 +200,26 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
 				}
 			}
+			if (entity instanceof EntityWeb) {
+
+				entity.remove();
+				EntityWeb newWB = new EntityWeb(world, player);
+				newWB.damage +=1;
+				if (!world.isClientSide) {
+					world.entityJoinedWorld(newWB);
+					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+				}
+			}
+			if (entity instanceof EntityIceBall) {
+
+				entity.remove();
+				EntityIceBall newIB = new EntityIceBall(world, player);
+				newIB.damage +=1;
+				if (!world.isClientSide) {
+					world.entityJoinedWorld(newIB);
+					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+				}
+			}
 
 		}
 
@@ -279,7 +281,7 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 
 
 								if (shield.tool == ShieldMaterials.TOOL_LEATHER && attacker != this){
-									attacker.push(_dx * 1.2 ,0.75,_dz * 1.2);
+									attacker.push(_dx * 1.2 ,0.65,_dz * 1.2);
 									//applies funny knockback to attack when hit.
 								}
 								if (shield.tool == ShieldMaterials.TOOL_STONE && attacker != this){
@@ -338,7 +340,7 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 	@Unique
 	private int parryDelay = 0;
 	@Inject(
-		method = "Lnet/minecraft/core/entity/player/EntityPlayer;onLivingUpdate()V",
+		method = "onLivingUpdate()V",
 		at = @At(value = "HEAD")
 	)
 	public void tickMixin(CallbackInfo ci){
@@ -397,6 +399,4 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 
 
 	}
-
-
 }

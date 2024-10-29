@@ -5,6 +5,7 @@ import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.monster.EntityZombie;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.DamageType;
@@ -14,6 +15,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static mizurin.shieldmod.ShieldMod.expertMode;
 
 //Mixin for knockback when blocking.
 @Mixin(value = EntityLiving.class, remap = false)
@@ -61,6 +64,20 @@ public abstract class KnockBackMixin {
 
 				}
 			}
+		}
+		if(((Object)this) instanceof EntityZombie && expertMode){
+			float f = MathHelper.sqrt_double(d * d + d1 * d1);
+			float f1 = 0.3F;
+			((EntityZombie)(Object)this).xd /= 2.0;
+			((EntityZombie)(Object)this).yd /= 2.0;
+			((EntityZombie)(Object)this).zd /= 2.0;
+			((EntityZombie)(Object)this).xd -= d / (double)f * (double)f1;
+			((EntityZombie)(Object)this).zd -= d1 / (double)f * (double)f1;
+			if (((EntityZombie)(Object)this).yd > 0.4000000059604645) {
+				((EntityZombie)(Object)this).yd = 0.4000000059604645;
+			}
+
+			ci.cancel();
 		}
 	}
 }

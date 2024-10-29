@@ -27,17 +27,20 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	public static int itemID;
 	public static int entityID;
 	public static boolean hurtSound;
+	public static boolean expertMode;
 	public static ArtType paintingSeal;
 	public static ArtType paintingRice;
 	static {
 		Properties prop = new Properties();
 		prop.setProperty("starting_item_id", "21000");
-		prop.setProperty("starting_entity_id", "100");
+		prop.setProperty("starting_entity_id", "200");
 		prop.setProperty("enable_hit_sounds", "false");
+		prop.setProperty("enable_expert_mode", "false");
 		ConfigHandler config = new ConfigHandler(ShieldMod.MOD_ID, prop);
 		itemID = config.getInt("starting_item_id");
 		entityID = config.getInt("starting_entity_id");
 		hurtSound = config.getBoolean("enable_hit_sounds");
+		expertMode = config.getBoolean("enable_expert_mode");
 		config.updateConfig();
 	}
 
@@ -57,10 +60,12 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 		EntityHelper.createEntity(EntityPB.class, ++entityID, "poisonBottle", () -> new SnowballRenderer(Shields.poisonBottle));
 		EntityHelper.createEntity(EntityRock.class, ++entityID, "pebbleShield", () -> new SnowballRenderer(Item.ammoPebble));
 		EntityHelper.createEntity(EntityFire.class, ++entityID, "entityFire", () -> new SnowballRenderer(Block.fire.asItem()));
+		EntityHelper.createEntity(EntityWeb.class, ++entityID, "entityWeb", () -> new SnowballRenderer(Block.cobweb.asItem()));
 
 		NetEntityHandler.registerNetworkEntry(new NetShieldEntry(), 8000);
 		NetEntityHandler.registerNetworkEntry(new NetPotionEntry(), 8001);
 		NetEntityHandler.registerNetworkEntry(new NetFireEntry(), 8002);
+		NetEntityHandler.registerNetworkEntry(new NetWebEntry(), 8003);
 	}
 
 	@Override

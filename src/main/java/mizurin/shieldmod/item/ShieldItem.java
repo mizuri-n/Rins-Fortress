@@ -28,17 +28,19 @@ public class ShieldItem extends ItemToolSword {
 	//Applies a knockback effect for all shields, bonus knockback to Leather Shields, and sets hitEntities on fire when hit by a Steel Shield.
 	@Override
 	public boolean hitEntity(ItemStack itemstack, EntityLiving target, EntityLiving player) {
-		if(itemstack.getItem() == Shields.leatherShield){
-			target.knockBack(player, 1, (player.x - target.x), (player.z - target.z ));
-			target.push((target.x - player.x)/7, 0, (target.z - player.z)/7);
-		} else {
-			target.knockBack(player, 3, player.x - target.x, player.z - target.z);
+		if ((target.hurtTime == 10 || target instanceof EntityPlayer)) {
+			if (itemstack.getItem() == Shields.leatherShield) {
+				target.knockBack(player, 1, (player.x - target.x), (player.z - target.z));
+				target.push((target.x - player.x) / 11, 0, (target.z - player.z) / 11);
+			} else {
+				target.push((target.x - player.x) / 11, 0, (target.z - player.z) / 11);
+			}
+			if (itemstack.getItem() == Shields.goldShield) {
+				((IDazed) target).shieldmod$dazedHurt(300);
+				target.push((target.x - player.x) / 20, 0, (target.z - player.z) / 20);
+			}
+			itemstack.damageItem(1, player);
 		}
-		if(itemstack.getItem() == Shields.goldShield){
-			((IDazed)target).shieldmod$dazedHurt();
-			target.push((target.x - player.x)/20, 0, (target.z - player.z)/20);
-		}
-		itemstack.damageItem(1, player);
 
 		return true;
 	}
