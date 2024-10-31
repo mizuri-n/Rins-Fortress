@@ -26,6 +26,7 @@ public class EntityWeb extends EntityProjectile {
 
 	public void init() {
 		super.init();
+		this.defaultProjectileSpeed = 0.95F;
 
 	}
 	@Override

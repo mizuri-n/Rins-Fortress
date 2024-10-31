@@ -147,10 +147,10 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 				}
 			}
 
-			if (entity instanceof EntityFireball) {
-				entity.hurt(player, 1, DamageType.COMBAT);
-				world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
-			}
+//			if (entity instanceof EntityFireball) {
+//				entity.hurt(player, 1, DamageType.COMBAT);
+//				world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
+//			}
 
 			if (entity instanceof EntityCannonball) {
 
@@ -344,6 +344,9 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 		at = @At(value = "HEAD")
 	)
 	public void tickMixin(CallbackInfo ci){
+
+
+
 		ItemStack stack = inventory.mainInventory[inventory.currentItem];
 		if (stack != null) {
 			if (stack.getItem() instanceof ShieldItem) {

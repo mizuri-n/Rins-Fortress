@@ -15,8 +15,8 @@ public class WorldMixin {
 	World thisObject = (World)(Object)this;
 
 	/**
-	 * @author
-	 * @reason
+	 * @author Rin
+	 * @reason Leather armor reduce aggro range
 	 */
 	@Overwrite
 	public EntityPlayer getClosestPlayer(double x, double y, double z, double radius) {
