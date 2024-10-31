@@ -73,8 +73,8 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 	}
 
 	/**
-	 * @author McRin
-	 * @reason Balls
+	 * @author Rin
+	 * @reason SnowBalls
 	 */
 	@Overwrite
 	public void attackEntity(Entity entity, float distance) {

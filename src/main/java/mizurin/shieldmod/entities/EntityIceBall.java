@@ -3,12 +3,13 @@ package mizurin.shieldmod.entities;
 import mizurin.shieldmod.interfaces.IDazed;
 import net.minecraft.core.HitResult;
 import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.projectile.EntityProjectile;
 import net.minecraft.core.entity.projectile.EntitySnowball;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 
-public class EntityIceBall extends EntitySnowball {
+public class EntityIceBall extends EntityProjectile {
 	public EntityIceBall(World world) {
 		super(world);
 		this.modelItem = Item.ammoSnowball;

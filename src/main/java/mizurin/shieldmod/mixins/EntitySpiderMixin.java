@@ -52,7 +52,7 @@ public class EntitySpiderMixin extends EntityMonster {
 							double d2 = entity.y + (double)entity.getHeadHeight() - 0.2 - web.y;
 							float f1 = MathHelper.sqrt_double(dX * dX + dZ * dZ) * 0.2F;
 							this.world.playSoundAtEntity((Entity)null, this, "random.bow", 0.5F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F));
-							web.setHeading(dX, d2 + (double) f1, dZ, 0.8F, 1.0F);
+							web.setHeading(dX, d2 + (double) f1, dZ, 1F, 1.0F);
 							this.world.entityJoinedWorld(web);
 
 						}

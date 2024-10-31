@@ -2,7 +2,6 @@ package mizurin.shieldmod.mixins;
 
 import mizurin.shieldmod.interfaces.IDazed;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.util.helper.DamageType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,12 +31,15 @@ public class DazedMixin implements IDazed {
 	@Unique
 	public int remainingFreezeTicks;
 
+
 	//Mirrors the fire status effect but cannot be put out and slows the entity.
 	@Inject(method = "baseTick()V", at = @At("HEAD"))
 	public void inject(CallbackInfo callbackInfo) {
 		if (this.remainingDazedTicks > 0) {
+
 			this.xd *= 0.85D;
 			this.zd *= 0.85D;
+
 			if (this.remainingDazedTicks % 16 == 0) {
 				this.hurt( null, 1, DamageType.COMBAT);
 			}
