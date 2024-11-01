@@ -1,7 +1,6 @@
 package mizurin.shieldmod.mixins;
 
 import mizurin.shieldmod.entities.*;
-import mizurin.shieldmod.interfaces.IDazed;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
@@ -40,6 +39,7 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 
 	@Unique
 	private static final int DATA_BLOCKING = 23;
+
 	@Shadow
 	public InventoryPlayer inventory;
 	@Shadow
@@ -344,9 +344,6 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 		at = @At(value = "HEAD")
 	)
 	public void tickMixin(CallbackInfo ci){
-
-
-
 		ItemStack stack = inventory.mainInventory[inventory.currentItem];
 		if (stack != null) {
 			if (stack.getItem() instanceof ShieldItem) {
