@@ -61,6 +61,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 		EntityHelper.createEntity(EntityRock.class, ++entityID, "pebbleShield", () -> new SnowballRenderer(Item.ammoPebble));
 		EntityHelper.createEntity(EntityFire.class, ++entityID, "entityFire", () -> new SnowballRenderer(Block.fire.asItem()));
 		EntityHelper.createEntity(EntityWeb.class, ++entityID, "entityWeb", () -> new SnowballRenderer(Block.cobweb.asItem()));
+		EntityHelper.createEntity(EntityIceBall.class, ++entityID, "ammoSnow", () -> new SnowballRenderer(Item.ammoSnowball));
 
 		NetEntityHandler.registerNetworkEntry(new NetShieldEntry(), 8000);
 		NetEntityHandler.registerNetworkEntry(new NetPotionEntry(), 8001);

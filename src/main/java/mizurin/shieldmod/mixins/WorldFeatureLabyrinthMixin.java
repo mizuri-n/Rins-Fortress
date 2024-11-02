@@ -25,14 +25,19 @@ public class WorldFeatureLabyrinthMixin {
 
 	@Inject(method = "pickCheckLootItem(Ljava/util/Random;)Lnet/minecraft/core/item/ItemStack;", at = @At(value = "FIELD", target = "Lnet/minecraft/core/world/generate/feature/WorldFeatureLabyrinth;treasureGenerated:Z", ordinal = 1, shift = At.Shift.AFTER), cancellable = true)
 	private void addTreasure(Random random, CallbackInfoReturnable<ItemStack> cir) {
-		if (isCold && random.nextInt(2) == 0) {
-			cir.setReturnValue(new ItemStack(Shields.tearShield));
+		if (isCold) {
+			if(random.nextInt(2) == 0) {
+				cir.setReturnValue(new ItemStack(Shields.tearShield));
+			}
 		}
-		if(isHot && random.nextInt(2)== 0){
-			cir.setReturnValue(new ItemStack(Shields.rockyHelmet));
-		}
-		if(!isHot && !isCold && random.nextInt(2)== 0){
-			cir.setReturnValue(new ItemStack(Shields.regenAmulet));
+		 else if(isHot){
+			 if (random.nextInt(2)== 0) {
+				 cir.setReturnValue(new ItemStack(Shields.rockyHelmet));
+			 }
+		} else {
+			if (random.nextInt(2) == 0) {
+				cir.setReturnValue(new ItemStack(Shields.regenAmulet));
+			}
 		}
 	}
 	@Inject(method = "generate(Lnet/minecraft/core/world/World;Ljava/util/Random;III)Z", at = @At(value = "FIELD", target = "net/minecraft/core/world/generate/feature/WorldFeatureLabyrinth.slabBlock : I", ordinal = 0))

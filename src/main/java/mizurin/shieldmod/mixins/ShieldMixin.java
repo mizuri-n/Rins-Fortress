@@ -147,10 +147,6 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 				}
 			}
 
-//			if (entity instanceof EntityFireball) {
-//				entity.hurt(player, 1, DamageType.COMBAT);
-//				world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
-//			}
 
 			if (entity instanceof EntityCannonball) {
 
@@ -231,16 +227,16 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 	@Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
 	public void injectHurt(Entity attacker, int damage, DamageType type, CallbackInfoReturnable<Boolean> ci) {
 		if (attacker instanceof EntityMonster || attacker instanceof EntityArrow) {
-			if (this.world.difficultySetting == 0) {
-				damage = 0;
-			}
-
-			if (this.world.difficultySetting == 1) {
-				damage = damage / 3 + 1;
-			}
-
-			if (this.world.difficultySetting == 3) {
-				damage = damage * 3 / 2;
+			switch(this.world.difficultySetting){
+				case 0:
+					damage = 0;
+					break;
+				case 1:
+					damage = damage / 3 + 1;
+					break;
+				case 3:
+					damage = damage * 3 / 2;
+					break;
 			}
 		}
 		// check if we are holding the shield item.

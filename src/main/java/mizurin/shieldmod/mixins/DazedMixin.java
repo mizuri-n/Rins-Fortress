@@ -33,7 +33,7 @@ public abstract class DazedMixin extends Entity implements IDazed {
 		return false;
 	}
 
-	@Inject(method = "init()V", at = @At("TAIL"))
+	@Inject(method = "<init>", at = @At("TAIL"))
 	public void defineSyncStatus(CallbackInfo ci){
 		entityData.define(DATA_DAZE, 0);
 		entityData.define(DATA_FREEZE, 0);
