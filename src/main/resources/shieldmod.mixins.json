@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BlockFarmlandMixin",
+    "BorealLabyrinthMixin",
     "DazedMixin",
     "EntityLivingMixin",
     "EntitySkeletonMixin",
@@ -14,8 +15,10 @@
     "FieldMixin",
     "KnockBackMixin",
     "ShieldMixin",
+    "SpiderWebMixin",
     "WorldFeatureLabyrinthMixin",
-    "WorldMixin"
+    "WorldMixin",
+    "ZombieMixin"
   ],
   "client": [
     "BipedRendererMixin",

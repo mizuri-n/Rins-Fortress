@@ -33,6 +33,15 @@ public abstract class DazedMixin extends Entity implements IDazed {
 		return false;
 	}
 
+	@Shadow
+	public abstract int getMaxHealth();
+
+	@Shadow
+	public int bonusHealth;
+
+	@Shadow
+	public abstract void setHealthRaw(int health);
+
 	@Inject(method = "<init>", at = @At("TAIL"))
 	public void defineSyncStatus(CallbackInfo ci){
 		entityData.define(DATA_DAZE, 0);
