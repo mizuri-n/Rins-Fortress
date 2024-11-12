@@ -37,7 +37,7 @@ public class Recipes implements RecipeEntrypoint {
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(" P ","PLP"," P ")
-			.addInput('P', Block.cobbleStone)
+			.addInput('P', "minecraft:cobblestones")
 			.addInput('L',"minecraft:planks")
 			.create("stoneShield", Shields.stoneShield.getDefaultStack());
 

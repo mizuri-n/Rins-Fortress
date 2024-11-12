@@ -32,7 +32,12 @@ public class EntityIceBall extends EntityProjectile {
 		if (hitResult.entity != null) {
 			hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
 			((IDazed) hitResult.entity).shieldmod$freezeHurt(20);
-
+			if (this.modelItem != null) {
+				for(int j = 0; j < 8; ++j) {
+					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Item.ammoSnowball.id);
+				}
+			}
+			this.remove();
 			//Applies my custom status effect from the IFreeze interface.
 		}
 	}

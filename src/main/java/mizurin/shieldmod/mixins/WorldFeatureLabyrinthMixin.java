@@ -19,8 +19,14 @@ public class WorldFeatureLabyrinthMixin {
 	@Shadow
 	boolean isCold;
 
-	@Unique
 	private boolean isHot;
+
+	private boolean isBoreal;
+
+	public WorldFeatureLabyrinthMixin(boolean isHot, boolean isBoreal) {
+		this.isHot = isHot;
+		this.isBoreal = isBoreal;
+	}
 
 
 	@Inject(method = "pickCheckLootItem(Ljava/util/Random;)Lnet/minecraft/core/item/ItemStack;", at = @At(value = "FIELD", target = "Lnet/minecraft/core/world/generate/feature/WorldFeatureLabyrinth;treasureGenerated:Z", ordinal = 1, shift = At.Shift.AFTER), cancellable = true)
@@ -31,18 +37,30 @@ public class WorldFeatureLabyrinthMixin {
 			}
 		}
 		 else if(isHot){
-			 if (random.nextInt(2)== 0) {
 				 cir.setReturnValue(new ItemStack(Shields.rockyHelmet));
+		} else if(isBoreal){
+			 int r = random.nextInt(5);
+			 switch (r){
+				 case 0:
+				 case 1:
+					 cir.setReturnValue(new ItemStack(Shields.tearShield));
+					 break;
+				 case 2:
+				 case 3:
+					 cir.setReturnValue(new ItemStack(Shields.rockyHelmet));
+					 break;
+				 case 4:
+					 cir.setReturnValue(new ItemStack(Shields.regenAmulet));
+					 break;
 			 }
-		} else {
-			if (random.nextInt(2) == 0) {
+		}
+		 else if (random.nextInt(3) == 0) {
 				cir.setReturnValue(new ItemStack(Shields.regenAmulet));
 			}
-		}
 	}
-	@Inject(method = "generate(Lnet/minecraft/core/world/World;Ljava/util/Random;III)Z", at = @At(value = "FIELD", target = "net/minecraft/core/world/generate/feature/WorldFeatureLabyrinth.slabBlock : I", ordinal = 0))
-	private void addBiome(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir){
-		this.isHot = true;
-	}
+//	@Inject(method = "generate(Lnet/minecraft/core/world/World;Ljava/util/Random;III)Z", at = @At(value = "FIELD", target = "net/minecraft/core/world/generate/feature/WorldFeatureLabyrinth.slabBlock : I", ordinal = 0))
+//	private void addBiome(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir){
+//		this.isHot = true;
+//	}
 }
 
