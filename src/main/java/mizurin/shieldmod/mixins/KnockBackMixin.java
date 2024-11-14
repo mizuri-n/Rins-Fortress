@@ -67,7 +67,7 @@ public abstract class KnockBackMixin {
 		}
 		if(((Object)this) instanceof EntityZombie && expertMode){
 			float f = MathHelper.sqrt_double(d * d + d1 * d1);
-			float f1 = 0.3F;
+			float f1 = 0.2F;
 			((EntityZombie)(Object)this).xd /= 2.0;
 			((EntityZombie)(Object)this).yd /= 2.0;
 			((EntityZombie)(Object)this).zd /= 2.0;
