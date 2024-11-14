@@ -1,8 +1,11 @@
 package mizurin.shieldmod.mixins;
 
 import mizurin.shieldmod.item.Shields;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
+import net.minecraft.core.world.biome.Biome;
+import net.minecraft.core.world.biome.Biomes;
 import net.minecraft.core.world.generate.feature.WorldFeatureLabyrinth;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,8 +22,10 @@ public class WorldFeatureLabyrinthMixin {
 	@Shadow
 	boolean isCold;
 
+	@Unique
 	private boolean isHot;
 
+	@Unique
 	private boolean isBoreal;
 
 	public WorldFeatureLabyrinthMixin(boolean isHot, boolean isBoreal) {
@@ -58,9 +63,22 @@ public class WorldFeatureLabyrinthMixin {
 				cir.setReturnValue(new ItemStack(Shields.regenAmulet));
 			}
 	}
-//	@Inject(method = "generate(Lnet/minecraft/core/world/World;Ljava/util/Random;III)Z", at = @At(value = "FIELD", target = "net/minecraft/core/world/generate/feature/WorldFeatureLabyrinth.slabBlock : I", ordinal = 0))
-//	private void addBiome(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir){
-//		this.isHot = true;
+	@Inject(method = "generate", at = @At("HEAD"))
+	public void generate(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
+		Biome biome = world.getBlockBiome(x, y, z);
+		if (biome == Biomes.OVERWORLD_BOREAL_FOREST || biome == Biomes.OVERWORLD_MEADOW){
+			isBoreal = true;
+		}
+
+		if(biome == Biomes.OVERWORLD_CAATINGA || biome == Biomes.OVERWORLD_DESERT || biome == Biomes.OVERWORLD_OUTBACK || biome == Biomes.OVERWORLD_OUTBACK_GRASSY){
+			isHot = true;
+		}
+	}
+//	@Inject(method = "pickMobSpawner(Ljava/util/Random;)Ljava/lang/String;", at = @At("HEAD"), cancellable = true)
+//	private void pickMobSpawner(Random random, CallbackInfoReturnable<String> cir) {
+//		if(isBoreal) {
+//			cir.setReturnValue("Spider");
+//		}
 //	}
 }
 
