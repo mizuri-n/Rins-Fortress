@@ -1,5 +1,6 @@
 package mizurin.shieldmod.mixins;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
@@ -7,7 +8,6 @@ import mizurin.shieldmod.item.ShieldMaterials;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
-import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.entity.projectile.*;
 import net.minecraft.core.item.ItemStack;
@@ -21,8 +21,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.List;
 
@@ -223,36 +225,27 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 		world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.3f, 1.0f);
 	}
 
-	// inject at the top(HEAD) of hurt(), allow us to call return(cancel/set return value)
-	@Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
-	public void injectHurt(Entity attacker, int damage, DamageType type, CallbackInfoReturnable<Boolean> ci) {
-		if (attacker instanceof EntityMonster || attacker instanceof EntityArrow) {
-			switch(this.world.difficultySetting){
-				case 0:
-					damage = 0;
-					break;
-				case 1:
-					damage = damage / 3 + 1;
-					break;
-				case 3:
-					damage = damage * 3 / 2;
-					break;
-			}
-		}
+	// Modify the damage value provided to super.hurt
+	@ModifyArgs(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/entity/EntityLiving;hurt(Lnet/minecraft/core/entity/Entity;ILnet/minecraft/core/util/helper/DamageType;)Z"))
+	public void injectHurt(Args args) {
+		Entity attacker = args.get(0);
+		int damage = args.get(1);
+
 		// check if we are holding the shield item.
 		ItemStack stack = inventory.mainInventory[inventory.currentItem];
 		//check if we are wearing the helmet.
 		ItemStack helmet_item = this.inventory.armorItemInSlot(3);
-		if(attacker != null) { //need this or you will get a null pointer.
+		if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet)) && attacker != this) {
 			if (!this.gamemode.isPlayerInvulnerable()) {
-				if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet)) && attacker != this) {
-					if(getHealth() < getMaxHealth()){
-						damage *= 0;
-					}
+				if(getHealth() < getMaxHealth()){
+					damage *= 0;
+				}
+				if (attacker != null) {
 					attacker.hurt(this, 2, DamageType.FALL);
 				}
 			}
 		}
+
 
 		if (stack != null) {
 			if (stack.getItem() instanceof ShieldItem) {
@@ -270,7 +263,7 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 							if (shieldmod$getIsBlock()) {
 								//checks if the player is blocking to apply the damage resistance.
 
-								int newDamage = Math.round(damage * (shield.tool.getEfficiency(true)));
+								damage = Math.round(damage * (shield.tool.getEfficiency(true)));
 
 								double _dx = attacker.x - this.x;
 								double _dz = attacker.z - this.z;
@@ -299,7 +292,6 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 									shieldmod$Counter(20);
 									//adds the ticks(Blocked) when hit.
 								}
-								super.hurt(attacker, newDamage, type);
 
 
 								world.playSoundAtEntity(attacker,
@@ -323,15 +315,14 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 								}
 
 								stack.damageItem(4, inventory.player);
-							} else {
-								super.hurt(attacker, damage, type);
 							}
 						}
-						ci.setReturnValue(true);
 					}
 				}
 			}
 		}
+
+		args.set(1, damage);
 	}
 	@Unique
 	private int tickCounter = 0;
