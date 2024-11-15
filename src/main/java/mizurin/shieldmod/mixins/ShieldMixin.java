@@ -243,7 +243,6 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 		ItemStack stack = inventory.mainInventory[inventory.currentItem];
 		//check if we are wearing the helmet.
 		ItemStack helmet_item = this.inventory.armorItemInSlot(3);
-		System.out.println(helmet_item);
 		if (!this.gamemode.isPlayerInvulnerable()) {
 			if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet)) && attacker != this) {
 				if (attacker != null) {
