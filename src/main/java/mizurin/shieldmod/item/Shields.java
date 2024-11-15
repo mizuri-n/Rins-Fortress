@@ -47,7 +47,7 @@ public class Shields {
 			.setStackSize(1)
 			.setItemModel(item -> new ItemModelShield(item, new ItemModelColored.ColoredTextureEntry[]
 				{
-					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/wooden_shield"), (s) -> -1)
+					new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/wooden_shield_test"), (s) -> -1)
 				}).setFull3D())
 			.build(new ShieldItem("wooden.shield", ++itemID, ShieldMaterials.TOOL_WOOD))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);

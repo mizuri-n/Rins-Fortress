@@ -43,21 +43,6 @@ public class WorldFeatureLabyrinthMixin {
 		}
 		 else if(isHot){
 				 cir.setReturnValue(new ItemStack(Shields.rockyHelmet));
-		} else if(isBoreal){
-			 int r = random.nextInt(5);
-			 switch (r){
-				 case 0:
-				 case 1:
-					 cir.setReturnValue(new ItemStack(Shields.tearShield));
-					 break;
-				 case 2:
-				 case 3:
-					 cir.setReturnValue(new ItemStack(Shields.rockyHelmet));
-					 break;
-				 case 4:
-					 cir.setReturnValue(new ItemStack(Shields.regenAmulet));
-					 break;
-			 }
 		}
 		 else if (random.nextInt(3) == 0) {
 				cir.setReturnValue(new ItemStack(Shields.regenAmulet));
@@ -74,11 +59,5 @@ public class WorldFeatureLabyrinthMixin {
 			isHot = true;
 		}
 	}
-//	@Inject(method = "pickMobSpawner(Ljava/util/Random;)Ljava/lang/String;", at = @At("HEAD"), cancellable = true)
-//	private void pickMobSpawner(Random random, CallbackInfoReturnable<String> cir) {
-//		if(isBoreal) {
-//			cir.setReturnValue("Spider");
-//		}
-//	}
 }
 

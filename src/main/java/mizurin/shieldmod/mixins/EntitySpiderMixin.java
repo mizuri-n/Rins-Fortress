@@ -42,7 +42,7 @@ public class EntitySpiderMixin extends EntityMonster {
 			if (brightness > 0.5F && this.random.nextInt(100) == 0) {
 				this.entityToAttack = null;
 			} else {
-				if (distance < 10.0F && distance > 6.0F) {
+				if ((distance < 10.0F && distance > 6.0F && this.random.nextInt(10) == 0)) {
 					double dX = entity.x - this.x;
 					double dZ = entity.z - this.z;
 					if (this.attackTime == 0) {
@@ -55,9 +55,10 @@ public class EntitySpiderMixin extends EntityMonster {
 							web.setHeading(dX, d2 + (double) f1, dZ, 1F, 1.0F);
 							this.world.entityJoinedWorld(web);
 
+
 						}
 
-						this.attackTime = 60;
+						this.attackTime = 30;
 					}
 
 					this.yRot = (float)(Math.atan2(dZ, dX) * 180.0 / Math.PI) - 90.0F;

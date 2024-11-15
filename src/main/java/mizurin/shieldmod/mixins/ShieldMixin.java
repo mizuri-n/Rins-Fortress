@@ -246,7 +246,10 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 		if(attacker != null) { //need this or you will get a null pointer.
 			if (!this.gamemode.isPlayerInvulnerable()) {
 				if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet)) && attacker != this) {
-					attacker.hurt(attacker, 2, DamageType.COMBAT);
+					if(getHealth() < getMaxHealth()){
+						damage *= 0;
+					}
+					attacker.hurt(this, 2, DamageType.FALL);
 				}
 			}
 		}
@@ -260,8 +263,8 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 						World world = attacker.world;
 
 						if (!this.gamemode.isPlayerInvulnerable()) {
-							if(shield.tool == ShieldMaterials.TOOL_TEAR && getHealth() <= getMaxHealth() * 0.3){
-								damage = Math.round(damage * 0.5f);
+							if(shield.tool == ShieldMaterials.TOOL_TEAR && getHealth() <= getMaxHealth() * 0.5){
+								damage = Math.round(damage * 0.7f);
 							}
 							//tear shield provides a damage resistance when the player is low health. it can stack with blocking too.
 							if (shieldmod$getIsBlock()) {
@@ -282,7 +285,7 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 								}
 								if (shield.tool == ShieldMaterials.TOOL_STONE && attacker != this){
 									if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet))) {
-										attacker.hurt(attacker, 5, DamageType.FALL);
+										attacker.hurt(this, 5, DamageType.FALL);
 									} else {
 										attacker.hurt(this, 3, DamageType.FALL);
 									}
@@ -346,8 +349,8 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 
 				ShieldItem shield = ((ShieldItem) stack.getItem());
 				if (shieldmod$getIsBlock() && (shield.tool == ShieldMaterials.TOOL_LEATHER || shield.tool == ShieldMaterials.TOOL_WOOD)) {
-					this.xd *= 0.65D;
-					this.zd *= 0.65D;
+					this.xd *= 0.80D;
+					this.zd *= 0.80D;
 				}
 				else if (shieldmod$getIsBlock() && shield.tool == ShieldMaterials.TOOL_DIAMOND){
 					this.xd *= 0.20D;
