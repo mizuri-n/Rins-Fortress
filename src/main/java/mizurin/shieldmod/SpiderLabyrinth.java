@@ -1,5 +1,6 @@
 package mizurin.shieldmod;
 
+import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
@@ -35,17 +36,17 @@ public class SpiderLabyrinth extends WorldFeature {
 			this.wallBlockB = Block.cobbleBasalt.id;
 			this.brickBlockA = Block.brickBasalt.id;
 			this.brickBlockB = Block.brickBasalt.id;
-			this.slabBlock = Block.slabPlanksOak.id;
+			this.slabBlock = Block.slabPlanksOakPainted.id;
 	}
 
 	public boolean generate(World world, Random random, int x, int y, int z) {
 
-		this.chestLoot = new WeightedRandomBag();
+		this.chestLoot = new WeightedRandomBag<>();
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.ingotIron.getDefaultStack(), 1, 6), 100.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.ingotGold.getDefaultStack(), 1, 4), 100.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.sulphur.getDefaultStack(), 3, 8), 100.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.diamond.getDefaultStack(), 1, 4), 2.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.foodAppleGold.getDefaultStack()), 1.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.foodAppleGold.getDefaultStack()), 2.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.dustRedstone.getDefaultStack(), 1, 4), 100.0);
 
 		for(int i = 0; i < 9; ++i) {
@@ -53,7 +54,7 @@ public class SpiderLabyrinth extends WorldFeature {
 		}
 
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.foodApple.getDefaultStack()), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Block.wool.getDefaultStack(), 1, 4), 100.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Block.wool.getDefaultStack(), 1, 2), 100.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.handcannonLoaded.getDefaultStack()), 0.5);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.handcannonUnloaded.getDefaultStack()), 4.5);
 		this.chestLoot.addEntry((new WeightedRandomLootObject(Item.armorHelmetChainmail.getDefaultStack())).setRandomMetadata(Item.armorHelmetChainmail.getMaxDamage() / 2, Item.armorHelmetChainmail.getMaxDamage()), 20.0);
@@ -62,16 +63,28 @@ public class SpiderLabyrinth extends WorldFeature {
 		this.chestLoot.addEntry((new WeightedRandomLootObject(Item.armorBootsChainmail.getDefaultStack())).setRandomMetadata(Item.armorBootsChainmail.getMaxDamage() / 2, Item.armorBootsChainmail.getMaxDamage()), 20.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.ingotSteelCrude.getDefaultStack()), 10.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject((ItemStack)null), 892.0);
-		this.dispenserLoot = new WeightedRandomBag();
+		this.dispenserLoot = new WeightedRandomBag<>();
 		this.dispenserLoot.addEntry(new WeightedRandomLootObject(Item.ammoArrow.getDefaultStack(), 5, 7), 300.0);
 		this.dispenserLoot.addEntry(new WeightedRandomLootObject(Item.ammoArrowGold.getDefaultStack()), 10.0);
 		this.dispenserLoot.addEntry(new WeightedRandomLootObject(Item.ammoChargeExplosive.getDefaultStack()), 0.5);
 		this.dispenserLoot.addEntry(new WeightedRandomLootObject((ItemStack)null), 289.5);
-		this.spawnerMonsters = new WeightedRandomBag();
-
-
+		this.spawnerMonsters = new WeightedRandomBag<>();
 		this.spawnerMonsters.addEntry("Spider", 3.0);
 		this.spawnerMonsters.addEntry("ArmouredZombie", 1.0);
+		int r = random.nextInt(5);
+		switch (r) {
+			case 0:
+			case 1:
+				this.treasureItem = (new ItemStack(Shields.tearShield));
+				break;
+			case 2:
+			case 3:
+				this.treasureItem = (new ItemStack(Shields.rockyHelmet));
+				break;
+			case 4:
+				this.treasureItem = (new ItemStack(Shields.regenAmulet));
+				break;
+		}
 
 		if (this.canReplace(world, x, y, z)) {
 			this.dungeonLimit = 1;
@@ -160,7 +173,7 @@ public class SpiderLabyrinth extends WorldFeature {
 									world.setBlockWithNotify(x, y + 1, z, Block.spikes.id);
 								}
 							} else if (x != blockX && z != blockZ && random.nextInt(20) == 0 && world.getBlockId(x, y + 1, z) != this.slabBlock) {
-								world.setBlockWithNotify(x, y, z, this.slabBlock);
+								world.setBlockAndMetadataWithNotify(x, y, z, this.slabBlock, 12 << 4);
 							} else {
 								world.setBlockWithNotify(x, y, z, 0);
 							}
@@ -186,7 +199,7 @@ public class SpiderLabyrinth extends WorldFeature {
 	private boolean canReplace(World world, int x, int y, int z) {
 		if (y <= 11) {
 			return false;
-		} else if (world.getBlockId(x, y, z) != this.brickBlockA && world.getBlockId(x, y, z) != Block.planksOak.id && world.getBlockId(x, y, z) != Block.cobweb.id && world.getBlockId(x, y, z) != Block.bookshelfPlanksOak.id && world.getBlockId(x, y, z) != Block.mobspawner.id && world.getBlockId(x, y, z) != this.brickBlockB) {
+		} else if (world.getBlockId(x, y, z) != this.brickBlockA && world.getBlockId(x, y, z) != Block.planksOakPainted.id && world.getBlockId(x, y, z) != Block.cobweb.id && world.getBlockId(x, y, z) != Block.bookshelfPlanksOak.id && world.getBlockId(x, y, z) != Block.mobspawner.id && world.getBlockId(x, y, z) != this.brickBlockB) {
 			if (world.getBlockId(x, y, z) != Block.motionsensorIdle.id && world.getBlockId(x, y, z) != Block.dispenserCobbleStone.id && world.getBlockId(x, y, z) != Block.motionsensorActive.id) {
 				return world.getBlockMaterial(x, y, z) == Material.grass || world.getBlockMaterial(x, y, z) == Material.dirt || world.getBlockMaterial(x, y, z) == Material.stone || world.getBlockMaterial(x, y, z) == Material.sand || world.getBlockMaterial(x, y, z) == Material.moss;
 			} else {
@@ -272,6 +285,9 @@ public class SpiderLabyrinth extends WorldFeature {
 						if (y == blockY + (height - 3) && !zWallCheck && !xWallCheck && random.nextInt(5) == 0) {
 							world.setBlockWithNotify(x, y, z, Block.cobweb.id);
 						}
+						if (y == blockY + (height - 2) && !zWallCheck && !xWallCheck && random.nextInt(20) == 0) {
+							world.setBlockWithNotify(x, y, z, Block.cobweb.id);
+						}
 					}
 				}
 			}
@@ -317,6 +333,7 @@ public class SpiderLabyrinth extends WorldFeature {
 
 	private void generateDungeon(World world, Random random, int blockX, int blockY, int blockZ, boolean doSpawner) {
 		int size = 4;
+		byte height = 2;
 		if (blockY >= 10) {
 			int x;
 			int y;
@@ -340,6 +357,12 @@ public class SpiderLabyrinth extends WorldFeature {
 							} else {
 								world.setBlockWithNotify(x, y, z, this.wallBlockB);
 							}
+							if (y == blockY + (height - 3) && !zWallCheck && !xWallCheck && random.nextInt(5) == 0) {
+								world.setBlockWithNotify(x, y, z, Block.cobweb.id);
+							}
+							if (y == blockY + (height - 2) && !zWallCheck && !xWallCheck && random.nextInt(20) == 0) {
+								world.setBlockWithNotify(x, y, z, Block.cobweb.id);
+							}
 						}
 					}
 				}
@@ -348,7 +371,7 @@ public class SpiderLabyrinth extends WorldFeature {
 			x = blockX + random.nextInt(size - 1) - (size - 1);
 			y = blockZ + random.nextInt(size - 1) - (size - 1);
 			if (this.canReplace(world, x, blockY - 2, y)) {
-				world.setBlockWithNotify(x, blockY - 1, y, Block.chestPlanksOak.id);
+				world.setBlockAndMetadataWithNotify(x, blockY - 1, y, Block.chestPlanksOakPainted.id, 12 << 4);
 				TileEntityChest tileentitychest = (TileEntityChest)world.getBlockTileEntity(x, blockY - 1, y);
 
 				for(int k4 = 0; k4 < 10; ++k4) {
@@ -403,7 +426,7 @@ public class SpiderLabyrinth extends WorldFeature {
 										world.setBlockWithNotify(x, y, z, this.wallBlockA);
 									}
 								} else {
-									world.setBlockWithNotify(x, y, z, Block.planksOak.id);
+									world.setBlockAndMetadataWithNotify(x, y, z, Block.planksOakPainted.id, 12);
 								}
 
 								if (x > blockX - 3 && x < blockX + 3 && z > blockZ - 3 && z < blockZ + 3) {
@@ -420,9 +443,10 @@ public class SpiderLabyrinth extends WorldFeature {
 									if (xRoom % 2 == 0) {
 										world.setBlockWithNotify(x, y, z, Block.bookshelfPlanksOak.id);
 									} else if (random.nextInt(5) == 0) {
-										world.setBlockWithNotify(x, y, z, Block.logOakMossy.id);
-									} else {
-										world.setBlockWithNotify(x, y, z, Block.logOak.id);
+										world.setBlockWithNotify(x, y, z, Block.logPine.id);
+									}
+									else {
+										world.setBlockWithNotify(x, y, z, Block.logPine.id);
 									}
 								} else {
 									world.setBlockWithNotify(x, y, z, 0);
@@ -433,6 +457,9 @@ public class SpiderLabyrinth extends WorldFeature {
 
 							if (zRoom % 2 == 0 && (x == blockX - 2 || x == blockX + 2) && (z == blockZ - 2 || z == blockZ + 2)) {
 								world.setBlockWithNotify(x, y, z, this.brickBlockA);
+							}
+							if (y == blockY + (2) && !zWallCheck && !xWallCheck && random.nextInt(20) == 0) {
+								world.setBlockWithNotify(x, y, z, Block.cobweb.id);
 							}
 						}
 					}
