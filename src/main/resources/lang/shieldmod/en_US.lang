@@ -33,4 +33,12 @@ item.shieldmod.armor.leggings.leather.desc=A pair of trousers made from a cow's 
 item.shieldmod.armor.boots.leather.name=Leather Boots
 item.shieldmod.armor.boots.leather.desc=A pair of boots made from a cow's hide.
 
+tile.shieldmod.log.apple.name=Apple Log
+tile.shieldmod.log.apple.desc=A log from an apple tree.
+tile.shieldmod.leaves.apple.name=Apple Leaves
+tile.shieldmod.leaves.apple.desc=Leaves from an apple tree.
+tile.shieldmod.sapling.apple.name=Apple Sapling
+tile.shieldmod.sapling.apple.desc=Plant to grow an apple tree.
+tile.shieldmod.leaves.apple.flowering.name=Flowering Apple Leaves
+tile.shieldmod.leaves.apple.flowering.desc=Leaves from an apple tree that are budding with fruit.
 

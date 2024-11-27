@@ -1,6 +1,8 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.entity;
 
+import mizurin.shieldmod.interfaces.IDazed;
 import mizurin.shieldmod.item.Shields;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -9,6 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 
 @Mixin(value = EntityLiving.class, remap = false)
@@ -26,12 +29,9 @@ public class EntityLivingMixin {
 			}
 			if (AR) {
 				((EntityPlayer) entityKilledBy).heal(1);
-				for (int j = 0; j < 8; ++j) {
-					entityKilledBy.world.spawnParticle("largesmoke", entityKilledBy.x, entityKilledBy.y, entityKilledBy.z, 0.0, 0.0, 0.0, 0);
+					entityKilledBy.world.spawnParticle("explode", entityKilledBy.x, entityKilledBy.y + entityKilledBy.getHeadHeight(), entityKilledBy.z, 0.0, 0.0, 0.0, 0);
 
-				}
 			}
 		}
 	}
-
 }

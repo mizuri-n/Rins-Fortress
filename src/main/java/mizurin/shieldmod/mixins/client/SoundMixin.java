@@ -1,4 +1,4 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.client;
 
 
 import mizurin.shieldmod.ShieldMod;

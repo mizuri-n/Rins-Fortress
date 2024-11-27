@@ -1,13 +1,15 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.entity;
 
 import com.mojang.nbt.CompoundTag;
 import mizurin.shieldmod.entities.EntityIceBall;
 import mizurin.shieldmod.interfaces.IShieldZombie;
+import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.*;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.entity.projectile.EntitySnowball;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.AABB;
@@ -24,6 +26,17 @@ import static mizurin.shieldmod.ShieldMod.expertMode;
 public abstract class EntitySnowManMixin extends EntityMonster implements IShieldZombie {
 	public EntitySnowManMixin(World world) {
 		super(world);
+	}
+	@Override
+	public void dropFewItems() {
+		if (this.random.nextInt(1000) == 0) {
+			this.spawnAtLocation(Item.bucketIcecream.id, 1);
+		}
+		if(expertMode && random.nextInt(10) == 0){
+			this.spawnAtLocation(Block.ice.id, 1);
+		}
+
+		super.dropFewItems();
 	}
 
 	@Override

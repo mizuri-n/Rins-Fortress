@@ -1,4 +1,4 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.client;
 
 import mizurin.shieldmod.interfaces.IShieldZombie;
 import net.minecraft.client.render.block.model.BlockModel;
