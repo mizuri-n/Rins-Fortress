@@ -1,7 +1,8 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.entity;
 
 import mizurin.shieldmod.entities.EntityWeb;
 import mizurin.shieldmod.interfaces.IDazed;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.monster.EntitySkeleton;
@@ -22,13 +23,20 @@ public class EntitySpiderMixin extends EntityMonster {
 
 	public void spawnInit() {
 		super.init();
-		if (this.world.difficultySetting != 0 && this.random.nextInt(70 / this.world.difficultySetting) == 0) {
+		if (this.world.difficultySetting != 0 && this.random.nextInt(70 / this.world.difficultySetting) == 0 && expertMode) {
 			EntitySkeleton entityskeleton = new EntitySkeleton(this.world);
 			entityskeleton.moveTo(this.x, this.y, this.z, this.yRot, 0.0F);
 			this.world.entityJoinedWorld(entityskeleton);
 			entityskeleton.startRiding(this);
 		}
+	}
 
+	@Override
+	protected void dropFewItems() {
+		if(expertMode && random.nextInt(10) == 0){
+			this.spawnAtLocation(Block.cobweb.id, 1);
+		}
+		super.dropFewItems();
 	}
 
 	/**

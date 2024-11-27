@@ -5,26 +5,34 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BlockFarmlandMixin",
+    "ColorizerMixin",
     "DazedMixin",
-    "EntityLivingMixin",
-    "EntitySkeletonMixin",
-    "EntitySnowManMixin",
-    "EntitySpiderMixin",
-    "EntityZombieArmoredMixin",
     "FieldMixin",
     "KnockBackMixin",
     "ShieldMixin",
     "SpiderLabyrinthMixin",
-    "SpiderWebMixin",
     "WorldFeatureLabyrinthMixin",
-    "WorldMixin"
+    "WorldMixin",
+    "client.BipedRendererMixin",
+    "client.IconMixin",
+    "client.LivingRendererMixin",
+    "client.PaintingMixin",
+    "client.PlayerRendererMixin",
+    "client.SoundMixin",
+    "entity.EntityCreeperMixin",
+    "entity.EntityLivingMixin",
+    "entity.EntitySkeletonMixin",
+    "entity.EntitySnowManMixin",
+    "entity.EntitySpiderMixin",
+    "entity.EntityZombieArmoredMixin",
+    "entity.SpiderWebMixin"
   ],
   "client": [
-    "BipedRendererMixin",
-    "LivingRendererMixin",
-    "PaintingMixin",
-    "PlayerRendererMixin",
-    "SoundMixin"
+    "client.BipedRendererMixin",
+    "client.LivingRendererMixin",
+    "client.PaintingMixin",
+    "client.PlayerRendererMixin",
+    "client.SoundMixin"
   ],
   "injectors": {
     "defaultRequire": 1

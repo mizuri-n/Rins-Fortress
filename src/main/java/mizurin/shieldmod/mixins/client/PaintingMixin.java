@@ -1,4 +1,4 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.client;
 
 import net.minecraft.client.render.stitcher.AtlasStitcher;
 import net.minecraft.client.render.stitcher.TextureRegistry;

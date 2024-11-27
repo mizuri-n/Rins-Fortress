@@ -1,4 +1,4 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import mizurin.shieldmod.ColoredArmorTexture;

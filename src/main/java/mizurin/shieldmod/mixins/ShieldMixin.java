@@ -1,6 +1,5 @@
 package mizurin.shieldmod.mixins;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
@@ -21,7 +20,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
@@ -237,8 +235,8 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 		ItemStack helmet_item = this.inventory.armorItemInSlot(3);
 		if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet)) && attacker != this) {
 			if (!this.gamemode.isPlayerInvulnerable()) {
-				if(getHealth() < getMaxHealth()){
-					damage *= 0;
+				if(getHealth() == getMaxHealth()){
+					damage = damage / 3;
 				}
 				if (attacker != null) {
 					attacker.hurt(this, 2, DamageType.FALL);
@@ -307,9 +305,9 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 									double dz = world.rand.nextGaussian() * 0.02;
 									world.spawnParticle(
 										"snowshovel",
-										attacker.x + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
-										attacker.y - attacker.bbHeight + (double) (world.rand.nextFloat() * width),
-										attacker.z + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
+										this.x + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
+										this.y - this.bbHeight + (double) (world.rand.nextFloat() * width),
+										this.z + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
 										dx, dy, dz, 0
 									);
 								}
@@ -340,8 +338,8 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 
 				ShieldItem shield = ((ShieldItem) stack.getItem());
 				if (shieldmod$getIsBlock() && (shield.tool == ShieldMaterials.TOOL_LEATHER || shield.tool == ShieldMaterials.TOOL_WOOD)) {
-					this.xd *= 0.80D;
-					this.zd *= 0.80D;
+					this.xd *= 0.75D;
+					this.zd *= 0.75D;
 				}
 				else if (shieldmod$getIsBlock() && shield.tool == ShieldMaterials.TOOL_DIAMOND){
 					this.xd *= 0.20D;
@@ -369,7 +367,7 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 		ItemStack helmet_item = this.inventory.armorItemInSlot(2);
 		if ((helmet_item != null && helmet_item.getItem().equals(Shields.regenAmulet))) {
 			++this.tickCounter;
-			if (this.tickCounter >= 600) {
+			if (this.tickCounter >= 660) {
 				this.tickCounter = 0;
 				this.heal(1);
 			}

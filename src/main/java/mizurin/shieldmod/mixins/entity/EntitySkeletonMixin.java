@@ -1,9 +1,12 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.entity;
 
+import net.minecraft.core.WeightedRandomLootObject;
+import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.monster.EntitySkeleton;
 import net.minecraft.core.entity.projectile.EntityArrow;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,6 +18,19 @@ import static mizurin.shieldmod.ShieldMod.expertMode;
 public class EntitySkeletonMixin extends EntityMonster{
 	public EntitySkeletonMixin(World world) {
 		super(world);
+	}
+	public void spawnInit() {
+		super.init();
+		if(expertMode){
+			this.mobDrops.add(new WeightedRandomLootObject(Item.flint.getDefaultStack(), 0, 1));
+		}
+	}
+	@Override
+	protected void dropFewItems() {
+		if(expertMode && random.nextInt(1000) == 0){
+			this.spawnAtLocation(Item.bucketMilk.id, 1);
+		}
+		super.dropFewItems();
 	}
 
 

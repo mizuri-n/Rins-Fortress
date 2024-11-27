@@ -1,4 +1,4 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.entity;
 
 import net.minecraft.core.block.BlockCobweb;
 import net.minecraft.core.entity.Entity;
