@@ -1,7 +1,10 @@
 package mizurin.shieldmod;
 
+import mizurin.shieldmod.blocks.RinBlocks;
 import mizurin.shieldmod.entities.*;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.client.entity.fx.EntityFX;
+import net.minecraft.client.entity.fx.EntityFlameFX;
 import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.core.block.Block;
@@ -9,9 +12,11 @@ import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.enums.ArtType;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.net.entity.NetEntityHandler;
+import net.minecraft.core.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.EntityHelper;
+import turniplabs.halplibe.helper.ParticleHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
@@ -24,6 +29,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static int playerArmorRenderOffset = 0;
 
+	public static int blockID;
 	public static int itemID;
 	public static int entityID;
 	public static boolean hurtSound;
@@ -32,11 +38,13 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	public static ArtType paintingRice;
 	static {
 		Properties prop = new Properties();
+		prop.setProperty("starting_block_id", "7000");
 		prop.setProperty("starting_item_id", "21000");
 		prop.setProperty("starting_entity_id", "200");
 		prop.setProperty("enable_hit_sounds", "false");
 		prop.setProperty("enable_expert_mode", "false");
 		ConfigHandler config = new ConfigHandler(ShieldMod.MOD_ID, prop);
+		blockID = config.getInt("starting_block_id");
 		itemID = config.getInt("starting_item_id");
 		entityID = config.getInt("starting_entity_id");
 		hurtSound = config.getBoolean("enable_hit_sounds");
@@ -49,6 +57,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
     public void onInitialize() {
         LOGGER.info("Rin's Fortress has been initialized.");
 		new Shields().initializeItems();
+		new RinBlocks().initializeBlocks();
 		Colorizers.registerColorizers();
     }
 

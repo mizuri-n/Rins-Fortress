@@ -1,4 +1,4 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.entity;
 
 import com.mojang.nbt.CompoundTag;
 import mizurin.shieldmod.interfaces.IShieldZombie;
@@ -40,7 +40,7 @@ public class EntityZombieArmoredMixin extends EntityZombie implements IShieldZom
 			//chance of spawning
 			setHealthRaw(80);
 			attackStrength = 6;
-			this.mobDrops.add(new WeightedRandomLootObject(Item.ingotIron.getDefaultStack(), 1, 2));
+			this.mobDrops.add(new WeightedRandomLootObject(Item.oreRawIron.getDefaultStack(), 1, 1));
 			//guaranteed drop of 1-2 iron as a reward for killing the shielded zombie.
 			entityData.set(21, (byte)1);
 			//if it spawns, set the data true.

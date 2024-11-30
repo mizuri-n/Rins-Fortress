@@ -1,5 +1,6 @@
 package mizurin.shieldmod;
 
+import mizurin.shieldmod.blocks.RinBlocks;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
@@ -89,6 +90,10 @@ public class Recipes implements RecipeEntrypoint {
 			.addInput(Item.jar)
 			.addInput(Item.jar)
 			.create("poisonbottle", new ItemStack(Shields.poisonBottle, 3));
+
+		RecipeBuilder.Shapeless(MOD_ID)
+			.addInput(new ItemStack(RinBlocks.logApple, 1))
+			.create("apple_log_to_light_grey", new ItemStack(Block.planksOakPainted, 4, 8));
 
 
 		WORKBENCH.register("tearstoneShield", new RecipeEntryRepairable(Shields.tearShield, Item.ingotIron));

@@ -35,7 +35,7 @@ public class EntityPB extends EntityProjectile {
 	public void onHit(HitResult hitResult) {
 		if (hitResult.entity instanceof EntityLiving) {
 			hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
-			((IDazed) hitResult.entity).shieldmod$dazedHurt(300);
+			((IDazed) hitResult.entity).shieldmod$dazedHurt(450);
 			//Applies my custom status effect from the IDazed interface.
 		}
 		if (this.modelItem != null) {
