@@ -1,8 +1,6 @@
 package mizurin.shieldmod.mixins.entity;
 
-import mizurin.shieldmod.interfaces.IDazed;
 import mizurin.shieldmod.item.Shields;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -11,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 
 @Mixin(value = EntityLiving.class, remap = false)

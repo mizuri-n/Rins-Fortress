@@ -8,7 +8,10 @@ import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.entity.projectile.*;
+import net.minecraft.core.entity.projectile.EntityArrow;
+import net.minecraft.core.entity.projectile.EntityCannonball;
+import net.minecraft.core.entity.projectile.EntityProjectile;
+import net.minecraft.core.entity.projectile.EntitySnowball;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.InventoryPlayer;
@@ -28,7 +31,7 @@ import java.util.List;
 
 
 // mixin to EntityPlayer, do not remap(forgot what remap does)
-@Mixin(value = EntityPlayer.class, remap = false)
+@Mixin(value = EntityPlayer.class, remap = false, priority = 1100)
 
 // extend Entity so we get access to entity methods and fields.
 // abstract so we don't have to implement interfaces, constructor is not used but required.

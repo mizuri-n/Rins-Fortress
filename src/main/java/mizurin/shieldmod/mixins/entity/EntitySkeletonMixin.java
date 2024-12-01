@@ -1,7 +1,6 @@
 package mizurin.shieldmod.mixins.entity;
 
 import net.minecraft.core.WeightedRandomLootObject;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.EntityMonster;
 import net.minecraft.core.entity.monster.EntitySkeleton;

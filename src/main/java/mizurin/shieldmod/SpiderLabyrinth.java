@@ -1,5 +1,6 @@
 package mizurin.shieldmod;
 
+import mizurin.shieldmod.blocks.RinBlocks;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
@@ -44,7 +45,7 @@ public class SpiderLabyrinth extends WorldFeature {
 		this.chestLoot = new WeightedRandomBag<>();
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.ingotIron.getDefaultStack(), 1, 6), 100.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.ingotGold.getDefaultStack(), 1, 4), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.sulphur.getDefaultStack(), 3, 8), 100.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(RinBlocks.saplingApple.getDefaultStack(), 1, 3), 100.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.diamond.getDefaultStack(), 1, 4), 2.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.foodAppleGold.getDefaultStack()), 2.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.dustRedstone.getDefaultStack(), 1, 4), 100.0);
