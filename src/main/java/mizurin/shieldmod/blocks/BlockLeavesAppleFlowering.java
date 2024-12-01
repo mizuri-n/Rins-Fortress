@@ -23,7 +23,7 @@ public class BlockLeavesAppleFlowering extends BlockLeavesCherry implements IBon
 	public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
 		int growthRate = (meta & 240) >> 4;
 		if (dropCause != EnumDropCause.PICK_BLOCK && dropCause != EnumDropCause.SILK_TOUCH) {
-			return growthRate == 0 ? null : new ItemStack[]{new ItemStack(Item.foodApple, world.rand.nextInt(2) + 1)};
+			return growthRate == 0 ? null : new ItemStack[]{new ItemStack(Item.foodApple, 1)};
 		} else {
 			return new ItemStack[]{new ItemStack(this)};
 		}

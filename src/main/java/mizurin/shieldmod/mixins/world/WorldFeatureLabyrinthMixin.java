@@ -1,4 +1,4 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.world;
 
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.block.Block;

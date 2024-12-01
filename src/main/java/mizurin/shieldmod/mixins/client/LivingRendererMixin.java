@@ -2,8 +2,8 @@ package mizurin.shieldmod.mixins.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import mizurin.shieldmod.ColoredArmorTexture;
-import mizurin.shieldmod.interfaces.IColoredArmor;
 import mizurin.shieldmod.ShieldMod;
+import mizurin.shieldmod.interfaces.IColoredArmor;
 import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.client.render.model.ModelBase;
 import net.minecraft.core.entity.EntityLiving;

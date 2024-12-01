@@ -3,7 +3,6 @@ package mizurin.shieldmod.mixins.entity;
 import com.mojang.nbt.CompoundTag;
 import mizurin.shieldmod.entities.EntityIceBall;
 import mizurin.shieldmod.interfaces.IShieldZombie;
-import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.*;

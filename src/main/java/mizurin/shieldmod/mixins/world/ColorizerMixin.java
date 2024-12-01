@@ -1,4 +1,4 @@
-package mizurin.shieldmod.mixins;
+package mizurin.shieldmod.mixins.world;
 
 import mizurin.shieldmod.blocks.RinBlocks;
 import net.minecraft.client.render.colorizer.Colorizer;

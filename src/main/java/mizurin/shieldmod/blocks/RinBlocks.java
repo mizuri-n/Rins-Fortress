@@ -1,6 +1,5 @@
 package mizurin.shieldmod.blocks;
 
-import net.minecraft.client.render.block.color.BlockColor;
 import net.minecraft.client.render.block.color.BlockColorLeavesOak;
 import net.minecraft.client.render.block.model.BlockModelAxisAligned;
 import net.minecraft.client.render.block.model.BlockModelCrossedSquares;
@@ -12,9 +11,6 @@ import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.item.block.ItemBlockLeaves;
 import net.minecraft.core.sound.BlockSound;
 import turniplabs.halplibe.helper.BlockBuilder;
-
-
-import java.util.function.Function;
 
 import static mizurin.shieldmod.ShieldMod.blockID;
 import static mizurin.shieldmod.item.Shields.MOD_ID;

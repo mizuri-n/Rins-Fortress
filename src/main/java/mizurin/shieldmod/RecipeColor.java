@@ -1,6 +1,7 @@
 package mizurin.shieldmod;
 
 import com.mojang.nbt.CompoundTag;
+import goocraft4evr.nonamedyes.item.ModItems;
 import mizurin.shieldmod.interfaces.IColorable;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
@@ -9,7 +10,6 @@ import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.InventoryCrafting;
 import net.minecraft.core.util.helper.Color;
-import goocraft4evr.nonamedyes.item.ModItems;
 import turniplabs.halplibe.helper.ModVersionHelper;
 
 import java.util.ArrayList;

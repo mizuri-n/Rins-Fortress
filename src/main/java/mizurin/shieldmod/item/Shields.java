@@ -1,16 +1,16 @@
 package mizurin.shieldmod.item;
 
+import mizurin.shieldmod.ShieldMod;
 import net.minecraft.client.render.stitcher.TextureRegistry;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemSoup;
+import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.tag.ItemTags;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.ItemBuilder;
-import mizurin.shieldmod.ShieldMod;
-import org.slf4j.Logger;
-import net.minecraft.core.item.material.ArmorMaterial;
 
 import static mizurin.shieldmod.ShieldMod.itemID;
 

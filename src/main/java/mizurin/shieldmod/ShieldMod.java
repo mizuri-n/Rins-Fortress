@@ -2,9 +2,8 @@ package mizurin.shieldmod;
 
 import mizurin.shieldmod.blocks.RinBlocks;
 import mizurin.shieldmod.entities.*;
+import mizurin.shieldmod.item.Shields;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.client.entity.fx.EntityFX;
-import net.minecraft.client.entity.fx.EntityFlameFX;
 import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.core.block.Block;
@@ -12,17 +11,14 @@ import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.enums.ArtType;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.net.entity.NetEntityHandler;
-import net.minecraft.core.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.EntityHelper;
-import turniplabs.halplibe.helper.ParticleHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
-import mizurin.shieldmod.item.Shields;
 
-import java.util.*;
+import java.util.Properties;
 
 public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint{
     public static final String MOD_ID = "shieldmod";
@@ -34,6 +30,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	public static int entityID;
 	public static boolean hurtSound;
 	public static boolean expertMode;
+	public static boolean appleGenerate;
 	public static ArtType paintingSeal;
 	public static ArtType paintingRice;
 	static {
@@ -43,12 +40,14 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 		prop.setProperty("starting_entity_id", "200");
 		prop.setProperty("enable_hit_sounds", "false");
 		prop.setProperty("enable_expert_mode", "false");
+		prop.setProperty("enable_apple_tree_generation", "true");
 		ConfigHandler config = new ConfigHandler(ShieldMod.MOD_ID, prop);
 		blockID = config.getInt("starting_block_id");
 		itemID = config.getInt("starting_item_id");
 		entityID = config.getInt("starting_entity_id");
 		hurtSound = config.getBoolean("enable_hit_sounds");
 		expertMode = config.getBoolean("enable_expert_mode");
+		appleGenerate = config.getBoolean("enable_apple_tree_generation");
 		config.updateConfig();
 	}
 

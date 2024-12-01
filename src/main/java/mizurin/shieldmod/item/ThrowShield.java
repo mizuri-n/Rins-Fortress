@@ -1,7 +1,7 @@
 package mizurin.shieldmod.item;
 
-import mizurin.shieldmod.interfaces.IThrownItem;
 import mizurin.shieldmod.entities.EntityShield;
+import mizurin.shieldmod.interfaces.IThrownItem;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.ItemStack;
