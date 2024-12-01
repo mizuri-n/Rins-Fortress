@@ -51,7 +51,7 @@ public class NetPotionEntry
 
 	@Override
 	public Packet23VehicleSpawn getSpawnPacket(EntityTrackerEntry tracker, EntityPB trackedObject) {
-		System.out.println("POTION");
+		//System.out.println("POTION");
 		EntityLiving entityliving = trackedObject.owner;
 		return new Packet23VehicleSpawn(trackedObject, 0, entityliving == null ? -1 : entityliving.id, trackedObject.xd, trackedObject.yd, trackedObject.zd);
 	}

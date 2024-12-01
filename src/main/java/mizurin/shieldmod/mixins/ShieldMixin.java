@@ -28,8 +28,7 @@ import java.util.List;
 
 
 // mixin to EntityPlayer, do not remap(forgot what remap does)
-@Mixin(value = EntityPlayer.class, remap = false)
-
+@Mixin(value = EntityPlayer.class, remap = false, priority = 1200)
 // extend Entity so we get access to entity methods and fields.
 // abstract so we don't have to implement interfaces, constructor is not used but required.
 public abstract class ShieldMixin extends EntityLiving implements ParryInterface{
