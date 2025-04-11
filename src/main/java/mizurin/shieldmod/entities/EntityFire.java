@@ -1,32 +1,33 @@
 package mizurin.shieldmod.entities;
-import net.minecraft.core.HitResult;
-import net.minecraft.core.entity.EntityLiving;
-import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.entity.projectile.EntityProjectile;
+import net.minecraft.core.entity.Mob;
+import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.entity.projectile.Projectile;
+import net.minecraft.core.item.Items;
+import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.util.helper.DamageType;
-import net.minecraft.core.util.phys.Vec3d;
+import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
 
-public class EntityFire extends EntityProjectile {
+public class EntityFire extends Projectile {
 
 	public EntityFire(World world) {
 		super(world);
-		this.modelItem = Item.ammoFireball;
+		this.modelItem = Items.AMMO_FIREBALL;
 	}
 
-	public EntityFire(World world, EntityLiving entityliving){
-		super(world, entityliving);
-		this.modelItem = Item.ammoFireball;
+	public EntityFire(World world, Mob owner){
+		super(world, owner);
+		this.modelItem = Items.AMMO_FIREBALL;
 	}
 	public EntityFire(World world, double x, double y, double z){
 		super(world, x, y, z);
-		this.modelItem = Item.ammoFireball;
+		this.modelItem = Items.AMMO_FIREBALL;
 	}
 
 	public EntityFire(World world, double x, double y, double z, double xd, double yd, double zd){
 		super(world, x, y, z);
-		this.modelItem = Item.ammoFireball;
+		this.modelItem = Items.AMMO_FIREBALL;
 		this.xd = xd;
 		this.yd = yd;
 		this.zd = zd;
@@ -47,7 +48,7 @@ public class EntityFire extends EntityProjectile {
 			hitResult.entity.zd *= .33;
 
 			hitResult.entity.remainingFireTicks = 150;
-			if (hitResult.entity instanceof EntityPlayer){
+			if (hitResult.entity instanceof Player){
 				remove();
 			}
 		}
@@ -81,9 +82,10 @@ public class EntityFire extends EntityProjectile {
 	}
 	@Override
 	public HitResult getHitResult() {
-		Vec3d currentPos = Vec3d.createVector(this.x, this.y, this.z);
-		Vec3d nextPos = Vec3d.createVector(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
-		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true);
+		Vec3 currentPos = Vec3.getTempVec3(this.x, this.y, this.z);
+		Vec3 nextPos = Vec3.getTempVec3(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
+		assert this.world != null;
+		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true, false);
 		return hit;
 	}
 }

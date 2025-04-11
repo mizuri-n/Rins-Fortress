@@ -2,11 +2,11 @@ package mizurin.shieldmod.mixins.entity;
 
 import mizurin.shieldmod.entities.EntityWeb;
 import mizurin.shieldmod.interfaces.IDazed;
-import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.monster.EntityMonster;
-import net.minecraft.core.entity.monster.EntitySkeleton;
-import net.minecraft.core.entity.monster.EntitySpider;
+import net.minecraft.core.entity.monster.MobMonster;
+import net.minecraft.core.entity.monster.MobSkeleton;
+import net.minecraft.core.entity.monster.MobSpider;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.world.World;
@@ -15,16 +15,15 @@ import org.spongepowered.asm.mixin.Overwrite;
 
 import static mizurin.shieldmod.ShieldMod.expertMode;
 
-@Mixin(value = EntitySpider.class, remap = false)
-public class EntitySpiderMixin extends EntityMonster {
+@Mixin(value = MobSpider.class, remap = false)
+public class EntitySpiderMixin extends MobMonster {
 	public EntitySpiderMixin(World world) {
 		super(world);
 	}
 
 	public void spawnInit() {
-		super.init();
-		if (this.world.difficultySetting != 0 && this.random.nextInt(70 / this.world.difficultySetting) == 0 && expertMode) {
-			EntitySkeleton entityskeleton = new EntitySkeleton(this.world);
+		if (this.world.getDifficulty().canHostileMobsSpawn() && this.random.nextInt(70 / this.world.getDifficulty().id()) == 0 && expertMode) {
+			MobSkeleton entityskeleton = new MobSkeleton(this.world);
 			entityskeleton.moveTo(this.x, this.y, this.z, this.yRot, 0.0F);
 			this.world.entityJoinedWorld(entityskeleton);
 			entityskeleton.startRiding(this);
@@ -32,11 +31,11 @@ public class EntitySpiderMixin extends EntityMonster {
 	}
 
 	@Override
-	protected void dropFewItems() {
+	protected void dropDeathItems() {
 		if(expertMode && random.nextInt(10) == 0){
-			this.spawnAtLocation(Block.cobweb.id, 1);
+			this.dropItem(Blocks.COBWEB.id(), 1);
 		}
-		super.dropFewItems();
+		super.dropDeathItems();
 	}
 
 	/**
@@ -48,7 +47,7 @@ public class EntitySpiderMixin extends EntityMonster {
 		if (expertMode) {
 			float brightness = this.getBrightness(1.0F);
 			if (brightness > 0.5F && this.random.nextInt(100) == 0) {
-				this.entityToAttack = null;
+				this.target = null;
 			} else {
 				if ((distance < 10.0F && distance > 6.0F && this.random.nextInt(10) == 0)) {
 					double dX = entity.x - this.x;
@@ -58,7 +57,7 @@ public class EntitySpiderMixin extends EntityMonster {
 							EntityWeb web = new EntityWeb(this.world, this);
 							web.y += 2;
 							double d2 = entity.y + (double)entity.getHeadHeight() - 0.2 - web.y;
-							float f1 = MathHelper.sqrt_double(dX * dX + dZ * dZ) * 0.2F;
+							float f1 = MathHelper.sqrt(dX * dX + dZ * dZ) * 0.2F;
 							this.world.playSoundAtEntity((Entity)null, this, "random.bow", 0.5F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F));
 							web.setHeading(dX, d2 + (double) f1, dZ, 1F, 1.0F);
 							this.world.entityJoinedWorld(web);
@@ -76,7 +75,7 @@ public class EntitySpiderMixin extends EntityMonster {
 					if (this.onGround) {
 						double d = entity.x - this.x;
 						double d1 = entity.z - this.z;
-						float f2 = MathHelper.sqrt_double(d * d + d1 * d1);
+						float f2 = MathHelper.sqrt(d * d + d1 * d1);
 						this.xd = d / (double) f2 * 0.5 * 0.800000011920929 + this.xd * 0.20000000298023224;
 						this.zd = d1 / (double) f2 * 0.5 * 0.800000011920929 + this.zd * 0.20000000298023224;
 						this.yd = 0.4000000059604645;
@@ -93,13 +92,13 @@ public class EntitySpiderMixin extends EntityMonster {
 		} else {
 			float brightness = this.getBrightness(1.0F);
 			if (brightness > 0.5F && this.random.nextInt(100) == 0) {
-				this.entityToAttack = null;
+				this.target = null;
 			} else {
 				if (distance > 2.0F && distance < 6.0F && this.random.nextInt(10) == 0) {
 					if (this.onGround) {
 						double d = entity.x - this.x;
 						double d1 = entity.z - this.z;
-						float f2 = MathHelper.sqrt_double(d * d + d1 * d1);
+						float f2 = MathHelper.sqrt(d * d + d1 * d1);
 						this.xd = d / (double)f2 * 0.5 * 0.800000011920929 + this.xd * 0.20000000298023224;
 						this.zd = d1 / (double)f2 * 0.5 * 0.800000011920929 + this.zd * 0.20000000298023224;
 						this.yd = 0.4000000059604645;

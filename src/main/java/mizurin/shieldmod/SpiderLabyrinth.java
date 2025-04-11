@@ -5,12 +5,14 @@ import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntityChest;
 import net.minecraft.core.block.entity.TileEntityDispenser;
 import net.minecraft.core.block.entity.TileEntityMobSpawner;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.WorldFeature;
 
@@ -33,36 +35,36 @@ public class SpiderLabyrinth extends WorldFeature {
 	public WeightedRandomBag<String> spawnerMonsters;
 
 	public SpiderLabyrinth() {
-			this.wallBlockA = Block.basalt.id;
-			this.wallBlockB = Block.cobbleBasalt.id;
-			this.brickBlockA = Block.brickBasalt.id;
-			this.brickBlockB = Block.brickBasalt.id;
-			this.slabBlock = Block.slabPlanksOakPainted.id;
+			this.wallBlockA = Blocks.BASALT.id();
+			this.wallBlockB = Blocks.COBBLE_STONE.id();
+			this.brickBlockA = Blocks.BRICK_BASALT.id();
+			this.brickBlockB = Blocks.BRICK_BASALT.id();
+			this.slabBlock = Blocks.SLAB_PLANKS_PAINTED.id();
 	}
 
 	public boolean generate(World world, Random random, int x, int y, int z) {
 
 		this.chestLoot = new WeightedRandomBag<>();
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.ingotIron.getDefaultStack(), 1, 6), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.ingotGold.getDefaultStack(), 1, 4), 100.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_IRON.getDefaultStack(), 1, 6), 100.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_GOLD.getDefaultStack(), 1, 4), 100.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(RinBlocks.saplingApple.getDefaultStack(), 1, 3), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.diamond.getDefaultStack(), 1, 4), 2.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.foodAppleGold.getDefaultStack()), 2.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.dustRedstone.getDefaultStack(), 1, 4), 100.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.DIAMOND.getDefaultStack(), 1, 4), 2.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.FOOD_APPLE_GOLD.getDefaultStack()), 2.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.DUST_REDSTONE.getDefaultStack(), 1, 4), 100.0);
 
 		for(int i = 0; i < 9; ++i) {
-			this.chestLoot.addEntry(new WeightedRandomLootObject(new ItemStack(Item.itemsList[Item.record13.id + i])), 1.0);
+			this.chestLoot.addEntry(new WeightedRandomLootObject(new ItemStack(Item.itemsList[Items.RECORD_13.id + i])), 1.0);
 		}
 
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.foodApple.getDefaultStack()), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Block.wool.getDefaultStack(), 1, 2), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.handcannonLoaded.getDefaultStack()), 0.5);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.handcannonUnloaded.getDefaultStack()), 4.5);
-		this.chestLoot.addEntry((new WeightedRandomLootObject(Item.armorHelmetChainmail.getDefaultStack())).setRandomMetadata(Item.armorHelmetChainmail.getMaxDamage() / 2, Item.armorHelmetChainmail.getMaxDamage()), 20.0);
-		this.chestLoot.addEntry((new WeightedRandomLootObject(Item.armorChestplateChainmail.getDefaultStack())).setRandomMetadata(Item.armorChestplateChainmail.getMaxDamage() / 2, Item.armorChestplateChainmail.getMaxDamage()), 20.0);
-		this.chestLoot.addEntry((new WeightedRandomLootObject(Item.armorLeggingsChainmail.getDefaultStack())).setRandomMetadata(Item.armorLeggingsChainmail.getMaxDamage() / 2, Item.armorLeggingsChainmail.getMaxDamage()), 20.0);
-		this.chestLoot.addEntry((new WeightedRandomLootObject(Item.armorBootsChainmail.getDefaultStack())).setRandomMetadata(Item.armorBootsChainmail.getMaxDamage() / 2, Item.armorBootsChainmail.getMaxDamage()), 20.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Item.ingotSteelCrude.getDefaultStack()), 10.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.FOOD_APPLE_GOLD.getDefaultStack()), 100.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Blocks.WOOL.getDefaultStack(), 1, 2), 100.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.HANDCANNON_LOADED.getDefaultStack()), 0.5);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.HANDCANNON_UNLOADED.getDefaultStack()), 4.5);
+		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_HELMET_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.ARMOR_HELMET_CHAINMAIL.getMaxDamage() / 2, Items.ARMOR_HELMET_CHAINMAIL.getMaxDamage()), 20.0);
+		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_CHESTPLATE_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.ARMOR_CHESTPLATE_CHAINMAIL.getMaxDamage() / 2, Items.ARMOR_CHESTPLATE_CHAINMAIL.getMaxDamage()), 20.0);
+		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_LEGGINGS_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.ARMOR_LEGGINGS_CHAINMAIL.getMaxDamage() / 2, Items.ARMOR_LEGGINGS_CHAINMAIL.getMaxDamage()), 20.0);
+		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_BOOTS_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.INGOT_STEEL_CRUDE.getMaxDamage() / 2, Items.INGOT_STEEL_CRUDE.getMaxDamage()), 20.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_STEEL_CRUDE.getDefaultStack()), 10.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject((ItemStack)null), 892.0);
 		this.dispenserLoot = new WeightedRandomBag<>();
 		this.dispenserLoot.addEntry(new WeightedRandomLootObject(Item.ammoArrow.getDefaultStack(), 5, 7), 300.0);

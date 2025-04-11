@@ -1,15 +1,16 @@
 package mizurin.shieldmod.mixins.entity;
 
-import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.tags.CompoundTag;
 import mizurin.shieldmod.entities.EntityIceBall;
 import mizurin.shieldmod.interfaces.IShieldZombie;
-import net.minecraft.core.block.Block;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.monster.*;
-import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.entity.projectile.EntitySnowball;
-import net.minecraft.core.item.Item;
+import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.entity.projectile.ProjectileSnowball;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
@@ -21,37 +22,36 @@ import java.util.List;
 import static mizurin.shieldmod.ShieldMod.expertMode;
 
 
-@Mixin(value = EntitySnowman.class, remap = false)
-public abstract class EntitySnowManMixin extends EntityMonster implements IShieldZombie {
+@Mixin(value = MobSnowman.class, remap = false)
+public abstract class EntitySnowManMixin extends MobMonster implements IShieldZombie {
 	public EntitySnowManMixin(World world) {
 		super(world);
 	}
+
 	@Override
-	public void dropFewItems() {
+	public void dropDeathItems() {
 		if (this.random.nextInt(1000) == 0) {
-			this.spawnAtLocation(Item.bucketIcecream.id, 1);
+			this.dropItem(Items.BUCKET_ICECREAM.id, 1);
 		}
 		if(expertMode && random.nextInt(10) == 0){
-			this.spawnAtLocation(Block.ice.id, 1);
+			this.dropItem(Blocks.ICE.id(), 1);
 		}
 
-		super.dropFewItems();
+		super.dropDeathItems();
 	}
 
-	@Override
 	protected void init() {
-		super.init();
-		entityData.define(22, (byte)0);
+		entityData.define(22, (byte)0, Byte.class);
 	}
 
 	//Right click to put a carved pumpkin on the snowman's head
 	@Override
-	public boolean interact(EntityPlayer entityplayer) {
+	public boolean interact(Player entityplayer) {
 		if (super.interact(entityplayer)) {
 			return true;
 		} else {
 				ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-				if (itemstack != null && itemstack.getItem() == Block.pumpkinCarvedIdle.asItem() && !shieldmod$isSnowJack()) {
+				if (itemstack != null && itemstack.getItem() == Blocks.PUMPKIN_CARVED_IDLE.asItem() && !shieldmod$isSnowJack()) {
 					setTarget(null);
 					//Snowman stops targeting player.
 					entityData.set(22, (byte) 1);
@@ -69,19 +69,19 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 		if (shieldmod$isSnowJack()) {
 			//creates a bounding box and grabs a list of monsters to attack.
 			//doing just monsters causes the snowman to attack itself, I also want to exclude creepers from being attacked.
-			List<Entity> nearbyMon = this.world.getEntitiesWithinAABB(EntityZombie.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0));
-			nearbyMon.addAll(this.world.getEntitiesWithinAABB(EntitySkeleton.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0)));
-			nearbyMon.addAll(this.world.getEntitiesWithinAABB(EntitySpider.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0)));
-			nearbyMon.addAll(this.world.getEntitiesWithinAABB(EntitySlime.class, AABB.getBoundingBoxFromPool(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).expand(16.0, 4.0, 16.0)));
+			List<Mob> nearbyMon = this.world.getEntitiesWithinAABBExcludingEntity(MobZombie.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0));
+			nearbyMon.addAll(this.world.getEntitiesWithinAABB(MobSkeleton.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
+			nearbyMon.addAll(this.world.getEntitiesWithinAABB(MobSpider.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
+			nearbyMon.addAll(this.world.getEntitiesWithinAABB(MobSlime.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
 			if (!nearbyMon.isEmpty()) {
 				super.setTarget((Entity) nearbyMon.get(this.world.rand.nextInt(nearbyMon.size())));
 			}
 		} else {
 			//else statement for regular snowmen without carved pumpkins.
-			EntityPlayer entityplayer = this.world.getClosestPlayerToEntity(this, 16.0);
+			Player entityplayer = this.world.getClosestPlayerToEntity(this, 16.0);
 			return entityplayer != null && this.canEntityBeSeen(entityplayer) && entityplayer.getGamemode().areMobsHostile() ? entityplayer : null;
 		}
-		return entityToAttack;
+		return findPlayerToAttack();
 	}
 
 	/**
@@ -97,12 +97,12 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 				if (this.attackTime == 0) {
 					if (!this.world.isClientSide) {
 						EntityIceBall snowball = new EntityIceBall(this.world, this);
-						if (this.world.getBlockId((int) this.x, (int) this.y - 1, (int) this.z) == Block.gravel.id) {
+						if (this.world.getBlockId((int) this.x, (int) this.y - 1, (int) this.z) == Blocks.GRAVEL.id()) {
 							snowball.damage = 1;
 						}
 
 						double d2 = entity.y + (double) entity.getHeadHeight() - 0.2 - snowball.y;
-						float f1 = MathHelper.sqrt_double(dX * dX + dZ * dZ) * 0.2F;
+						float f1 = MathHelper.sqrt(dX * dX + dZ * dZ) * 0.2F;
 						this.world.playSoundAtEntity((Entity) null, this, "random.bow", 0.5F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F));
 						this.world.entityJoinedWorld(snowball);
 						snowball.setHeadingPrecise(dX, d2 + (double) f1, dZ, 0.8F);
@@ -122,14 +122,14 @@ public abstract class EntitySnowManMixin extends EntityMonster implements IShiel
 				double dZ = entity.z - this.z;
 				if (this.attackTime == 0) {
 					if (!this.world.isClientSide) {
-						EntitySnowball snowball = new EntitySnowball(this.world, this);
-						if (this.world.getBlockId((int)this.x, (int)this.y - 1, (int)this.z) == Block.gravel.id) {
+						ProjectileSnowball snowball = new ProjectileSnowball(this.world, this);
+						if (this.world.getBlockId((int)this.x, (int)this.y - 1, (int)this.z) == Blocks.GRAVEL.id()) {
 							snowball.damage = 1;
 						}
 
 						++snowball.y;
 						double d2 = entity.y + (double)entity.getHeadHeight() - 0.2 - snowball.y;
-						float f1 = MathHelper.sqrt_double(dX * dX + dZ * dZ) * 0.2F;
+						float f1 = MathHelper.sqrt(dX * dX + dZ * dZ) * 0.2F;
 						this.world.playSoundAtEntity((Entity)null, this, "random.bow", 0.5F, 0.4F / (this.random.nextFloat() * 0.4F + 0.8F));
 						this.world.entityJoinedWorld(snowball);
 						snowball.setHeadingPrecise(dX, d2 + (double)f1, dZ, 0.6F);

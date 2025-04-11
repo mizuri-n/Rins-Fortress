@@ -1,14 +1,14 @@
 package mizurin.shieldmod.mixins.entity;
 
-import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.tags.CompoundTag;
 import mizurin.shieldmod.interfaces.IShieldZombie;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.monster.EntityArmoredZombie;
-import net.minecraft.core.entity.monster.EntityZombie;
-import net.minecraft.core.item.Item;
+import net.minecraft.core.entity.monster.MobZombie;
+import net.minecraft.core.entity.monster.MobZombieArmored;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -18,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-@Mixin(value = EntityArmoredZombie.class, remap = false)
-public class EntityZombieArmoredMixin extends EntityZombie implements IShieldZombie {
+@Mixin(value = MobZombieArmored.class, remap = false)
+public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie {
 	@Shadow
 	@Final
 	private boolean isHoldingSword;
@@ -30,7 +30,7 @@ public class EntityZombieArmoredMixin extends EntityZombie implements IShieldZom
 	}
 	@Inject(method = "init", at = @At("TAIL"))
 	public void init(CallbackInfo ci){
-		entityData.define(21, (byte)0);
+		entityData.define(21, (byte)0, Byte.class);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class EntityZombieArmoredMixin extends EntityZombie implements IShieldZom
 			//chance of spawning
 			setHealthRaw(80);
 			attackStrength = 6;
-			this.mobDrops.add(new WeightedRandomLootObject(Item.oreRawIron.getDefaultStack(), 1, 1));
+			this.mobDrops.add(new WeightedRandomLootObject(Items.ORE_RAW_IRON.getDefaultStack(), 1, 1));
 			//guaranteed drop of 1-2 iron as a reward for killing the shielded zombie.
 			entityData.set(21, (byte)1);
 			//if it spawns, set the data true.
