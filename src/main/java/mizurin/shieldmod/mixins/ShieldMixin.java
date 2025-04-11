@@ -7,11 +7,17 @@ import mizurin.shieldmod.item.ShieldMaterials;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.EntityArrow;
 import net.minecraft.core.entity.projectile.EntityCannonball;
 import net.minecraft.core.entity.projectile.EntityProjectile;
 import net.minecraft.core.entity.projectile.EntitySnowball;
+import net.minecraft.core.entity.projectile.Projectile;
+import net.minecraft.core.entity.projectile.ProjectileArrow;
+import net.minecraft.core.entity.projectile.ProjectileCannonball;
+import net.minecraft.core.entity.projectile.ProjectileSnowball;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.InventoryPlayer;
@@ -31,11 +37,11 @@ import java.util.List;
 
 
 // mixin to EntityPlayer, do not remap(forgot what remap does)
-@Mixin(value = EntityPlayer.class, remap = false, priority = 1100)
+@Mixin(value = Player.class, remap = false, priority = 1200)
 
 // extend Entity so we get access to entity methods and fields.
 // abstract so we don't have to implement interfaces, constructor is not used but required.
-public abstract class ShieldMixin extends EntityLiving implements ParryInterface{
+public abstract class ShieldMixin extends Mob implements ParryInterface{
 	public ShieldMixin(World world) {
 		super(world);
 	}
@@ -52,7 +58,7 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 	@Shadow
 	public abstract ItemStack getHeldItem();
 	@Unique
-	public EntityLiving thisObject = (EntityLiving) (Object) this;
+	public Mob thisObject = (Mob) (Object) this;
 	@Shadow
 	public abstract int getMaxHealth();
 	@Unique
@@ -113,7 +119,7 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 	//programmer note. I want to die after this lmao.
 
 	@Unique
-	public void parryHitbox(World world, EntityPlayer player) {
+	public void parryHitbox(World world, Player player) {
 
 		double bound = 3.75;
 		AABB aabb1 = new AABB(
@@ -129,17 +135,17 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 		List<Entity> projectileList = player.world.getEntitiesWithinAABB(EntityProjectile.class, aabb1);
 		for (Entity entity : projectileList) {
 			world.spawnParticle("largesmoke", entity.x, entity.y, entity.z, 0.0, 0.0, 0.0, 0);
-			if (entity instanceof EntityArrow) {
-				if (((EntityArrow) entity).isGrounded()) {
+			if (entity instanceof ProjectileArrow) {
+				if (((ProjectileArrow) entity).isGrounded()) {
 					return;
 				}
 			}
 
-			if (entity instanceof EntityArrow) {
+			if (entity instanceof ProjectileArrow) {
 
-				if (!((EntityArrow) entity).isGrounded()) {
+				if (!((ProjectileArrow) entity).isGrounded()) {
 					entity.remove();
-					EntityArrow newArrow = new EntityArrow(world, player, false, ((EntityArrow) entity).getArrowType());
+					ProjectileArrow newArrow = new ProjectileArrow(world, player, false, ((ProjectileArrow) entity).getArrowType());
 					newArrow.damage += 3;
 					if (!world.isClientSide) {
 						//For any devs looking at my code. This if statement (!world.isClientSide) is used for server compatibility, please use it when spawning items.
@@ -151,28 +157,28 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 			}
 
 
-			if (entity instanceof EntityCannonball) {
+			if (entity instanceof ProjectileCannonball) {
 
 				double oldCBX = entity.x;
 				double oldCBY = entity.y;
 				double oldCBZ = entity.z;
 
 				entity.remove();
-				EntityCannonball newCB = new EntityCannonball(world, player);
+				ProjectileCannonball newCB = new ProjectileCannonball(world, player);
 				if (!world.isClientSide) {
 					world.entityJoinedWorld(newCB);
 					newCB.setPos(oldCBX, oldCBY, oldCBZ);
-					double pushX = player.getLookAngle().xCoord;
-					double pushY = player.getLookAngle().yCoord;
-					double pushZ = player.getLookAngle().zCoord;
+					double pushX = player.getLookAngle().x;
+					double pushY = player.getLookAngle().y;
+					double pushZ = player.getLookAngle().z;
 					newCB.push(pushX * 1.2, pushY * 1.2, pushZ * 1.2);
 					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
 				}
 			}
-			if (entity instanceof EntitySnowball) {
+			if (entity instanceof ProjectileSnowball) {
 
 				entity.remove();
-				EntitySnowball newSB = new EntitySnowball(world, player);
+				ProjectileSnowball newSB = new ProjectileSnowball(world, player);
 				newSB.damage +=1;
 				if (!world.isClientSide) {
 					world.entityJoinedWorld(newSB);
@@ -383,8 +389,8 @@ public abstract class ShieldMixin extends EntityLiving implements ParryInterface
 			parryDelay--;
 		}
 
-		if(this.parryTicks == 18 && thisObject instanceof EntityPlayer && parryDelay == 0){
-			parryHitbox(thisObject.world, (EntityPlayer)thisObject);
+		if(this.parryTicks == 18 && thisObject instanceof Player && parryDelay == 0){
+			parryHitbox(thisObject.world, (Player)thisObject);
 			parryDelay = 30;
 		}
 

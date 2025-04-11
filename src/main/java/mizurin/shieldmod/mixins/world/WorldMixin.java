@@ -1,6 +1,6 @@
 package mizurin.shieldmod.mixins.world;
 import mizurin.shieldmod.item.Shields;
-import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,11 +19,11 @@ public class WorldMixin {
 	 * @reason Leather armor reduce aggro range
 	 */
 	@Overwrite
-	public EntityPlayer getClosestPlayer(double x, double y, double z, double radius) {
+	public Player getClosestPlayer(double x, double y, double z, double radius) {
 		double closestDistance = Double.POSITIVE_INFINITY;
-		EntityPlayer entityplayer = null;
+		Player entityplayer = null;
 		if (radius < 0.0) {
-			for (EntityPlayer entityPlayer1 : thisObject.players) {
+			for (Player entityPlayer1 : thisObject.players) {
 				double currentDistance = entityPlayer1.distanceToSqr(x, y, z);
 				if (!(currentDistance < closestDistance)) continue;
 				closestDistance = currentDistance;
@@ -31,7 +31,7 @@ public class WorldMixin {
 			}
 		} else {
 			double rSquared = radius * radius;
-			for (EntityPlayer entityPlayer1 : thisObject.players) {
+			for (Player entityPlayer1 : thisObject.players) {
 				double armorTotal = 16;
 				double currentDistance = entityPlayer1.distanceToSqr(x, y, z);
 				if (!(currentDistance < rSquared) || !(currentDistance < closestDistance)) continue;

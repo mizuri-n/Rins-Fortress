@@ -3,8 +3,8 @@ package mizurin.shieldmod.item;
 import mizurin.shieldmod.interfaces.IDazed;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityLiving;
-import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.entity.Mob;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolSword;
@@ -15,8 +15,8 @@ public class ShieldItem extends ItemToolSword {
 	public int weaponDamage;
 
 
-	public ShieldItem(String name, int id, ToolMaterial toolMaterial){
-		super(name, id, toolMaterial);
+	public ShieldItem(String name, String namespaceID, int id, ToolMaterial toolMaterial){
+		super(name, namespaceID, id, toolMaterial);
 		maxStackSize = 1;
 		setMaxDamage(toolMaterial.getDurability());
 		this.tool = toolMaterial;
@@ -27,8 +27,8 @@ public class ShieldItem extends ItemToolSword {
 
 	//Applies a knockback effect for all shields, bonus knockback to Leather Shields, and sets hitEntities on fire when hit by a Steel Shield.
 	@Override
-	public boolean hitEntity(ItemStack itemstack, EntityLiving target, EntityLiving player) {
-		if ((target.hurtTime == 10 || target instanceof EntityPlayer)) {
+	public boolean hitEntity(ItemStack itemstack, Mob target, Mob player) {
+		if ((target.hurtTime == 10 || target instanceof Player)) {
 			if (itemstack.getItem() == Shields.leatherShield) {
 				target.knockBack(player, 1, (player.x - target.x), (player.z - target.z));
 				target.push((target.x - player.x) / 11, 0, (target.z - player.z) / 11);
@@ -51,7 +51,7 @@ public class ShieldItem extends ItemToolSword {
 
 	//Activates ticks that determine if the player is blocking.
 	@Override
-	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+	public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
 		//Set to true then add the ticks to the data.
 		((ParryInterface)entityplayer).shieldmod$setIsBlock(true);
 		((ParryInterface)entityplayer).shieldmod$Block(5);
@@ -59,7 +59,7 @@ public class ShieldItem extends ItemToolSword {
 		return itemstack;
 	}
 	//this function is used for shift right click abilities.
-	public void onBlock(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+	public void onBlock(ItemStack itemstack, World world, Player entityplayer) {
 		return;
 	}
 

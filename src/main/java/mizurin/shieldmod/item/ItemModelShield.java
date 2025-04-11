@@ -1,11 +1,11 @@
 package mizurin.shieldmod.item;
 
-import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.tags.CompoundTag;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import net.minecraft.client.render.ItemRenderer;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.monster.EntityMonster;
-import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.entity.monster.MobMonster;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import org.lwjgl.opengl.GL11;
@@ -31,7 +31,7 @@ public class ItemModelShield extends ItemModelColored {
 	@Override
 	public void heldTransformThirdPerson(ItemRenderer renderer, Entity entity, ItemStack itemstack) {
 		//The "active" data renders the shield when it is blocking.
-		if (entity instanceof EntityPlayer) {
+		if (entity instanceof Player) {
 			if (((ParryInterface) entity).shieldmod$getIsBlock()) {
 				final float scale2 = 0.625F;
 				GL11.glTranslatef(0.25F, -0.1875F, -0.1875F);
@@ -56,7 +56,7 @@ public class ItemModelShield extends ItemModelColored {
 				GL11.glTranslatef(0.31F, -0.20075F, -0.3F);
 			}
 		}
-		if(entity instanceof EntityMonster){
+		if(entity instanceof MobMonster){
 			final float scale = 0.625F;
 			GL11.glTranslatef(-0.25F, -0.1875F, -0.1F);
 			GL11.glScalef(scale, scale, scale);

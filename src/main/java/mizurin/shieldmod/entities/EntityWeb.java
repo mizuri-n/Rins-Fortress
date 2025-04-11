@@ -1,36 +1,35 @@
 package mizurin.shieldmod.entities;
 
 import mizurin.shieldmod.interfaces.IDazed;
-import net.minecraft.core.HitResult;
-import net.minecraft.core.entity.EntityLiving;
-import net.minecraft.core.entity.projectile.EntityProjectile;
-import net.minecraft.core.item.Item;
+import net.minecraft.core.entity.Mob;
+import net.minecraft.core.entity.projectile.Projectile;
+import net.minecraft.core.item.Items;
+import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.World;
 
-public class EntityWeb extends EntityProjectile {
-	public EntityWeb(World world, EntityLiving entityliving) {
-		super(world, entityliving);
-		this.modelItem = Item.ammoSnowball;
+public class EntityWeb extends Projectile {
+	public EntityWeb(World world, Mob owner) {
+		super(world, owner);
+		this.modelItem = Items.AMMO_SNOWBALL;
 	}
 
 	public EntityWeb(World world, double d, double d1, double d2) {
 		super(world, d, d1, d2);
-		this.modelItem = Item.ammoSnowball;
+		this.modelItem = Items.AMMO_SNOWBALL;
 	}
 
 	public EntityWeb(World world) {
 		super(world);
-		this.modelItem = Item.ammoSnowball;
+		this.modelItem = Items.AMMO_SNOWBALL;
 	}
 
 	public void init() {
-		super.init();
 		this.defaultProjectileSpeed = 0.95F;
 
 	}
 	@Override
 	public void onHit(HitResult hitResult) {
-		if (hitResult.entity instanceof EntityLiving) {
+		if (hitResult.entity instanceof Mob) {
 			((IDazed) hitResult.entity).shieldmod$freezeHurt(60);
 
 			//Applies my custom status effect from the IFreeze interface.

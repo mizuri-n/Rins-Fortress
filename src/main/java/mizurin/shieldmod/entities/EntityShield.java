@@ -2,24 +2,23 @@ package mizurin.shieldmod.entities;
 
 import mizurin.shieldmod.interfaces.IThrownItem;
 import mizurin.shieldmod.item.Shields;
-import net.minecraft.core.HitResult;
+import net.minecraft.core.item.Items;
+import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityLiving;
-import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.entity.projectile.EntityPebble;
-import net.minecraft.core.item.Item;
+import net.minecraft.core.entity.Mob;
+import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.entity.projectile.ProjectilePebble;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.util.helper.Axis;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.phys.Vec3d;
+import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
 
 import java.util.List;
 
-public class EntityShield extends EntityPebble {
+public class EntityShield extends ProjectilePebble {
 	private int bounce = 4; //Amount of bounces allowed. I set a limit as a failsafe as the entity can get stuck inside blocks and or fences.
 	public EntityShield(World world) {
 		super(world);
@@ -27,7 +26,7 @@ public class EntityShield extends EntityPebble {
 		this.setSize(0.9F, 0.9F);
 	}
 
-	public EntityShield(World world, EntityLiving entityliving) {
+	public EntityShield(World world, Mob entityliving) {
 		super(world, entityliving);
 		this.modelItem = Shields.ammotearShield;
 	}
@@ -38,13 +37,12 @@ public class EntityShield extends EntityPebble {
 	}
 
 	public void init() {
-		super.init();
 		this.damage = 0;
 		this.defaultGravity = 0.03F;
 		this.defaultProjectileSpeed = 0.99F;
 	}
 	//storeOrDropItem is a failsafe if the player's inventory is full. if not directly put the shield into the inventory.
-	public void storeOrDropItem(EntityPlayer player, ItemStack stack){
+	public void storeOrDropItem(Player player, ItemStack stack){
 		if(stack == null || stack.stackSize <= 0){
 			return;
 		}
@@ -59,15 +57,15 @@ public class EntityShield extends EntityPebble {
 			++this.ticksInAir; //Used for damage calc
 		float velocity;
 		if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
-			velocity = MathHelper.sqrt_double(this.xd * this.xd + this.zd * this.zd);
+			velocity = MathHelper.sqrt(this.xd * this.xd + this.zd * this.zd);
 			this.yRotO = this.yRot = (float) (Math.atan2(this.xd, this.zd) * 180.0 / Math.PI);
 			this.xRotO = this.xRot = (float) (Math.atan2(this.yd, (double) velocity) * 180.0 / Math.PI);
 		}
 
-		velocity = MathHelper.sqrt_double(this.xd * this.xd + this.yd * this.yd + this.zd * this.zd);
-		Vec3d currentPos = Vec3d.createVector(this.x, this.y, this.z);
-		Vec3d nextPos = Vec3d.createVector(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
-		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true);
+		velocity = MathHelper.sqrt(this.xd * this.xd + this.yd * this.yd + this.zd * this.zd);
+		Vec3 currentPos = Vec3.getTempVec3(this.x, this.y, this.z);
+		Vec3 nextPos = Vec3.getTempVec3(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
+		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true, false);
 		float otherAxisScale;
 		float deceleration;
 		//This section is used to invert the velocity of the entity after it hits a tile. inverting it basically turns it around.
@@ -105,13 +103,13 @@ public class EntityShield extends EntityPebble {
 		}
 
 
-		List<Entity> collidingEntities = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.getOffsetBoundingBox(this.xd, this.yd, this.zd).expand(0.5, 0.5, 0.5));
+		List<Entity> collidingEntities = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.cloneMove(this.xd, this.yd, this.zd).expand(0.5, 0.5, 0.5));
 		if ((collidingEntities == null || collidingEntities.size() <= 0) && this.bounce > 0 || collidingEntities != null && collidingEntities.size() == 1 && collidingEntities.get(0) == this.owner && this.tickCount < 4) {
 			//This grabs a list of entities inside the bounding box
 			this.x += this.xd;
 			this.y += this.yd;
 			this.z += this.zd;
-			otherAxisScale = MathHelper.sqrt_double(this.xd * this.xd + this.zd * this.zd);
+			otherAxisScale = MathHelper.sqrt(this.xd * this.xd + this.zd * this.zd);
 			this.yRot = (float) (Math.atan2(this.xd, this.zd) * 180.0 / Math.PI);
 
 			for (this.xRot = (float) (Math.atan2(this.yd, (double) otherAxisScale) * 180.0 / Math.PI); this.xRot - this.xRotO < -180.0F; this.xRotO -= 360.0F) {
@@ -151,14 +149,14 @@ public class EntityShield extends EntityPebble {
 				this.remove();
 				//failsafe to prevent the entity from not removing itself
 				if (this.owner != null) {
-					storeOrDropItem((EntityPlayer) owner, ((IThrownItem) owner).getThrownItem());
+					storeOrDropItem((Player) owner, ((IThrownItem) owner).getThrownItem());
 					//returns the item to the player who threw it.
 				}
 			}
 		} else {
 			if (this.modelItem != null) {
 				for (int j = 0; j < 8; ++j) {
-					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Item.ammoSnowball.id);
+					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_SNOWBALL.id);
 					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, this.modelItem.id);
 					//spawns particles on impact.
 				}
@@ -169,13 +167,13 @@ public class EntityShield extends EntityPebble {
 			}
 			if(collidingEntities != null && collidingEntities.size() == 1) {
 				if (collidingEntities.get(0) != null) {
-					collidingEntities.get(0).hurt((EntityPlayer)owner, this.damage, DamageType.COMBAT);
+					collidingEntities.get(0).hurt((Player)owner, this.damage, DamageType.COMBAT);
 				}
 				//this is used to hurt the entities hit directly with the entity through the bounding box.
 			}
 			this.remove();
 			if (this.owner != null) {
-				storeOrDropItem((EntityPlayer) owner, ((IThrownItem) owner).getThrownItem());
+				storeOrDropItem((Player) owner, ((IThrownItem) owner).getThrownItem());
 				//returns item to the player who threw it.
 			}
 		}
@@ -195,20 +193,20 @@ public class EntityShield extends EntityPebble {
 				}
 			if (this.modelItem != null) {
 				for(int j = 0; j < 8; ++j) {
-					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Item.ammoSnowball.id);
+					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_SNOWBALL.id);
 					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, this.modelItem.id);
 				}
 			}
 		this.remove();
 			if (this.owner != null) {
-				storeOrDropItem((EntityPlayer) owner, ((IThrownItem) owner).getThrownItem());
+				storeOrDropItem((Player) owner, ((IThrownItem) owner).getThrownItem());
 			}
 		}
 	@Override
 	public HitResult getHitResult() {
-		Vec3d currentPos = Vec3d.createVector(this.x, this.y, this.z);
-		Vec3d nextPos = Vec3d.createVector(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
-		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true);
+		Vec3 currentPos = Vec3.getTempVec3(this.x, this.y, this.z);
+		Vec3 nextPos = Vec3.getTempVec3(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
+		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true, false);
 		return hit;
 	}
 }

@@ -1,9 +1,8 @@
 package mizurin.shieldmod.mixins;
-import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.tags.CompoundTag;
 import mizurin.shieldmod.interfaces.IThrownItem;
-import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -13,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //Mixin for the throwable shield.
-@Mixin(value = EntityPlayer.class, remap = false)
+@Mixin(value = Player.class, remap = false)
 public abstract class FieldMixin implements IThrownItem {
 	@Shadow
 	public abstract ChunkCoordinates getLastDeathCoordinate();
@@ -25,7 +24,7 @@ public abstract class FieldMixin implements IThrownItem {
 	public ItemStack getThrownItem() {
 		return thrownItem;
 	}
-	public void storeOrDropItem(EntityPlayer player, ItemStack stack){
+	public void storeOrDropItem(Player player, ItemStack stack){
 		if(stack == null || stack.stackSize <= 0){
 			return;
 		}
@@ -54,7 +53,7 @@ public abstract class FieldMixin implements IThrownItem {
 	@Inject(method = "readAdditionalSaveData(Lcom/mojang/nbt/CompoundTag;)V", at = @At("TAIL"))
 	private  void loadData(CompoundTag tag, CallbackInfo ci){
 		this.thrownItem = ItemStack.readItemStackFromNbt(tag.getCompound("item"));
-		storeOrDropItem((EntityPlayer)(Object)this, this.thrownItem);
+		storeOrDropItem((Player)(Object)this, this.thrownItem);
 		//gives the player their thrown item back. good failsafe so they do not lose the item.
 	}
 }

@@ -3,7 +3,7 @@ package mizurin.shieldmod.mixins;
 import mizurin.shieldmod.interfaces.IDazed;
 import net.minecraft.core.entity.ConsumedFood;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.Mob;
 import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Map;
 
 
-@Mixin(value = EntityLiving.class, remap = false)
+@Mixin(value = Mob.class, remap = false)
 public abstract class DazedMixin extends Entity implements IDazed {
 
 
@@ -54,8 +54,8 @@ public abstract class DazedMixin extends Entity implements IDazed {
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	public void defineSyncStatus(CallbackInfo ci){
-		entityData.define(DATA_DAZE, 0);
-		entityData.define(DATA_FREEZE, 0);
+		entityData.define(DATA_DAZE, 0, int.class);
+		entityData.define(DATA_FREEZE, 0, int.class);
 	}
 
 
