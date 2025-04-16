@@ -6,21 +6,14 @@ import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.Mob;
-import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.entity.player.Player;
-import net.minecraft.core.entity.projectile.EntityArrow;
-import net.minecraft.core.entity.projectile.EntityCannonball;
-import net.minecraft.core.entity.projectile.EntityProjectile;
-import net.minecraft.core.entity.projectile.EntitySnowball;
 import net.minecraft.core.entity.projectile.Projectile;
 import net.minecraft.core.entity.projectile.ProjectileArrow;
 import net.minecraft.core.entity.projectile.ProjectileCannonball;
 import net.minecraft.core.entity.projectile.ProjectileSnowball;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
-import net.minecraft.core.player.inventory.InventoryPlayer;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
@@ -132,7 +125,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 		);
 
 
-		List<Entity> projectileList = player.world.getEntitiesWithinAABB(EntityProjectile.class, aabb1);
+		List<Entity> projectileList = player.world.getEntitiesWithinAABB(Projectile.class, aabb1);
 		for (Entity entity : projectileList) {
 			world.spawnParticle("largesmoke", entity.x, entity.y, entity.z, 0.0, 0.0, 0.0, 0);
 			if (entity instanceof ProjectileArrow) {

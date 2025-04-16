@@ -3,6 +3,7 @@ package mizurin.shieldmod.entities;
 import mizurin.shieldmod.interfaces.IThrownItem;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.item.Items;
+import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
@@ -46,8 +47,9 @@ public class EntityShield extends ProjectilePebble {
 		if(stack == null || stack.stackSize <= 0){
 			return;
 		}
-		InventoryPlayer inventory = player.inventory;
-		inventory.insertItem(stack, false);
+
+		ContainerInventory containerInventory = player.inventory;
+		containerInventory.insertItem(stack, false);
 		if (stack.stackSize > 0){
 			player.dropPlayerItem(stack);
 		}

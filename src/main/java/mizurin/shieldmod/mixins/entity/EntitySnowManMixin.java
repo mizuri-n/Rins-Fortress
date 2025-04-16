@@ -6,6 +6,7 @@ import mizurin.shieldmod.interfaces.IShieldZombie;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
+import net.minecraft.core.entity.animal.MobSheep;
 import net.minecraft.core.entity.monster.*;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.ProjectileSnowball;
@@ -69,10 +70,12 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 		if (shieldmod$isSnowJack()) {
 			//creates a bounding box and grabs a list of monsters to attack.
 			//doing just monsters causes the snowman to attack itself, I also want to exclude creepers from being attacked.
-			List<Mob> nearbyMon = this.world.getEntitiesWithinAABBExcludingEntity(MobZombie.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0));
-			nearbyMon.addAll(this.world.getEntitiesWithinAABB(MobSkeleton.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
-			nearbyMon.addAll(this.world.getEntitiesWithinAABB(MobSpider.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
-			nearbyMon.addAll(this.world.getEntitiesWithinAABB(MobSlime.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
+
+
+
+			List<MobMonster> nearbyMon = this.world.getEntitiesWithinAABB(MobMonster.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0));
+			nearbyMon.removeAll(this.world.getEntitiesWithinAABB(MobSnowman.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
+			nearbyMon.removeAll(this.world.getEntitiesWithinAABB(MobCreeper.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
 			if (!nearbyMon.isEmpty()) {
 				super.setTarget((Entity) nearbyMon.get(this.world.rand.nextInt(nearbyMon.size())));
 			}
