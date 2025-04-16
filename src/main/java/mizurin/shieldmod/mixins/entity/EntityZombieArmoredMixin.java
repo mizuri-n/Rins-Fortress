@@ -13,14 +13,12 @@ import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = MobZombieArmored.class, remap = false)
 public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie {
-	@Shadow
 	@Final
 	private boolean isHoldingSword;
 
@@ -28,7 +26,7 @@ public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie
 	public EntityZombieArmoredMixin(World world) {
 		super(world);
 	}
-	@Inject(method = "init", at = @At("TAIL"))
+	@Inject(method = "spawnInit", at = @At("TAIL"))
 	public void init(CallbackInfo ci){
 		entityData.define(21, (byte)0, Byte.class);
 	}
