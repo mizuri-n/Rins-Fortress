@@ -31,7 +31,7 @@ public class BipedRendererMixin<T extends Mob> extends EntityRenderer<T> {
 		super();
 	}
 
-	@Inject(method = "Lnet/minecraft/client/render/entity/MobRendererBiped;renderAdditional(Lnet/minecraft/core/entity/Mob;F)V", at = @At("HEAD"))
+	@Inject(method = "renderAdditional(Lnet/minecraft/core/entity/Mob;F)V", at = @At("HEAD"))
 	public void inject(T entity, float f, CallbackInfo ci){
 		if (entity instanceof IShieldZombie && ((IShieldZombie)entity).shieldmod$isSnowJack()) {
 
