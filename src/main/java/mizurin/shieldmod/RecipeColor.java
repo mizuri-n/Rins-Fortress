@@ -9,9 +9,9 @@ import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
-import net.minecraft.core.player.inventory.InventoryCrafting;
+import net.minecraft.core.player.inventory.container.ContainerCrafting;
 import net.minecraft.core.util.helper.Color;
-import turniplabs.halplibe.helper.ModVersionHelper;
+import net.minecraft.core.util.helper.DyeColor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ import java.util.Map;
 //Special thanks to UselessBullets for being extremely awesome https://github.com/UselessBullets/Lunacy/tree/7.1
 //Mixin for custom recipe colors.
 public class RecipeColor extends RecipeEntryCraftingDynamic {
-	public static boolean nonamedyesOn = ModVersionHelper.isModPresent("nonamedyes");
+	public static boolean nonamedyesOn = /*ModVersionHelper.isModPresent("nonamedyes")*/false; // TODO replace with fabric loader mod check since this helper is dead :(
 
 	public static HashMap<Item, Map<Integer, Color>> dyeMap = new HashMap<>();
 	private static final Map<Integer, Color> vanillaDye;
@@ -29,34 +29,32 @@ public class RecipeColor extends RecipeEntryCraftingDynamic {
 	static {
 		vanillaDye = new HashMap<>();
 		nonameDye = new HashMap<>();
-		ItemDye.field_31002_bk[7] = 13027014;
-		ItemDye.field_31002_bk[15] = 16777215;
 		for (int color = 0; color < 16; color++) {
-			vanillaDye.put(color, new Color().setARGB(ItemDye.field_31002_bk[color]));
+			vanillaDye.put(color, DyeColor.colorFromItemMeta(color).color);
 		}
 		if (nonamedyesOn){
 			//checks if nonamedyes is enabled, then adds them to the hasmap.
-			nonameDye.put(0, new Color().setARGB(11540279)); //crimson
-			nonameDye.put(1, new Color().setARGB(6627104)); //maroon
-			nonameDye.put(2, new Color().setARGB(10005149)); //ash.gray
-			nonameDye.put(3, new Color().setARGB(7236357)); // olive
-			nonameDye.put(4, new Color().setARGB(13007915)); //ochre
-			nonameDye.put(5, new Color().setARGB(14063170)); //buff L
-			nonameDye.put(6, new Color().setARGB(3591599)); //verdigris
-			nonameDye.put(7, new Color().setARGB(16772730)); //light.yellow L
-			nonameDye.put(8, new Color().setARGB(3878540)); //indigo
-			nonameDye.put(9, new Color().setARGB(13887232)); //xanthic
-			nonameDye.put(10, new Color().setARGB(9191711)); //cinnamon
-			nonameDye.put(11, new Color().setARGB(2171241)); //navy.blue
-			nonameDye.put(12, new Color().setARGB(6631797)); //royal.purple
-			nonameDye.put(13, new Color().setARGB(2788193)); //viridian
+			nonameDye.put(0, new Color().setARGB(0xb01737)); //crimson
+			nonameDye.put(1, new Color().setARGB(0x651f20)); //maroon
+			nonameDye.put(2, new Color().setARGB(0x98aa9d)); //ash.gray
+			nonameDye.put(3, new Color().setARGB(0x6e6b05)); // olive
+			nonameDye.put(4, new Color().setARGB(0xc67c2b)); //ochre
+			nonameDye.put(5, new Color().setARGB(0xd69642)); //buff L
+			nonameDye.put(6, new Color().setARGB(0x36cdaf)); //verdigris
+			nonameDye.put(7, new Color().setARGB(0xffee7a)); //light.yellow L
+			nonameDye.put(8, new Color().setARGB(0x3b2e8c)); //indigo
+			nonameDye.put(9, new Color().setARGB(0xd3e700)); //xanthic
+			nonameDye.put(10, new Color().setARGB(0x8c411f)); //cinnamon
+			nonameDye.put(11, new Color().setARGB(0x212169)); //navy.blue
+			nonameDye.put(12, new Color().setARGB(0x653175)); //royal.purple
+			nonameDye.put(13, new Color().setARGB(0x2a8b61)); //viridian
 
 			dyeMap.put(ModItems.dye, nonameDye);
 		}
 		dyeMap.put(Items.DYE, vanillaDye);
 	}
 	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventorycrafting) {
+	public ItemStack getCraftingResult(ContainerCrafting inventorycrafting) {
 		ItemStack shieldStack = null;
 		List<ItemStack> dyeStacks = new ArrayList<>();
 		for (int x = 0; x < 3; ++x) {
@@ -121,7 +119,7 @@ public class RecipeColor extends RecipeEntryCraftingDynamic {
 	}
 
 	@Override
-	public boolean matches(InventoryCrafting crafting) {
+	public boolean matches(ContainerCrafting crafting) {
 		ItemStack shieldStack = null;
 		ItemStack dyeStack = null;
 		for (int x = 0; x < 3; ++x) {
@@ -151,7 +149,7 @@ public class RecipeColor extends RecipeEntryCraftingDynamic {
 	}
 
 	@Override
-	public ItemStack[] onCraftResult(InventoryCrafting crafting) {
+	public ItemStack[] onCraftResult(ContainerCrafting crafting) {
 		ItemStack[] returnStack = new ItemStack[9];
 		for (int x = 0; x < 3; ++x) {
 			for (int y = 0; y < 3; ++y) {

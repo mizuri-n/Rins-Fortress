@@ -4,7 +4,9 @@ import com.llamalad7.mixinextras.sugar.Local;
 import mizurin.shieldmod.ColoredArmorTexture;
 import mizurin.shieldmod.ShieldMod;
 import mizurin.shieldmod.interfaces.IColoredArmor;
+import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.model.ModelBase;
+import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
@@ -18,11 +20,13 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //Mixin for colored armor renderer
-@Mixin(value = LivingRenderer.class, remap = false)
+@Mixin(value = MobRenderer.class, remap = false)
 public abstract class LivingRendererMixin<T extends Mob> {
-	@Shadow protected abstract boolean shouldRenderPass(T entity, int renderPass, float partialTick);
+	@Shadow
+	protected abstract boolean prepareArmor(T entity, int layer, float partialTick);
 
-	@Shadow protected ModelBase renderPassModel;
+	@Shadow
+	protected ModelBase armorModel;
 	@Unique
 	float limbSwing;
 	@Unique
@@ -37,17 +41,17 @@ public abstract class LivingRendererMixin<T extends Mob> {
 	float headPitch;
 	@Unique
 	float scale;
-	@Inject(method = "render(Lnet/minecraft/core/entity/EntityLiving;DDDFF)V",
-		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/LivingRenderer;shouldRenderPass(Lnet/minecraft/core/entity/EntityLiving;IF)Z"))
+	@Inject(method = "render(Lnet/minecraft/client/render/tessellator/Tessellator;Lnet/minecraft/core/entity/Mob;DDDFF)V",
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/MobRenderer;prepareArmor(Lnet/minecraft/core/entity/Mob;IF)Z"))
 	private void captureLocals(
-		T entity, double x, double y, double z, float yaw, float partialTick, CallbackInfo ci,
-							   @Local(name = "limbSwing") float limbSwing,
-							   @Local(name = "limbYaw") float limbYaw,
-							   @Local(name = "ticksExisted") float ticksExisted,
-							   @Local(name = "headYaw") float headYaw,
-							   @Local(name = "headYawOffset") float headYawOffset,
-							   @Local(name = "headPitch") float headPitch,
-							   @Local(name = "scale") float scale
+		Tessellator tessellator, T entity, double x, double y, double z, float yaw, float partialTick, CallbackInfo ci,
+		@Local(name = "walkProgress") float limbSwing,
+		@Local(name = "walkSpeed") float limbYaw,
+		@Local(name = "limbSway") float ticksExisted,
+		@Local(name = "headYaw") float headYaw,
+		@Local(name = "bodyYaw") float headYawOffset,
+		@Local(name = "headPitch") float headPitch,
+		@Local(name = "scale") float scale
 	){
 		this.limbSwing = limbSwing;
 		this.limbYaw = limbYaw;
@@ -57,8 +61,8 @@ public abstract class LivingRendererMixin<T extends Mob> {
 		this.headPitch = headPitch;
 		this.scale = scale;
 	}
-	@Redirect(method = "render(Lnet/minecraft/core/entity/EntityLiving;DDDFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/LivingRenderer;shouldRenderPass(Lnet/minecraft/core/entity/EntityLiving;IF)Z"))
-	private boolean hijackRenderPass(LivingRenderer instance, T entity, int renderPass, float partialTick){
+	@Redirect(method = "render(Lnet/minecraft/client/render/tessellator/Tessellator;Lnet/minecraft/core/entity/Mob;DDDFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/MobRenderer;prepareArmor(Lnet/minecraft/core/entity/Mob;IF)Z"))
+	private boolean hijackRenderPass(MobRenderer instance, T entity, int renderPass, float partialTick){
 		ShieldMod.playerArmorRenderOffset = 0;
 		if (entity instanceof Player){
 			ItemStack itemstack = ((Player) entity).inventory.armorItemInSlot(3 - renderPass);
@@ -68,8 +72,8 @@ public abstract class LivingRendererMixin<T extends Mob> {
 				for (ColoredArmorTexture ignored : cTex) {
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glBlendFunc(770, 771);
-					shouldRenderPass(entity, renderPass, partialTick);
-					this.renderPassModel.render(limbSwing, limbYaw, ticksExisted, headYaw - headYawOffset, headPitch, scale);
+					prepareArmor(entity, renderPass, partialTick);
+					this.armorModel.render(limbSwing, limbYaw, ticksExisted, headYaw - headYawOffset, headPitch, scale);
 					GL11.glDisable(3042);
 					GL11.glEnable(3008);
 					ShieldMod.playerArmorRenderOffset++;
@@ -78,6 +82,6 @@ public abstract class LivingRendererMixin<T extends Mob> {
 				return false;
 			}
 		}
-		return this.shouldRenderPass(entity, renderPass, partialTick);
+		return this.prepareArmor(entity, renderPass, partialTick);
 	}
 }
