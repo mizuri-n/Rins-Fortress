@@ -1,7 +1,7 @@
 package mizurin.shieldmod.mixins.client;
 
-import net.minecraft.client.render.stitcher.AtlasStitcher;
-import net.minecraft.client.render.stitcher.TextureRegistry;
+import net.minecraft.client.render.texture.stitcher.AtlasStitcher;
+import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 
-import static net.minecraft.client.render.stitcher.TextureRegistry.artAtlas;
+import static net.minecraft.client.render.texture.stitcher.TextureRegistry.artAtlas;
 
 //Mixin for reloading painting textures.
 @Mixin(TextureRegistry.class)
