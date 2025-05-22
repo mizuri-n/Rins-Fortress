@@ -4,7 +4,6 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.Projectile;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.util.phys.HitResult;
-import net.minecraft.core.item.Item;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;

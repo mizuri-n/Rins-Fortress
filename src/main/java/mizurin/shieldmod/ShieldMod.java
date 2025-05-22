@@ -5,7 +5,6 @@ import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.item.Shields;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.colorizer.Colorizers;
-import net.minecraft.client.render.entity.SnowballRenderer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.enums.ArtType;

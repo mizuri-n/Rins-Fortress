@@ -14,6 +14,7 @@ import net.minecraft.core.entity.projectile.ProjectileCannonball;
 import net.minecraft.core.entity.projectile.ProjectileSnowball;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
+import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
@@ -43,7 +44,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 	private static final int DATA_BLOCKING = 23;
 
 	@Shadow
-	public InventoryPlayer inventory;
+	public ContainerInventory inventory;
 	@Shadow
 	public abstract boolean hurt(Entity attacker, int damage, DamageType type);
 	@Shadow
@@ -54,6 +55,10 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 	public Mob thisObject = (Mob) (Object) this;
 	@Shadow
 	public abstract int getMaxHealth();
+
+	@Shadow
+	public abstract ItemStack getCurrentEquippedItem();
+
 	@Unique
 	private int parryTicks;
 	@Unique
@@ -63,9 +68,9 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 	@Unique
 	private int fireTicks;
 
-	@Inject(method = "init", at = @At("TAIL"))
+	@Inject(method = "defineSynchedData", at = @At("TAIL"))
 	public void defineSynchedData(CallbackInfo ci) {
-		entityData.define(DATA_BLOCKING, (byte)0);
+		entityData.define(DATA_BLOCKING, (byte)0, byte.class);
 	}
 
 
@@ -115,7 +120,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 	public void parryHitbox(World world, Player player) {
 
 		double bound = 3.75;
-		AABB aabb1 = new AABB(
+		AABB aabb1 = AABB.getTemporaryBB(
 			player.x - bound,
 			player.y + player.getHeadHeight() - bound,
 			player.z - bound,
@@ -125,7 +130,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 		);
 
 
-		List<Entity> projectileList = player.world.getEntitiesWithinAABB(Projectile.class, aabb1);
+		List<Projectile> projectileList = player.world.getEntitiesWithinAABB(Projectile.class, aabb1);
 		for (Entity entity : projectileList) {
 			world.spawnParticle("largesmoke", entity.x, entity.y, entity.z, 0.0, 0.0, 0.0, 0);
 			if (entity instanceof ProjectileArrow) {
@@ -226,13 +231,13 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 	}
 
 	// Modify the damage value provided to super.hurt
-	@ModifyArgs(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/entity/EntityLiving;hurt(Lnet/minecraft/core/entity/Entity;ILnet/minecraft/core/util/helper/DamageType;)Z"))
+	@ModifyArgs(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/entity/Mob;hurt(Lnet/minecraft/core/entity/Entity;ILnet/minecraft/core/util/helper/DamageType;)Z"))
 	public void injectHurt(Args args) {
 		Entity attacker = args.get(0);
 		int damage = args.get(1);
 
 		// check if we are holding the shield item.
-		ItemStack stack = inventory.mainInventory[inventory.currentItem];
+		ItemStack stack = inventory.mainInventory[getCurrentEquippedItem().itemID];
 		//check if we are wearing the helmet.
 		ItemStack helmet_item = this.inventory.armorItemInSlot(3);
 		if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet)) && attacker != this) {
@@ -334,7 +339,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 		at = @At(value = "HEAD")
 	)
 	public void tickMixin(CallbackInfo ci){
-		ItemStack stack = inventory.mainInventory[inventory.currentItem];
+		ItemStack stack = inventory.mainInventory[getCurrentEquippedItem().itemID];
 		if (stack != null) {
 			if (stack.getItem() instanceof ShieldItem) {
 

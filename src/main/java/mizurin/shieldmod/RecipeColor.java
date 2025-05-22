@@ -1,6 +1,6 @@
 package mizurin.shieldmod;
 
-import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.tags.CompoundTag;
 import goocraft4evr.nonamedyes.item.ModItems;
 import mizurin.shieldmod.interfaces.IColorable;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
@@ -8,6 +8,7 @@ import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemDye;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.player.inventory.InventoryCrafting;
 import net.minecraft.core.util.helper.Color;
 import turniplabs.halplibe.helper.ModVersionHelper;
@@ -52,7 +53,7 @@ public class RecipeColor extends RecipeEntryCraftingDynamic {
 
 			dyeMap.put(ModItems.dye, nonameDye);
 		}
-		dyeMap.put(Item.dye, vanillaDye);
+		dyeMap.put(Items.DYE, vanillaDye);
 	}
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventorycrafting) {

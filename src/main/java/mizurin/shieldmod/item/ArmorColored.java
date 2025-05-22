@@ -1,6 +1,6 @@
 package mizurin.shieldmod.item;
 
-import com.mojang.nbt.CompoundTag;
+import com.mojang.nbt.tags.CompoundTag;
 import mizurin.shieldmod.ColoredArmorTexture;
 import mizurin.shieldmod.ShieldMod;
 import mizurin.shieldmod.interfaces.IColorable;
@@ -16,8 +16,8 @@ public class ArmorColored extends ItemArmor implements IColoredArmor, IColorable
 	public static final String MOD_ID = ShieldMod.MOD_ID;
 
 
-	public ArmorColored(String name, int id, ArmorMaterial material, int armorPiece) {
-		super(name, id, material, armorPiece);
+	public ArmorColored(String name, String nameSpaceID, int id, ArmorMaterial material, int armorPiece) {
+		super(name, nameSpaceID, id, material, armorPiece);
 	}
 	public Color getColor(ItemStack itemStack){
 		if (itemStack.getData().containsKey("dyed_color")){

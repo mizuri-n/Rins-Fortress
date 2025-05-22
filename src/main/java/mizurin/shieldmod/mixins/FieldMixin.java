@@ -3,6 +3,7 @@ import com.mojang.nbt.tags.CompoundTag;
 import mizurin.shieldmod.interfaces.IThrownItem;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.world.chunk.ChunkCoordinates;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,7 +29,7 @@ public abstract class FieldMixin implements IThrownItem {
 		if(stack == null || stack.stackSize <= 0){
 			return;
 		}
-		InventoryPlayer inventory = player.inventory;
+		ContainerInventory inventory = player.inventory;
 		inventory.insertItem(stack, false);
 		if (stack.stackSize > 0){
 			player.dropPlayerItem(stack);
@@ -42,7 +43,8 @@ public abstract class FieldMixin implements IThrownItem {
 		return itemStack;
 	}
 	//adds save data for when the player quits after throwing the shield
-	@Inject(method = "addAdditionalSaveData(Lcom/mojang/nbt/CompoundTag;)V", at = @At("TAIL"))
+	@Inject(method = "Lnet/minecraft/core/entity/player/Player;addAdditionalSaveData(Lcom/mojang/nbt/tags/CompoundTag;)V", at = @At("TAIL"))
+
 	private void addData(CompoundTag tag, CallbackInfo ci){
 		ItemStack thrownItem = getThrownItem();
 		if(thrownItem != null) {
@@ -50,7 +52,7 @@ public abstract class FieldMixin implements IThrownItem {
 		}
 	}
 	//reads the save data after the player rejoins the world after throwing the shield
-	@Inject(method = "readAdditionalSaveData(Lcom/mojang/nbt/CompoundTag;)V", at = @At("TAIL"))
+	@Inject(method = "Lnet/minecraft/core/entity/player/Player;readAdditionalSaveData(Lcom/mojang/nbt/tags/CompoundTag;)V", at = @At("TAIL"))
 	private  void loadData(CompoundTag tag, CallbackInfo ci){
 		this.thrownItem = ItemStack.readItemStackFromNbt(tag.getCompound("item"));
 		storeOrDropItem((Player)(Object)this, this.thrownItem);

@@ -9,6 +9,7 @@ import net.minecraft.core.data.registry.recipe.RecipeNamespace;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryRepairable;
+import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import turniplabs.halplibe.helper.RecipeBuilder;
@@ -95,11 +96,11 @@ public class Recipes implements RecipeEntrypoint {
 			.create("apple_log_to_light_grey", new ItemStack(Blocks.PLANKS_OAK_PAINTED, 4, 8));
 
 
-		WORKBENCH.register("tearstoneShield", new RecipeEntryRepairable(Shields.tearShield, Items.INGOT_IRON));
+		WORKBENCH.register("tearstoneShield", new RecipeEntryRepairable(Shields.tearShield.getDefaultStack(), new RecipeSymbol(new ItemStack(Items.INGOT_IRON, 1))));
 
-		WORKBENCH.register("amuletRegenChest", new RecipeEntryRepairable(Shields.regenAmulet, Items.DUST_REDSTONE));
+		WORKBENCH.register("amuletRegenChest", new RecipeEntryRepairable(Shields.regenAmulet.getDefaultStack(), new RecipeSymbol(new ItemStack(Items.DUST_REDSTONE))));
 
-		WORKBENCH.register("rockyHelmetHat", new RecipeEntryRepairable(Shields.rockyHelmet, Blocks.COBBLE_STONE.asItem()));
+		WORKBENCH.register("rockyHelmetHat", new RecipeEntryRepairable(Shields.rockyHelmet.getDefaultStack(), new RecipeSymbol(new ItemStack(Blocks.COBBLE_STONE))));
 	}
 	public void initializeRecipe(){
 		Registries.RECIPE_TYPES.register("colored/shield", RecipeColor.class);

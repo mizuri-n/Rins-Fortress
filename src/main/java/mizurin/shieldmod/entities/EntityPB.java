@@ -2,7 +2,6 @@ package mizurin.shieldmod.entities;
 
 import mizurin.shieldmod.interfaces.IDazed;
 import mizurin.shieldmod.item.Shields;
-import net.minecraft.core.entity.Entity;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.projectile.Projectile;
