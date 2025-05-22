@@ -1,14 +1,16 @@
 package mizurin.shieldmod.entities;
 
+import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.Mob;
+import net.minecraft.core.net.entity.EntityTracker;
+import net.minecraft.core.net.entity.EntityTrackerEntry;
 import net.minecraft.core.net.entity.ITrackedEntry;
 import net.minecraft.core.net.entity.IVehicleEntry;
-import net.minecraft.core.net.packet.Packet23VehicleSpawn;
+import net.minecraft.core.net.packet.PacketAddEntity;
 import net.minecraft.core.world.World;
-import net.minecraft.server.entity.EntityTracker;
-import net.minecraft.server.entity.EntityTrackerEntry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 //This is used to render custom entities on servers
 //Entity Thrown Shield.
@@ -40,19 +42,20 @@ public class NetShieldEntry
 	public void onEntityTracked(EntityTracker tracker, EntityTrackerEntry trackerEntry, EntityShield trackedObject) {
 	}
 
+
 	@Override
-	public Entity getEntity(World world, double x, double y, double z, int metadata, boolean hasVelocity, double xd, double yd, double zd, Entity owner) {
-		if (owner instanceof EntityLiving) {
-			return new EntityShield(world, (EntityLiving) owner);
+	public Entity getEntity(World world, double d, double e, double f, int i, boolean bl, double g, double h, double j, Entity entity, @Nullable CompoundTag compoundTag) {
+		if (entity instanceof Mob) {
+			return new EntityShield(world, (Mob) entity);
 		} else {
-			return new EntityShield(world, x, y, z);
+			return new EntityShield(world, d, e, f);
 		}
 	}
 
 	@Override
-	public Packet23VehicleSpawn getSpawnPacket(EntityTrackerEntry tracker, EntityShield trackedObject) {
+	public PacketAddEntity getSpawnPacket(EntityTrackerEntry tracker, EntityShield trackedObject) {
 		System.out.println("SHIELD");
-		EntityLiving entityliving = trackedObject.owner;
-		return new Packet23VehicleSpawn(trackedObject, 0, entityliving == null ? -1 : entityliving.id, trackedObject.xd, trackedObject.yd, trackedObject.zd);
+		Mob entityliving = trackedObject.owner;
+		return new PacketAddEntity(trackedObject, 0, entityliving == null ? -1 : entityliving.id, trackedObject.xd, trackedObject.yd, trackedObject.zd);
 	}
 }

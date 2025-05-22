@@ -10,6 +10,7 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,10 +32,14 @@ public abstract class KnockBackMixin {
 	@Shadow
 	public abstract boolean interact(Player entityplayer);
 
+	@Shadow
+	public abstract @Nullable ItemStack getHeldItem();
+
 	@Inject(method = "knockBack(Lnet/minecraft/core/entity/Entity;IDD)V", at = @At("HEAD"), cancellable = true)
 	public void injectKnockBack(Entity entity, int i, double d, double d1, CallbackInfo ci) {
 		if (((Object)this) instanceof Player) {
-			ItemStack stack = ((Player)(Object)this).inventory.mainInventory[((Player)(Object)this).inventory.currentItem];
+			ItemStack stack = ((Player)(Object)this).inventory.mainInventory[getHeldItem().itemID];
+			//hope works
 
 
 			if (stack != null) {

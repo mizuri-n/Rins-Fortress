@@ -2,10 +2,10 @@ package mizurin.shieldmod.item;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.EntityRenderDispatcher;
-import net.minecraft.client.render.FontRenderer;
-import net.minecraft.client.render.RenderEngine;
+import net.minecraft.client.render.Font;
+import net.minecraft.client.render.TextureManager;
 import net.minecraft.client.render.item.model.ItemModelStandard;
-import net.minecraft.client.render.stitcher.IconCoordinate;
+import net.minecraft.client.render.texture.stitcher.IconCoordinate;
 import net.minecraft.client.render.tessellator.Tessellator;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.Item;
@@ -35,7 +35,7 @@ public class ItemModelColored extends ItemModelStandard {
 	}
 
 	@Override
-	public void renderItemIntoGui(Tessellator tessellator, FontRenderer fontrenderer, RenderEngine renderengine, ItemStack itemStack, int x, int y, float brightness, float alpha) {
+	public void renderItemIntoGui(Tessellator tessellator, Font fontrenderer, TextureManager renderengine, ItemStack itemStack, int x, int y, float brightness, float alpha) {
 		currentIndex = 0;
 		for (int i = 0; i < textureEntries.length; i++) {
 			currentIndex = i;
@@ -45,7 +45,7 @@ public class ItemModelColored extends ItemModelStandard {
 
 	@Override
 	public void renderAsItemEntity(Tessellator tessellator, @Nullable Entity entity, Random random, ItemStack itemstack, int renderCount, float yaw, float brightness, float partialTick) {
-		Minecraft mc = Minecraft.getMinecraft(this);
+		Minecraft mc = Minecraft.getMinecraft();
 		if (mc.fullbright || this.itemfullBright) {
 			brightness = 1.0F;
 		}
@@ -53,7 +53,7 @@ public class ItemModelColored extends ItemModelStandard {
 		EntityRenderDispatcher renderDispatcher = EntityRenderDispatcher.instance;
 		GL11.glScalef(0.5F, 0.5F, 0.5F);
 		IconCoordinate tex = this.getIcon(entity, itemstack);
-		tex.parentAtlas.bindTexture();
+		tex.parentAtlas.bind();
 		int render;
 		float r;
 		float g;

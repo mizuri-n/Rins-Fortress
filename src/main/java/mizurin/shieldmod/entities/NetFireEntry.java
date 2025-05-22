@@ -1,14 +1,16 @@
 package mizurin.shieldmod.entities;
 
+import com.mojang.nbt.tags.CompoundTag;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityLiving;
+import net.minecraft.core.entity.Mob;
+import net.minecraft.core.net.entity.EntityTracker;
+import net.minecraft.core.net.entity.EntityTrackerEntry;
 import net.minecraft.core.net.entity.ITrackedEntry;
 import net.minecraft.core.net.entity.IVehicleEntry;
-import net.minecraft.core.net.packet.Packet23VehicleSpawn;
+import net.minecraft.core.net.packet.PacketAddEntity;
 import net.minecraft.core.world.World;
-import net.minecraft.server.entity.EntityTracker;
-import net.minecraft.server.entity.EntityTrackerEntry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 //This is used to render custom entities on servers
 //Entity Fire.
@@ -41,19 +43,19 @@ public class NetFireEntry
 	}
 
 	@Override
-	public Entity getEntity(World world, double x, double y, double z, int metadata, boolean hasVelocity, double xd, double yd, double zd, Entity owner) {
-		EntityFire fire = new EntityFire(world, x, y, z, xd, yd, zd);
-		if (owner instanceof EntityLiving) {
-			fire.owner = (EntityLiving) owner;
+	public Entity getEntity(World world, double d, double e, double f, int i, boolean bl, double g, double h, double j, Entity entity, @Nullable CompoundTag compoundTag) {
+		EntityFire fire = new EntityFire(world, d, e, f, g, h, j);
+		if (entity instanceof Mob) {
+			fire.owner = (Mob) entity;
 		}
 		return fire;
 	}
 
 	@Override
-	public Packet23VehicleSpawn getSpawnPacket(EntityTrackerEntry tracker, EntityFire trackedObject) {
+	public PacketAddEntity getSpawnPacket(EntityTrackerEntry tracker, EntityFire trackedObject) {
 		System.out.println("FIRE");
-		EntityLiving entityliving = trackedObject.owner;
-		return new Packet23VehicleSpawn(trackedObject, 0, entityliving == null ? -1 : entityliving.id, trackedObject.xd, trackedObject.yd, trackedObject.zd);
+		Mob entityliving = trackedObject.owner;
+		return new PacketAddEntity(trackedObject, 0, entityliving == null ? -1 : entityliving.id, trackedObject.xd, trackedObject.yd, trackedObject.zd);
 	}
 }
 

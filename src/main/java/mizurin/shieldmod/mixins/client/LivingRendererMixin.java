@@ -4,10 +4,9 @@ import com.llamalad7.mixinextras.sugar.Local;
 import mizurin.shieldmod.ColoredArmorTexture;
 import mizurin.shieldmod.ShieldMod;
 import mizurin.shieldmod.interfaces.IColoredArmor;
-import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.client.render.model.ModelBase;
-import net.minecraft.core.entity.EntityLiving;
-import net.minecraft.core.entity.player.EntityPlayer;
+import net.minecraft.core.entity.Mob;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //Mixin for colored armor renderer
 @Mixin(value = LivingRenderer.class, remap = false)
-public abstract class LivingRendererMixin<T extends EntityLiving> {
+public abstract class LivingRendererMixin<T extends Mob> {
 	@Shadow protected abstract boolean shouldRenderPass(T entity, int renderPass, float partialTick);
 
 	@Shadow protected ModelBase renderPassModel;
@@ -61,8 +60,8 @@ public abstract class LivingRendererMixin<T extends EntityLiving> {
 	@Redirect(method = "render(Lnet/minecraft/core/entity/EntityLiving;DDDFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/LivingRenderer;shouldRenderPass(Lnet/minecraft/core/entity/EntityLiving;IF)Z"))
 	private boolean hijackRenderPass(LivingRenderer instance, T entity, int renderPass, float partialTick){
 		ShieldMod.playerArmorRenderOffset = 0;
-		if (entity instanceof EntityPlayer){
-			ItemStack itemstack = ((EntityPlayer) entity).inventory.armorItemInSlot(3 - renderPass);
+		if (entity instanceof Player){
+			ItemStack itemstack = ((Player) entity).inventory.armorItemInSlot(3 - renderPass);
 			if (itemstack != null && itemstack.getItem() instanceof IColoredArmor){
 				// do stuff
 				ColoredArmorTexture[] cTex = ((IColoredArmor) itemstack.getItem()).getArmorTextures(itemstack);

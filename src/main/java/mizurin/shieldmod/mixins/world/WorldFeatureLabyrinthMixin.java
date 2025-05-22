@@ -48,7 +48,7 @@ public class WorldFeatureLabyrinthMixin {
 				cir.setReturnValue(new ItemStack(Shields.regenAmulet));
 			}
 	}
-	@Inject(method = "generate", at = @At("HEAD"))
+	@Inject(method = "place", at = @At("HEAD"))
 	public void generate(World world, Random random, int x, int y, int z, CallbackInfoReturnable<Boolean> cir) {
 		Biome biome = world.getBlockBiome(x, y, z);
 		if (biome == Biomes.OVERWORLD_BOREAL_FOREST || biome == Biomes.OVERWORLD_MEADOW){

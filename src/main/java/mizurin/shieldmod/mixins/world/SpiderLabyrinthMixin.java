@@ -19,13 +19,13 @@ public class SpiderLabyrinthMixin {
 
 
 
-	@Redirect(method = "decorate", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/generate/feature/WorldFeatureLabyrinth;generate(Lnet/minecraft/core/world/World;Ljava/util/Random;III)Z"))
+	@Redirect(method = "decorate", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/generate/feature/WorldFeatureLabyrinth;place(Lnet/minecraft/core/world/World;Ljava/util/Random;III)Z"))
 	public boolean redirect(WorldFeatureLabyrinth instance, World world, Random rand, int x, int y, int z,
 							@Local(name = "biome") Biome biome) {
 		boolean isBoreal = (biome == Biomes.OVERWORLD_BOREAL_FOREST || biome == Biomes.OVERWORLD_MEADOW);
 		if (isBoreal) {
-			return new SpiderLabyrinth().generate(world, rand, x, y, z);
+			return new SpiderLabyrinth().place(world, rand, x, y, z);
 		}
-		return instance.generate(world, rand, x, y, z);
+		return instance.place(world, rand, x, y, z);
 	}
 }
