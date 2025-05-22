@@ -70,7 +70,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 
 	@Inject(method = "defineSynchedData", at = @At("TAIL"))
 	public void defineSynchedData(CallbackInfo ci) {
-		entityData.define(DATA_BLOCKING, (byte)0, byte.class);
+		entityData.define(DATA_BLOCKING, (byte)0, Byte.class);
 	}
 
 
@@ -237,7 +237,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 		int damage = args.get(1);
 
 		// check if we are holding the shield item.
-		ItemStack stack = inventory.mainInventory[getCurrentEquippedItem().itemID];
+		ItemStack stack = getHeldItem();
 		//check if we are wearing the helmet.
 		ItemStack helmet_item = this.inventory.armorItemInSlot(3);
 		if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet)) && attacker != this) {
@@ -339,7 +339,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 		at = @At(value = "HEAD")
 	)
 	public void tickMixin(CallbackInfo ci){
-		ItemStack stack = inventory.mainInventory[getCurrentEquippedItem().itemID];
+		ItemStack stack = getHeldItem();
 		if (stack != null) {
 			if (stack.getItem() instanceof ShieldItem) {
 

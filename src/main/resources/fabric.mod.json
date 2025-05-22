@@ -32,6 +32,9 @@
 		],
 		"recipesReady": [
 			"mizurin.shieldmod.Recipes"
+		],
+		"initModels": [
+			"mizurin.shieldmod.RFModelEntryPoint"
 		]
   },
   "mixins": [

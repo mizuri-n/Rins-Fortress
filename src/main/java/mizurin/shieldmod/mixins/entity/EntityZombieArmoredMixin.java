@@ -11,6 +11,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -75,13 +76,13 @@ public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag tag) {
+	public void addAdditionalSaveData(@NotNull CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putByte("shieldmod$isShieldZombie", shieldmod$isShieldZombie() ? (byte) 1 : (byte)0);
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag tag) {
+	public void readAdditionalSaveData(@NotNull CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
 		entityData.set(21, tag.getByte("shieldmod$isShieldZombie"));
 	}

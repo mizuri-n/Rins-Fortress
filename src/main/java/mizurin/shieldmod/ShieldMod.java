@@ -3,6 +3,7 @@ package mizurin.shieldmod;
 import mizurin.shieldmod.blocks.RinBlocks;
 import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.item.Shields;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.core.crafting.LookupFuelFurnace;
@@ -18,7 +19,7 @@ import turniplabs.halplibe.util.GameStartEntrypoint;
 
 import java.util.Properties;
 
-public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint{
+public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint, ClientModInitializer {
     public static final String MOD_ID = "shieldmod";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static int playerArmorRenderOffset = 0;
@@ -92,5 +93,8 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	}
 
 
-
+	@Override
+	public void onInitializeClient() {
+	new RFModelEntryPoint();
+	}
 }

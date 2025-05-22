@@ -1,4 +1,5 @@
 package mizurin.shieldmod.entities;
+import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.Projectile;
@@ -26,16 +27,16 @@ public class EntityFire extends Projectile {
 
 	public EntityFire(World world, double x, double y, double z, double xd, double yd, double zd){
 		super(world, x, y, z);
-		this.modelItem = Items.AMMO_FIREBALL;
+		this.modelItem = Blocks.FIRE.asItem();
 		this.xd = xd;
 		this.yd = yd;
 		this.zd = zd;
 	}
 
-	public void init() {
+	public void initProjectile() {
 		this.damage = 5;
 		this.defaultGravity = 0.003F;
-		this.defaultProjectileSpeed = 0.15F;
+		this.defaultProjectileSpeed = 0.115F;
 	}
 
 	public void onHit(HitResult hitResult) {
