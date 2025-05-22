@@ -29,15 +29,15 @@ public class SteelShield extends ShieldItem{
 	@Override
 	public void onBlock(ItemStack itemstack, World world, Player entityplayer) {
 		if (entityplayer.isSneaking() && ((ParryInterface)entityplayer).shieldmod$getFireTicks() == 0){
-			if(entityplayer.inventory.consumeInventoryItem(Items.FLINT.id)){
-				itemstack.damageItem(4, entityplayer);
+			if(entityplayer.inventory.player.hasItem(Items.FLINT)){
+				itemstack.damageItem(16, entityplayer);
 					for (int i = 0; i < 4; i++) {
 						Vec3 plylook = entityplayer.getLookAngle();
 						EntityFire flame = new EntityFire(world, entityplayer);
 						if (!world.isClientSide) {
 							world.entityJoinedWorld(flame);
 
-							flame.setHeading(plylook.x, plylook.y, plylook.z, .2f, 10);
+							flame.setHeading(plylook.x, plylook.y, plylook.z, .5f, 10);
 						}
 					}
 					world.playSoundAtEntity(entityplayer, entityplayer, "fire.ignite", 3.6F, 1.5F);

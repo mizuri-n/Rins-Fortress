@@ -54,8 +54,8 @@ public abstract class DazedMixin extends Entity implements IDazed {
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	public void defineSyncStatus(CallbackInfo ci){
-		entityData.define(DATA_DAZE, 0, int.class);
-		entityData.define(DATA_FREEZE, 0, int.class);
+		entityData.define(DATA_DAZE, 0, Integer.class);
+		entityData.define(DATA_FREEZE, 0, Integer.class);
 	}
 
 

@@ -43,7 +43,7 @@ public abstract class FieldMixin implements IThrownItem {
 		return itemStack;
 	}
 	//adds save data for when the player quits after throwing the shield
-	@Inject(method = "Lnet/minecraft/core/entity/player/Player;addAdditionalSaveData(Lcom/mojang/nbt/tags/CompoundTag;)V", at = @At("TAIL"))
+	@Inject(method = "addAdditionalSaveData(Lcom/mojang/nbt/tags/CompoundTag;)V", at = @At("TAIL"))
 
 	private void addData(CompoundTag tag, CallbackInfo ci){
 		ItemStack thrownItem = getThrownItem();
@@ -52,7 +52,7 @@ public abstract class FieldMixin implements IThrownItem {
 		}
 	}
 	//reads the save data after the player rejoins the world after throwing the shield
-	@Inject(method = "Lnet/minecraft/core/entity/player/Player;readAdditionalSaveData(Lcom/mojang/nbt/tags/CompoundTag;)V", at = @At("TAIL"))
+	@Inject(method = "readAdditionalSaveData(Lcom/mojang/nbt/tags/CompoundTag;)V", at = @At("TAIL"))
 	private  void loadData(CompoundTag tag, CallbackInfo ci){
 		this.thrownItem = ItemStack.readItemStackFromNbt(tag.getCompound("item"));
 		storeOrDropItem((Player)(Object)this, this.thrownItem);
