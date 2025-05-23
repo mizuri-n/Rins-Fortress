@@ -13,15 +13,15 @@ item.shieldmod.diamond_shield.desc=A rare and pretty shield.
 item.shieldmod.steel_shield.name=Steel Shield
 item.shieldmod.steel_shield.desc=A comically large steel fire striker.
 item.shieldmod.tear_shield.name=Tearstone Shield
-item.shieldmod.tear_shield.desc=A throwable frozen shield that boosts defense when close to death.
+item.shieldmod.tear_shield.desc=A throwable frozen shield.
 item.shieldmod.food_stew_pumpkin.name=Pumpkin Stew
-item.shieldmod.food_stew_pumpkin.desc=Hearty... tasty!
-item.shieldmod.poison_bottle_name=Alchemist's Poison
-item.shieldmod.poison_bottle_desc=Full of a velvet gloom...
+item.shieldmod.food_stew_pumpkin.desc=Hearty... and fortified?
+item.shieldmod.poison_bottle.name=Alchemist's Poison
+item.shieldmod.poison_bottle.desc=Full of a velvet gloom...
 item.shieldmod.helmet_rock.name=Rocky Helmet
 item.shieldmod.helmet_rock.desc=A crumbling helmet.
 item.shieldmod.amulet_heart.name=Amulet of restoration
-item.shieldmod.amulet_heart.desc=An amulet that is warm to the touch and fills you with vigor.
+item.shieldmod.amulet_heart.desc=An amulet that is warm to the touch.
 
 
 item.shieldmod.armor_.helmet_leather.name=Leather Cap

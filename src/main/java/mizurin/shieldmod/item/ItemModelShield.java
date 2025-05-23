@@ -41,7 +41,7 @@ public class ItemModelShield extends ItemModelColored {
 				GL11.glRotatef(30F, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(-25F, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(10F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(0.10F, -0.80075F, 0.375F);
+				GL11.glTranslatef(0.35F, -0.70075F, 0.175F);
 			} else {
 				//Renders the shield when not blocking.
 				//Doing this blind was hell.
@@ -53,7 +53,7 @@ public class ItemModelShield extends ItemModelColored {
 				GL11.glRotatef(40F, 0.0F, 0.0F, 1.0F); //z value
 				GL11.glRotatef(-25F, 0.0F, 0.0F, 1.0F); //z value
 				GL11.glRotatef(30F, 1.0F, 0.0F, 0.0F); //x value
-				GL11.glTranslatef(0.31F, -0.20075F, -0.3F);
+				GL11.glTranslatef(0.41F, -0.20075F, -0.2F);
 			}
 		}
 		if(entity instanceof MobMonster){
@@ -73,10 +73,11 @@ public class ItemModelShield extends ItemModelColored {
 	public void heldTransformFirstPerson(ItemRenderer renderer, Entity entity, ItemStack itemStack) {
 		//Renders the blocking state in first person.
 			if (((ParryInterface) entity).shieldmod$getIsBlock()) {
+				final float scale3 = 0.625F;
 				GL11.glRotatef(77, 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(24, 0.0F, 0.0F, 1.0F);
+				GL11.glRotatef(23, 0.0F, 0.0F, 1.0F);
 				GL11.glRotatef(10, 1.0F, 0.0F, 0.0F);
-				GL11.glTranslatef(0.3F, -0.2F, -0.7F);
+				GL11.glTranslatef(0.5F, -0.3F, -1.3F);
 
 
 			} else {
@@ -85,7 +86,7 @@ public class ItemModelShield extends ItemModelColored {
 			GL11.glRotatef(74, 0.0F, 1.0F, 0.0F);
 			GL11.glRotatef(23, 0.0F, 0.0F, 1.0F);
 			GL11.glRotatef(10, 1.0F, 0.0F, 0.0F);
-			GL11.glTranslatef(0.0F, -0.3F, -0.5F);
+			GL11.glTranslatef(0.2F, -0.5F, -0.5F);
 		}
 	}
 }

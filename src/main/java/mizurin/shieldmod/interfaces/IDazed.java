@@ -8,4 +8,8 @@ public interface IDazed {
 	public void shieldmod$freezeHurt(int freezeTicks);
 
 	public int shieldmod$getFreezeHurt();
+
+	public void shieldmod$poisonHurt(int poisonTicks);
+
+	public int shieldmod$getPoisonHurt();
 }
