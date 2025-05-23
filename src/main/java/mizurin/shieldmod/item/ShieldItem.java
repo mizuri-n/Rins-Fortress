@@ -20,7 +20,7 @@ public class ShieldItem extends ItemToolSword {
 		maxStackSize = 1;
 		setMaxDamage(toolMaterial.getDurability());
 		this.tool = toolMaterial;
-		this.weaponDamage = 4 + toolMaterial.getDamage();
+		this.weaponDamage = 3 + toolMaterial.getDamage();
 
 
 	}
@@ -44,7 +44,7 @@ public class ShieldItem extends ItemToolSword {
 
 		return true;
 	}
-	public int getDamageVsEntity(Entity entity) {
+	public int getDamageVsEntity(Entity entity, ItemStack is) {
 		return this.weaponDamage;
 	}
 

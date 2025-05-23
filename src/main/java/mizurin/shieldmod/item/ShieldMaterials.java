@@ -12,14 +12,14 @@ public class ShieldMaterials extends ToolMaterial {
 		return this;
 	}
 	//ToolMaterials for shields. Haste efficiency is overridden for the shield's block percent. ex: 0.85 is a 15% damage reduction.
-	public static final ToolMaterial TOOL_LEATHER = new ToolMaterial().setDurability(64).setDamage(-2).setEfficiency(2.0f, 0.85f);
-	public static final ToolMaterial TOOL_WOOD = new ToolMaterial().setDurability(96).setDamage(-1).setEfficiency(2.0f, 0.80f);
-	public static final ToolMaterial TOOL_STONE = new ToolMaterial().setDurability(128).setDamage(0).setEfficiency(2.0f, 0.70f);
-	public static final ToolMaterial TOOL_IRON = new ToolMaterial().setDurability(384).setDamage(1).setEfficiency(2.0f, 0.60f);
-	public static final ToolMaterial TOOL_GOLD = new ToolMaterial().setDurability(256).setDamage(0).setEfficiency(2.0f, 0.50f).setSilkTouch(true);
-	public static final ToolMaterial TOOL_DIAMOND = new ToolMaterial().setDurability(1536).setDamage(2).setEfficiency(2.0f, 0.40f);
-	public static final ToolMaterial TOOL_STEEL = new ToolMaterial().setDurability(4608).setDamage(2).setEfficiency(2.0f, 0.60f);
-	public static final ToolMaterial TOOL_TEAR = new ToolMaterial().setDurability(512).setDamage(1).setEfficiency(2.0F, 0.60F);
+	public static final ToolMaterial TOOL_LEATHER = new ToolMaterial().setDurability(64).setDamage(-1).setEfficiency(2.0f, 0.85f);
+	public static final ToolMaterial TOOL_WOOD = new ToolMaterial().setDurability(96).setDamage(0).setEfficiency(2.0f, 0.80f);
+	public static final ToolMaterial TOOL_STONE = new ToolMaterial().setDurability(128).setDamage(1).setEfficiency(2.0f, 0.70f);
+	public static final ToolMaterial TOOL_IRON = new ToolMaterial().setDurability(384).setDamage(2).setEfficiency(2.0f, 0.60f);
+	public static final ToolMaterial TOOL_GOLD = new ToolMaterial().setDurability(256).setDamage(1).setEfficiency(2.0f, 0.50f).setSilkTouch(true);
+	public static final ToolMaterial TOOL_DIAMOND = new ToolMaterial().setDurability(1536).setDamage(4).setEfficiency(2.0f, 0.40f);
+	public static final ToolMaterial TOOL_STEEL = new ToolMaterial().setDurability(4608).setDamage(3).setEfficiency(2.0f, 0.60f);
+	public static final ToolMaterial TOOL_TEAR = new ToolMaterial().setDurability(512).setDamage(2).setEfficiency(2.0F, 0.60F);
 
 	@Override
 	public ToolMaterial setEfficiency(float efficiency, float guard) {

@@ -16,7 +16,7 @@ public class ThrowShield extends ShieldItem{
 		maxStackSize = 1;
 		setMaxDamage(toolMaterial.getDurability());
 		this.tool = toolMaterial;
-		this.weaponDamage = 4 + toolMaterial.getDamage();
+		this.weaponDamage = 3 + toolMaterial.getDamage();
 
 	}
 	@Override
@@ -36,7 +36,7 @@ public class ThrowShield extends ShieldItem{
 
 			//entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem,null);
 
-			entityplayer.inventory.setCurrentItem(null, true);
+			entityplayer.inventory.setItem(entityplayer.inventory.getCurrentItemIndex(), null);
 			//Sets the shield to null to hide it and act as a cooldown.
 			world.playSoundAtEntity(null, entityplayer, "mob.ghast.fireball", 0.3F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			if (!world.isClientSide) {

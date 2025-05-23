@@ -44,7 +44,6 @@ public abstract class FieldMixin implements IThrownItem {
 	}
 	//adds save data for when the player quits after throwing the shield
 	@Inject(method = "addAdditionalSaveData(Lcom/mojang/nbt/tags/CompoundTag;)V", at = @At("TAIL"))
-
 	private void addData(CompoundTag tag, CallbackInfo ci){
 		ItemStack thrownItem = getThrownItem();
 		if(thrownItem != null) {
