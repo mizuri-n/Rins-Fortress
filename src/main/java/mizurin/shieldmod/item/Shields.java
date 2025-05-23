@@ -96,7 +96,7 @@ public class Shields {
 
 
 		pumpkinStew = new ItemBuilder(MOD_ID)
-			.build(new ItemSoup("food_stew_pumpkin", MOD_ID + ":food_stew_pumpkin" ,++itemID, 16, 30));
+			.build(new ItemSoup("food_stew_pumpkin", MOD_ID + ":food_stew_pumpkin" ,++itemID, 20, 50));
 
 
 		// TODO need to bypass vanilla id check

@@ -38,7 +38,7 @@ public abstract class KnockBackMixin {
 	@Inject(method = "knockBack(Lnet/minecraft/core/entity/Entity;IDD)V", at = @At("HEAD"), cancellable = true)
 	public void injectKnockBack(Entity entity, int i, double d, double d1, CallbackInfo ci) {
 		if (((Object)this) instanceof Player) {
-			ItemStack stack = ((Player)(Object)this).inventory.mainInventory[getHeldItem().itemID];
+			ItemStack stack = ((Player)(Object)this).getCurrentEquippedItem();
 			//hope works
 
 

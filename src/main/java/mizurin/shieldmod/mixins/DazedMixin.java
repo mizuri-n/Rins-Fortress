@@ -27,6 +27,9 @@ public abstract class DazedMixin extends Entity implements IDazed {
 	@Unique
 	private static final int DATA_FREEZE = 25;
 
+	@Unique
+	private  static final int DATA_POISON = 26;
+
 	public DazedMixin(World world) {
 		super(world);
 	}
@@ -56,6 +59,7 @@ public abstract class DazedMixin extends Entity implements IDazed {
 	public void defineSyncStatus(CallbackInfo ci){
 		entityData.define(DATA_DAZE, 0, Integer.class);
 		entityData.define(DATA_FREEZE, 0, Integer.class);
+		entityData.define(DATA_POISON, 0, Integer.class);
 	}
 
 
@@ -67,9 +71,9 @@ public abstract class DazedMixin extends Entity implements IDazed {
 			this.xd *= 0.90D;
 			this.zd *= 0.90D;
 
-			if (this.shieldmod$getDazedHurt() % 25 == 0) {
-				this.hurt( null, 1, DamageType.GENERIC);
-			}
+//			if (this.shieldmod$getDazedHurt() % 25 == 0) {
+//				this.hurt( null, 1, DamageType.GENERIC);
+//			}
 //			if(this.shieldmod$getDazedHurt() % 10 == 0) {
 				float width = 1.0f;
 				double dx = world.rand.nextGaussian() * 0.002;
@@ -106,6 +110,27 @@ public abstract class DazedMixin extends Entity implements IDazed {
 
 		}
 
+		if(this.shieldmod$getPoisonHurt() > 0 ){
+
+			if (this.shieldmod$getPoisonHurt() % 60 == 0) {
+			this.hurt( null, 2, DamageType.GENERIC);}
+
+			if(this.shieldmod$getPoisonHurt() % 10 == 0) {
+				float width = 1.0f;
+				double dx = world.rand.nextGaussian() * 0.002;
+				double dy = world.rand.nextGaussian() * 0.002;
+				double dz = world.rand.nextGaussian() * 0.002;
+				world.spawnParticle(
+					"blueflame",
+					this.x + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
+					this.y + this.getHeadHeight() - 1 + (double) (world.rand.nextFloat() * width),
+					this.z + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
+					dx, dy, dz, 0
+				);
+			}
+			this.entityData.set(DATA_POISON, this.entityData.getInt(DATA_POISON) - 1);
+		}
+
 	}
 	@Override
 	public void shieldmod$dazedHurt(int dazedTicks){
@@ -126,6 +151,16 @@ public abstract class DazedMixin extends Entity implements IDazed {
 	@Override
 	public int shieldmod$getFreezeHurt() {
 		return entityData.getInt(DATA_FREEZE);
+	}
+
+	@Override
+	public void shieldmod$poisonHurt(int poisonTicks) {
+		this.entityData.set(DATA_POISON, poisonTicks);
+	}
+
+	@Override
+	public int shieldmod$getPoisonHurt() {
+		return entityData.getInt(DATA_POISON);
 	}
 
 }

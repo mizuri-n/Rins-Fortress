@@ -23,8 +23,6 @@ public class EntityIceBall extends Projectile {
 		this.modelItem = Items.AMMO_SNOWBALL;
 	}
 
-	public void init() {
-	}
 
 	@Override
 	public void onHit(HitResult hitResult) {

@@ -2,6 +2,9 @@ package mizurin.shieldmod.entities;
 
 import mizurin.shieldmod.interfaces.IDazed;
 import mizurin.shieldmod.item.Shields;
+import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.animal.MobSheep;
+import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.projectile.Projectile;
@@ -9,10 +12,12 @@ import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
 
+import java.util.List;
+
 //Entity Poison Bottle
 public class EntityPB extends Projectile {
 	public EntityPB(World world, Mob owner) {
-		super(world);
+		super(world, owner);
 		this.modelItem = Shields.poisonBottle;
 	}
 	public EntityPB(World world, double d, double d1, double d2) {
@@ -23,7 +28,7 @@ public class EntityPB extends Projectile {
 		super(world);
 		this.modelItem = Shields.poisonBottle;
 	}
-	public void init() {
+	public void initProjectile() {
 		this.damage = 1;
 		this.defaultGravity = 0.098F;
 		this.defaultProjectileSpeed = 0.95F;
@@ -33,7 +38,7 @@ public class EntityPB extends Projectile {
 	public void onHit(HitResult hitResult) {
 		if (hitResult.entity instanceof Mob) {
 			hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
-			((IDazed) hitResult.entity).shieldmod$dazedHurt(450);
+			((IDazed) hitResult.entity).shieldmod$poisonHurt(200);
 			//Applies my custom status effect from the IDazed interface.
 		}
 		if (this.modelItem != null) {

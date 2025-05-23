@@ -12,7 +12,7 @@ public class EntityRock extends ProjectilePebble {
 	public EntityRock(World world, Mob owner) {
 		super(world, owner);
 	}
-	public void init() {
+	public void initProjectile() {
 		this.damage = 2;
 	}
 	public void onHit(HitResult hitResult) {

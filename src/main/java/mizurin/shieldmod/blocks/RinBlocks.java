@@ -17,14 +17,11 @@ import static mizurin.shieldmod.item.Shields.MOD_ID;
 public class RinBlocks {
 
 	public static Colorizer apple;
-	public static Block logApple;
-	public static Block leavesApple;
-	public static Block leavesAppleFlowering;
-	public static Block saplingApple;
+	public static Block<?> logApple;
+	public static Block<?> leavesApple;
+	public static Block<?> leavesAppleFlowering;
+	public static Block<?> saplingApple;
 
-	public void initializeBlockDetails() {
-
-	}
 
 	public void initializeBlocks() {
 		BlockBuilder leaves = new BlockBuilder(MOD_ID)

@@ -23,8 +23,9 @@ public class EntityWeb extends Projectile {
 		this.modelItem = Items.AMMO_SNOWBALL;
 	}
 
-	public void init() {
+	public void initProjectile() {
 		this.defaultProjectileSpeed = 0.95F;
+		this.defaultGravity = 0.03F;
 
 	}
 	@Override

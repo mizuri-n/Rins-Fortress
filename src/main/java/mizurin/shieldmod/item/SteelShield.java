@@ -42,7 +42,7 @@ public class SteelShield extends ShieldItem{
 					}
 					world.playSoundAtEntity(entityplayer, entityplayer, "fire.ignite", 3.6F, 1.5F);
 
-				((ParryInterface)entityplayer).shieldmod$Fire(10);
+				((ParryInterface)entityplayer).shieldmod$Fire(20);
 
 				}
 			}

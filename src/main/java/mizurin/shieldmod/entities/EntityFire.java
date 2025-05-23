@@ -34,7 +34,7 @@ public class EntityFire extends Projectile {
 	}
 
 	public void initProjectile() {
-		this.damage = 5;
+		this.damage = 7;
 		this.defaultGravity = 0.003F;
 		this.defaultProjectileSpeed = 0.115F;
 	}

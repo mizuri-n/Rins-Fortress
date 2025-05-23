@@ -37,7 +37,7 @@ public class EntityShield extends ProjectilePebble {
 		this.modelItem = Shields.ammotearShield;
 	}
 
-	public void init() {
+	public void initProjectile() {
 		this.damage = 0;
 		this.defaultGravity = 0.03F;
 		this.defaultProjectileSpeed = 0.99F;

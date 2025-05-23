@@ -65,7 +65,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 		paintingRice = new ArtType("paintingRice", "Lunch", "Rin", "shieldmod:art/onigiri", 32, 32);
 		// TODO need to assign models with the model entrypoint and model helper now
 		EntityHelper.createEntity(EntityShield.class, NamespaceID.getPermanent(MOD_ID, "ammo_shield"), null, "ammoShield", entityID/*, () -> new EntityRendererSprite<>(Shields.ammotearShield)*/);
-		EntityHelper.createEntity(EntityPB.class, NamespaceID.getPermanent(MOD_ID, "bottle_poison"), null, "poisonBottle", ++entityID/*, () -> new EntityRendererSprite<>(Shields.poisonBottle*/);
+		EntityHelper.createEntity(EntityPB.class, NamespaceID.getPermanent(MOD_ID, "poison_bottle"), null, "poisonBottle", ++entityID/*, () -> new EntityRendererSprite<>(Shields.poisonBottle*/);
 		EntityHelper.createEntity(EntityRock.class, NamespaceID.getPermanent(MOD_ID, "shield_pebble"), null, "pebbleShield", ++entityID/*, () -> new EntityRendererSprite<>(Item.ammoPebble)*/);
 		EntityHelper.createEntity(EntityFire.class, NamespaceID.getPermanent(MOD_ID, "fire"), null, "entityFire", ++entityID/*, () -> new EntityRendererSprite<>(Block.fire.asItem())*/);
 		EntityHelper.createEntity(EntityWeb.class, NamespaceID.getPermanent(MOD_ID, "web"), null, "entityWeb", ++entityID/*, () -> new EntityRendererSprite<>(Block.cobweb.asItem())*/);
