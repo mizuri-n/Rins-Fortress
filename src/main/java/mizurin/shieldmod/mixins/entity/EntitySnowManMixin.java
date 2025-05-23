@@ -41,9 +41,9 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 		super.dropDeathItems();
 	}
 
-	protected void init() {
-		entityData.define(22, (byte)0, Byte.class);
-	}
+//	public void spawnInit() {
+//		entityData.define(22, (byte)0, Byte.class);
+//	}
 
 	//Right click to put a carved pumpkin on the snowman's head
 	@Override
@@ -70,8 +70,6 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 		if (shieldmod$isSnowJack()) {
 			//creates a bounding box and grabs a list of monsters to attack.
 			//doing just monsters causes the snowman to attack itself, I also want to exclude creepers from being attacked.
-
-
 
 			List<MobMonster> nearbyMon = this.world.getEntitiesWithinAABB(MobMonster.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0));
 			nearbyMon.removeAll(this.world.getEntitiesWithinAABB(MobSnowman.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));

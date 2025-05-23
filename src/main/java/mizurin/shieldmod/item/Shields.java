@@ -62,30 +62,30 @@ public class Shields {
 
 		goldShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
-			.build(new ParryShield("gold_shield", "shieldmod:item/gold_shield_test" ,++itemID, ShieldMaterials.TOOL_GOLD))
+			.build(new ParryShield("gold_shield", "shieldmod:item/gold_shield" ,++itemID, ShieldMaterials.TOOL_GOLD))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 
 		diamondShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
-			.build(new TreasureShield("diamond_shield", "shieldmod:item/diamond_shield_test" ,++itemID, ShieldMaterials.TOOL_DIAMOND))
+			.build(new TreasureShield("diamond_shield", "shieldmod:item/diamond_shield" ,++itemID, ShieldMaterials.TOOL_DIAMOND))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 
 		steelShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
-			.build(new SteelShield("steel_shield", "shieldmod:item/steel_shield_test" ,++itemID, ShieldMaterials.TOOL_STEEL))
+			.build(new SteelShield("steel_shield", "shieldmod:item/steel_shield" ,++itemID, ShieldMaterials.TOOL_STEEL))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 
 		leatherShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
-			.build(new ShieldColored("leather_shield", "shieldmod:item/leather_shield_test" ,++itemID, ShieldMaterials.TOOL_LEATHER))
+			.build(new ShieldColored("leather_shield", "shieldmod:item/leather_shield" ,++itemID, ShieldMaterials.TOOL_LEATHER))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 
 		tearShield = new ItemBuilder(MOD_ID)
-			.build(new ThrowShield("tear_shield", "shieldmod:item/tearstone_shield_test" ,++itemID, ShieldMaterials.TOOL_TEAR))
+			.build(new ThrowShield("tear_shield", "shieldmod:item/tearstone_shield" ,++itemID, ShieldMaterials.TOOL_TEAR))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 

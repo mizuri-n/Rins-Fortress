@@ -47,7 +47,7 @@ public class EntityFire extends Projectile {
 			hitResult.entity.yd = 0.0;
 			hitResult.entity.zd *= .33;
 
-			hitResult.entity.remainingFireTicks = 150;
+			hitResult.entity.remainingFireTicks = 200;
 			if (hitResult.entity instanceof Player){
 				remove();
 			}

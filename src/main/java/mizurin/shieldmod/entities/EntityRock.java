@@ -14,6 +14,8 @@ public class EntityRock extends ProjectilePebble {
 	}
 	public void initProjectile() {
 		this.damage = 2;
+		this.defaultProjectileSpeed = 0.95F;
+		this.defaultGravity = 0.03F;
 	}
 	public void onHit(HitResult hitResult) {
 		if (hitResult.entity != null) {

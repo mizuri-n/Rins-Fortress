@@ -3,9 +3,7 @@ package mizurin.shieldmod;
 import mizurin.shieldmod.blocks.BlockLeavesAppleFlowering;
 import mizurin.shieldmod.blocks.BlockModelAppleLeavesBloom;
 import mizurin.shieldmod.blocks.RinBlocks;
-import mizurin.shieldmod.entities.EntityFire;
-import mizurin.shieldmod.entities.EntityPB;
-import mizurin.shieldmod.entities.EntityWeb;
+import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.item.ItemModelColored;
 import mizurin.shieldmod.item.ItemModelShield;
 import mizurin.shieldmod.item.Shields;
@@ -22,6 +20,7 @@ import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Blocks;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.util.helper.Side;
 import turniplabs.halplibe.helper.ModelHelper;
 import turniplabs.halplibe.util.ModelEntrypoint;
@@ -139,6 +138,17 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 		});
 		ModelHelper.setEntityModel(EntityPB.class, () -> {
 			EntityRenderer<?> er = new EntityRendererSprite<EntityPB>(Shields.poisonBottle);
+			er.init(dispatcher);
+			return er;
+		});
+
+		ModelHelper.setEntityModel(EntityShield.class, () -> {
+			EntityRenderer<?> er = new EntityRendererSprite<EntityShield>(Shields.ammotearShield);
+			er.init(dispatcher);
+			return er;
+		});
+		ModelHelper.setEntityModel(EntityRock.class, () -> {
+			EntityRenderer<?> er = new EntityRendererSprite<EntityRock>(Items.AMMO_PEBBLE);
 			er.init(dispatcher);
 			return er;
 		});

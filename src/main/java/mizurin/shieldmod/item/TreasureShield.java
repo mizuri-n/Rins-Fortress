@@ -13,7 +13,7 @@ public class TreasureShield extends ShieldItem{
 		maxStackSize = 1;
 		setMaxDamage(toolMaterial.getDurability());
 		this.tool = toolMaterial;
-		this.weaponDamage = 4 + toolMaterial.getDamage();
+		this.weaponDamage = 3 + toolMaterial.getDamage();
 	}
 
 	//If the ticks(Blocked) are active, then the player has bonus damage and knockback for the shield.
