@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //Mixin to render carved pumpkins on snowmen.
 @Mixin(value = MobRendererBiped.class, remap = false)
-public class BipedRendererMixin<T extends Mob> extends EntityRenderer<T> {
+public abstract class BipedRendererMixin<T extends Mob> extends EntityRenderer<T> {
 
 	@Shadow
 	protected ModelBiped modelBipedMain;
@@ -39,7 +39,7 @@ public class BipedRendererMixin<T extends Mob> extends EntityRenderer<T> {
 			if (itemstack != null && itemstack.getItem().id < Blocks.blocksList.length) {
 				GL11.glPushMatrix();
 				this.modelBipedMain.head.render(0.0625f);
-				if (((BlockModel<?>) BlockModelDispatcher.getInstance().getDispatch(Blocks.blocksList[itemstack.itemID])).shouldItemRender3d()) {
+				if (BlockModelDispatcher.getInstance().getDispatch(Blocks.blocksList[itemstack.itemID]).shouldItemRender3d()) {
 					float f1 = 0.625f;
 					GL11.glTranslatef(0.0f, -0.25f, 0.0f);
 					GL11.glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
@@ -49,10 +49,5 @@ public class BipedRendererMixin<T extends Mob> extends EntityRenderer<T> {
 				GL11.glPopMatrix();
 			}
 		}
-	}
-
-	@Override
-	public void render(Tessellator tessellator, T entity, double d, double e, double f, float g, float h) {
-
 	}
 }
