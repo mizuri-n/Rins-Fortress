@@ -2,32 +2,27 @@ package mizurin.shieldmod.item;
 
 import com.mojang.nbt.tags.CompoundTag;
 import mizurin.shieldmod.ColoredArmorTexture;
-import mizurin.shieldmod.ShieldMod;
 import mizurin.shieldmod.interfaces.IColorable;
 import mizurin.shieldmod.interfaces.IColoredArmor;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.util.collection.NamespaceID;
-
-import java.awt.*;
+import net.minecraft.core.util.helper.Color;
 
 public class ArmorColored extends ItemArmor implements IColoredArmor, IColorable {
-	public static final String MOD_ID = ShieldMod.MOD_ID;
-
-
 	public ArmorColored(String name, String nameSpaceID, int id, ArmorMaterial material, int armorPiece) {
 		super(name, nameSpaceID, id, material, armorPiece);
 	}
-	public Color getColor(ItemStack itemStack){
+	public static int getColor(ItemStack itemStack){
 		if (itemStack.getData().containsKey("dyed_color")){
 			CompoundTag colorTag = itemStack.getData().getCompound("dyed_color");
 			int red = colorTag.getShort("red");
 			int green = colorTag.getShort("green");
 			int blue = colorTag.getShort("blue");
-			return new Color(red, green, blue);
+			return Color.intToIntARGB(255, red, green, blue);
 		}
-		return new Color(255, 255,255);
+		return 0xFF_FF_FF_FF;
 	}
 
 	public ColoredArmorTexture[] getArmorTextures(ItemStack itemStack) {
