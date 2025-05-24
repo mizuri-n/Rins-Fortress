@@ -33,8 +33,8 @@ public class Shields {
 	public static Item rockyHelmet;
 	public static Item regenAmulet;
 
-	public static ArmorMaterial rockyArmor = ArmorHelper.createArmorMaterial(MOD_ID, "armor_stone", 256, 30f, 30f, 30f, 30f);
-	public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "armor_stone", 384, 0f, 0f, 0f, 0f);
+	public static ArmorMaterial rockyArmor = ArmorHelper.createArmorMaterial(MOD_ID, "stone", 256, 30f, 30f, 30f, 30f);
+	public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "amulet", 384, 0f, 0f, 0f, 0f);
 
 
 	@SuppressWarnings("unchecked")
@@ -101,34 +101,30 @@ public class Shields {
 
 
 		rockyHelmet = new ItemBuilder(MOD_ID)
-			.build(new ItemArmor("helmet_rock", MOD_ID + ":helmet_rock" ,++itemID,  rockyArmor, 0));
+			.build(new ItemArmor("helmet_rock", MOD_ID + ":helmet_rock" ,++itemID,  rockyArmor, IArmorItem.PIECE_HEAD));
 
 
 		regenAmulet = new ItemBuilder(MOD_ID)
-			.build(new ItemArmor("amulet_heart", MOD_ID + ":amulet_heart" ,++itemID, heartAmulet, 1));
+			.build(new ItemArmor("amulet_heart", MOD_ID + ":amulet_heart" ,++itemID, heartAmulet, IArmorItem.PIECE_CHEST));
 	}
 
 	public static void replaceVanillaItems() {
 		Item.itemsList[Items.ARMOR_HELMET_LEATHER.id] = null;
 		Item.itemsMap.remove(Items.ARMOR_HELMET_LEATHER.namespaceID);
-		Items.ARMOR_HELMET_LEATHER = new ItemBuilder(MOD_ID)
-			.build(new ArmorColored("armor_helmet_leather", Items.ARMOR_HELMET_LEATHER.namespaceID.toString() ,Items.ARMOR_HELMET_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_HEAD));
+		Items.ARMOR_HELMET_LEATHER = new ArmorColored("armor.helmet.leather", Items.ARMOR_HELMET_LEATHER.namespaceID.toString() ,Items.ARMOR_HELMET_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_HEAD);
 
 		Item.itemsList[Items.ARMOR_CHESTPLATE_LEATHER.id] = null;
 		Item.itemsMap.remove(Items.ARMOR_CHESTPLATE_LEATHER.namespaceID);
-		Items.ARMOR_CHESTPLATE_LEATHER = new ItemBuilder(MOD_ID)
-			.build(new ArmorColored("armor_chestplate_leather", Items.ARMOR_CHESTPLATE_LEATHER.namespaceID.toString() ,Items.ARMOR_CHESTPLATE_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_CHEST));
+		Items.ARMOR_CHESTPLATE_LEATHER = new ArmorColored("armor.chestplate.leather", Items.ARMOR_CHESTPLATE_LEATHER.namespaceID.toString() ,Items.ARMOR_CHESTPLATE_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_CHEST);
 
 
 		Item.itemsList[Items.ARMOR_LEGGINGS_LEATHER.id] = null;
 		Item.itemsMap.remove(Items.ARMOR_LEGGINGS_LEATHER.namespaceID);
-		Items.ARMOR_LEGGINGS_LEATHER = new  ItemBuilder(MOD_ID)
-			.build(new ArmorColored("armor_leggings_leather", Items.ARMOR_LEGGINGS_LEATHER.namespaceID.toString() ,Items.ARMOR_LEGGINGS_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_LEGS));
+		Items.ARMOR_LEGGINGS_LEATHER = new ArmorColored("armor.leggings.leather", Items.ARMOR_LEGGINGS_LEATHER.namespaceID.toString() ,Items.ARMOR_LEGGINGS_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_LEGS);
 
 
 		Item.itemsList[Items.ARMOR_BOOTS_LEATHER.id] = null;
 		Item.itemsMap.remove(Items.ARMOR_BOOTS_LEATHER.namespaceID);
-		Items.ARMOR_BOOTS_LEATHER = new ItemBuilder(MOD_ID)
-			.build(new ArmorColored("armor_boots_leather", Items.ARMOR_BOOTS_LEATHER.namespaceID.toString() ,Items.ARMOR_BOOTS_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_BOOTS));
+		Items.ARMOR_BOOTS_LEATHER = new ArmorColored("armor.boots.leather", Items.ARMOR_BOOTS_LEATHER.namespaceID.toString() ,Items.ARMOR_BOOTS_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_BOOTS);
 	}
 }
