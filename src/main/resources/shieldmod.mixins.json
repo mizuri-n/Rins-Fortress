@@ -8,6 +8,7 @@
     "FieldMixin",
     "ItemsMixin",
     "KnockBackMixin",
+    "RecipeRegistryMixin",
     "ShieldMixin",
     "entity.EntityCreeperMixin",
     "entity.EntityLivingMixin",
