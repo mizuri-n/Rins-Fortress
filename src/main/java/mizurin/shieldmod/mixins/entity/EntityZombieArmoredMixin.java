@@ -27,7 +27,7 @@ public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie
 	public EntityZombieArmoredMixin(World world) {
 		super(world);
 	}
-	@Inject(method = "spawnInit", at = @At("TAIL"))
+	@Inject(method = "<init>", at = @At("TAIL"))
 	public void init(CallbackInfo ci){
 		entityData.define(21, (byte)0, Byte.class);
 	}
