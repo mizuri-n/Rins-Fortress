@@ -9,6 +9,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.core.crafting.LookupFuelFurnace;
+import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.enums.ArtType;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.net.entity.NetEntityHandler;
@@ -84,7 +85,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	@Override
 	public void afterGameStart() {
 		LookupFuelFurnace.instance.addFuelEntry(Shields.woodenShield.id, 600);
-		new Recipes().initializeRecipe();
+		Registries.RECIPE_TYPES.register("colored/shield", RecipeColor.class);
 		LOGGER.info("RF initialized");
 	}
 
