@@ -15,7 +15,7 @@ import java.util.HashMap;
 import static net.minecraft.client.render.texture.stitcher.TextureRegistry.artAtlas;
 
 //Mixin for reloading painting textures.
-@Mixin(TextureRegistry.class)
+@Mixin(value = TextureRegistry.class, remap = false)
 public abstract class PaintingMixin {
 	@Shadow
 	public static HashMap<String, AtlasStitcher> stitcherMap;

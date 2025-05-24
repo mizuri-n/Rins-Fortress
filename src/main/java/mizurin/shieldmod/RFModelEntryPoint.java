@@ -1,16 +1,13 @@
 package mizurin.shieldmod;
 
-import mizurin.shieldmod.blocks.BlockLeavesAppleFlowering;
-import mizurin.shieldmod.blocks.BlockModelAppleLeavesBloom;
-import mizurin.shieldmod.blocks.RinBlocks;
 import mizurin.shieldmod.entities.*;
+import mizurin.shieldmod.item.ArmorColored;
 import mizurin.shieldmod.item.ItemModelColored;
 import mizurin.shieldmod.item.ItemModelShield;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.client.render.EntityRenderDispatcher;
 import net.minecraft.client.render.TileEntityRenderDispatcher;
 import net.minecraft.client.render.block.color.BlockColorDispatcher;
-import net.minecraft.client.render.block.color.BlockColorLeavesOak;
 import net.minecraft.client.render.block.model.BlockModelAxisAligned;
 import net.minecraft.client.render.block.model.BlockModelCrossedSquares;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
@@ -49,58 +46,58 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 	@Override
 	public void initItemModels(ItemModelDispatcher dispatcher) {
 		ModelHelper.setItemModel(Shields.woodenShield, () -> {
-			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.woodenShield, new ItemModelColored.ColoredTextureEntry[]
-				{new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/wooden_shield"), (s) -> -1)}).setFull3D();
+			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.woodenShield,
+				new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/wooden_shield"), (s) -> -1)).setFull3D();
 			im.icon	= TextureRegistry.getTexture(Shields.woodenShield.namespaceID);
 			return im;
 		});
 
 		ModelHelper.setItemModel(Shields.stoneShield, () -> {
-			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.stoneShield, new ItemModelColored.ColoredTextureEntry[]
-				{new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/stone_shield"), (s) -> -1)}).setFull3D();
+			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.stoneShield,
+				new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/stone_shield"), (s) -> -1)).setFull3D();
 			im.icon	= TextureRegistry.getTexture(Shields.stoneShield.namespaceID);
 			return im;
 		});
 
 		ModelHelper.setItemModel(Shields.ironShield, () -> {
-			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.ironShield, new ItemModelColored.ColoredTextureEntry[]
-				{new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/iron_shield"), (s) -> -1)}).setFull3D();
+			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.ironShield,
+				new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/iron_shield"), (s) -> -1)).setFull3D();
 			im.icon	= TextureRegistry.getTexture(Shields.ironShield.namespaceID);
 			return im;
 		});
 
 		ModelHelper.setItemModel(Shields.goldShield, () -> {
-			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.goldShield, new ItemModelColored.ColoredTextureEntry[]
-				{new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/gold_shield"), (s) -> -1)}).setFull3D();
+			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.goldShield,
+				new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/gold_shield"), (s) -> -1)).setFull3D();
 			im.icon	= TextureRegistry.getTexture(Shields.goldShield.namespaceID);
 			return im;
 		});
 
 		ModelHelper.setItemModel(Shields.diamondShield, () -> {
-			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.diamondShield, new ItemModelColored.ColoredTextureEntry[]
-				{new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/diamond_shield"), (s) -> -1)}).setFull3D();
+			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.diamondShield,
+				new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/diamond_shield"), (s) -> -1)).setFull3D();
 			im.icon	= TextureRegistry.getTexture(Shields.diamondShield.namespaceID);
 			return im;
 		});
 
 		ModelHelper.setItemModel(Shields.steelShield, () -> {
-			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.steelShield, new ItemModelColored.ColoredTextureEntry[]
-				{new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/steel_shield"), (s) -> -1)}).setFull3D();
+			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.steelShield,
+				new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/steel_shield"), (s) -> -1)).setFull3D();
 			im.icon	= TextureRegistry.getTexture(Shields.steelShield.namespaceID);
 			return im;
 		});
 
 		ModelHelper.setItemModel(Shields.leatherShield, () -> {
-			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.leatherShield, new ItemModelColored.ColoredTextureEntry[]
-				{new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/colored"),ItemModelShield::shieldColor),
-			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/outline"), (s) -> -1)}).setFull3D();
+			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.leatherShield,
+				new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/colored"),ItemModelShield::shieldColor),
+				new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/outline"), (s) -> -1)).setFull3D();
 			im.icon	= TextureRegistry.getTexture(Shields.leatherShield.namespaceID);
 			return im;
 		});
 
 		ModelHelper.setItemModel(Shields.tearShield, () -> {
-			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.tearShield, new ItemModelColored.ColoredTextureEntry[]
-				{new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/tearstone_shield"), (s) -> -1)}).setFull3D();
+			ItemModelShield im = (ItemModelShield) new ItemModelShield(Shields.tearShield,
+				new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/tearstone_shield"), (s) -> -1)).setFull3D();
 			im.icon	= TextureRegistry.getTexture(Shields.tearShield.namespaceID);
 			return im;
 		});
@@ -122,6 +119,11 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 			model.icon = TextureRegistry.getTexture("shieldmod:item/regen_amulet");
 			return model;
 		});
+
+		dispatcher.addDispatch(new ItemModelColored(Items.ARMOR_BOOTS_LEATHER, new ItemModelColored.ColoredTextureEntry("shieldmod:item/leather_boots", ArmorColored::getColor)));
+		dispatcher.addDispatch(new ItemModelColored(Items.ARMOR_LEGGINGS_LEATHER, new ItemModelColored.ColoredTextureEntry("shieldmod:item/leather_leggings", ArmorColored::getColor)));
+		dispatcher.addDispatch(new ItemModelColored(Items.ARMOR_CHESTPLATE_LEATHER, new ItemModelColored.ColoredTextureEntry("shieldmod:item/leather_chestplate", ArmorColored::getColor)));
+		dispatcher.addDispatch(new ItemModelColored(Items.ARMOR_HELMET_LEATHER, new ItemModelColored.ColoredTextureEntry("shieldmod:item/leather_helmet", ArmorColored::getColor)));
 	}
 
 	@Override

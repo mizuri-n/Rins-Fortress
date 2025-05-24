@@ -6,16 +6,16 @@ import java.awt.*;
 
 public class ColoredArmorTexture {
 	protected NamespaceID armorTexture;
-	protected Color color;
+	protected int color;
 
-	public ColoredArmorTexture(NamespaceID armorTexture, Color color){
+	public ColoredArmorTexture(NamespaceID armorTexture, int color){
 		this.armorTexture = armorTexture;
 		this.color = color;
 	}
 	public NamespaceID getArmorTexture(){
 		return armorTexture;
 	}
-	public Color getColor(){
+	public int getColor(){
 		return color;
 	}
 }

@@ -7,6 +7,7 @@ import net.minecraft.client.render.TextureManager;
 import net.minecraft.client.render.item.model.ItemModelStandard;
 import net.minecraft.client.render.texture.stitcher.IconCoordinate;
 import net.minecraft.client.render.tessellator.Tessellator;
+import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
@@ -20,25 +21,21 @@ import java.util.function.Function;
 public class ItemModelColored extends ItemModelStandard {
 	private int currentIndex;
 	private final ColoredTextureEntry[] textureEntries; // Specifically an array list to guarantee consecutive order when indexing
-	public ItemModelColored(Item item, ColoredTextureEntry[] textureEntries) {
+	public ItemModelColored(Item item, ColoredTextureEntry ... textureEntries) {
 		super(item, null);
 		this.textureEntries = textureEntries;
 	}
 
 	@Override
 	public void renderItemInWorld(Tessellator tessellator, Entity entity, ItemStack itemStack, float brightness, float alpha, boolean worldTransform) {
-		currentIndex = 0;
-		for (int i = 0; i < textureEntries.length; i++) {
-			currentIndex = i;
+		for (currentIndex = 0; currentIndex < textureEntries.length; currentIndex++) {
 			super.renderItemInWorld(tessellator, entity, itemStack, brightness, alpha, worldTransform);
 		}
 	}
 
 	@Override
 	public void renderItemIntoGui(Tessellator tessellator, Font fontrenderer, TextureManager renderengine, ItemStack itemStack, int x, int y, float brightness, float alpha) {
-		currentIndex = 0;
-		for (int i = 0; i < textureEntries.length; i++) {
-			currentIndex = i;
+		for (currentIndex = 0; currentIndex < textureEntries.length; currentIndex++) {
 			super.renderItemIntoGui(tessellator, fontrenderer, renderengine, itemStack, x, y, brightness, alpha);
 		}
 	}
@@ -94,9 +91,8 @@ public class ItemModelColored extends ItemModelStandard {
 				}
 
 				GL11.glRotatef(180.0F - renderDispatcher.viewLerpYaw, 0.0F, 1.0F, 0.0F);
-				for (int index = 0; index < textureEntries.length; index++) {
-					currentIndex = index;
-					ColoredTextureEntry e = textureEntries[index];
+				for (currentIndex = 0; currentIndex < textureEntries.length; currentIndex++) {
+					ColoredTextureEntry e = textureEntries[currentIndex];
 					int color = e.colorProcessor.apply(itemstack);
 					r = (float)(color >> 16 & 255) / 255.0F;
 					g = (float)(color >> 8 & 255) / 255.0F;
@@ -125,8 +121,14 @@ public class ItemModelColored extends ItemModelStandard {
 	public static class ColoredTextureEntry {
 		public final IconCoordinate coordinate;
 		public final Function<ItemStack, Integer> colorProcessor;
+
 		public ColoredTextureEntry(IconCoordinate coordinate, Function<ItemStack, Integer> colorProcessor) {
 			this.coordinate = coordinate;
+			this.colorProcessor = colorProcessor;
+		}
+
+		public ColoredTextureEntry(String texture, Function<ItemStack, Integer> colorProcessor) {
+			this.coordinate = TextureRegistry.getTexture(texture);
 			this.colorProcessor = colorProcessor;
 		}
 	}

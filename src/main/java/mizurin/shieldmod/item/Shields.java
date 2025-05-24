@@ -1,9 +1,11 @@
 package mizurin.shieldmod.item;
 
 import mizurin.shieldmod.ShieldMod;
+import net.minecraft.core.item.IArmorItem;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemSoup;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.tag.ItemTags;
 import org.slf4j.Logger;
@@ -27,10 +29,6 @@ public class Shields {
 	public static Item ammotearShield;
 	public static Item pumpkinStew;
 
-	public static Item armorLeatherHelmet;
-	public static Item armorLeatherChest;
-	public static Item armorLeatherLeg;
-	public static Item armorLeatherBoot;
 	public static Item poisonBottle;
 	public static Item rockyHelmet;
 	public static Item regenAmulet;
@@ -99,23 +97,6 @@ public class Shields {
 			.build(new ItemSoup("food_stew_pumpkin", MOD_ID + ":food_stew_pumpkin" ,++itemID, 20, 50));
 
 
-		// TODO need to bypass vanilla id check
-//		armorLeatherHelmet = new ItemBuilder(MOD_ID)
-//			.build(new ArmorColored("armor_helmet_leather", MOD_ID + ":armor_helmet_leather" ,16426, ArmorMaterial.LEATHER, 0));
-//
-//
-//		armorLeatherChest = new ItemBuilder(MOD_ID)
-//			.build(new ArmorColored("armor_chestplate_leather", MOD_ID + ":armor_chestplate_leather" ,16427, ArmorMaterial.LEATHER, 1));
-//
-//
-//		armorLeatherLeg = new  ItemBuilder(MOD_ID)
-//			.build(new ArmorColored("armor_leggings_leather", MOD_ID + ":armor_leggings_leather" ,16428, ArmorMaterial.LEATHER, 2));
-//
-//
-//		armorLeatherBoot = new ItemBuilder(MOD_ID)
-//			.build(new ArmorColored("armor_boots_leather", MOD_ID + ":armor_boots_leather" ,16429, ArmorMaterial.LEATHER, 3));
-
-
 		poisonBottle = new ItemBuilder(MOD_ID).setStackSize(16).build(new ItemPB("poison_bottle", MOD_ID + ":poison_bottle" ,++itemID));
 
 
@@ -125,5 +106,29 @@ public class Shields {
 
 		regenAmulet = new ItemBuilder(MOD_ID)
 			.build(new ItemArmor("amulet_heart", MOD_ID + ":amulet_heart" ,++itemID, heartAmulet, 1));
+	}
+
+	public static void replaceVanillaItems() {
+		Item.itemsList[Items.ARMOR_HELMET_LEATHER.id] = null;
+		Item.itemsMap.remove(Items.ARMOR_HELMET_LEATHER.namespaceID);
+		Items.ARMOR_HELMET_LEATHER = new ItemBuilder(MOD_ID)
+			.build(new ArmorColored("armor_helmet_leather", Items.ARMOR_HELMET_LEATHER.namespaceID.toString() ,Items.ARMOR_HELMET_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_HEAD));
+
+		Item.itemsList[Items.ARMOR_CHESTPLATE_LEATHER.id] = null;
+		Item.itemsMap.remove(Items.ARMOR_CHESTPLATE_LEATHER.namespaceID);
+		Items.ARMOR_CHESTPLATE_LEATHER = new ItemBuilder(MOD_ID)
+			.build(new ArmorColored("armor_chestplate_leather", Items.ARMOR_CHESTPLATE_LEATHER.namespaceID.toString() ,Items.ARMOR_CHESTPLATE_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_CHEST));
+
+
+		Item.itemsList[Items.ARMOR_LEGGINGS_LEATHER.id] = null;
+		Item.itemsMap.remove(Items.ARMOR_LEGGINGS_LEATHER.namespaceID);
+		Items.ARMOR_LEGGINGS_LEATHER = new  ItemBuilder(MOD_ID)
+			.build(new ArmorColored("armor_leggings_leather", Items.ARMOR_LEGGINGS_LEATHER.namespaceID.toString() ,Items.ARMOR_LEGGINGS_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_LEGS));
+
+
+		Item.itemsList[Items.ARMOR_BOOTS_LEATHER.id] = null;
+		Item.itemsMap.remove(Items.ARMOR_BOOTS_LEATHER.namespaceID);
+		Items.ARMOR_BOOTS_LEATHER = new ItemBuilder(MOD_ID)
+			.build(new ArmorColored("armor_boots_leather", Items.ARMOR_BOOTS_LEATHER.namespaceID.toString() ,Items.ARMOR_BOOTS_LEATHER.id, ArmorMaterial.LEATHER, IArmorItem.PIECE_BOOTS));
 	}
 }

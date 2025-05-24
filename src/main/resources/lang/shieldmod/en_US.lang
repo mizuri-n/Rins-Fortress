@@ -24,7 +24,7 @@ item.shieldmod.amulet_heart.name=Amulet of restoration
 item.shieldmod.amulet_heart.desc=An amulet that is warm to the touch.
 
 
-item.shieldmod.armor_.helmet_leather.name=Leather Cap
+item.shieldmod.armor_helmet_leather.name=Leather Cap
 item.shieldmod.armor_helmet_leather.desc=A hat made from a cow's hide.
 item.shieldmod.armor_chestplate_leather.name=Leather Tunic
 item.shieldmod.armor_chestplate_leather.desc=A tunic made from a cow's hide.
