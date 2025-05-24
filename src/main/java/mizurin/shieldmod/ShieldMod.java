@@ -2,24 +2,29 @@ package mizurin.shieldmod;
 
 import mizurin.shieldmod.blocks.RinBlocks;
 import mizurin.shieldmod.entities.*;
+import mizurin.shieldmod.item.ArmorColored;
+import mizurin.shieldmod.item.ItemModelColored;
 import mizurin.shieldmod.item.Shields;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.colorizer.Colorizers;
 import net.minecraft.core.crafting.LookupFuelFurnace;
+import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.enums.ArtType;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.net.entity.NetEntityHandler;
 import net.minecraft.core.util.collection.NamespaceID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.EntityHelper;
+import turniplabs.halplibe.helper.ModelHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 
 import java.util.Properties;
 
-public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint, ClientModInitializer {
+public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint {
     public static final String MOD_ID = "shieldmod";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static int playerArmorRenderOffset = 0;
@@ -54,13 +59,13 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
     @Override
     public void onInitialize() {
         LOGGER.info("Rin's Fortress has been initialized.");
-		new Shields().initializeItems();
-		new RinBlocks().initializeBlocks();
-		Colorizers.registerColorizers();
     }
 
 	@Override
 	public void beforeGameStart() {
+		new Shields().initializeItems();
+		new RinBlocks().initializeBlocks();
+
 		paintingSeal = new ArtType("paintingSeal", "The Orb", "Rin", "shieldmod:art/seal", 32, 32);
 		paintingRice = new ArtType("paintingRice", "Lunch", "Rin", "shieldmod:art/onigiri", 32, 32);
 		// TODO need to assign models with the model entrypoint and model helper now
@@ -80,21 +85,17 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	@Override
 	public void afterGameStart() {
 		LookupFuelFurnace.instance.addFuelEntry(Shields.woodenShield.id, 600);
-		new Recipes().initializeRecipe();
+		Registries.RECIPE_TYPES.register("colored/shield", RecipeColor.class);
 		LOGGER.info("RF initialized");
 	}
 
 	@Override
 	public void beforeClientStart() {
+		Colorizers.registerColorizers();
 	}
 
 	@Override
 	public void afterClientStart() {
 	}
 
-
-	@Override
-	public void onInitializeClient() {
-	new RFModelEntryPoint();
-	}
 }

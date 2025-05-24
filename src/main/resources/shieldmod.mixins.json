@@ -4,10 +4,11 @@
   "package": "mizurin.shieldmod.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BlockFarmlandMixin",
     "DazedMixin",
     "FieldMixin",
+    "ItemsMixin",
     "KnockBackMixin",
+    "RecipeRegistryMixin",
     "ShieldMixin",
     "entity.EntityCreeperMixin",
     "entity.EntityLivingMixin",

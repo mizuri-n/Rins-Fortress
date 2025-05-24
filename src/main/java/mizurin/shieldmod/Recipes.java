@@ -6,6 +6,7 @@ import net.minecraft.core.block.Blocks;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
 import net.minecraft.core.data.registry.recipe.RecipeNamespace;
+import net.minecraft.core.data.registry.recipe.RecipeRegistry;
 import net.minecraft.core.data.registry.recipe.RecipeSymbol;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCrafting;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryRepairable;
@@ -102,10 +103,7 @@ public class Recipes implements RecipeEntrypoint {
 
 		WORKBENCH.register("rockyHelmetHat", new RecipeEntryRepairable(Shields.rockyHelmet.getDefaultStack(), new RecipeSymbol(new ItemStack(Blocks.COBBLE_STONE))));
 	}
-	public void initializeRecipe(){
-		Registries.RECIPE_TYPES.register("colored/shield", RecipeColor.class);
-		WORKBENCH.register("leather", new RecipeColor());
-	}
+
 }
 
 

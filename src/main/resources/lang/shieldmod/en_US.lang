@@ -23,16 +23,6 @@ item.shieldmod.helmet_rock.desc=A crumbling helmet.
 item.shieldmod.amulet_heart.name=Amulet of restoration
 item.shieldmod.amulet_heart.desc=An amulet that is warm to the touch.
 
-
-item.shieldmod.armor_.helmet_leather.name=Leather Cap
-item.shieldmod.armor_helmet_leather.desc=A hat made from a cow's hide.
-item.shieldmod.armor_chestplate_leather.name=Leather Tunic
-item.shieldmod.armor_chestplate_leather.desc=A tunic made from a cow's hide.
-item.shieldmod.armor_leggings_leather.name=Leather Pants
-item.shieldmod.armor_leggings_leather.desc=A pair of trousers made from a cow's hide.
-item.shieldmod.armor_boots_leather.name=Leather Boots
-item.shieldmod.armor_boots_leather.desc=A pair of boots made from a cow's hide.
-
 tile.shieldmod.log.apple.name=Apple Log
 tile.shieldmod.log.apple.desc=A log from an apple tree.
 tile.shieldmod.leaves.apple.name=Apple Leaves

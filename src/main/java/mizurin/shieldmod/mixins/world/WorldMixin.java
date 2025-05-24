@@ -2,6 +2,7 @@ package mizurin.shieldmod.mixins.world;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -44,16 +45,16 @@ public class WorldMixin {
 				ItemStack helmetSlot = entityPlayer1.inventory.armorItemInSlot(3); //1
 
 
-				if (helmetSlot != null && helmetSlot.itemID == Shields.armorLeatherHelmet.id){
+				if (helmetSlot != null && helmetSlot.itemID == Items.ARMOR_HELMET_LEATHER.id){
 					armorTotal -= 1;
 					plyInvis = true;
-				} if (chestplateSlot != null && chestplateSlot.itemID == Shields.armorLeatherChest.id) {
+				} if (chestplateSlot != null && chestplateSlot.itemID == Items.ARMOR_CHESTPLATE_LEATHER.id) {
 					armorTotal -= 4;
 					plyInvis = true;
-				} if (leggingsSlot != null && leggingsSlot.itemID == Shields.armorLeatherLeg.id) {
+				} if (leggingsSlot != null && leggingsSlot.itemID == Items.ARMOR_LEGGINGS_LEATHER.id) {
 					armorTotal -= 2;
 					plyInvis = true;
-				} if (bootSlot != null && bootSlot.itemID == Shields.armorLeatherBoot.id){
+				} if (bootSlot != null && bootSlot.itemID == Items.ARMOR_BOOTS_LEATHER.id){
 					armorTotal -= 1;
 					plyInvis = true;
 				}

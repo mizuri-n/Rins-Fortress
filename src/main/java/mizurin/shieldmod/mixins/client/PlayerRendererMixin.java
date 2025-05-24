@@ -10,6 +10,7 @@ import net.minecraft.client.render.model.ModelBase;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.collection.NamespaceID;
+import net.minecraft.core.util.helper.Color;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -17,8 +18,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.awt.*;
 
 @Mixin(value = MobRendererPlayer.class, remap = false)
 public abstract class PlayerRendererMixin extends MobRenderer<Player> {
@@ -40,8 +39,8 @@ public abstract class PlayerRendererMixin extends MobRenderer<Player> {
 		if (itemstack != null && itemstack.getItem() instanceof IColoredArmor){
 			armorTextures =((IColoredArmor) itemstack.getItem()).getArmorTextures(itemstack);
 			if (ShieldMod.playerArmorRenderOffset > armorTextures.length) return;
-			Color color = armorTextures[ShieldMod.playerArmorRenderOffset].getColor();
-			GL11.glColor4f((color.getRed()/255f) * brightness, (color.getGreen()/255f) * brightness, (color.getBlue()/255f) * brightness,color.getAlpha()/255f);
+			int color = armorTextures[ShieldMod.playerArmorRenderOffset].getColor();
+			GL11.glColor4f((Color.redFromInt(color) /255f) * brightness, (Color.greenFromInt(color)/255f) * brightness, (Color.blueFromInt(color)/255f) * brightness, Color.alphaFromInt(color)/255f);
 		}
 	}
 	@Inject(method = "prepareArmor(Lnet/minecraft/core/entity/player/Player;IF)Z", at = @At("TAIL"))

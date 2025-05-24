@@ -27,7 +27,7 @@ public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie
 	public EntityZombieArmoredMixin(World world) {
 		super(world);
 	}
-	@Inject(method = "spawnInit", at = @At("TAIL"))
+	@Inject(method = "<init>", at = @At("TAIL"))
 	public void init(CallbackInfo ci){
 		entityData.define(21, (byte)0, Byte.class);
 	}
@@ -35,15 +35,15 @@ public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie
 	@Override
 	public void spawnInit(){
 		super.spawnInit();
-//		if ((random.nextInt(5) == 0)){
-//			//chance of spawning
-//			setHealthRaw(80);
-//			attackStrength = 6;
-//			this.mobDrops.add(new WeightedRandomLootObject(Items.ORE_RAW_IRON.getDefaultStack(), 1, 1));
-//			//guaranteed drop of 1-2 iron as a reward for killing the shielded zombie.
-//			entityData.set(21, (byte)1);
-//			//if it spawns, set the data true.
-//		}
+		if ((random.nextInt(5) == 0)){
+			//chance of spawning
+			setHealthRaw(80);
+			attackStrength = 6;
+			this.mobDrops.add(new WeightedRandomLootObject(Items.ORE_RAW_IRON.getDefaultStack(), 1, 1));
+			//guaranteed drop of 1-2 iron as a reward for killing the shielded zombie.
+			entityData.set(21, (byte)1);
+			//if it spawns, set the data true.
+		}
 	}
 
 

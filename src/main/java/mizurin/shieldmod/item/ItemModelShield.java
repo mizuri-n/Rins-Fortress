@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 
 public class ItemModelShield extends ItemModelColored {
-	public ItemModelShield(Item item, ColoredTextureEntry[] textureEntries) {
+	public ItemModelShield(Item item, ColoredTextureEntry ... textureEntries) {
 		super(item, textureEntries);
 	}
 
