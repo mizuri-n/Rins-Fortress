@@ -16,7 +16,7 @@ public class EntityCreeperMixin extends MobMonster {
 		super(world);
 	}
 	public void spawnInit() {
-		if (expertMode && (this.world.getCurrentWeather() == OVERWORLD_STORM) && random.nextInt(50) == 0){
+		if (expertMode && (this.world.getCurrentWeather() == OVERWORLD_STORM) && random.nextInt(25) == 0){
 			this.entityData.set(17, (byte)1);
 		}
 		if(expertMode){

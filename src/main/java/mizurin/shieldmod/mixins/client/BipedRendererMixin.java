@@ -1,15 +1,12 @@
 package mizurin.shieldmod.mixins.client;
 
 import mizurin.shieldmod.interfaces.IShieldZombie;
-import net.minecraft.client.render.block.model.BlockModel;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.MobRenderer;
 import net.minecraft.client.render.entity.MobRendererBiped;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.model.ModelBiped;
 import net.minecraft.client.render.tessellator.Tessellator;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.item.ItemStack;

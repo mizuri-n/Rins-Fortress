@@ -33,8 +33,8 @@ public class Shields {
 	public static Item rockyHelmet;
 	public static Item regenAmulet;
 
-	public static ArmorMaterial rockyArmor = ArmorHelper.createArmorMaterial(MOD_ID, "stone", 256, 30f, 30f, 30f, 30f);
-	public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "amulet", 384, 0f, 0f, 0f, 0f);
+	public static ArmorMaterial rockyArmor = ArmorHelper.createArmorMaterial(MOD_ID, "stone", 240, 30f, 30f, 30f, 30f);
+	public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "amulet", 120, 0f, 0f, 0f, 0f);
 
 
 	@SuppressWarnings("unchecked")
@@ -89,7 +89,7 @@ public class Shields {
 
 		ammotearShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
-			.build(new Item("tear_shield_ammo", MOD_ID + ":tear_shield_ammo", ++itemID))
+			.build(new Item("ammo_tear_shield", MOD_ID + ":item/tear_shield_ammo", ++itemID))
 			.withTags(ItemTags.NOT_IN_CREATIVE_MENU);
 
 

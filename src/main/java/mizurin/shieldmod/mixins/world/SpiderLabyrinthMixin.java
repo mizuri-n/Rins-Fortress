@@ -7,7 +7,9 @@ import net.minecraft.core.world.biome.Biome;
 import net.minecraft.core.world.biome.Biomes;
 import net.minecraft.core.world.generate.chunk.perlin.overworld.ChunkDecoratorOverworld;
 import net.minecraft.core.world.generate.feature.WorldFeatureLabyrinth;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
@@ -17,15 +19,16 @@ import java.util.Random;
 public class SpiderLabyrinthMixin {
 
 
-
+	@Shadow
+	@Final
+	private World world;
 
 	@Redirect(method = "decorate", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/world/generate/feature/WorldFeatureLabyrinth;place(Lnet/minecraft/core/world/World;Ljava/util/Random;III)Z"))
-	public boolean redirect(WorldFeatureLabyrinth instance, World world, Random rand, int x, int y, int z,
-							@Local(name = "biome") Biome biome) {
+	public boolean redirect(WorldFeatureLabyrinth instance, World world, Random lRand, int x, int y, int z, @Local(name = "biome") Biome biome) {
 		boolean isBoreal = (biome == Biomes.OVERWORLD_BOREAL_FOREST || biome == Biomes.OVERWORLD_MEADOW);
 		if (isBoreal) {
-			return new SpiderLabyrinth().place(world, rand, x, y, z);
+			return new SpiderLabyrinth().place(this.world, lRand, x, y, z);
 		}
-		return instance.place(world, rand, x, y, z);
+		return instance.place(world, lRand, x, y, z);
 	}
 }
