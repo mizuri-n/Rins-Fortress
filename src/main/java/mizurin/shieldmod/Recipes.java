@@ -94,7 +94,7 @@ public class Recipes implements RecipeEntrypoint {
 
 		RecipeBuilder.Shapeless(MOD_ID)
 			.addInput(new ItemStack(RinBlocks.logApple, 1))
-			.create("apple_log_to_grey", new ItemStack(Blocks.PLANKS_OAK_PAINTED, 4, 7));
+			.create("apple_log_to_grey", new ItemStack(Blocks.PLANKS_OAK_PAINTED, 4, 8));
 
 
 		WORKBENCH.register("tearstoneShield", new RecipeEntryRepairable(Shields.tearShield.getDefaultStack(), new RecipeSymbol(new ItemStack(Items.INGOT_IRON, 1))));

@@ -4,6 +4,7 @@ import mizurin.shieldmod.interfaces.IDazed;
 import net.minecraft.core.entity.ConsumedFood;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
+import net.minecraft.core.entity.monster.MobZombieArmored;
 import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
@@ -40,14 +41,6 @@ public abstract class DazedMixin extends Entity implements IDazed {
 		return false;
 	}
 
-	@Shadow
-	public abstract int getMaxHealth();
-
-	@Shadow
-	public int bonusHealth;
-
-	@Shadow
-	public abstract void setHealthRaw(int health);
 
 	@Shadow
 	public abstract float getHeadHeight();
@@ -71,10 +64,6 @@ public abstract class DazedMixin extends Entity implements IDazed {
 			this.xd *= 0.90D;
 			this.zd *= 0.90D;
 
-//			if (this.shieldmod$getDazedHurt() % 25 == 0) {
-//				this.hurt( null, 1, DamageType.GENERIC);
-//			}
-//			if(this.shieldmod$getDazedHurt() % 10 == 0) {
 				float width = 1.0f;
 				double dx = world.rand.nextGaussian() * 0.002;
 				double dy = world.rand.nextGaussian() * 0.002;
@@ -86,10 +75,7 @@ public abstract class DazedMixin extends Entity implements IDazed {
 					this.z + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
 					dx, dy, dz, 0
 				);
-//			}
 			this.entityData.set(DATA_DAZE, this.entityData.getInt(DATA_DAZE) - 3);
-			//the ticks are put in a way to deal small damage and slow while also being offset by fire status
-			//having it mimic the fire status countdown causes them to overlap and only deal damage once due to invulnerability frames.
 		}
 		if (this.shieldmod$getFreezeHurt() > 0) {
 			this.xd *= 0.65D;
@@ -121,7 +107,7 @@ public abstract class DazedMixin extends Entity implements IDazed {
 				double dy = world.rand.nextGaussian() * 0.002;
 				double dz = world.rand.nextGaussian() * 0.002;
 				world.spawnParticle(
-					"blueflame",
+					"purpleflame",
 					this.x + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
 					this.y + this.getHeadHeight() - 1 + (double) (world.rand.nextFloat() * width),
 					this.z + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,

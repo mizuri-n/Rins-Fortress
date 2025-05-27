@@ -14,6 +14,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.AABB;
+import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -31,7 +32,7 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 
 	@Override
 	public void dropDeathItems() {
-		if (this.random.nextInt(1000) == 0) {
+		if (this.random.nextInt(900) == 0 && expertMode) {
 			this.dropItem(Items.BUCKET_ICECREAM.id, 1);
 		}
 		if(expertMode && random.nextInt(10) == 0){
@@ -41,9 +42,10 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 		super.dropDeathItems();
 	}
 
-//	public void spawnInit() {
-//		entityData.define(22, (byte)0, Byte.class);
-//	}
+	public void defineSynchedData() {
+		super.spawnInit();
+		entityData.define(22, (byte)0, Byte.class);
+	}
 
 	//Right click to put a carved pumpkin on the snowman's head
 	@Override
@@ -68,6 +70,31 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 	@Override
 	protected Entity findPlayerToAttack() {
 		if (shieldmod$isSnowJack()) {
+			return null;
+		} else {
+			//else statement for regular snowmen without carved pumpkins.
+			Player entityplayer = this.world.getClosestPlayerToEntity(this, 16.0);
+			return entityplayer != null && this.canEntityBeSeen(entityplayer) && entityplayer.getGamemode().areMobsHostile() ? entityplayer : null;
+		}
+	}
+
+	@Override
+	protected void updateAI(){
+		if (this.closestFireflyEntity == null) {
+			this.closestFireflyEntity = this.getClosestFireflyToEntity((int)this.x, (int)this.y, (int)this.z, 8.0F);
+		}
+
+		if (this.closestFireflyEntity != null) {
+			double dX = this.x - this.closestFireflyEntity.x;
+			double dZ = this.z - this.closestFireflyEntity.z;
+			double hypotenuse = Math.sqrt(dX * dX + dZ * dZ);
+			double scaleFactor = hypotenuse / 8.0;
+			dX *= scaleFactor;
+			dZ *= scaleFactor;
+			Vec3 distanceXYZ = Vec3.getTempVec3(this.x + dX, this.y, this.z + dZ);
+			this.pathToEntity = this.world.getEntityPathToXYZ(this, MathHelper.floor(distanceXYZ.x), MathHelper.floor(this.y), MathHelper.floor(distanceXYZ.z), 16.0F);
+		}
+		if (shieldmod$isSnowJack()) {
 			//creates a bounding box and grabs a list of monsters to attack.
 			//doing just monsters causes the snowman to attack itself, I also want to exclude creepers from being attacked.
 
@@ -75,14 +102,12 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 			nearbyMon.removeAll(this.world.getEntitiesWithinAABB(MobSnowman.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
 			nearbyMon.removeAll(this.world.getEntitiesWithinAABB(MobCreeper.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
 			if (!nearbyMon.isEmpty()) {
-				super.setTarget((Entity) nearbyMon.get(this.world.rand.nextInt(nearbyMon.size())));
+				this.setTarget((Entity)nearbyMon.get(this.world.rand.nextInt(nearbyMon.size())));
 			}
-		} else {
-			//else statement for regular snowmen without carved pumpkins.
-			Player entityplayer = this.world.getClosestPlayerToEntity(this, 16.0);
-			return entityplayer != null && this.canEntityBeSeen(entityplayer) && entityplayer.getGamemode().areMobsHostile() ? entityplayer : null;
+
 		}
-		return findPlayerToAttack();
+
+		super.updateAI();
 	}
 
 	/**

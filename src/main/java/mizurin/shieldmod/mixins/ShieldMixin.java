@@ -242,7 +242,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 		ItemStack helmet_item = this.inventory.armorItemInSlot(3);
 		if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet)) && attacker != this) {
 			if (!this.gamemode.isPlayerInvulnerable()) {
-				if(getHealth() == getMaxHealth()){
+				if(getHealth() == getMaxHealth() && attacker != null){
 					damage = damage / 3;
 				}
 				if (attacker != null) {

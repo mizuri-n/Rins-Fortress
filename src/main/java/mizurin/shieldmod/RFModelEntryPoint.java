@@ -1,5 +1,6 @@
 package mizurin.shieldmod;
 
+import mizurin.shieldmod.blocks.BlockModelAppleLeavesBloom;
 import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.item.ArmorColored;
 import mizurin.shieldmod.item.ItemModelColored;
@@ -7,7 +8,9 @@ import mizurin.shieldmod.item.ItemModelShield;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.client.render.EntityRenderDispatcher;
 import net.minecraft.client.render.TileEntityRenderDispatcher;
+import net.minecraft.client.render.block.color.BlockColorCustom;
 import net.minecraft.client.render.block.color.BlockColorDispatcher;
+import net.minecraft.client.render.block.color.BlockColorLeavesOak;
 import net.minecraft.client.render.block.model.BlockModelAxisAligned;
 import net.minecraft.client.render.block.model.BlockModelCrossedSquares;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
@@ -41,6 +44,7 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 
 		ModelHelper.setBlockModel(leavesApple, () -> new BlockModelLeaves<>(leavesApple, "shieldmod:block/leaves_apple"));
 
+		ModelHelper.setBlockModel(leavesAppleFlowering, () -> new BlockModelAppleLeavesBloom<>(leavesAppleFlowering));
 	}
 
 
@@ -60,15 +64,14 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 		dispatcher.addDispatch(new ItemModelShield(Shields.steelShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/steel_shield"), RFModelEntryPoint::white)).setFull3D());
 		dispatcher.addDispatch(new ItemModelShield(Shields.leatherShield,
-			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/colored"),ItemModelShield::shieldColor),
-			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/outline"), RFModelEntryPoint::white)).setFull3D());
+			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/colored"),ItemModelShield::shieldColor)));
 		dispatcher.addDispatch(new ItemModelShield(Shields.tearShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/tearstone_shield"), RFModelEntryPoint::white)).setFull3D());
 
+		dispatcher.addDispatch(setIcon(new ItemModelStandard(Shields.ammotearShield, null), "shieldmod:item/tear_shield_ammo"));
 		dispatcher.addDispatch(setIcon(new ItemModelStandard(Shields.poisonBottle, null), "shieldmod:item/poison_bottle"));
 		dispatcher.addDispatch(setIcon(new ItemModelStandard(Shields.pumpkinStew, null), "shieldmod:item/pumpkin_stew"));
 		dispatcher.addDispatch(setIcon(new ItemModelStandard(Shields.regenAmulet, null), "shieldmod:item/regen_amulet"));
-
 		dispatcher.addDispatch(setIcon(new ItemModelStandard(Shields.rockyHelmet, null), "shieldmod:item/rocky_helmet"));
 
 		dispatcher.addDispatch(new ItemModelColored(Items.ARMOR_BOOTS_LEATHER, new ItemModelColored.ColoredTextureEntry("shieldmod:item/leather_boots", ArmorColored::getColor)));
@@ -105,6 +108,13 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 			er.init(dispatcher);
 			return er;
 		});
+
+		ModelHelper.setEntityModel(EntityIceBall.class, () -> {
+			final EntityRenderer<?> er = new EntityRendererSprite<EntityIceBall>(Items.AMMO_SNOWBALL);
+			er.init(dispatcher);
+			return er;
+		});
+
 	}
 
 	@Override
@@ -114,6 +124,8 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 
 	@Override
 	public void initBlockColors(final BlockColorDispatcher dispatcher) {
+		ModelHelper.setBlockColor(leavesApple, () -> new BlockColorLeavesOak(apple));
+		ModelHelper.setBlockColor(leavesAppleFlowering, () -> new BlockColorLeavesOak(apple));
 
 	}
 

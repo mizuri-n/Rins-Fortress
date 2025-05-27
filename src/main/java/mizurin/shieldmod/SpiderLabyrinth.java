@@ -4,12 +4,13 @@ import mizurin.shieldmod.blocks.RinBlocks;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
-import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockLogicRotatable;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.entity.TileEntityChest;
 import net.minecraft.core.block.entity.TileEntityDispenser;
 import net.minecraft.core.block.entity.TileEntityMobSpawner;
 import net.minecraft.core.block.material.Material;
+import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
@@ -36,7 +37,7 @@ public class SpiderLabyrinth extends WorldFeature {
 
 	public SpiderLabyrinth() {
 			this.wallBlockA = Blocks.BASALT.id();
-			this.wallBlockB = Blocks.COBBLE_STONE.id();
+			this.wallBlockB = Blocks.COBBLE_BASALT.id();
 			this.brickBlockA = Blocks.BRICK_BASALT.id();
 			this.brickBlockB = Blocks.BRICK_BASALT.id();
 			this.slabBlock = Blocks.SLAB_PLANKS_PAINTED.id();
@@ -125,7 +126,9 @@ public class SpiderLabyrinth extends WorldFeature {
 
 						if (!generateTrapOnWall && (xWallCheck || zWallCheck) && (x == blockZ || z == blockZ) && y == blockY) {
 							world.setBlockWithNotify(x, y, z, Blocks.MOTION_SENSOR_IDLE.id());
+							BlockLogicRotatable.setDefaultDirection(world, x, y, z);
 							world.setBlockWithNotify(x, y - 1, z, Blocks.DISPENSER_COBBLE_STONE.id());
+							BlockLogicRotatable.setDefaultDirection(world, x, y - 1, z);
 							TileEntityDispenser tileEntityDispenser = (TileEntityDispenser)world.getTileEntity(x, blockY - 1, z);
 
 							for(int k4 = 0; k4 < 3; ++k4) {
@@ -204,7 +207,7 @@ public class SpiderLabyrinth extends WorldFeature {
 			return false;
 		} else if (world.getBlockId(x, y, z) != this.brickBlockA && world.getBlockId(x, y, z) != Blocks.PLANKS_OAK_PAINTED.id() && world.getBlockId(x, y, z) != Blocks.COBWEB.id() && world.getBlockId(x, y, z) != Blocks.BOOKSHELF_PLANKS_OAK.id() && world.getBlockId(x, y, z) != Blocks.MOBSPAWNER.id() && world.getBlockId(x, y, z) != this.brickBlockB) {
 			if (world.getBlockId(x, y, z) != Blocks.MOTION_SENSOR_IDLE.id() && world.getBlockId(x, y, z) != Blocks.DISPENSER_COBBLE_STONE.id() && world.getBlockId(x, y, z) != Blocks.MOTION_SENSOR_ACTIVE.id()) {
-				return world.getBlockMaterial(x, y, z) == Material.grass || world.getBlockMaterial(x, y, z) == Material.dirt || world.getBlockMaterial(x, y, z) == Material.stone || world.getBlockMaterial(x, y, z) == Material.sand || world.getBlockMaterial(x, y, z) == Material.moss;
+				return BlockTags.CAVES_CUT_THROUGH.appliesTo(world.getBlock(x, y, z)) || world.getBlockMaterial(x, y, z) == Material.grass || world.getBlockMaterial(x, y, z) == Material.dirt || world.getBlockMaterial(x, y, z).isStone() || world.getBlockMaterial(x, y, z) == Material.sand || world.getBlockMaterial(x, y, z) == Material.moss;
 			} else {
 				world.removeBlockTileEntity(x, y, z);
 				world.setBlockWithNotify(x, y, z, 0);

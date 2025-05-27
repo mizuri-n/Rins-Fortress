@@ -7,7 +7,11 @@ import mizurin.shieldmod.item.ItemModelColored;
 import mizurin.shieldmod.item.Shields;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.client.entity.particle.Particle;
+import net.minecraft.client.entity.particle.ParticleFlame;
 import net.minecraft.client.render.colorizer.Colorizers;
+import net.minecraft.client.render.texture.stitcher.AtlasStitcher;
+import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.enums.ArtType;
@@ -18,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.EntityHelper;
 import turniplabs.halplibe.helper.ModelHelper;
+import turniplabs.halplibe.helper.ParticleHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
@@ -69,17 +74,27 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 		paintingSeal = new ArtType("paintingSeal", "The Orb", "Rin", "shieldmod:art/seal", 32, 32);
 		paintingRice = new ArtType("paintingRice", "Lunch", "Rin", "shieldmod:art/onigiri", 32, 32);
 		// TODO need to assign models with the model entrypoint and model helper now
-		EntityHelper.createEntity(EntityShield.class, NamespaceID.getPermanent(MOD_ID, "ammo_shield"), null, "ammoShield", entityID/*, () -> new EntityRendererSprite<>(Shields.ammotearShield)*/);
-		EntityHelper.createEntity(EntityPB.class, NamespaceID.getPermanent(MOD_ID, "poison_bottle"), null, "poisonBottle", ++entityID/*, () -> new EntityRendererSprite<>(Shields.poisonBottle*/);
-		EntityHelper.createEntity(EntityRock.class, NamespaceID.getPermanent(MOD_ID, "shield_pebble"), null, "pebbleShield", ++entityID/*, () -> new EntityRendererSprite<>(Item.ammoPebble)*/);
-		EntityHelper.createEntity(EntityFire.class, NamespaceID.getPermanent(MOD_ID, "fire"), null, "entityFire", ++entityID/*, () -> new EntityRendererSprite<>(Block.fire.asItem())*/);
-		EntityHelper.createEntity(EntityWeb.class, NamespaceID.getPermanent(MOD_ID, "web"), null, "entityWeb", ++entityID/*, () -> new EntityRendererSprite<>(Block.cobweb.asItem())*/);
-		EntityHelper.createEntity(EntityIceBall.class, NamespaceID.getPermanent(MOD_ID, "ammo_snow"), null, "ammoSnow", ++entityID/*, () -> new EntityRendererSprite<>(Item.ammoSnowball)*/);
+		EntityHelper.createEntity(EntityShield.class, NamespaceID.getPermanent(MOD_ID, "ammo_shield"), null, "ammoShield", entityID);
+		EntityHelper.createEntity(EntityPB.class, NamespaceID.getPermanent(MOD_ID, "poison_bottle"), null, "poisonBottle", ++entityID);
+		EntityHelper.createEntity(EntityRock.class, NamespaceID.getPermanent(MOD_ID, "shield_pebble"), null, "pebbleShield", ++entityID);
+		EntityHelper.createEntity(EntityFire.class, NamespaceID.getPermanent(MOD_ID, "fire"), null, "entityFire", ++entityID);
+		EntityHelper.createEntity(EntityWeb.class, NamespaceID.getPermanent(MOD_ID, "web"), null, "entityWeb", ++entityID);
+		EntityHelper.createEntity(EntityIceBall.class, NamespaceID.getPermanent(MOD_ID, "ammo_snow"), null, "ammoSnow", ++entityID);
 
 		NetEntityHandler.registerNetworkEntry(new NetShieldEntry(), 8000);
 		NetEntityHandler.registerNetworkEntry(new NetPotionEntry(), 8001);
 		NetEntityHandler.registerNetworkEntry(new NetFireEntry(), 8002);
 		NetEntityHandler.registerNetworkEntry(new NetWebEntry(), 8003);
+
+		ParticleHelper.createParticle("purpleflame", ((world, d, e, f, g, h, i, j) -> new EntityPoisonFX(world, d, e, f, g, h, i, ParticleFlame.Type.BLUE)));
+
+		try {
+			for(AtlasStitcher stitcher : TextureRegistry.stitcherMap.values()) {
+				TextureRegistry.initializeAllFiles(MOD_ID, stitcher, stitcher != TextureRegistry.artAtlas);
+			}
+		} catch (Exception e) {
+			LOGGER.warn("Failed to fully initialize assets, some issue may occur!", e);
+		}
 	}
 
 	@Override
