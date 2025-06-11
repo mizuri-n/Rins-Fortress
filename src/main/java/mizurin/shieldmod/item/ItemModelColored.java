@@ -28,14 +28,18 @@ public class ItemModelColored extends ItemModelStandard {
 
 	@Override
 	public void renderItemInWorld(Tessellator tessellator, Entity entity, ItemStack itemStack, float brightness, float alpha, boolean worldTransform) {
-		for (currentIndex = 0; currentIndex < textureEntries.length; currentIndex++) {
+		currentIndex = 0;
+		for (int i = 0; i < textureEntries.length; i++) {
+			currentIndex = i;
 			super.renderItemInWorld(tessellator, entity, itemStack, brightness, alpha, worldTransform);
 		}
 	}
 
 	@Override
 	public void renderItemIntoGui(Tessellator tessellator, Font fontrenderer, TextureManager renderengine, ItemStack itemStack, int x, int y, float brightness, float alpha) {
-		for (currentIndex = 0; currentIndex < textureEntries.length; currentIndex++) {
+		currentIndex = 0;
+		for (int i = 0; i < textureEntries.length; i++) {
+			currentIndex = i;
 			super.renderItemIntoGui(tessellator, fontrenderer, renderengine, itemStack, x, y, brightness, alpha);
 		}
 	}
@@ -91,8 +95,9 @@ public class ItemModelColored extends ItemModelStandard {
 				}
 
 				GL11.glRotatef(180.0F - renderDispatcher.viewLerpYaw, 0.0F, 1.0F, 0.0F);
-				for (currentIndex = 0; currentIndex < textureEntries.length; currentIndex++) {
-					ColoredTextureEntry e = textureEntries[currentIndex];
+				for (int index = 0; index < textureEntries.length; index++) {
+					currentIndex = index;
+					ColoredTextureEntry e = textureEntries[index];
 					int color = e.colorProcessor.apply(itemstack);
 					r = (float)(color >> 16 & 255) / 255.0F;
 					g = (float)(color >> 8 & 255) / 255.0F;

@@ -56,12 +56,12 @@ public class ShieldItem extends ItemToolSword {
 		((ParryInterface)entityplayer).shieldmod$setIsBlock(true);
 		((ParryInterface)entityplayer).shieldmod$Block(5);
 
+
 		return itemstack;
 	}
 	//this function is used for shift right click abilities.
 	public void onBlock(ItemStack itemstack, World world, Player entityplayer) {
 		return;
 	}
-
 }
 

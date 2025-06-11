@@ -1,7 +1,6 @@
 package mizurin.shieldmod.mixins.world;
 
 import mizurin.shieldmod.item.Shields;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.Biome;

@@ -35,7 +35,7 @@ public abstract class BipedRendererMixin<T extends Mob> extends EntityRenderer<T
 			ItemStack itemstack = Blocks.PUMPKIN_CARVED_IDLE.getDefaultStack();
 			if (itemstack != null && itemstack.getItem().id < Blocks.blocksList.length) {
 				GL11.glPushMatrix();
-				this.modelBipedMain.head.render(0.0625f);
+				this.modelBipedMain.head.translateTo(0.0625f);
 				if (BlockModelDispatcher.getInstance().getDispatch(Blocks.blocksList[itemstack.itemID]).shouldItemRender3d()) {
 					float f1 = 0.625f;
 					GL11.glTranslatef(0.0f, -0.25f, 0.0f);

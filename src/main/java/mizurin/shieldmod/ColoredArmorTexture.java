@@ -2,7 +2,6 @@ package mizurin.shieldmod;
 
 import net.minecraft.core.util.collection.NamespaceID;
 
-import java.awt.*;
 
 public class ColoredArmorTexture {
 	protected NamespaceID armorTexture;

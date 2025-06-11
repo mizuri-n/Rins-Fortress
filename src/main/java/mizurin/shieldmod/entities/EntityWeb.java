@@ -5,6 +5,7 @@ import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.projectile.Projectile;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.util.phys.HitResult;
+import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
 
 public class EntityWeb extends Projectile {
@@ -44,12 +45,13 @@ public class EntityWeb extends Projectile {
 		super.onHit(hitResult);
 	}
 
-//	@Override
-//	public HitResult getHitResult() {
-//		Vec3d currentPos = Vec3d.createVector(this.x, this.y, this.z);
-//		Vec3d nextPos = Vec3d.createVector(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
-//		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true);
-//		//I redid the getHitResult so that it can pass through non-solid blocks. (flag1: true).
-//		return hit;
-//	}
+	@Override
+	public HitResult getHitResult() {
+		Vec3 currentPos = Vec3.getTempVec3(this.x, this.y, this.z);
+		Vec3 nextPos = Vec3.getTempVec3(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
+		assert this.world != null;
+		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true, false);
+		return hit;
+	}
+
 }

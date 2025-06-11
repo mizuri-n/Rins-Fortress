@@ -34,8 +34,6 @@ public class ThrowShield extends ShieldItem{
 			((IThrownItem)entityplayer).setThrownItem(itemstack);
 			//Sets the shield to the player's thrown item.
 
-			//entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem,null);
-
 			entityplayer.inventory.setItem(entityplayer.inventory.getCurrentItemIndex(), null);
 			//Sets the shield to null to hide it and act as a cooldown.
 			world.playSoundAtEntity(null, entityplayer, "mob.ghast.fireball", 0.3F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));

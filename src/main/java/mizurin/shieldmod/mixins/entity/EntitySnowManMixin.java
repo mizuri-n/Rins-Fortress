@@ -5,8 +5,6 @@ import mizurin.shieldmod.entities.EntityIceBall;
 import mizurin.shieldmod.interfaces.IShieldZombie;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.Mob;
-import net.minecraft.core.entity.animal.MobSheep;
 import net.minecraft.core.entity.monster.*;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.ProjectileSnowball;
@@ -123,8 +121,9 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 				if (this.attackTime == 0) {
 					if (!this.world.isClientSide) {
 						EntityIceBall snowball = new EntityIceBall(this.world, this);
+						snowball.damage = 1;
 						if (this.world.getBlockId((int) this.x, (int) this.y - 1, (int) this.z) == Blocks.GRAVEL.id()) {
-							snowball.damage = 1;
+							snowball.damage = 2;
 						}
 
 						double d2 = entity.y + (double) entity.getHeadHeight() - 0.2 - snowball.y;
