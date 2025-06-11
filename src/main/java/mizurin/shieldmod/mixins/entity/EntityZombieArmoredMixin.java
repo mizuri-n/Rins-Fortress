@@ -18,6 +18,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import static mizurin.shieldmod.ShieldMod.expertMode;
+
 @Mixin(value = MobZombieArmored.class, remap = false)
 public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie {
 	@Final
@@ -37,14 +40,14 @@ public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie
 		super.spawnInit();
 		if ((random.nextInt(5) == 0)){
 			//chance of spawning
-			setHealthRaw(80);
+			setHealthRaw(60);
 			attackStrength = 6;
-			this.mobDrops.add(new WeightedRandomLootObject(Items.ORE_RAW_IRON.getDefaultStack(), 1, 1));
-			//guaranteed drop of 1-2 iron as a reward for killing the shielded zombie.
+			this.mobDrops.add(new WeightedRandomLootObject(Items.ORE_RAW_IRON.getDefaultStack(), 0, 1));
 			entityData.set(21, (byte)1);
 			//if it spawns, set the data true.
 		}
 	}
+
 
 
 	@Override

@@ -20,12 +20,14 @@ public class EntitySkeletonMixin extends MobMonster {
 	}
 	public void spawnInit() {
 		if(expertMode){
-			this.mobDrops.add(new WeightedRandomLootObject(Items.FLINT.getDefaultStack(), 0, 1));
+			if (this.random.nextInt(2) == 0 && expertMode) {
+				this.mobDrops.add(new WeightedRandomLootObject(Items.FLINT.getDefaultStack(), 0, 1));
+			}
 		}
 	}
 
 	protected void dropDeathItems() {
-		if (this.random.nextInt(1000) == 0 && expertMode) {
+		if (this.random.nextInt(900) == 0 && expertMode) {
 			this.dropItem(Items.BUCKET_MILK.id, 1);
 		}
 
@@ -45,7 +47,6 @@ public class EntitySkeletonMixin extends MobMonster {
 				if (this.attackTime == 0) {
 					if (!this.world.isClientSide) {
 						ProjectileArrow entityarrow = new ProjectileArrow(this.world, this, false, 0);
-						//++entityarrow.y;
 						double d2 = entity.y + (double) entity.getHeadHeight() - 0.20000000298023224 - entityarrow.y;
 						float f1 = MathHelper.sqrt(d * d + d1 * d1) * 0.2F;
 						this.world.playSoundAtEntity((Entity) null, this, "random.bow", 1.0F, 1.0F / (this.random.nextFloat() * 0.4F + 0.8F));
@@ -66,7 +67,6 @@ public class EntitySkeletonMixin extends MobMonster {
 				if (this.attackTime == 0) {
 					if (!this.world.isClientSide) {
 						ProjectileArrow entityarrow = new ProjectileArrow(this.world, this, false, 0);
-						//++entityarrow.y;
 						double d2 = entity.y + (double)entity.getHeadHeight() - 0.20000000298023224 - entityarrow.y;
 						float f1 = MathHelper.sqrt(d * d + d1 * d1) * 0.2F;
 						this.world.playSoundAtEntity((Entity)null, this, "random.bow", 1.0F, 1.0F / (this.random.nextFloat() * 0.4F + 0.8F));

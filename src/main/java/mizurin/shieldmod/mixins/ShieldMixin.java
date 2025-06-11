@@ -235,6 +235,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 	public void injectHurt(Args args) {
 		Entity attacker = args.get(0);
 		int damage = args.get(1);
+		int orgDamage = damage;
 
 		// check if we are holding the shield item.
 		ItemStack stack = getHeldItem();
@@ -318,11 +319,13 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 										dx, dy, dz, 0
 									);
 								}
-
-								stack.damageItem(4, inventory.player);
 							}
+							stack.damageItem(orgDamage *4/5, this);
 						}
 					}
+				}
+				if(stack.stackSize <= 0){
+					stack.stackSize = 0;
 				}
 			}
 		}

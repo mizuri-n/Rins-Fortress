@@ -1,5 +1,4 @@
 package mizurin.shieldmod.mixins.world;
-import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;

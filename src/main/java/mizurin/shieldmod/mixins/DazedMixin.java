@@ -99,7 +99,11 @@ public abstract class DazedMixin extends Entity implements IDazed {
 		if(this.shieldmod$getPoisonHurt() > 0 ){
 
 			if (this.shieldmod$getPoisonHurt() % 60 == 0) {
-			this.hurt( null, 2, DamageType.GENERIC);}
+//				if(((Object)this) instanceof MobZombieArmored){
+//					this.hurt( null, 4, DamageType.GENERIC);
+//				}
+			this.hurt( null, 2, DamageType.GENERIC);
+			}
 
 			if(this.shieldmod$getPoisonHurt() % 10 == 0) {
 				float width = 1.0f;
