@@ -34,7 +34,7 @@ public class Shields {
 	public static Item regenAmulet;
 
 	public static ArmorMaterial rockyArmor = ArmorHelper.createArmorMaterial(MOD_ID, "stone", 240, 30f, 30f, 30f, 30f);
-	public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "amulet", 120, 0f, 0f, 0f, 0f);
+	public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "amulet", 120, 5f, 5f, 5f, 5f);
 
 
 	@SuppressWarnings("unchecked")

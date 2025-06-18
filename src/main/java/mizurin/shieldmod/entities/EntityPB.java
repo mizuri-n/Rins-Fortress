@@ -41,7 +41,7 @@ public class EntityPB extends Projectile {
 		}
 		if(hitResult.hitType == HitResult.HitType.TILE || hitResult.hitType == HitResult.HitType.ENTITY){
 			//List<Entity> collidingEntities = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.cloneMove(this.xd, this.yd, this.zd).expand(4, 2, 4));
-			List<Mob> nearbyMon = this.world.getEntitiesWithinAABB(Mob.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(2.0, 1.0, 2.0));
+			List<Mob> nearbyMon = this.world.getEntitiesWithinAABB(Mob.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(2.0, 1.5, 2.0));
 			for(Mob mon : nearbyMon){
 				((IDazed) mon).shieldmod$poisonHurt(200);
 			}

@@ -70,7 +70,7 @@ public class BlockLeavesAppleFlowering extends BlockLogicLeavesCherry implements
 		int meta = world.getBlockMetadata(x, y, z);
 		int growthRate = getGrowthRate(meta);
 		if (world.getSeasonManager().getCurrentSeason() == Seasons.OVERWORLD_FALL) {
-			if (rand.nextInt(40) == 0 && growthRate == 0) {
+			if (rand.nextInt(60) == 0 && growthRate == 0) {
 				world.setBlockMetadataWithNotify(x, y, z, setGrowthRate(meta, 1));
 				world.scheduleBlockUpdate(x, y, z, leavesAppleFlowering.id(), this.tickDelay());
 			}
