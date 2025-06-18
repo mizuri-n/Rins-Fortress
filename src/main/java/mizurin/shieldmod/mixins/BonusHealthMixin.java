@@ -4,6 +4,7 @@ package mizurin.shieldmod.mixins;
 import mizurin.shieldmod.item.Shields;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.IArmorItem;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.world.World;
@@ -27,11 +28,9 @@ public class BonusHealthMixin extends Mob {
 	@Inject(method = "getMaxHealth()I", at = @At("HEAD"), cancellable = true)
 	public void injectBonusHealth(CallbackInfoReturnable<Integer> cir){
 		if(this.inventory != null){
-			ItemStack chest_item = this.inventory.armorItemInSlot(2);
-			if ((chest_item != null && chest_item.getItem().equals(Shields.regenAmulet))){
+			ItemStack chest_item = this.inventory.armorItemInSlot(IArmorItem.PIECE_CHEST);
+			if (chest_item != null && chest_item.getItem().equals(Shields.regenAmulet)){
 				cir.setReturnValue(24);
-			} else {
-				cir.setReturnValue(20);
 			}
 		}
 	}
