@@ -263,7 +263,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 
 						if (!this.gamemode.isPlayerInvulnerable()) {
 							if(shield.tool == ShieldMaterials.TOOL_TEAR && getHealth() <= getMaxHealth() * 0.5){
-								damage = Math.round(damage * 0.7f);
+								damage = Math.round(damage * 0.65f);
 							}
 							//tear shield provides a damage resistance when the player is low health. it can stack with blocking too.
 							if (shieldmod$getIsBlock()) {
@@ -319,8 +319,8 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 										dx, dy, dz, 0
 									);
 								}
+								stack.damageItem(orgDamage *4/5, this);
 							}
-							stack.damageItem(orgDamage *4/5, this);
 						}
 					}
 				}
@@ -374,10 +374,10 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 
 			}
 		}
-		ItemStack helmet_item = this.inventory.armorItemInSlot(2);
-		if ((helmet_item != null && helmet_item.getItem().equals(Shields.regenAmulet))) {
+		ItemStack chest_item = this.inventory.armorItemInSlot(2);
+		if ((chest_item != null && chest_item.getItem().equals(Shields.regenAmulet))) {
 			++this.tickCounter;
-			if (this.tickCounter >= 660) {
+			if (this.tickCounter >= 600) {
 				this.tickCounter = 0;
 				this.heal(1);
 			}

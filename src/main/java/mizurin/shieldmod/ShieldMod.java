@@ -21,6 +21,8 @@ import turniplabs.halplibe.util.ClientStartEntrypoint;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientStartEntrypoint {
@@ -101,6 +103,13 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint, ClientSta
 	@Override
 	public void beforeClientStart() {
 		Colorizers.registerColorizers();
+		for (final AtlasStitcher stitcher : TextureRegistry.stitcherMap.values()) {
+			try {
+				TextureRegistry.initializeAllFiles(MOD_ID, stitcher, true);
+			} catch (URISyntaxException | IOException e) {
+				LOGGER.error("Failed to initialize texture files!", e);
+			}
+		}
 	}
 
 	@Override
