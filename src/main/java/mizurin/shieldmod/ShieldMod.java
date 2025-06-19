@@ -74,16 +74,6 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint {
 		NetEntityHandler.registerNetworkEntry(new NetPotionEntry(), 8001);
 		NetEntityHandler.registerNetworkEntry(new NetFireEntry(), 8002);
 		NetEntityHandler.registerNetworkEntry(new NetWebEntry(), 8003);
-
-		ParticleHelper.createParticle("purpleflame", ((world, d, e, f, g, h, i, j) -> new EntityPoisonFX(world, d, e, f, g, h, i, ParticleFlame.Type.BLUE)));
-
-		try {
-			for(AtlasStitcher stitcher : TextureRegistry.stitcherMap.values()) {
-				TextureRegistry.initializeAllFiles(MOD_ID, stitcher, stitcher != TextureRegistry.artAtlas);
-			}
-		} catch (Exception e) {
-			LOGGER.warn("Failed to fully initialize assets, some issue may occur!", e);
-		}
 	}
 
 	@Override
