@@ -1,7 +1,7 @@
 package mizurin.shieldmod.entities;
 
-import mizurin.shieldmod.interfaces.IDazed;
-import mizurin.shieldmod.item.Shields;
+import mizurin.shieldmod.interfaces.IStatus;
+import mizurin.shieldmod.item.RFItems;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.entity.Mob;
@@ -16,15 +16,15 @@ import java.util.List;
 public class EntityPB extends Projectile {
 	public EntityPB(World world, Mob owner) {
 		super(world, owner);
-		this.modelItem = Shields.poisonBottle;
+		this.modelItem = RFItems.poisonBottle;
 	}
 	public EntityPB(World world, double d, double d1, double d2) {
 		super(world, d, d1, d2);
-		this.modelItem = Shields.poisonBottle;
+		this.modelItem = RFItems.poisonBottle;
 	}
 	public EntityPB(World world) {
 		super(world);
-		this.modelItem = Shields.poisonBottle;
+		this.modelItem = RFItems.poisonBottle;
 	}
 	public void initProjectile() {
 		this.damage = 1;
@@ -36,14 +36,13 @@ public class EntityPB extends Projectile {
 	public void onHit(HitResult hitResult) {
 		if (hitResult.entity instanceof Mob) {
 			hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
-			((IDazed) hitResult.entity).shieldmod$poisonHurt(200);
+			((IStatus) hitResult.entity).shieldmod$poisonHurt(200);
 			//Applies my custom status effect from the IDazed interface.
 		}
 		if(hitResult.hitType == HitResult.HitType.TILE || hitResult.hitType == HitResult.HitType.ENTITY){
-			//List<Entity> collidingEntities = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.cloneMove(this.xd, this.yd, this.zd).expand(4, 2, 4));
 			List<Mob> nearbyMon = this.world.getEntitiesWithinAABB(Mob.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(2.0, 1.5, 2.0));
 			for(Mob mon : nearbyMon){
-				((IDazed) mon).shieldmod$poisonHurt(200);
+				((IStatus) mon).shieldmod$poisonHurt(200);
 			}
 		}
 		if (this.modelItem != null) {

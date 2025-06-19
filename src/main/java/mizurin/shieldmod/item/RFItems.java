@@ -15,7 +15,7 @@ import turniplabs.halplibe.helper.ItemBuilder;
 
 import static mizurin.shieldmod.ShieldMod.itemID;
 
-public class Shields {
+public class RFItems {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	public static Item woodenShield;

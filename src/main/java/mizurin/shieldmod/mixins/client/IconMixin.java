@@ -1,8 +1,8 @@
 package mizurin.shieldmod.mixins.client;
 
-import mizurin.shieldmod.interfaces.IDazed;
+import com.llamalad7.mixinextras.sugar.Local;
+import mizurin.shieldmod.interfaces.IStatus;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.hud.HudIngame;
 import net.minecraft.client.gui.hud.component.HudComponent;
 import net.minecraft.client.gui.hud.component.HudComponentHealthBar;
@@ -11,8 +11,10 @@ import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.item.ItemBucketIceCream;
 import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.player.gamemode.Gamemode;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
@@ -25,23 +27,15 @@ public abstract class IconMixin extends HudComponent {
 	}
 
 
-	@Override
-	public void render(Minecraft mc, HudIngame hudIngame, int xSizeScreen, int ySizeScreen, float f) {
-		int x = this.getLayout().getComponentX(mc, this, xSizeScreen);
-		int y = this.getLayout().getComponentY(mc, this, ySizeScreen);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glDisable(3042);
-		boolean heartsFlash = mc.thePlayer.heartsFlashTime / 3 % 2 == 1;
-		if (mc.thePlayer.heartsFlashTime < 10) {
-			heartsFlash = false;
-		}
+	@Inject(method = "render(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/hud/HudIngame;IIF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/entity/player/PlayerLocal;getGamemode()Lnet/minecraft/core/player/gamemode/Gamemode;", shift = At.Shift.AFTER), cancellable = true)
+	public void injectRender(Minecraft mc, HudIngame hudIngame, int xSizeScreen, int ySizeScreen, float partialTick, CallbackInfo ci,
+							 @Local(name = "heartsFlash")boolean heartsFlash,
+							 @Local(name = "x")int x, @Local(name = "y")int y,
+							 @Local(name = "health")int health,
+							 @Local(name = "prevHealth")int prevHealth){
 
-		int health = mc.thePlayer.getHealth();
-		int prevHealth = mc.thePlayer.prevHealth;
-		this.random.setSeed((long)hudIngame.updateCounter * 312871L);
 		boolean isHardcore = mc.thePlayer.getGamemode() == Gamemode.hardcore;
-
-		if (((IDazed) mc.thePlayer).shieldmod$getPoisonHurt() > 0) {
+		if (((IStatus) mc.thePlayer).shieldmod$getPoisonHurt() > 0) {
 			for (int i = 0; i < mc.thePlayer.getMaxHealth()/2; ++i) {
 				boolean heartOffset = false;
 				if (heartsFlash) {
@@ -53,7 +47,7 @@ public abstract class IconMixin extends HudComponent {
 				if (health <= 4) {
 					yHeart += this.random.nextInt(2);
 				}
-				if(i <= 12 && i >= 10){
+				if(i <= 13 && i >= 10){
 					yHeart -= 10;
 					xHeart = x + (i - 10) * 8;
 				}
@@ -109,7 +103,7 @@ public abstract class IconMixin extends HudComponent {
 				if (health <= 4) {
 					yHeart += this.random.nextInt(2);
 				}
-				if(i <= 12 && i >= 10){
+				if(i <= 13 && i >= 10){
 					yHeart -= 10;
 					xHeart = x + (i - 10) * 8;
 				}
@@ -153,49 +147,7 @@ public abstract class IconMixin extends HudComponent {
 				}
 			}
 		}
-	}
-
-
-
-
-
-
-
-	@Override
-	public void renderPreview(Minecraft mc, Gui gui, Layout layout, int xSizeScreen, int ySizeScreen) {
-		int x = layout.getComponentX(mc, this, xSizeScreen);
-		int y = layout.getComponentY(mc, this, ySizeScreen);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glDisable(3042);
-		int health = 11;
-
-		if (((IDazed) mc.thePlayer).shieldmod$getPoisonHurt() > 0) {
-			for (int i = 0; i < mc.thePlayer.getMaxHealth()/2; ++i) {
-				int xHeart = x + i * 8;
-				gui.drawGuiIcon(xHeart, y, 9, 9, TextureRegistry.getTexture("shieldmod:gui/hud/heart/container"));
-				if (i * 2 + 1 < health) {
-					gui.drawGuiIcon(xHeart, y, 9, 9, TextureRegistry.getTexture("shieldmod:gui/hud/heart/full"));
-				}
-
-				if (i * 2 + 1 == health) {
-					gui.drawGuiIcon(xHeart, y, 9, 9, TextureRegistry.getTexture("shieldmod:gui/hud/heart/half"));
-				}
-			}
-
-		}
-		else {
-			for (int i = 0; i < 10; ++i) {
-				int xHeart = x + i * 8;
-				gui.drawGuiIcon(xHeart, y, 9, 9, TextureRegistry.getTexture("minecraft:gui/hud/heart/container"));
-				if (i * 2 + 1 < health) {
-					gui.drawGuiIcon(xHeart, y, 9, 9, TextureRegistry.getTexture("minecraft:gui/hud/heart/full"));
-				}
-
-				if (i * 2 + 1 == health) {
-					gui.drawGuiIcon(xHeart, y, 9, 9, TextureRegistry.getTexture("minecraft:gui/hud/heart/half"));
-				}
-			}
-		}
+		ci.cancel();
 	}
 }
 

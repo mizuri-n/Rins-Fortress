@@ -1,7 +1,7 @@
 package mizurin.shieldmod;
 
-import mizurin.shieldmod.blocks.RinBlocks;
-import mizurin.shieldmod.item.Shields;
+import mizurin.shieldmod.blocks.RFBlocks;
+import mizurin.shieldmod.item.RFItems;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.data.registry.recipe.RecipeGroup;
@@ -33,50 +33,50 @@ public class Recipes implements RecipeEntrypoint {
 			.setShape(" P ","PLP"," P ")
 			.addInput('P', "minecraft:planks")
 			.addInput('L',"minecraft:logs")
-			.create("woodenShield", Shields.woodenShield.getDefaultStack());
+			.create("woodenShield", RFItems.woodenShield.getDefaultStack());
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(" P ","PLP"," P ")
 			.addInput('P', "minecraft:cobblestones")
 			.addInput('L',"minecraft:planks")
-			.create("stoneShield", Shields.stoneShield.getDefaultStack());
+			.create("stoneShield", RFItems.stoneShield.getDefaultStack());
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(" P ","PLP"," P ")
 			.addInput('P', Items.INGOT_IRON)
 			.addInput('L',"minecraft:planks")
-			.create("ironShield", Shields.ironShield.getDefaultStack());
+			.create("ironShield", RFItems.ironShield.getDefaultStack());
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(" P ","PLP"," P ")
 			.addInput('P', Items.INGOT_GOLD)
 			.addInput('L',"minecraft:planks")
-			.create("goldShield", Shields.goldShield.getDefaultStack());
+			.create("goldShield", RFItems.goldShield.getDefaultStack());
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(" P ","PLP"," P ")
 			.addInput('P', Items.DIAMOND)
 			.addInput('L',"minecraft:planks")
-			.create("diamondShield", Shields.diamondShield.getDefaultStack());
+			.create("diamondShield", RFItems.diamondShield.getDefaultStack());
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(" P ","PLP"," P ")
 			.addInput('P', Items.INGOT_STEEL)
 			.addInput('L',"minecraft:planks")
-			.create("steelShield", Shields.steelShield.getDefaultStack());
+			.create("steelShield", RFItems.steelShield.getDefaultStack());
 
 
 		RecipeBuilder.Shaped(MOD_ID)
 			.setShape(" P ","PLP"," P ")
 			.addInput('P', Items.LEATHER)
 			.addInput('L', "minecraft:wools")
-			.create("leatherShield", Shields.leatherShield.getDefaultStack());
+			.create("leatherShield", RFItems.leatherShield.getDefaultStack());
 
 		RecipeBuilder.Shapeless(MOD_ID)
 			.addInput(Blocks.PUMPKIN)
 			.addInput(Items.FOOD_PORKCHOP_COOKED)
 			.addInput(Items.BOWL)
-			.create("pumpkinstew", Shields.pumpkinStew.getDefaultStack());
+			.create("pumpkinstew", RFItems.pumpkinStew.getDefaultStack());
 
 		RecipeBuilder.Shapeless(MOD_ID)
 			.addInput(Items.DUST_REDSTONE)
@@ -88,18 +88,18 @@ public class Recipes implements RecipeEntrypoint {
 			.addInput(Items.JAR)
 			.addInput(Items.JAR)
 			.addInput(Items.JAR)
-			.create("poisonbottle", new ItemStack(Shields.poisonBottle, 3));
+			.create("poisonbottle", new ItemStack(RFItems.poisonBottle, 3));
 
 		RecipeBuilder.Shapeless(MOD_ID)
-			.addInput(new ItemStack(RinBlocks.logApple, 1))
+			.addInput(new ItemStack(RFBlocks.logApple, 1))
 			.create("apple_log_to_grey", new ItemStack(Blocks.PLANKS_OAK_PAINTED, 4, 8));
 
 
-		WORKBENCH.register("tearstoneShield", new RecipeEntryRepairable(Shields.tearShield.getDefaultStack(), new RecipeSymbol(new ItemStack(Items.INGOT_IRON, 1))));
+		WORKBENCH.register("tearstoneShield", new RecipeEntryRepairable(RFItems.tearShield.getDefaultStack(), new RecipeSymbol(new ItemStack(Items.INGOT_IRON, 1))));
 
-		WORKBENCH.register("amuletRegenChest", new RecipeEntryRepairable(Shields.regenAmulet.getDefaultStack(), new RecipeSymbol(new ItemStack(Items.DUST_REDSTONE))));
+		WORKBENCH.register("amuletRegenChest", new RecipeEntryRepairable(RFItems.regenAmulet.getDefaultStack(), new RecipeSymbol(new ItemStack(Items.DUST_REDSTONE))));
 
-		WORKBENCH.register("rockyHelmetHat", new RecipeEntryRepairable(Shields.rockyHelmet.getDefaultStack(), new RecipeSymbol(new ItemStack(Blocks.COBBLE_STONE))));
+		WORKBENCH.register("rockyHelmetHat", new RecipeEntryRepairable(RFItems.rockyHelmet.getDefaultStack(), new RecipeSymbol(new ItemStack(Blocks.COBBLE_STONE))));
 	}
 
 }

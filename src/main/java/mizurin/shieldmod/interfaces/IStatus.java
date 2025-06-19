@@ -1,6 +1,6 @@
 package mizurin.shieldmod.interfaces;
 
-public interface IDazed {
+public interface IStatus {
 	public void shieldmod$dazedHurt(int dazedTicks);
 
 	public int shieldmod$getDazedHurt();

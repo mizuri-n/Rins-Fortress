@@ -22,10 +22,10 @@
         "mizurin.shieldmod.ShieldMod"
     ],
 		"beforeGameStart": [
-			"mizurin.shieldmod.ShieldMod"
+			"mizurin.shieldmod.ShieldModClient"
 		],
 		"beforeClientStart": [
-			"mizurin.shieldmod.ShieldMod"
+			"mizurin.shieldmod.ShieldModClient"
 		],
 		"afterGameStart": [
 			"mizurin.shieldmod.ShieldMod"

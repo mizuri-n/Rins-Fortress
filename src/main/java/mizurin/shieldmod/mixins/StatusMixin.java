@@ -1,10 +1,9 @@
 package mizurin.shieldmod.mixins;
 
-import mizurin.shieldmod.interfaces.IDazed;
+import mizurin.shieldmod.interfaces.IStatus;
 import net.minecraft.core.entity.ConsumedFood;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
-import net.minecraft.core.entity.monster.MobZombieArmored;
 import net.minecraft.core.item.ItemFood;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
@@ -19,7 +18,7 @@ import java.util.Map;
 
 
 @Mixin(value = Mob.class, remap = false)
-public abstract class DazedMixin extends Entity implements IDazed {
+public abstract class StatusMixin extends Entity implements IStatus {
 
 
 	@Unique
@@ -31,7 +30,7 @@ public abstract class DazedMixin extends Entity implements IDazed {
 	@Unique
 	private  static final int DATA_POISON = 26;
 
-	public DazedMixin(World world) {
+	public StatusMixin(World world) {
 		super(world);
 	}
 

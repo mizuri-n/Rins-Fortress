@@ -1,6 +1,6 @@
 package mizurin.shieldmod.item;
 
-import mizurin.shieldmod.interfaces.IDazed;
+import mizurin.shieldmod.interfaces.IStatus;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
@@ -29,14 +29,14 @@ public class ShieldItem extends ItemToolSword {
 	@Override
 	public boolean hitEntity(ItemStack itemstack, Mob target, Mob player) {
 		if ((target.hurtTime == 10 || target instanceof Player)) {
-			if (itemstack.getItem() == Shields.leatherShield) {
+			if (itemstack.getItem() == RFItems.leatherShield) {
 				target.knockBack(player, 1, (player.x - target.x), (player.z - target.z));
 				target.push((target.x - player.x) / 11, 0, (target.z - player.z) / 11);
 			} else {
 				target.push((target.x - player.x) / 11, 0, (target.z - player.z) / 11);
 			}
-			if (itemstack.getItem() == Shields.goldShield) {
-				((IDazed) target).shieldmod$dazedHurt(300);
+			if (itemstack.getItem() == RFItems.goldShield) {
+				((IStatus) target).shieldmod$dazedHurt(300);
 				target.push((target.x - player.x) / 20, 0, (target.z - player.z) / 20);
 			}
 			itemstack.damageItem(1, player);

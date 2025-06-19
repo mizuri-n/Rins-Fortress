@@ -2,7 +2,7 @@ package mizurin.shieldmod.mixins.entity;
 
 import com.mojang.nbt.tags.CompoundTag;
 import mizurin.shieldmod.interfaces.IShieldZombie;
-import mizurin.shieldmod.item.Shields;
+import mizurin.shieldmod.item.RFItems;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.MobZombie;
@@ -18,8 +18,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import static mizurin.shieldmod.ShieldMod.expertMode;
 
 @Mixin(value = MobZombieArmored.class, remap = false)
 public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie {
@@ -74,7 +72,7 @@ public class EntityZombieArmoredMixin extends MobZombie implements IShieldZombie
 	@Inject(method = "getHeldItem()Lnet/minecraft/core/item/ItemStack;", at = @At("HEAD"), cancellable = true)
 	private void sword(CallbackInfoReturnable<ItemStack> cir){
 		if (shieldmod$isShieldZombie()){
-			cir.setReturnValue(new ItemStack(Shields.ironShield));
+			cir.setReturnValue(new ItemStack(RFItems.ironShield));
 		}
 	}
 
