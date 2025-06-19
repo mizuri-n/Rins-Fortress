@@ -5,12 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BonusHealthMixin",
-    "DazedMixin",
+    "StatusMixin",
     "FieldMixin",
     "ItemsMixin",
     "KnockBackMixin",
     "RecipeRegistryMixin",
-    "ShieldMixin",
+    "HurtMixin",
     "SlotArmorMixin",
     "entity.EntityCreeperMixin",
     "entity.EntityLivingMixin",
@@ -30,8 +30,7 @@
     "client.IconMixin",
     "client.LivingRendererMixin",
     "client.PaintingMixin",
-    "client.PlayerRendererMixin",
-    "client.SoundMixin"
+    "client.PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

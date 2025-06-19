@@ -1,7 +1,7 @@
 package mizurin.shieldmod.mixins.world;
 
 import mizurin.shieldmod.WorldFeatureTreeApple;
-import mizurin.shieldmod.blocks.RinBlocks;
+import mizurin.shieldmod.blocks.RFBlocks;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.world.biome.BiomeSeasonalForest;
 import net.minecraft.core.world.generate.feature.WorldFeature;
@@ -25,7 +25,7 @@ public class SeasonalMixin {
 			cir.setReturnValue ((WorldFeature)(random.nextInt(2) == 0 ? new WorldFeatureTreeFancy(Blocks.LEAVES_OAK.id(), Blocks.LOG_OAK.id()) : new WorldFeatureTree(Blocks.LEAVES_OAK.id(), Blocks.LOG_OAK.id(), 4)));
 		} else {
 			if (random.nextInt(3) == 0 && appleGenerate) {
-				cir.setReturnValue ((WorldFeature)(random.nextInt(3) == 0 ? new WorldFeatureTreeFancy(RinBlocks.leavesApple.id(), RinBlocks.logApple.id()) : new WorldFeatureTreeApple(RinBlocks.leavesApple.id(), RinBlocks.logApple.id(), 4)));
+				cir.setReturnValue ((WorldFeature)(random.nextInt(3) == 0 ? new WorldFeatureTreeFancy(RFBlocks.leavesApple.id(), RFBlocks.logApple.id()) : new WorldFeatureTreeApple(RFBlocks.leavesApple.id(), RFBlocks.logApple.id(), 4)));
 			} else {
 			cir.setReturnValue ((WorldFeature)(random.nextInt(3) == 0 ? new WorldFeatureTreeFancy(Blocks.LEAVES_CHERRY.id(), Blocks.LOG_CHERRY.id()) : new WorldFeatureTreeCherry(Blocks.LEAVES_CHERRY.id(), Blocks.LOG_CHERRY.id(), 4)));
 			}

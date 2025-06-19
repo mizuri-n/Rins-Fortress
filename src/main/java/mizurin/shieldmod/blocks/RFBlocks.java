@@ -8,9 +8,9 @@ import net.minecraft.core.sound.BlockSound;
 import turniplabs.halplibe.helper.BlockBuilder;
 
 import static mizurin.shieldmod.ShieldMod.blockID;
-import static mizurin.shieldmod.item.Shields.MOD_ID;
+import static mizurin.shieldmod.item.RFItems.MOD_ID;
 
-public class RinBlocks {
+public class RFBlocks {
 
 	public static Colorizer apple;
 	public static Block<?> logApple;

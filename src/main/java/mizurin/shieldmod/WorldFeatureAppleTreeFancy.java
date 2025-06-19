@@ -2,7 +2,7 @@ package mizurin.shieldmod;
 
 import java.util.Random;
 
-import mizurin.shieldmod.blocks.RinBlocks;
+import mizurin.shieldmod.blocks.RFBlocks;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.util.helper.MathHelper;
@@ -139,8 +139,8 @@ public class WorldFeatureAppleTreeFancy extends WorldFeature {
 				double thisDist = Math.sqrt(Math.pow((double)Math.abs(off1) + 0.5, 2.0) + Math.pow((double)Math.abs(off2) + 0.5, 2.0));
 				if (thisDist <= (double)radius) {
 					int id = this.world.getBlockId(coord[0], coord[1], coord[2]);
-					if (id == 0 || id == this.leavesID || id == RinBlocks.leavesAppleFlowering.id()) {
-						this.world.setBlockWithNotify(coord[0], coord[1], coord[2], random.nextInt(5) == 0 ? RinBlocks.leavesAppleFlowering.id() : blockId);
+					if (id == 0 || id == this.leavesID || id == RFBlocks.leavesAppleFlowering.id()) {
+						this.world.setBlockWithNotify(coord[0], coord[1], coord[2], random.nextInt(5) == 0 ? RFBlocks.leavesAppleFlowering.id() : blockId);
 					}
 				}
 			}
@@ -311,7 +311,7 @@ public class WorldFeatureAppleTreeFancy extends WorldFeature {
 				pos[dim1] = MathHelper.floor((double)startPos[dim1] + (double)linePos * dim1DeltaScale);
 				pos[dim2] = MathHelper.floor((double)startPos[dim2] + (double)linePos * dim2DeltaScale);
 				int idAtPos = this.world.getBlockId(pos[0], pos[1], pos[2]);
-				if (idAtPos != 0 && idAtPos != this.leavesID && idAtPos != RinBlocks.leavesAppleFlowering.id()) {
+				if (idAtPos != 0 && idAtPos != this.leavesID && idAtPos != RFBlocks.leavesAppleFlowering.id()) {
 					break;
 				}
 			}

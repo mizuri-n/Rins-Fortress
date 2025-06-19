@@ -4,7 +4,7 @@ import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
-import mizurin.shieldmod.item.Shields;
+import mizurin.shieldmod.item.RFItems;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
@@ -35,8 +35,8 @@ import java.util.List;
 
 // extend Entity so we get access to entity methods and fields.
 // abstract so we don't have to implement interfaces, constructor is not used but required.
-public abstract class ShieldMixin extends Mob implements ParryInterface{
-	public ShieldMixin(World world) {
+public abstract class HurtMixin extends Mob implements ParryInterface{
+	public HurtMixin(World world) {
 		super(world);
 	}
 
@@ -241,7 +241,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 		ItemStack stack = getHeldItem();
 		//check if we are wearing the helmet.
 		ItemStack helmet_item = this.inventory.armorItemInSlot(3);
-		if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet)) && attacker != this) {
+		if ((helmet_item != null && helmet_item.getItem().equals(RFItems.rockyHelmet)) && attacker != this) {
 			if (!this.gamemode.isPlayerInvulnerable()) {
 				if(getHealth() == getMaxHealth() && attacker != null){
 					damage = damage / 3;
@@ -283,7 +283,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 									//applies funny knockback to attack when hit.
 								}
 								if (shield.tool == ShieldMaterials.TOOL_STONE && attacker != this){
-									if ((helmet_item != null && helmet_item.getItem().equals(Shields.rockyHelmet))) {
+									if ((helmet_item != null && helmet_item.getItem().equals(RFItems.rockyHelmet))) {
 										attacker.hurt(this, 5, DamageType.FALL);
 									} else {
 										attacker.hurt(this, 3, DamageType.FALL);
@@ -375,7 +375,7 @@ public abstract class ShieldMixin extends Mob implements ParryInterface{
 			}
 		}
 		ItemStack chest_item = this.inventory.armorItemInSlot(2);
-		if ((chest_item != null && chest_item.getItem().equals(Shields.regenAmulet))) {
+		if ((chest_item != null && chest_item.getItem().equals(RFItems.regenAmulet))) {
 			++this.tickCounter;
 			if (this.tickCounter >= 600) {
 				this.tickCounter = 0;

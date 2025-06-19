@@ -10,7 +10,7 @@ import net.minecraft.core.world.season.Seasons;
 
 public class BlockLeavesApple extends BlockLogicLeavesBase {
 	public BlockLeavesApple(Block<?> block) {
-		super(block, Material.leaves, RinBlocks.saplingApple);
+		super(block, Material.leaves, RFBlocks.saplingApple);
 	}
 
 	public void animationTick(World world, int x, int y, int z, Random rand) {

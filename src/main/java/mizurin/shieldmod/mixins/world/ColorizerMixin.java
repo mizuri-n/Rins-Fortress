@@ -1,6 +1,6 @@
 package mizurin.shieldmod.mixins.world;
 
-import mizurin.shieldmod.blocks.RinBlocks;
+import mizurin.shieldmod.blocks.RFBlocks;
 import net.minecraft.client.render.colorizer.Colorizer;
 import net.minecraft.client.render.colorizer.Colorizers;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,6 +19,6 @@ public abstract class ColorizerMixin {
 
 	@Inject(method = "registerColorizers()V", at = @At("TAIL"))
 	private static void injectColor(CallbackInfo ci){
-		RinBlocks.apple = add(new Colorizer("apple"));
+		RFBlocks.apple = add(new Colorizer("apple"));
 	}
 }

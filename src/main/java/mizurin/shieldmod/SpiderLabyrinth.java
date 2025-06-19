@@ -1,7 +1,7 @@
 package mizurin.shieldmod;
 
-import mizurin.shieldmod.blocks.RinBlocks;
-import mizurin.shieldmod.item.Shields;
+import mizurin.shieldmod.blocks.RFBlocks;
+import mizurin.shieldmod.item.RFItems;
 import net.minecraft.core.WeightedRandomBag;
 import net.minecraft.core.WeightedRandomLootObject;
 import net.minecraft.core.block.BlockLogicRotatable;
@@ -48,7 +48,7 @@ public class SpiderLabyrinth extends WorldFeature {
 		this.chestLoot = new WeightedRandomBag<>();
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_IRON.getDefaultStack(), 1, 6), 100.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_GOLD.getDefaultStack(), 1, 4), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(RinBlocks.saplingApple.getDefaultStack(), 1, 3), 100.0);
+		this.chestLoot.addEntry(new WeightedRandomLootObject(RFBlocks.saplingApple.getDefaultStack(), 1, 3), 100.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.DIAMOND.getDefaultStack(), 1, 4), 2.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.FOOD_APPLE_GOLD.getDefaultStack()), 2.0);
 		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.DUST_REDSTONE.getDefaultStack(), 1, 4), 100.0);
@@ -79,14 +79,14 @@ public class SpiderLabyrinth extends WorldFeature {
 		switch (r) {
 			case 0:
 			case 1:
-				this.treasureItem = (new ItemStack(Shields.tearShield));
+				this.treasureItem = (new ItemStack(RFItems.tearShield));
 				break;
 			case 2:
 			case 3:
-				this.treasureItem = (new ItemStack(Shields.rockyHelmet));
+				this.treasureItem = (new ItemStack(RFItems.rockyHelmet));
 				break;
 			case 4:
-				this.treasureItem = (new ItemStack(Shields.regenAmulet));
+				this.treasureItem = (new ItemStack(RFItems.regenAmulet));
 				break;
 		}
 

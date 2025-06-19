@@ -1,7 +1,7 @@
 package mizurin.shieldmod.mixins;
 
 
-import mizurin.shieldmod.item.Shields;
+import mizurin.shieldmod.item.RFItems;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.Container;
 import net.minecraft.core.player.inventory.menu.MenuInventory;
@@ -30,7 +30,7 @@ public class SlotArmorMixin extends Slot{
 
 	@Inject(method = "setChanged()V", at = @At(value = "HEAD"))
 	public void injectSlot(final CallbackInfo ci){
-		if(this.lastItem != null && (this.lastItem.itemID == Shields.regenAmulet.id) && getItemStack() == null){
+		if(this.lastItem != null && (this.lastItem.itemID == RFItems.regenAmulet.id) && getItemStack() == null){
 			if(this.menu.inventory.player.getHealth() > this.menu.inventory.player.getMaxHealth()){
 				this.menu.inventory.player.setHealthRaw(this.menu.inventory.player.getMaxHealth());
 			}

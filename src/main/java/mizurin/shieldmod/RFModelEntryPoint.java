@@ -5,7 +5,7 @@ import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.item.ArmorColored;
 import mizurin.shieldmod.item.ItemModelColored;
 import mizurin.shieldmod.item.ItemModelShield;
-import mizurin.shieldmod.item.Shields;
+import mizurin.shieldmod.item.RFItems;
 import net.minecraft.client.render.EntityRenderDispatcher;
 import net.minecraft.client.render.TileEntityRenderDispatcher;
 import net.minecraft.client.render.block.color.BlockColorDispatcher;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import turniplabs.halplibe.helper.ModelHelper;
 import turniplabs.halplibe.util.ModelEntrypoint;
 
-import static mizurin.shieldmod.blocks.RinBlocks.*;
+import static mizurin.shieldmod.blocks.RFBlocks.*;
 
 public class RFModelEntryPoint implements ModelEntrypoint {
 	@Override
@@ -50,28 +50,28 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 
 	@Override
 	public void initItemModels(final ItemModelDispatcher dispatcher) {
-		dispatcher.addDispatch(new ItemModelShield(Shields.woodenShield,
+		dispatcher.addDispatch(new ItemModelShield(RFItems.woodenShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/wooden_shield"), (s) -> -1)).setFull3D());
-		dispatcher.addDispatch(new ItemModelShield(Shields.stoneShield,
+		dispatcher.addDispatch(new ItemModelShield(RFItems.stoneShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/stone_shield"), RFModelEntryPoint::white)).setFull3D());
-		dispatcher.addDispatch(new ItemModelShield(Shields.ironShield,
+		dispatcher.addDispatch(new ItemModelShield(RFItems.ironShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/iron_shield"), RFModelEntryPoint::white)).setFull3D());
-		dispatcher.addDispatch(new ItemModelShield(Shields.goldShield,
+		dispatcher.addDispatch(new ItemModelShield(RFItems.goldShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/gold_shield"), RFModelEntryPoint::white)).setFull3D());
-		dispatcher.addDispatch(new ItemModelShield(Shields.diamondShield,
+		dispatcher.addDispatch(new ItemModelShield(RFItems.diamondShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/diamond_shield"), RFModelEntryPoint::white)).setFull3D());
-		dispatcher.addDispatch(new ItemModelShield(Shields.steelShield,
+		dispatcher.addDispatch(new ItemModelShield(RFItems.steelShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/steel_shield"), RFModelEntryPoint::white)).setFull3D());
-		dispatcher.addDispatch(new ItemModelShield(Shields.leatherShield,
+		dispatcher.addDispatch(new ItemModelShield(RFItems.leatherShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/colored"),ItemModelShield::shieldColor)));
-		dispatcher.addDispatch(new ItemModelShield(Shields.tearShield,
+		dispatcher.addDispatch(new ItemModelShield(RFItems.tearShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/tearstone_shield"), RFModelEntryPoint::white)).setFull3D());
 
-		dispatcher.addDispatch(setIcon(new ItemModelStandard(Shields.ammotearShield, null), "shieldmod:item/tear_shield_ammo"));
-		dispatcher.addDispatch(setIcon(new ItemModelStandard(Shields.poisonBottle, null), "shieldmod:item/poison_bottle"));
-		dispatcher.addDispatch(setIcon(new ItemModelStandard(Shields.pumpkinStew, null), "shieldmod:item/pumpkin_stew"));
-		dispatcher.addDispatch(setIcon(new ItemModelStandard(Shields.regenAmulet, null), "shieldmod:item/regen_amulet"));
-		dispatcher.addDispatch(setIcon(new ItemModelStandard(Shields.rockyHelmet, null), "shieldmod:item/rocky_helmet"));
+		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.ammotearShield, null), "shieldmod:item/tear_shield_ammo"));
+		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.poisonBottle, null), "shieldmod:item/poison_bottle"));
+		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.pumpkinStew, null), "shieldmod:item/pumpkin_stew"));
+		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.regenAmulet, null), "shieldmod:item/regen_amulet"));
+		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.rockyHelmet, null), "shieldmod:item/rocky_helmet"));
 
 		dispatcher.addDispatch(new ItemModelColored(Items.ARMOR_BOOTS_LEATHER, new ItemModelColored.ColoredTextureEntry("shieldmod:item/leather_boots", ArmorColored::getColor)));
 		dispatcher.addDispatch(new ItemModelColored(Items.ARMOR_LEGGINGS_LEATHER, new ItemModelColored.ColoredTextureEntry("shieldmod:item/leather_leggings", ArmorColored::getColor)));
@@ -92,13 +92,13 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 			return er;
 		});
 		ModelHelper.setEntityModel(EntityPB.class, () -> {
-			final EntityRenderer<?> er = new EntityRendererSprite<EntityPB>(Shields.poisonBottle);
+			final EntityRenderer<?> er = new EntityRendererSprite<EntityPB>(RFItems.poisonBottle);
 			er.init(dispatcher);
 			return er;
 		});
 
 		ModelHelper.setEntityModel(EntityShield.class, () -> {
-			final EntityRenderer<?> er = new EntityRendererSprite<EntityShield>(Shields.ammotearShield);
+			final EntityRenderer<?> er = new EntityRendererSprite<EntityShield>(RFItems.ammotearShield);
 			er.init(dispatcher);
 			return er;
 		});

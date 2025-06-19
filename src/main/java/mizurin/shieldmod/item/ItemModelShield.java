@@ -66,6 +66,7 @@ public class ItemModelShield extends ItemModelColored {
 			GL11.glRotatef(15F, 0.0F, 1.0F, 0.0F);
 			GL11.glTranslatef(0.55F, -0.70075F, 0.055F);
 
+//			this is if you want the shield in the resting position
 //			final float scale = 0.625F;
 //			GL11.glTranslatef(-0.25F, -0.1875F, -0.1F);
 //			GL11.glScalef(scale, scale, scale);

@@ -1,6 +1,6 @@
 package mizurin.shieldmod.mixins.world;
 
-import mizurin.shieldmod.item.Shields;
+import mizurin.shieldmod.item.RFItems;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.Biome;
@@ -37,14 +37,14 @@ public class WorldFeatureLabyrinthMixin {
 	private void addTreasure(Random random, CallbackInfoReturnable<ItemStack> cir) {
 		if (isCold) {
 			if(random.nextInt(2) == 0) {
-				cir.setReturnValue(new ItemStack(Shields.tearShield));
+				cir.setReturnValue(new ItemStack(RFItems.tearShield));
 			}
 		}
 		 else if(isHot){
-				 cir.setReturnValue(new ItemStack(Shields.rockyHelmet));
+				 cir.setReturnValue(new ItemStack(RFItems.rockyHelmet));
 		}
 		 else if (random.nextInt(3) == 0) {
-				cir.setReturnValue(new ItemStack(Shields.regenAmulet));
+				cir.setReturnValue(new ItemStack(RFItems.regenAmulet));
 			}
 	}
 	@Inject(method = "place", at = @At("HEAD"))

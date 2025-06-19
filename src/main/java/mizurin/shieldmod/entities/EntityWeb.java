@@ -1,6 +1,6 @@
 package mizurin.shieldmod.entities;
 
-import mizurin.shieldmod.interfaces.IDazed;
+import mizurin.shieldmod.interfaces.IStatus;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.projectile.Projectile;
 import net.minecraft.core.item.Items;
@@ -32,7 +32,7 @@ public class EntityWeb extends Projectile {
 	@Override
 	public void onHit(HitResult hitResult) {
 		if (hitResult.entity instanceof Mob) {
-			((IDazed) hitResult.entity).shieldmod$freezeHurt(60);
+			((IStatus) hitResult.entity).shieldmod$freezeHurt(60);
 
 			//Applies my custom status effect from the IFreeze interface.
 		}

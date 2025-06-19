@@ -1,5 +1,5 @@
 package mizurin.shieldmod;
-import mizurin.shieldmod.blocks.RinBlocks;
+import mizurin.shieldmod.blocks.RFBlocks;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.MethodParametersAnnotation;
 import net.minecraft.core.world.generate.feature.tree.WorldFeatureTree;
@@ -18,14 +18,14 @@ public class WorldFeatureTreeApple extends WorldFeatureTree {
 
 	public void placeLeaves(World world, int x, int y, int z, Random rand) {
 		if (rand.nextInt(5) == 0) {
-			world.setBlockAndMetadataWithNotify(x, y, z, RinBlocks.leavesAppleFlowering.id(), world.seasonManager.getCurrentSeason() == Seasons.OVERWORLD_FALL ? 1 : 0);
+			world.setBlockAndMetadataWithNotify(x, y, z, RFBlocks.leavesAppleFlowering.id(), world.seasonManager.getCurrentSeason() == Seasons.OVERWORLD_FALL ? 1 : 0);
 		} else {
-			world.setBlockWithNotify(x, y, z, RinBlocks.leavesApple.id());
+			world.setBlockWithNotify(x, y, z, RFBlocks.leavesApple.id());
 		}
 
 	}
 
 	public boolean isLeaf(int id) {
-		return id == RinBlocks.leavesAppleFlowering.id() || id == RinBlocks.leavesApple.id();
+		return id == RFBlocks.leavesAppleFlowering.id() || id == RFBlocks.leavesApple.id();
 	}
 }

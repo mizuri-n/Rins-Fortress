@@ -1,7 +1,7 @@
 package mizurin.shieldmod.mixins.entity;
 
 import mizurin.shieldmod.entities.EntityWeb;
-import mizurin.shieldmod.interfaces.IDazed;
+import mizurin.shieldmod.interfaces.IStatus;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.monster.MobMonster;
@@ -84,7 +84,7 @@ public class EntitySpiderMixin extends MobMonster {
 					if (this.attackTime <= 0 && distance < 2.0F && entity.bb.maxY > this.bb.minY && entity.bb.minY < this.bb.maxY) {
 						this.attackTime = 20;
 						entity.hurt(this, 1, DamageType.COMBAT);
-						((IDazed) entity).shieldmod$poisonHurt(150);
+						((IStatus) entity).shieldmod$poisonHurt(150);
 					}
 				}
 

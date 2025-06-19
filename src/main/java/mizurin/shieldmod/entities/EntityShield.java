@@ -1,7 +1,7 @@
 package mizurin.shieldmod.entities;
 
 import mizurin.shieldmod.interfaces.IThrownItem;
-import mizurin.shieldmod.item.Shields;
+import mizurin.shieldmod.item.RFItems;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.util.phys.HitResult;
@@ -20,21 +20,22 @@ import net.minecraft.core.world.World;
 import java.util.List;
 
 public class EntityShield extends ProjectilePebble {
-	private int bounce = 4; //Amount of bounces allowed. I set a limit as a failsafe as the entity can get stuck inside blocks and or fences.
+	private int bounce = 4;
+	//Amount of bounces allowed. I set a limit as a failsafe as the entity can get stuck inside blocks and or fences.
 	public EntityShield(World world) {
 		super(world);
-		this.modelItem = Shields.ammotearShield;
+		this.modelItem = RFItems.ammotearShield;
 		this.setSize(0.9F, 0.9F);
 	}
 
 	public EntityShield(World world, Mob entityliving) {
 		super(world, entityliving);
-		this.modelItem = Shields.ammotearShield;
+		this.modelItem = RFItems.ammotearShield;
 	}
 
 	public EntityShield(World world, double d, double d1, double d2) {
 		super(world, d, d1, d2);
-		this.modelItem = Shields.ammotearShield;
+		this.modelItem = RFItems.ammotearShield;
 	}
 
 	public void initProjectile() {
