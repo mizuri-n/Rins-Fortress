@@ -18,12 +18,14 @@ public class ShieldModClient implements ClientStartEntrypoint {
 	@Override
 	public void beforeClientStart() {
 		Colorizers.registerColorizers();
-		for (final AtlasStitcher stitcher : TextureRegistry.stitcherMap.values()) {
-			try {
-				TextureRegistry.initializeAllFiles(MOD_ID, stitcher, true);
-			} catch (URISyntaxException | IOException e) {
-				LOGGER.error("Failed to initialize texture files!", e);
+		ParticleHelper.createParticle("purpleflame", ((world, d, e, f, g, h, i, j) -> new EntityPoisonFX(world, d, e, f, g, h, i, ParticleFlame.Type.BLUE)));
+
+		try {
+			for(AtlasStitcher stitcher : TextureRegistry.stitcherMap.values()) {
+				TextureRegistry.initializeAllFiles(MOD_ID, stitcher, stitcher != TextureRegistry.artAtlas);
 			}
+		} catch (Exception e) {
+			LOGGER.warn("Failed to fully initialize assets, some issue may occur!", e);
 		}
 	}
 
