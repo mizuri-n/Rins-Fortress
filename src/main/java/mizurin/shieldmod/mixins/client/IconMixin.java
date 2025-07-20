@@ -47,9 +47,10 @@ public abstract class IconMixin extends HudComponent {
 				if (health <= 4) {
 					yHeart += this.random.nextInt(2);
 				}
-				if(i <= 13 && i >= 10){
-					yHeart -= 10;
-					xHeart = x + (i - 10) * 8;
+				if(i <= (mc.thePlayer.getMaxHealth()/2) && i >= 10){
+					int j = (int) Math.floor(i * 0.1);
+					yHeart -= 10 * (j);
+					xHeart = x + (i - 10*(j)) * 8;
 				}
 
 				hudIngame.drawGuiIcon(xHeart, yHeart, 9, 9, !heartOffset ? TextureRegistry.getTexture("shieldmod:gui/hud/heart/container") : TextureRegistry.getTexture("shieldmod:gui/hud/heart/container_blinking"));
@@ -103,9 +104,10 @@ public abstract class IconMixin extends HudComponent {
 				if (health <= 4) {
 					yHeart += this.random.nextInt(2);
 				}
-				if(i <= 13 && i >= 10){
-					yHeart -= 10;
-					xHeart = x + (i - 10) * 8;
+				if(i <= (mc.thePlayer.getMaxHealth()/2) && i >= 10){
+					int j = (int) Math.floor(i * 0.1);
+					yHeart -= 10 * (j);
+					xHeart = x + (i - 10*(j)) * 8;
 				}
 
 				hudIngame.drawGuiIcon(xHeart, yHeart, 9, 9, !heartOffset ? TextureRegistry.getTexture("minecraft:gui/hud/heart/container") : TextureRegistry.getTexture("minecraft:gui/hud/heart/container_blinking"));

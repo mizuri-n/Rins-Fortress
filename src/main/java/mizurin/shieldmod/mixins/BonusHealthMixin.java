@@ -30,7 +30,7 @@ public class BonusHealthMixin extends Mob {
 		if(this.inventory != null){
 			ItemStack chest_item = this.inventory.armorItemInSlot(IArmorItem.PIECE_CHEST);
 			if (chest_item != null && chest_item.getItem().equals(RFItems.regenAmulet)){
-				cir.setReturnValue(26);
+				cir.setReturnValue(60);
 			}
 		}
 	}

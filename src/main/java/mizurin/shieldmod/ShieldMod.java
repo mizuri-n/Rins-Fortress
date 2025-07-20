@@ -4,9 +4,6 @@ import mizurin.shieldmod.blocks.RFBlocks;
 import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.item.RFItems;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.client.entity.particle.ParticleFlame;
-import net.minecraft.client.render.texture.stitcher.AtlasStitcher;
-import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.crafting.LookupFuelFurnace;
 import net.minecraft.core.data.registry.Registries;
 import net.minecraft.core.enums.ArtType;
@@ -15,7 +12,6 @@ import net.minecraft.core.util.collection.NamespaceID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.EntityHelper;
-import turniplabs.halplibe.helper.ParticleHelper;
 import turniplabs.halplibe.util.ConfigHandler;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 
