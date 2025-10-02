@@ -32,6 +32,9 @@ public abstract class PlayerRendererMixin extends MobRenderer<Player> {
 
 	@Inject(method = "prepareArmor(Lnet/minecraft/core/entity/player/Player;IF)Z", at = @At("HEAD"))
 	private void colorArmor(Player entity, int renderPass, float partialTick, CallbackInfoReturnable<Boolean> cir){
+		if(renderPass > 3){
+			return;
+		}
 		float brightness = mc.fullbright ? 1f : entity.getBrightness(0);
 		GL11.glColor4f(brightness,brightness,brightness,1f);
 		ItemStack itemstack = entity.inventory.armorItemInSlot(3 - renderPass);

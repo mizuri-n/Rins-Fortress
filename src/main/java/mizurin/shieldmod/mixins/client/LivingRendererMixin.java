@@ -64,7 +64,7 @@ public abstract class LivingRendererMixin<T extends Mob> {
 	@Redirect(method = "render(Lnet/minecraft/client/render/tessellator/Tessellator;Lnet/minecraft/core/entity/Mob;DDDFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/MobRenderer;prepareArmor(Lnet/minecraft/core/entity/Mob;IF)Z"))
 	private boolean hijackRenderPass(MobRenderer instance, T entity, int renderPass, float partialTick){
 		ShieldMod.playerArmorRenderOffset = 0;
-		if (entity instanceof Player){
+		if (entity instanceof Player && renderPass <= 3){
 			ItemStack itemstack = ((Player) entity).inventory.armorItemInSlot(3 - renderPass);
 			if (itemstack != null && itemstack.getItem() instanceof IColoredArmor){
 				// do stuff
