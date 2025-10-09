@@ -19,7 +19,6 @@ import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
-import org.lwjgl.util.vector.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -28,7 +27,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
-
 import java.util.List;
 
 
@@ -48,7 +46,7 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 	@Shadow
 	public ContainerInventory inventory;
 	@Shadow
-	public abstract boolean hurt(Entity attacker, int damage, DamageType type);
+	public abstract boolean hurt(Entity attacker, int damage , DamageType type);
 	@Shadow
 	public Gamemode gamemode;
 	@Shadow

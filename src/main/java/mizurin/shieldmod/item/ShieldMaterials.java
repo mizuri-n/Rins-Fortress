@@ -4,7 +4,7 @@ import net.minecraft.core.item.material.ToolMaterial;
 
 public class ShieldMaterials extends ToolMaterial {
 	private float guard;
-	public float getGuard(){
+	 public float getGuard(){
 		return this.guard;
 	}
 	public ToolMaterial setGuard(float guard){
