@@ -17,7 +17,9 @@ import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.AABB;
+import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
+import org.lwjgl.util.vector.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -266,16 +268,25 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 								damage = Math.round(damage * 0.65f);
 							}
 							//tear shield provides a damage resistance when the player is low health. it can stack with blocking too.
-							if (shieldmod$getIsBlock()) {
+							double _dx = attacker.x - this.x;
+							double _dz = attacker.z - this.z;
+							double _dy = attacker.y - this.y;
+							double length = Math.sqrt(_dx * _dx  + _dz * _dz);
+							_dx /= length;
+							_dz /= length;
+							_dy /= length;
+							Vec3 directionA = Vec3.getTempVec3(_dx, 0, _dz);
+							double similarity = this.getLookAngle().dotProduct(directionA);
+							if (shieldmod$getIsBlock() && similarity > 0.4) {
 								//checks if the player is blocking to apply the damage resistance.
 
 								damage = Math.round(damage * (shield.tool.getEfficiency(true)));
 
-								double _dx = attacker.x - this.x;
-								double _dz = attacker.z - this.z;
-								double length = Math.hypot(_dx, _dz);
-								_dx /= length;
-								_dz /= length;
+//								double _dx = attacker.x - this.x;
+//								double _dz = attacker.z - this.z;
+//								double length = Math.hypot(_dx, _dz);
+//								_dx /= length;
+//								_dz /= length;
 
 
 								if (shield.tool == ShieldMaterials.TOOL_LEATHER && attacker != this){
