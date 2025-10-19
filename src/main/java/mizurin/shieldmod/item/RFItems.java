@@ -32,6 +32,7 @@ public class RFItems {
 	public static Item poisonBottle;
 	public static Item rockyHelmet;
 	public static Item regenAmulet;
+	public static Item valkyrieShield;
 
 	public static ArmorMaterial rockyArmor = ArmorHelper.createArmorMaterial(MOD_ID, "stone", 240, 30f, 30f, 30f, 30f);
 	public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "amulet", 120, 5f, 5f, 5f, 5f);
@@ -87,6 +88,7 @@ public class RFItems {
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 
+
 		ammotearShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
 			.build(new Item("ammo_tear_shield", MOD_ID + ":item/tear_shield_ammo", ++itemID))
@@ -106,6 +108,11 @@ public class RFItems {
 
 		regenAmulet = new ItemBuilder(MOD_ID)
 			.build(new ItemArmor("amulet_heart", MOD_ID + ":amulet_heart" ,++itemID, heartAmulet, IArmorItem.PIECE_CHEST));
+
+		valkyrieShield = new ItemBuilder(MOD_ID)
+			.setStackSize(1)
+			.build(new ValkyrieShield("valkyrie_shield", "shieldmod:item/valkyrie_shield"  ,++itemID, ShieldMaterials.TOOL_VALK))
+			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 	}
 
 	public static void replaceVanillaItems() {

@@ -65,6 +65,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint {
 		EntityHelper.createEntity(EntityFire.class, NamespaceID.getPermanent(MOD_ID, "fire"), null, "entityFire", ++entityID);
 		EntityHelper.createEntity(EntityWeb.class, NamespaceID.getPermanent(MOD_ID, "web"), null, "entityWeb", ++entityID);
 		EntityHelper.createEntity(EntityIceBall.class, NamespaceID.getPermanent(MOD_ID, "ammo_snow"), null, "ammoSnow", ++entityID);
+		EntityHelper.createEntity(EntityHoming.class, NamespaceID.getPermanent(MOD_ID, "homing"), null, "homingMass", ++entityID);
 
 		NetEntityHandler.registerNetworkEntry(new NetShieldEntry(), 8000);
 		NetEntityHandler.registerNetworkEntry(new NetPotionEntry(), 8001);

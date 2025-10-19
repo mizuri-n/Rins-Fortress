@@ -41,7 +41,7 @@ public class ItemModelShield extends ItemModelColored {
 				GL11.glRotatef(30F, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(-25F, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(10F, 0.0F, 0.0F, 1.0F);
-				GL11.glTranslatef(0.35F, -0.70075F, 0.175F);
+				GL11.glTranslatef(0.35F, -0.70075F, 0.375F);
 			} else {
 				//Renders the shield when not blocking.
 				//Doing this blind was hell.
@@ -53,7 +53,7 @@ public class ItemModelShield extends ItemModelColored {
 				GL11.glRotatef(40F, 0.0F, 0.0F, 1.0F); //z value
 				GL11.glRotatef(-25F, 0.0F, 0.0F, 1.0F); //z value
 				GL11.glRotatef(30F, 1.0F, 0.0F, 0.0F); //x value
-				GL11.glTranslatef(0.41F, -0.20075F, -0.2F);
+				GL11.glTranslatef(0.31F, -0.20075F, -0.2F);
 			}
 		}
 		if(entity instanceof MobMonster){

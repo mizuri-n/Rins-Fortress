@@ -67,6 +67,9 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 		dispatcher.addDispatch(new ItemModelShield(RFItems.tearShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/tearstone_shield"), RFModelEntryPoint::white)).setFull3D());
 
+		dispatcher.addDispatch(new ItemModelShield(RFItems.valkyrieShield,
+			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/valkyrie_shield"), RFModelEntryPoint::white)).setFull3D());
+
 		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.ammotearShield, null), "shieldmod:item/tear_shield_ammo"));
 		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.poisonBottle, null), "shieldmod:item/poison_bottle"));
 		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.pumpkinStew, null), "shieldmod:item/pumpkin_stew"));
@@ -110,6 +113,12 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 
 		ModelHelper.setEntityModel(EntityIceBall.class, () -> {
 			final EntityRenderer<?> er = new EntityRendererSprite<EntityIceBall>(Items.AMMO_SNOWBALL);
+			er.init(dispatcher);
+			return er;
+		});
+
+		ModelHelper.setEntityModel(EntityHoming.class, () -> {
+			final EntityRenderer<?> er = new EntityRendererSprite<EntityHoming>(Items.AMMO_SNOWBALL).setScale(4.0F);
 			er.init(dispatcher);
 			return er;
 		});

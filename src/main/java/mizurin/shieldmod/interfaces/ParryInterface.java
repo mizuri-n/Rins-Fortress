@@ -15,4 +15,5 @@ public interface ParryInterface {
 
 	public int shieldmod$getFireTicks();
 	public void shieldmod$Fire(int fireTicks);
+
 }

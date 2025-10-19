@@ -131,97 +131,12 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 
 
 		List<Projectile> projectileList = player.world.getEntitiesWithinAABB(Projectile.class, aabb1);
-		for (Entity entity : projectileList) {
-			world.spawnParticle("largesmoke", entity.x, entity.y, entity.z, 0.0, 0.0, 0.0, 0);
-			if (entity instanceof ProjectileArrow) {
-				if (((ProjectileArrow) entity).isGrounded()) {
-					return;
-				}
-			}
-
-			if (entity instanceof ProjectileArrow) {
-
-				if (!((ProjectileArrow) entity).isGrounded()) {
-					entity.remove();
-					ProjectileArrow newArrow = new ProjectileArrow(world, player, false, ((ProjectileArrow) entity).getArrowType());
-					newArrow.damage += 3;
-					if (!world.isClientSide) {
-						//For any devs looking at my code. This if statement (!world.isClientSide) is used for server compatibility, please use it when spawning items.
-						//In this case, failure to do so can cause the player to parry their own clientside projectiles that do not disappear.
-						world.entityJoinedWorld(newArrow);
-						world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
-					}
-				}
-			}
-
-
-			if (entity instanceof ProjectileCannonball) {
-
-				double oldCBX = entity.x;
-				double oldCBY = entity.y;
-				double oldCBZ = entity.z;
-
-				entity.remove();
-				ProjectileCannonball newCB = new ProjectileCannonball(world, player);
-				if (!world.isClientSide) {
-					world.entityJoinedWorld(newCB);
-					newCB.setPos(oldCBX, oldCBY, oldCBZ);
-					double pushX = player.getLookAngle().x;
-					double pushY = player.getLookAngle().y;
-					double pushZ = player.getLookAngle().z;
-					newCB.push(pushX * 1.2, pushY * 1.2, pushZ * 1.2);
-					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
-				}
-			}
-			if (entity instanceof ProjectileSnowball) {
-
-				entity.remove();
-				ProjectileSnowball newSB = new ProjectileSnowball(world, player);
-				newSB.damage +=1;
-				if (!world.isClientSide) {
-					world.entityJoinedWorld(newSB);
-					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
-				}
-			}
-			if (entity instanceof EntityShield) {
-
-				entity.remove();
-				EntityShield newTS = new EntityShield(world, player);
-				newTS.damage += 2;
-				if (!world.isClientSide) {
-					world.entityJoinedWorld(newTS);
-					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
-				}
-			}
-			if (entity instanceof EntityPB) {
-
-				entity.remove();
-				EntityPB newPS = new EntityPB(world, player);
-				newPS.damage +=1;
-				if (!world.isClientSide) {
-					world.entityJoinedWorld(newPS);
-					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
-				}
-			}
-			if (entity instanceof EntityWeb) {
-
-				entity.remove();
-				EntityWeb newWB = new EntityWeb(world, player);
-				newWB.damage +=1;
-				if (!world.isClientSide) {
-					world.entityJoinedWorld(newWB);
-					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
-				}
-			}
-			if (entity instanceof EntityIceBall) {
-
-				entity.remove();
-				EntityIceBall newIB = new EntityIceBall(world, player);
-				newIB.damage +=1;
-				if (!world.isClientSide) {
-					world.entityJoinedWorld(newIB);
-					world.playSoundAtEntity(player, player, "mob.ghast.fireball", 0.66f, 1.0f);
-				}
+		for (Projectile projectile : projectileList) {
+			world.spawnParticle("largesmoke", projectile.x, projectile.y, projectile.z, 0.0, 0.0, 0.0, 0);
+			Vec3 lookAngle = player.getLookAngle();
+			if (lookAngle != null) {
+				projectile.setHeading(lookAngle.x, lookAngle.y, lookAngle.z, 1.0F, 0);
+				projectile.damage += 2;
 			}
 
 		}
@@ -356,7 +271,7 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 			if (stack.getItem() instanceof ShieldItem) {
 
 				ShieldItem shield = ((ShieldItem) stack.getItem());
-				if (shieldmod$getIsBlock() && (shield.tool == ShieldMaterials.TOOL_LEATHER || shield.tool == ShieldMaterials.TOOL_WOOD)) {
+				if (shieldmod$getIsBlock() && (shield.tool == ShieldMaterials.TOOL_LEATHER || shield.tool == ShieldMaterials.TOOL_WOOD || shield.tool == ShieldMaterials.TOOL_VALK)) {
 					this.xd *= 0.75D;
 					this.zd *= 0.75D;
 				}
@@ -401,7 +316,7 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 
 		if(this.parryTicks == 18 && thisObject instanceof Player && parryDelay == 0){
 			parryHitbox(thisObject.world, (Player)thisObject);
-			parryDelay = 30;
+			parryDelay = 25;
 		}
 
 

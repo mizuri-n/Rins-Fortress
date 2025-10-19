@@ -62,6 +62,7 @@ public abstract class StatusMixin extends Entity implements IStatus {
 
 			this.xd *= 0.90D;
 			this.zd *= 0.90D;
+			this.yd *= 0.90D;
 
 				float width = 1.0f;
 				double dx = world.rand.nextGaussian() * 0.002;
@@ -79,6 +80,7 @@ public abstract class StatusMixin extends Entity implements IStatus {
 		if (this.shieldmod$getFreezeHurt() > 0) {
 			this.xd *= 0.65D;
 			this.zd *= 0.65D;
+			this.yd *= 0.65D;
 
 			float width = 1.0f;
 				double dx = world.rand.nextGaussian() * 0.002;
