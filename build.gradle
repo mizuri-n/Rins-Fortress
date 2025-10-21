@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.7.bta'
+	id 'fabric-loom' version '1.10.0-bta'
 	id 'java'
 }
 
@@ -86,6 +86,15 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
+
+	ivy {
+		url = "https://github.com/"
+		patternLayout {
+			artifact "[organization]/[module]/releases/download/[revision]-${project.bta_version}/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
 }
 
 
@@ -101,6 +110,11 @@ dependencies {
 	modImplementation("turniplabs:halplibe:${project.halplibe_version}")
 	modImplementation("sunsetsatellite:catalyst-core:${catalystcore_version}")
 	modImplementation("sunsetsatellite:catalyst-effects:${catalysteffects_version}")
+
+	var bwa_import = "com.github.bta-team-port:better-with-aether:${project.bwa_version}"
+
+	if (project.bwa_mod_impl == "true") modImplementation(bwa_import)
+	else compileOnly(bwa_import)
 
 	modImplementation("turniplabs:modmenu-bta:${project.mod_menu_version}")
 	compileOnly("BTANoNameDyes:noname_dyes:1.3")

@@ -21,22 +21,32 @@
     "main": [
         "mizurin.shieldmod.ShieldMod"
     ],
+
 		"beforeGameStart": [
-			"mizurin.shieldmod.ShieldMod"
+			"mizurin.shieldmod.ShieldMod",
+			"mizurin.shieldmod.compat.aether.RFAetherCompatibility"
 		],
+
 		"beforeClientStart": [
 			"mizurin.shieldmod.ShieldModClient"
 		],
+
 		"afterGameStart": [
 			"mizurin.shieldmod.ShieldMod"
 		],
+
 		"recipesReady": [
-			"mizurin.shieldmod.Recipes"
+			"mizurin.shieldmod.Recipes",
+			"mizurin.shieldmod.compat.aether.RFAetherCompatibility"
 		],
+
 		"initModels": [
-			"mizurin.shieldmod.RFModelEntryPoint"
-		]
-  },
+			"mizurin.shieldmod.RFModelEntryPoint",
+			"mizurin.shieldmod.compat.aether.RFAetherCompatibility"
+		],
+
+		"preLaunch": ["mizurin.shieldmod.compat.aether.RFAetherCompatibility"]
+	},
   "mixins": [
 		"shieldmod.mixins.json"
   ],
