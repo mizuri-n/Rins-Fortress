@@ -38,19 +38,16 @@ public class ShieldItem extends ItemToolSword {
 				ShieldEffects.add((Mob) target, ShieldEffects.slowEffect, 1);
 				target.fling(target.xd * 0.2, target.yd * 0, target.zd * 0.2, 0.5F);
 			}
-			if (itemstack.getItem() == RFItems.holystoneShield) {
-				ShieldEffects.add((Mob) target, ShieldEffects.weaknessEffect, 1);
-				target.fling(target.xd * 0.2, target.yd * 0, target.zd * 0.2, 0.5F);
-			}
+
 			itemstack.damageItem(1, player);
 		}
 
 		return true;
 	}
+
 	public int getDamageVsEntity(Entity entity, ItemStack is) {
 		return this.weaponDamage;
 	}
-
 
 	//Activates ticks that determine if the player is blocking.
 	@Override

@@ -67,12 +67,6 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 		dispatcher.addDispatch(new ItemModelShield(RFItems.tearShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/tearstone_shield"), RFModelEntryPoint::white)).setFull3D());
 
-		dispatcher.addDispatch(new ItemModelShield(RFItems.valkyrieShield,
-			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/valkyrie_shield"), RFModelEntryPoint::white)).setFull3D());
-
-		dispatcher.addDispatch(new ItemModelShield(RFItems.holystoneShield,
-			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/disc_shield"), RFModelEntryPoint::white)).setFull3D());
-
 		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.ammotearShield, null), "shieldmod:item/tear_shield_ammo"));
 		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.poisonBottle, null), "shieldmod:item/poison_bottle"));
 		dispatcher.addDispatch(setIcon(new ItemModelStandard(RFItems.pumpkinStew, null), "shieldmod:item/pumpkin_stew"));

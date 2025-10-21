@@ -1,5 +1,6 @@
 package mizurin.shieldmod.mixins.entity;
 
+import mizurin.shieldmod.interfaces.IHasHealthSteal;
 import mizurin.shieldmod.item.RFItems;
 import mizurin.shieldmod.item.ShieldItem;
 import net.minecraft.core.entity.Entity;
@@ -19,14 +20,14 @@ public class EntityLivingMixin {
 
 		if(entityKilledBy instanceof Player){
 			ItemStack shield_item = ((Player)entityKilledBy).getHeldItem();
-			boolean AR = false;
-			if ((shield_item != null && shield_item.getItem().equals(RFItems.holystoneShield))){
-				AR = true;
-			}
-			if (AR) {
-				((Player) entityKilledBy).heal(1);
-					entityKilledBy.world.spawnParticle("explode", entityKilledBy.x, entityKilledBy.y + entityKilledBy.getHeadHeight(), entityKilledBy.z, 0.0, 0.0, 0.0, 0);
 
+			if (shield_item != null && shield_item.getItem() instanceof IHasHealthSteal) {
+				((Player) entityKilledBy).heal(1);
+				entityKilledBy.world.spawnParticle(
+					"explode",
+					entityKilledBy.x, entityKilledBy.y + entityKilledBy.getHeadHeight(), entityKilledBy.z,
+					0.0, 0.0, 0.0, 0
+				);
 			}
 		}
 	}
