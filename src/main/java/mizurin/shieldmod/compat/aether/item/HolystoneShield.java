@@ -17,7 +17,6 @@ public class HolystoneShield extends ShieldItem implements IHasHealthSteal {
 	@Override
 	public boolean hitEntity(ItemStack itemstack, Mob target, Mob player) {
 		if ((target.hurtTime == 10 || target instanceof Player)) {
-			target.fling(target.xd * 0.2, target.yd * 0, target.zd * 0.2, 0.5F);
 
 			ShieldEffects.add(target, ShieldEffects.weaknessEffect, 1);
 			target.fling(target.xd * 0.2, target.yd * 0, target.zd * 0.2, 0.5F);
