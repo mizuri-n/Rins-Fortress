@@ -1,5 +1,6 @@
 package mizurin.shieldmod.mixins;
 
+import mizurin.shieldmod.effects.ShieldEffects;
 import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
@@ -27,6 +28,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
+import sunsetsatellite.catalyst.effects.api.effect.IHasEffects;
+
 import java.util.List;
 
 
@@ -168,6 +171,7 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 		}
 
 
+
 		if (stack != null) {
 			if (stack.getItem() instanceof ShieldItem) {
 
@@ -195,11 +199,6 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 
 								damage = Math.round(damage * (shield.tool.getEfficiency(true)));
 
-//								double _dx = attacker.x - this.x;
-//								double _dz = attacker.z - this.z;
-//								double length = Math.hypot(_dx, _dz);
-//								_dx /= length;
-//								_dz /= length;
 
 
 								if (shield.tool == ShieldMaterials.TOOL_LEATHER && attacker != this){

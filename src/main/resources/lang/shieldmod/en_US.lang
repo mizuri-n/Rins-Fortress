@@ -22,6 +22,10 @@ item.shieldmod.helmet_rock.name=Rocky Helmet
 item.shieldmod.helmet_rock.desc=A crumbling helmet.
 item.shieldmod.amulet_heart.name=Amulet of restoration
 item.shieldmod.amulet_heart.desc=An amulet that is warm to the touch.
+item.shieldmod.valkyrie_shield.name=Valkyrie Shield
+item.shieldmod.valkyrie_shield.desc=Summon the power of a valkyrie with this angelic shield.
+item.shieldmod.holystone_shield.name=Holystone Shield
+item.shieldmod.holystone_shield.desc=Defend with this holystone disc.
 
 tile.shieldmod.log.apple.name=Apple Log
 tile.shieldmod.log.apple.desc=A log from an apple tree.
@@ -31,4 +35,6 @@ tile.shieldmod.sapling.apple.name=Apple Sapling
 tile.shieldmod.sapling.apple.desc=Plant to grow an apple tree.
 tile.shieldmod.leaves.apple.flowering.name=Flowering Apple Leaves
 tile.shieldmod.leaves.apple.flowering.desc=Leaves from an apple tree that are budding with fruit.
-
+effect.shieldmod.poison.name=Poison
+effect.shieldmod.slow.name=Slow
+effect.shieldmod.web.name=Webbed

@@ -1,6 +1,7 @@
 package mizurin.shieldmod;
 
 import mizurin.shieldmod.blocks.RFBlocks;
+import mizurin.shieldmod.effects.ShieldEffects;
 import mizurin.shieldmod.entities.*;
 import mizurin.shieldmod.item.RFItems;
 import net.fabricmc.api.ModInitializer;
@@ -55,6 +56,7 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint {
 	public void beforeGameStart() {
 		new RFItems().initializeItems();
 		new RFBlocks().initializeBlocks();
+		ShieldEffects.init();
 
 		paintingSeal = new ArtType("paintingSeal", "The Orb", "Rin", "shieldmod:art/seal", 32, 32);
 		paintingRice = new ArtType("paintingRice", "Lunch", "Rin", "shieldmod:art/onigiri", 32, 32);

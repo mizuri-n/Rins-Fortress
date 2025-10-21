@@ -1,7 +1,8 @@
 package mizurin.shieldmod.entities;
 
-import mizurin.shieldmod.interfaces.IStatus;
+import mizurin.shieldmod.effects.ShieldEffects;
 import mizurin.shieldmod.item.RFItems;
+import net.minecraft.core.entity.Entity;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.entity.Mob;
@@ -36,13 +37,12 @@ public class EntityPB extends Projectile {
 	public void onHit(HitResult hitResult) {
 		if (hitResult.entity instanceof Mob) {
 			hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
-			((IStatus) hitResult.entity).shieldmod$poisonHurt(200);
-			//Applies my custom status effect from the IDazed interface.
+			ShieldEffects.add((Mob) hitResult.entity, ShieldEffects.poisonEffect, random.nextInt(1) + 1);
 		}
 		if(hitResult.hitType == HitResult.HitType.TILE || hitResult.hitType == HitResult.HitType.ENTITY){
 			List<Mob> nearbyMon = this.world.getEntitiesWithinAABB(Mob.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(2.0, 1.5, 2.0));
 			for(Mob mon : nearbyMon){
-				((IStatus) mon).shieldmod$poisonHurt(200);
+				ShieldEffects.add((Entity) mon, ShieldEffects.poisonEffect, random.nextInt(1) + 1);
 			}
 		}
 		if (this.modelItem != null) {

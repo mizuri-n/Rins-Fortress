@@ -1,10 +1,12 @@
 package mizurin.shieldmod.mixins.entity;
 
 import com.mojang.nbt.tags.CompoundTag;
+import mizurin.shieldmod.effects.ShieldEffects;
 import mizurin.shieldmod.entities.EntityIceBall;
 import mizurin.shieldmod.interfaces.IShieldZombie;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.monster.*;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.ProjectileSnowball;
@@ -140,6 +142,7 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 				this.hasAttacked = true;
 			} else if (distance <= 4.0F) {
 				super.attackEntity(entity, distance);
+				ShieldEffects.add((Mob) target, ShieldEffects.weaknessEffect, 1);
 			}
 		} else {
 			if (distance < 8.0F && distance > 4.0F) {
@@ -167,6 +170,7 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 				this.hasAttacked = true;
 			} else if (distance <= 4.0F) {
 				super.attackEntity(entity, distance);
+				ShieldEffects.add((Mob) target, ShieldEffects.weaknessEffect, 1);
 			}
 		}
 	}

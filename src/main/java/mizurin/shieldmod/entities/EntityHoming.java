@@ -9,14 +9,13 @@ import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
-import turniplabs.halplibe.helper.ParticleHelper;
 
 import java.util.List;
 
 public class EntityHoming extends Projectile {
 	private Mob target;
 	private static final float homingPower = 0.15F;
-	private static final float topSpeed = 0.5F;
+	private static final float topSpeed = 0.4F;
 
 	public EntityHoming(World world) {
 		super(world);
@@ -29,7 +28,7 @@ public class EntityHoming extends Projectile {
 
 	@Override
 	public void initProjectile() {
-		this.damage = 6;
+		this.damage = 7;
 		this.defaultGravity = 0.0F;
 		this.defaultProjectileSpeed = 1.0F;
 		this.setSize(1.0F, 1.0F);
@@ -49,6 +48,7 @@ public class EntityHoming extends Projectile {
 		if (this.target == null || !this.target.isAlive()) {
 			AABB searchBox = AABB.getPermanentBB(this.x - 2.0, this.y - 2.0, this.z - 2.0, this.x + 2.0, this.y + 2.0, this.z + 2.0);
 			List<Mob> entities = this.world.getEntitiesWithinAABB(Mob.class, searchBox);
+			entities.remove(this.owner);
 			Mob closestMob = null;
 			for (Mob entity : entities) {
 				if (entity instanceof Mob && entity.isAlive() &! (entity instanceof Player)) {
@@ -94,7 +94,7 @@ public class EntityHoming extends Projectile {
 				}
 			}
 				if (hitResult.entity instanceof Mob) {
-					hitResult.entity.hurt(this.owner, this.damage, DamageType.GENERIC);
+					hitResult.entity.hurt(this.owner, this.damage, DamageType.FALL);
 					this.remove();
 					return;
 				}

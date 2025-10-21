@@ -25,10 +25,14 @@ public class ValkyrieShield extends ShieldItem{
 		if (entityplayer.isSneaking() && ((ParryInterface)entityplayer).shieldmod$getFireTicks() == 0){
 				itemstack.damageItem(16, entityplayer);
 			if (!world.isClientSide) {
-				world.entityJoinedWorld(new EntityHoming(world, entityplayer));
-
+				double lookX = entityplayer.getLookAngle().x;
+				double lookY = entityplayer.getLookAngle().y;
+				double lookZ = entityplayer.getLookAngle().z;
+				EntityHoming ball = new EntityHoming(world, entityplayer);
+				ball.setHeading(lookX, lookY, lookZ, 1.0f, 0.0f);
+				world.entityJoinedWorld(ball);
 			}
-				((ParryInterface)entityplayer).shieldmod$Fire(25);
+				((ParryInterface)entityplayer).shieldmod$Fire(35);
 
 		}
 

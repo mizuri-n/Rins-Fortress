@@ -33,6 +33,7 @@ public class RFItems {
 	public static Item rockyHelmet;
 	public static Item regenAmulet;
 	public static Item valkyrieShield;
+	public static Item holystoneShield;
 
 	public static ArmorMaterial rockyArmor = ArmorHelper.createArmorMaterial(MOD_ID, "stone", 240, 30f, 30f, 30f, 30f);
 	public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "amulet", 120, 5f, 5f, 5f, 5f);
@@ -112,6 +113,11 @@ public class RFItems {
 		valkyrieShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
 			.build(new ValkyrieShield("valkyrie_shield", "shieldmod:item/valkyrie_shield"  ,++itemID, ShieldMaterials.TOOL_VALK))
+			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
+
+		holystoneShield = new ItemBuilder(MOD_ID)
+			.setStackSize(1)
+			.build(new ShieldItem("holystone_shield", "shieldmod:item/disc_shield"  ,++itemID, ShieldMaterials.TOOL_STONE))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 	}
 

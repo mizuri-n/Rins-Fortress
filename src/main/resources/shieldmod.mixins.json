@@ -5,12 +5,11 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BonusHealthMixin",
-    "StatusMixin",
     "FieldMixin",
+    "HurtMixin",
     "ItemsMixin",
     "KnockBackMixin",
     "RecipeRegistryMixin",
-    "HurtMixin",
     "SlotArmorMixin",
     "entity.EntityCreeperMixin",
     "entity.EntityLivingMixin",
@@ -27,7 +26,7 @@
   ],
   "client": [
     "client.BipedRendererMixin",
-    "client.IconMixin",
+    "client.HudComponentHealthBarMixin",
     "client.LivingRendererMixin",
     "client.PaintingMixin",
     "client.PlayerRendererMixin"

@@ -1,6 +1,6 @@
 package mizurin.shieldmod.item;
 
-import mizurin.shieldmod.interfaces.IStatus;
+import mizurin.shieldmod.effects.ShieldEffects;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
@@ -30,14 +30,17 @@ public class ShieldItem extends ItemToolSword {
 	public boolean hitEntity(ItemStack itemstack, Mob target, Mob player) {
 		if ((target.hurtTime == 10 || target instanceof Player)) {
 			if (itemstack.getItem() == RFItems.leatherShield) {
-				target.knockBack(player, 1, (player.x - target.x), (player.z - target.z));
-				target.push((target.x - player.x) / 11, 0, (target.z - player.z) / 11);
+				target.fling(target.xd * 0.4, target.yd * 0, target.zd * 0.4, 0.5F);
 			} else {
-				target.push((target.x - player.x) / 11, 0, (target.z - player.z) / 11);
+				target.fling(target.xd * 0.2, target.yd * 0, target.zd * 0.2, 0.5F);
 			}
 			if (itemstack.getItem() == RFItems.goldShield) {
-				((IStatus) target).shieldmod$dazedHurt(300);
-				target.push((target.x - player.x) / 20, 0, (target.z - player.z) / 20);
+				ShieldEffects.add((Mob) target, ShieldEffects.slowEffect, 1);
+				target.fling(target.xd * 0.2, target.yd * 0, target.zd * 0.2, 0.5F);
+			}
+			if (itemstack.getItem() == RFItems.holystoneShield) {
+				ShieldEffects.add((Mob) target, ShieldEffects.weaknessEffect, 1);
+				target.fling(target.xd * 0.2, target.yd * 0, target.zd * 0.2, 0.5F);
 			}
 			itemstack.damageItem(1, player);
 		}
