@@ -5,8 +5,8 @@ import net.minecraft.core.item.material.ToolMaterial;
 
 //Colored Shield, same as Light Shield for movement speed but implements IColorable.
 public class ShieldColored extends ShieldItem implements IColorable {
-	public ShieldColored(String name, String namespaceID, int id, ToolMaterial toolMaterial) {
-		super(name, namespaceID, id, toolMaterial);
+	public ShieldColored(String name, String namespaceID, int id, ShieldMaterials shieldMaterials) {
+		super(name, namespaceID, id, shieldMaterials);
 	}
 
 }

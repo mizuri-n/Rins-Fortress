@@ -11,12 +11,12 @@ import net.minecraft.core.world.World;
 public class ThrowShield extends ShieldItem{
 
 
-	public ThrowShield(String name, String namespaceID, int id, ToolMaterial toolMaterial) {
-		super(name, namespaceID, id, toolMaterial);
+	public ThrowShield(String name, String namespaceID, int id, ShieldMaterials shieldMaterials) {
+		super(name, namespaceID, id, shieldMaterials);
 		maxStackSize = 1;
-		setMaxDamage(toolMaterial.getDurability());
-		this.tool = toolMaterial;
-		this.weaponDamage = 3 + toolMaterial.getDamage();
+		setMaxDamage(shieldMaterials.getDurability());
+		this.tool = shieldMaterials;
+		this.weaponDamage = 3 + shieldMaterials.getDamage();
 
 	}
 	@Override

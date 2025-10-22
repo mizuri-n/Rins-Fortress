@@ -4,6 +4,7 @@ import mizurin.shieldmod.RFModelEntryPoint;
 import mizurin.shieldmod.compat.aether.item.RFAetherItems;
 import mizurin.shieldmod.item.ItemModelColored;
 import mizurin.shieldmod.item.ItemModelShield;
+import mizurin.shieldmod.item.ItemModelSky;
 import net.minecraft.client.render.EntityRenderDispatcher;
 import net.minecraft.client.render.TileEntityRenderDispatcher;
 import net.minecraft.client.render.block.color.BlockColorDispatcher;
@@ -23,8 +24,17 @@ public class RFAetherModels implements ModelEntrypoint {
 		dispatcher.addDispatch(new ItemModelShield(RFAetherItems.valkyrieShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/valkyrie_shield"), RFModelEntryPoint::white)).setFull3D());
 
+		dispatcher.addDispatch(new ItemModelSky(RFAetherItems.skyrootShield,
+			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/skyroot_shield"), RFModelEntryPoint::white)).setFull3D());
+
 		dispatcher.addDispatch(new ItemModelShield(RFAetherItems.holystoneShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/disc_shield"), RFModelEntryPoint::white)).setFull3D());
+
+		dispatcher.addDispatch(new ItemModelShield(RFAetherItems.zaniteShield,
+			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/zanite_shield"), RFModelEntryPoint::white)).setFull3D());
+
+		dispatcher.addDispatch(new ItemModelShield(RFAetherItems.gravititeShield,
+			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/gravitite_shield"), RFModelEntryPoint::white)).setFull3D());
 	}
 
 	@Override

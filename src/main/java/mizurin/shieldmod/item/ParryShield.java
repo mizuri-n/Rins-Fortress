@@ -3,13 +3,12 @@ package mizurin.shieldmod.item;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.world.World;
 
 public class ParryShield extends ShieldItem {
 
-	public ParryShield(String name, String namespaceID, int id, ToolMaterial toolMaterial) {
-		super(name, namespaceID, id, toolMaterial);
+	public ParryShield(String name, String namespaceID, int id, ShieldMaterials shieldMaterials) {
+		super(name, namespaceID, id, shieldMaterials);
 	}
 
 	@Override

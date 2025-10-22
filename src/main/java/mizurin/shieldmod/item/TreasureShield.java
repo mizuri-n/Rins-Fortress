@@ -8,12 +8,12 @@ import net.minecraft.core.util.helper.DamageType;
 
 //For the Diamond Shield.
 public class TreasureShield extends ShieldItem{
-	public TreasureShield(String name, String namespaceID, int id, ToolMaterial toolMaterial) {
-		super(name, namespaceID, id, toolMaterial);
+	public TreasureShield(String name, String namespaceID, int id, ShieldMaterials shieldMaterials) {
+		super(name, namespaceID, id, shieldMaterials);
 		maxStackSize = 1;
-		setMaxDamage(toolMaterial.getDurability());
-		this.tool = toolMaterial;
-		this.weaponDamage = 3 + toolMaterial.getDamage();
+		setMaxDamage(shieldMaterials.getDurability());
+		this.tool = shieldMaterials;
+		this.weaponDamage = 3 + shieldMaterials.getDamage();
 	}
 
 	//If the ticks(Blocked) are active, then the player has bonus damage and knockback for the shield.

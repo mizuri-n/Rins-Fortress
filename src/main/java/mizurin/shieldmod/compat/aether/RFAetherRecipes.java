@@ -22,8 +22,23 @@ public class RFAetherRecipes implements RecipeEntrypoint {
 
 	public static void workbenchRecipes() {
 		RecipeBuilder.Shaped(MOD_ID, " X ", "XAX", " X ")
+			.addInput('X', AetherBlocks.PLANKS_SKYROOT)
+			.addInput('A', AetherBlocks.LOG_SKYROOT)
+			.create("skyroot_shield", new ItemStack(RFAetherItems.skyrootShield, 1));
+
+		RecipeBuilder.Shaped(MOD_ID, " X ", "XAX", " X ")
 			.addInput('X', AetherBlocks.COBBLE_HOLYSTONE)
 			.addInput('A', AetherItems.AMBROSIUM)
 			.create("holystone_shield", new ItemStack(RFAetherItems.holystoneShield, 1));
+
+		RecipeBuilder.Shaped(MOD_ID, " X ", "XAX", " X ")
+			.addInput('X', AetherItems.ZANITE)
+			.addInput('A', "minecraft:planks")
+			.create("zanite_shield", new ItemStack(RFAetherItems.zaniteShield, 1));
+
+		RecipeBuilder.Shaped(MOD_ID, " X ", "XAX", " X ")
+			.addInput('X', AetherBlocks.BLOCK_GRAVITITE)
+			.addInput('A', "minecraft:planks")
+			.create("zanite_shield", new ItemStack(RFAetherItems.gravititeShield, 1));
 	}
 }

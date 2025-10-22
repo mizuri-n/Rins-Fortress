@@ -197,7 +197,7 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 							if (shieldmod$getIsBlock() && similarity > 0.4) {
 								//checks if the player is blocking to apply the damage resistance.
 
-								damage = Math.round(damage * (shield.tool.getEfficiency(true)));
+								damage = Math.round(damage * (shield.getGuard(stack)));
 
 
 
@@ -270,7 +270,7 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 			if (stack.getItem() instanceof ShieldItem) {
 
 				ShieldItem shield = ((ShieldItem) stack.getItem());
-				if (shieldmod$getIsBlock() && (shield.tool == ShieldMaterials.TOOL_LEATHER || shield.tool == ShieldMaterials.TOOL_WOOD || shield.tool == ShieldMaterials.TOOL_VALK)) {
+				if (shieldmod$getIsBlock() && (shield.tool == ShieldMaterials.TOOL_LEATHER || shield.tool == ShieldMaterials.TOOL_WOOD || shield.tool == ShieldMaterials.TOOL_VALK || shield.tool == ShieldMaterials.TOOL_SKY)) {
 					this.xd *= 0.75D;
 					this.zd *= 0.75D;
 				}

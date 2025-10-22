@@ -3,15 +3,15 @@ package mizurin.shieldmod.compat.aether.item;
 import mizurin.shieldmod.effects.ShieldEffects;
 import mizurin.shieldmod.interfaces.IHasHealthSteal;
 import mizurin.shieldmod.item.ShieldItem;
+import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.material.ToolMaterial;
 
 public class HolystoneShield extends ShieldItem implements IHasHealthSteal {
 
-	public HolystoneShield(String name, String namespaceID, int id, ToolMaterial toolMaterial) {
-		super(name, namespaceID, id, toolMaterial);
+	public HolystoneShield(String name, String namespaceID, int id, ShieldMaterials shieldMaterials) {
+		super(name, namespaceID, id, shieldMaterials);
 	}
 
 	@Override

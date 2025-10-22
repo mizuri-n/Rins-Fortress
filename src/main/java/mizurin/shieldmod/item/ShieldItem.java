@@ -6,21 +6,21 @@ import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tool.ItemToolSword;
 import net.minecraft.core.world.World;
 
 public class ShieldItem extends ItemToolSword {
-	public ToolMaterial tool;
+	public ShieldMaterials tool;
 	public int weaponDamage;
+	public float guard;
 
-
-	public ShieldItem(String name, String namespaceID, int id, ToolMaterial toolMaterial){
-		super(name, namespaceID, id, toolMaterial);
+	public ShieldItem(String name, String namespaceID, int id, ShieldMaterials shieldMaterials){
+		super(name, namespaceID, id, shieldMaterials);
 		maxStackSize = 1;
-		setMaxDamage(toolMaterial.getDurability());
-		this.tool = toolMaterial;
-		this.weaponDamage = 3 + toolMaterial.getDamage();
+		setMaxDamage(shieldMaterials.getDurability());
+		this.tool = shieldMaterials;
+		this.weaponDamage = 3 + shieldMaterials.getDamage();
+		this.guard = shieldMaterials.getGuard();
 
 
 	}
@@ -47,6 +47,10 @@ public class ShieldItem extends ItemToolSword {
 
 	public int getDamageVsEntity(Entity entity, ItemStack is) {
 		return this.weaponDamage;
+	}
+
+	public float getGuard(ItemStack is){
+		return this.guard;
 	}
 
 	//Activates ticks that determine if the player is blocking.

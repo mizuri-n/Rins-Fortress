@@ -3,7 +3,11 @@
   "minVersion": "0.8",
   "package": "mizurin.shieldmod.compat.aether.mixins",
   "compatibilityLevel": "JAVA_8",
-  "client": [],
-  "server" : [],
-  "mixins": []
+  "client": [
+    "PlayerControllerSkyRootReachMixin"
+  ],
+  "server": [],
+  "mixins": [
+    "SkyrootShieldDropMultiplier"
+  ]
 }

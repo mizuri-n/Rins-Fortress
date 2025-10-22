@@ -12,8 +12,8 @@ import net.minecraft.core.entity.player.Player;
 
 
 public class SteelShield extends ShieldItem{
-	public SteelShield(String name, String namespaceID, int id, ToolMaterial toolMaterial) {
-		super(name, namespaceID, id, toolMaterial);
+	public SteelShield(String name, String namespaceID, int id, ShieldMaterials shieldMaterials) {
+		super(name, namespaceID, id, shieldMaterials);
 	}
 
 	@Override

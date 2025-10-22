@@ -3,14 +3,15 @@ package mizurin.shieldmod.compat.aether.item;
 import mizurin.shieldmod.entities.EntityHoming;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
+import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.world.World;
 
 public class ValkyrieShield extends ShieldItem {
-	public ValkyrieShield(String name, String namespaceID, int id, ToolMaterial toolMaterial) {
-		super(name, namespaceID, id, toolMaterial);
+	public ValkyrieShield(String name, String namespaceID, int id, ShieldMaterials shieldMaterials) {
+		super(name, namespaceID, id, shieldMaterials);
 	}
 
 	@Override

@@ -24,8 +24,14 @@ item.shieldmod.amulet_heart.name=Amulet of restoration
 item.shieldmod.amulet_heart.desc=An amulet that is warm to the touch.
 item.shieldmod.valkyrie_shield.name=Valkyrie Shield
 item.shieldmod.valkyrie_shield.desc=Summon the power of a valkyrie with this angelic shield.
+item.shieldmod.skyroot_shield.name=Skyroot Shield
+item.shieldmod.skyroot_shield.desc=Defend with this wooden shield.
 item.shieldmod.holystone_shield.name=Holystone Shield
 item.shieldmod.holystone_shield.desc=Defend with this holystone disc.
+item.shieldmod.zanite_shield.name=Zanite Shield
+item.shieldmod.zanite_shield.desc=Defend with this zanite blade...disc?
+item.shieldmod.gravitite_shield.name=Gravitite Shield
+item.shieldmod.gravitite_shield.desc=Definitely not bubblegum!
 
 tile.shieldmod.log.apple.name=Apple Log
 tile.shieldmod.log.apple.desc=A log from an apple tree.
