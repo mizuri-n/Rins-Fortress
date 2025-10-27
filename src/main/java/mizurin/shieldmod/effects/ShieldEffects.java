@@ -87,13 +87,13 @@ public class ShieldEffects {
 	 * @implNote The path for the assets that effects uses is: assets/ + MOD_ID +/effects/icon/ + imagePath
 	 */
 	private static void assignEffects() {
-		extraHealthEffect = new Effect(
+		extraHealthEffect = new AmuletEffect(
 			"effect.shieldmod.extra_health",
 			MOD_ID + ":extra_health",
 			Collections.singletonList(new IntModifier(EXTRA_HEALTH, ModifierType.ADD, 1)),
-			EffectTimeType.PERMANENT,
-			46
-		).setPersistent();
+			EffectTimeType.KEEP,
+			1
+		).setDefaultDuration(600);
 
 		poisonEffect = new PoisonEffect(
 			"effect.shieldmod.poison",

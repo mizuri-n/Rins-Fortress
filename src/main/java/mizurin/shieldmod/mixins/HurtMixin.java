@@ -10,9 +10,6 @@ import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.Projectile;
-import net.minecraft.core.entity.projectile.ProjectileArrow;
-import net.minecraft.core.entity.projectile.ProjectileCannonball;
-import net.minecraft.core.entity.projectile.ProjectileSnowball;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
@@ -58,9 +55,6 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 	public Mob thisObject = (Mob) (Object) this;
 	@Shadow
 	public abstract int getMaxHealth();
-
-	@Shadow
-	public abstract ItemStack getCurrentEquippedItem();
 
 	@Unique
 	private int parryTicks;
@@ -155,6 +149,10 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 		int damage = args.get(1);
 		int orgDamage = damage;
 
+		if (attacker != null && ((IHasEffects) attacker).getContainer().hasEffect(ShieldEffects.weaknessEffect)){
+			damage = Math.round(damage * 0.80f);
+		}
+
 		// check if we are holding the shield item.
 		ItemStack stack = getHeldItem();
 		//check if we are wearing the helmet.
@@ -200,7 +198,6 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 								damage = Math.round(damage * (shield.getGuard(stack)));
 
 
-
 								if (shield.tool == ShieldMaterials.TOOL_LEATHER && attacker != this){
 									attacker.push(_dx * 1.2 ,0.65,_dz * 1.2);
 									//applies funny knockback to attack when hit.
@@ -242,22 +239,19 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 										dx, dy, dz, 0
 									);
 								}
-								stack.damageItem(orgDamage *4/5, this);
+								stack.damageItem((int)Math.ceil((double)orgDamage *4/5), this);
+								if(stack.stackSize <= 0){
+									stack = null;
+								}
 							}
 						}
 					}
-				}
-				if(stack.stackSize <= 0){
-					stack.stackSize = 0;
 				}
 			}
 		}
 
 		args.set(1, damage);
 	}
-	@Unique
-	private int tickCounter = 0;
-
 	@Unique
 	private int parryDelay = 0;
 	@Inject(
@@ -296,15 +290,6 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 				}
 
 			}
-		}
-		ItemStack chest_item = this.inventory.armorItemInSlot(2);
-		if ((chest_item != null && chest_item.getItem().equals(RFItems.regenAmulet))) {
-			++this.tickCounter;
-			if (this.tickCounter >= 600) {
-				this.tickCounter = 0;
-				this.heal(1);
-			}
-
 		}
 		if(this.parryTicks != 0) {
 			this.parryTicks--;

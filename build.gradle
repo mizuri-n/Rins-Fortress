@@ -107,6 +107,9 @@ dependencies {
 
 	// Helper library
 	// If you do not need Halplibe you can comment this line out or delete this line
+
+	modImplementation 'com.github.bta-team-port:better-with-aether:7.3-SNAPSHOT'
+	modImplementation 'com.github.MartinSVK12:catalyst:7.3-SNAPSHOT'
 	modImplementation("turniplabs:halplibe:${project.halplibe_version}")
 	modImplementation("sunsetsatellite:catalyst-core:${catalystcore_version}")
 	modImplementation("sunsetsatellite:catalyst-effects:${catalysteffects_version}")

@@ -47,7 +47,7 @@ public class RFAetherItems {
 
 		gravititeShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
-			.build(new ZaniteShield("gravitite_shield", "shieldmod:item/gravitite_shield"  ,++itemID, ShieldMaterials.TOOL_IRON))
+			.build(new ShieldItem("gravitite_shield", "shieldmod:item/gravitite_shield"  ,++itemID, ShieldMaterials.TOOL_IRON))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 		valkyrieShield = new ItemBuilder(MOD_ID)

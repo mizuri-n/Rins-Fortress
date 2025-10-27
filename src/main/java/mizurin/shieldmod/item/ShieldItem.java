@@ -25,7 +25,7 @@ public class ShieldItem extends ItemToolSword {
 
 	}
 
-	//Applies a knockback effect for all shields, bonus knockback to Leather Shields, and sets hitEntities on fire when hit by a Steel Shield.
+	//Applies a knockback effect for all shields, bonus knockback to Leather Shields.
 	@Override
 	public boolean hitEntity(ItemStack itemstack, Mob target, Mob player) {
 		if ((target.hurtTime == 10 || target instanceof Player)) {

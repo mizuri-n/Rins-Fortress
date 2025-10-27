@@ -11,7 +11,7 @@ public class ExtraHealthEffectRenderer<T extends Effect> extends EffectRenderer<
 
 	@Override
 	public boolean shouldDisplayIcon() {
-		return false;
+		return true;
 	}
 
 }

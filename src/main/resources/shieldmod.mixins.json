@@ -9,6 +9,7 @@
     "HurtMixin",
     "ItemsMixin",
     "KnockBackMixin",
+    "MobHurtMixin",
     "RecipeRegistryMixin",
     "SlotArmorMixin",
     "entity.EntityCreeperMixin",

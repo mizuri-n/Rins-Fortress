@@ -1,8 +1,6 @@
 package mizurin.shieldmod.mixins.entity;
 
 import mizurin.shieldmod.interfaces.IHasHealthSteal;
-import mizurin.shieldmod.item.RFItems;
-import mizurin.shieldmod.item.ShieldItem;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;

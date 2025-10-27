@@ -20,14 +20,13 @@ public class TreasureShield extends ShieldItem{
 	@Override
 	public boolean hitEntity(ItemStack itemstack, Mob target, Mob player) {
 		if(((ParryInterface)player).shieldmod$getCounterTicks() > 0 && (target.hurtTime == 10)){
-			target.knockBack(player, 1, (player.x - target.x), (player.z - target.z ));
-			target.push((target.x - player.x)/4, 0, (target.z - player.z)/4);
+			target.fling(target.xd * 0.4, target.yd * 0, target.zd * 0.4, 0.5F);
 			target.hurt(player, 14, DamageType.COMBAT);
 			((ParryInterface)player).shieldmod$Counter(0);
 			//After hitting an entity, set the ticksB to 0, ending the countdown immediately.
 		}
 		if ((target.hurtTime == 10)) {
-			target.push((target.x - player.x) / 12, 0, (target.z - player.z) / 12);
+			target.fling(target.xd * 0.2, target.yd * 0, target.zd * 0.2, 0.5F);
 		}
 
 		itemstack.damageItem(1, player);
