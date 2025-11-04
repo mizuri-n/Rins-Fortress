@@ -25,9 +25,6 @@ public class AmuletEffect extends Effect {
 		if (ShieldEffects.isLocked(effectStack, effectContainer)) {
 			return;
 		}
-		if (effectStack.getAmount() == 1) {
-			HealthHelper.addExtraHealth(((Player) effectContainer.getParent()), 6);
-		}
 	}
 
 	@Override
