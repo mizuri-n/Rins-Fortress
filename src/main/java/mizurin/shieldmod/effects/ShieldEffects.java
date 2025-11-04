@@ -1,11 +1,8 @@
 package mizurin.shieldmod.effects;
 
-import mizurin.shieldmod.effects.render.CustomHeartContainer;
-import mizurin.shieldmod.effects.render.ExtraHealthEffectRenderer;
 import mizurin.shieldmod.effects.render.PoisonEffectRenderer;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
-import net.minecraft.core.entity.player.Player;
 import sunsetsatellite.catalyst.effects.api.attribute.Attributes;
 import sunsetsatellite.catalyst.effects.api.attribute.type.IntAttribute;
 import sunsetsatellite.catalyst.effects.api.effect.*;
@@ -91,9 +88,9 @@ public class ShieldEffects {
 			"effect.shieldmod.extra_health",
 			MOD_ID + ":extra_health",
 			Collections.singletonList(new IntModifier(EXTRA_HEALTH, ModifierType.ADD, 1)),
-			EffectTimeType.KEEP,
+			EffectTimeType.PERMANENT,
 			1
-		).setDefaultDuration(600);
+		).setDefaultDuration(1);
 
 		poisonEffect = new PoisonEffect(
 			"effect.shieldmod.poison",
@@ -132,25 +129,24 @@ public class ShieldEffects {
 
 	private static void registerEffects() {
 		Effects effects = Effects.getInstance();
-		effects.register(extraHealthEffect.id, extraHealthEffect);
 		effects.register(poisonEffect.id, poisonEffect);
 		effects.register(webEffect.id, webEffect);
 		effects.register(slowEffect.id, slowEffect);
 		effects.register(weaknessEffect.id, weaknessEffect);
+		effects.register(extraHealthEffect.id, weaknessEffect);
+
 	}
 
 	private static void assignEffectRenderers() {
 		EffectRendererDispatcher dispatcher = EffectRendererDispatcher.getInstance();
-		dispatcher.addDispatch(extraHealthEffect,
-			new ExtraHealthEffectRenderer<>(extraHealthEffect)
-				.setIcon("regen_amulet.png")
-		);
 
-		dispatcher.addDispatch(webEffect, new EffectRenderer<Effect>(webEffect).setIcon("icon_web.png"));
+		dispatcher.addDispatch(extraHealthEffect, new EffectRenderer<>(extraHealthEffect).setIcon("regen_amulet.png"));
 
-		dispatcher.addDispatch(slowEffect, new EffectRenderer<Effect>(slowEffect).setIcon("icon_slow.png"));
+		dispatcher.addDispatch(webEffect, new EffectRenderer<>(webEffect).setIcon("icon_web.png"));
 
-		dispatcher.addDispatch(weaknessEffect, new EffectRenderer<Effect>(weaknessEffect).setIcon("icon_weakness.png"));
+		dispatcher.addDispatch(slowEffect, new EffectRenderer<>(slowEffect).setIcon("icon_slow.png"));
+
+		dispatcher.addDispatch(weaknessEffect, new EffectRenderer<>(weaknessEffect).setIcon("icon_weakness.png"));
 
 		dispatcher.addDispatch(poisonEffect, new PoisonEffectRenderer<>(
 				poisonEffect,
@@ -170,25 +166,6 @@ public class ShieldEffects {
 		LookupLooks.instance.addEntry(affected, lock);
 	}
 
-	/**
-	 * @param player affected Player
-	 * @return most potent EffectStack affecting the player
-	 */
-	public static EffectStack resolveDominantEffect(Player player) {
-		EffectStack dominant = null;
-		EffectRendererDispatcher dispatcher = EffectRendererDispatcher.getInstance();
-
-		for (EffectStack effectStack : ((IHasEffects) player).getContainer().getEffects()) {
-			if (dispatcher.getDispatch(effectStack.getEffect()) instanceof CustomHeartContainer) {
-				if (dominant == null) dominant = effectStack;
-				int effectStackPotency = effectStack.getAmount() * effectStack.getDuration();
-				int dominantPotency = dominant.getAmount() * dominant.getDuration();
-				if (effectStackPotency > dominantPotency) dominant = effectStack;
-			}
-		}
-		return dominant;
-	}
-
 
 	/**
 	 * @param entity    affected Mob
@@ -203,7 +180,7 @@ public class ShieldEffects {
 	 */
 	public static boolean add(Entity entity, Effect newEffect, int amount) {
 		if (!(entity instanceof IHasEffects)) return false;
-		EffectStack stack = new EffectStack((IHasEffects) entity, newEffect, amount);
+		EffectStack stack = new EffectStack((IHasEffects<?>) entity, newEffect, amount);
 		return ShieldEffects.add(entity, stack);
 	}
 
@@ -220,7 +197,7 @@ public class ShieldEffects {
 	 */
 	public static boolean add(Entity entity, EffectStack stackToAdd) {
 		if (!(entity instanceof IHasEffects)) return false;
-		IHasEffects hasEffects = (IHasEffects) entity;
+		IHasEffects<?> hasEffects = (IHasEffects<?>) entity;
 
 		for (EffectStack currStack : hasEffects.getContainer().getEffects()) {
 			Effect currEffect = currStack.getEffect();
@@ -236,7 +213,7 @@ public class ShieldEffects {
 			}
 		}
 
-		if (isLocked(stackToAdd, ((IHasEffects) entity).getContainer())) return false;
+		if (isLocked(stackToAdd, hasEffects.getContainer())) return false;
 
 		stackToAdd.start(hasEffects.getContainer());
 		hasEffects.getContainer().add(stackToAdd);

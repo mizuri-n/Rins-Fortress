@@ -44,3 +44,5 @@ tile.shieldmod.leaves.apple.flowering.desc=Leaves from an apple tree that are bu
 effect.shieldmod.poison.name=Poison
 effect.shieldmod.slow.name=Slow
 effect.shieldmod.web.name=Webbed
+effect.shieldmod.extra_health.name=Restoration
+attribute.shieldmod.extraHealth.name=Extra health

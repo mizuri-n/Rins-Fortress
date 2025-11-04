@@ -27,7 +27,6 @@
   ],
   "client": [
     "client.BipedRendererMixin",
-    "client.HudComponentHealthBarMixin",
     "client.LivingRendererMixin",
     "client.PaintingMixin",
     "client.PlayerRendererMixin"

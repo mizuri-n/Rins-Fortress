@@ -106,7 +106,7 @@ public class RFItems {
 
 
 		regenAmulet = new ItemBuilder(MOD_ID)
-			.build(new ItemArmor("amulet_heart", MOD_ID + ":amulet_heart" ,++itemID, heartAmulet, IArmorItem.PIECE_CHEST));
+			.build(new ItemAmulet("amulet_heart", MOD_ID + ":amulet_heart" ,++itemID, heartAmulet, IArmorItem.PIECE_CHEST));
 
 	}
 

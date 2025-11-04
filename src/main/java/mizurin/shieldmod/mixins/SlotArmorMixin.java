@@ -3,7 +3,6 @@ package mizurin.shieldmod.mixins;
 
 import mizurin.shieldmod.effects.ShieldEffects;
 import mizurin.shieldmod.item.RFItems;
-import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.IArmorItem;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.Container;
@@ -17,7 +16,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import sunsetsatellite.catalyst.effects.helper.HealthHelper;
 
 @Mixin(value = SlotArmor.class, remap = false)
 public class SlotArmorMixin extends Slot{
@@ -32,15 +30,15 @@ public class SlotArmorMixin extends Slot{
 	@Unique
 	ItemStack lastItem;
 
+	//todo needs fixing
 	@Inject(method = "setChanged()V", at = @At(value = "HEAD"))
 	public void injectSlot(final CallbackInfo ci) {
+		ItemStack chest_item = this.menu.inventory.armorItemInSlot(IArmorItem.PIECE_CHEST);
 		if (this.lastItem != null && (this.lastItem.itemID == RFItems.regenAmulet.id) && getItemStack() == null) {
 			ShieldEffects.add(this.menu.inventory.player, ShieldEffects.extraHealthEffect, -1);
-			HealthHelper.addExtraHealth(this.menu.inventory.player, -6);
 		}
 
 		if (this.menu.inventory != null) {
-			ItemStack chest_item = this.menu.inventory.armorItemInSlot(IArmorItem.PIECE_CHEST);
 			if (chest_item != null && chest_item.getItem().equals(RFItems.regenAmulet)) {
 				ShieldEffects.add(this.menu.inventory.player, ShieldEffects.extraHealthEffect, 1);
 			}
