@@ -1,8 +1,10 @@
 package mizurin.shieldmod.effects;
 import mizurin.shieldmod.ShieldMod;
+import mizurin.shieldmod.item.ItemAmulet;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.effects.api.effect.*;
 import sunsetsatellite.catalyst.effects.api.modifier.Modifier;
 import sunsetsatellite.catalyst.effects.helper.HealthHelper;
@@ -43,6 +45,14 @@ public class AmuletEffect extends Effect {
 			ShieldMod.LOGGER.warn("AmuletEffect is not applied cause the world is null");
 			return;
 		}
+		if(mob instanceof Player){
+			Player player = (Player) mob;
+			ItemStack amulet = player.inventory.armorInventory[2];
+			if (amulet == null || !(amulet.getItem() instanceof ItemAmulet)) {
+				effectStack.subtract(1, effectContainer);
+			}
+		}
+
 		if(mob.tickCount % 600 == 0){
 			assert effectContainer.getParent() instanceof Mob;
 			mob.tickCount = 0;
