@@ -20,14 +20,11 @@ public class ItemAmulet extends ItemArmor implements IItemWithModifiers {
 
 	@Override
 	public Map<Modifier<?>, Boolean> getModifiers(IHasEffects<?> iHasEffects, ItemStack itemStack, int slot) {
-		if (slot < 0 || slot > 3) {
+		if (slot < 100 || slot > 103) {
 			return new HashMap<>();
 		}
-
 		HashMap<Modifier<?>, Boolean> map = new HashMap<>();
-
 		map.put(new IntModifier(Attributes.EXTRA_HEALTH, ModifierType.ADD,6),true);
-
 		return map;
 	}
 }
