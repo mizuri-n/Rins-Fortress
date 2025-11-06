@@ -30,14 +30,9 @@ public class SlotArmorMixin extends Slot{
 	@Unique
 	ItemStack lastItem;
 
-	//todo needs fixing
 	@Inject(method = "setChanged()V", at = @At(value = "HEAD"))
 	public void injectSlot(final CallbackInfo ci) {
 		ItemStack chest_item = this.menu.inventory.armorItemInSlot(IArmorItem.PIECE_CHEST);
-		if (this.lastItem != null && (this.lastItem.itemID == RFItems.regenAmulet.id) && getItemStack() == null) {
-			ShieldEffects.add(this.menu.inventory.player, ShieldEffects.extraHealthEffect, -1);
-		}
-
 		if (this.menu.inventory != null) {
 			if (chest_item != null && chest_item.getItem().equals(RFItems.regenAmulet)) {
 				ShieldEffects.add(this.menu.inventory.player, ShieldEffects.extraHealthEffect, 1);

@@ -1,6 +1,7 @@
 package mizurin.shieldmod.compat.aether.model;
 
 import mizurin.shieldmod.RFModelEntryPoint;
+import mizurin.shieldmod.compat.aether.entities.EntityHoming;
 import mizurin.shieldmod.compat.aether.item.RFAetherItems;
 import mizurin.shieldmod.item.ItemModelColored;
 import mizurin.shieldmod.item.ItemModelShield;
@@ -9,8 +10,12 @@ import net.minecraft.client.render.EntityRenderDispatcher;
 import net.minecraft.client.render.TileEntityRenderDispatcher;
 import net.minecraft.client.render.block.color.BlockColorDispatcher;
 import net.minecraft.client.render.block.model.BlockModelDispatcher;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererSprite;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
+import teamport.aether.items.AetherItems;
+import turniplabs.halplibe.helper.ModelHelper;
 import turniplabs.halplibe.util.ModelEntrypoint;
 
 public class RFAetherModels implements ModelEntrypoint {
@@ -39,7 +44,11 @@ public class RFAetherModels implements ModelEntrypoint {
 
 	@Override
 	public void initEntityModels(EntityRenderDispatcher dispatcher) {
-
+		ModelHelper.setEntityModel(EntityHoming.class, () -> {
+			final EntityRenderer<?> er = new EntityRendererSprite<EntityHoming>(AetherItems.PROJECTILE_LIGHTNING).setScale(4.0F);
+			er.init(dispatcher);
+			return er;
+		});
 	}
 
 	@Override

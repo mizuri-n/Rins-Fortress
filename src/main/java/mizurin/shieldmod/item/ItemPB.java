@@ -1,6 +1,5 @@
 package mizurin.shieldmod.item;
 
-import mizurin.shieldmod.entities.EntityHoming;
 import mizurin.shieldmod.entities.EntityPB;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.Item;

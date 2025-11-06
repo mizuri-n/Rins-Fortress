@@ -3,7 +3,10 @@ package mizurin.shieldmod.compat.aether.item;
 import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.item.Item;
+import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.item.tag.ItemTags;
+import teamport.aether.AetherMod;
+import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.ItemBuilder;
 
 import static mizurin.shieldmod.ShieldMod.MOD_ID;
@@ -16,6 +19,8 @@ public class RFAetherItems {
 	public static Item holystoneShield;
 	public static Item zaniteShield;
 	public static Item gravititeShield;
+
+	public static ArmorMaterial gravArmor = ArmorHelper.createArmorMaterial(MOD_ID, "grav", 240, 0f, 0f, 180f, 180f).withProtectionPercentage(AetherMod.HOLY, 180f).withProtectionPercentage(AetherMod.LIGHTNING, 180f);
 
 	private static boolean hasInit = false;
 
@@ -47,7 +52,7 @@ public class RFAetherItems {
 
 		gravititeShield = new ItemBuilder(MOD_ID)
 			.setStackSize(1)
-			.build(new ShieldItem("gravitite_shield", "shieldmod:item/gravitite_shield"  ,++itemID, ShieldMaterials.TOOL_IRON))
+			.build(new GravititeShield("gravitite_shield", "shieldmod:item/gravitite_shield"  ,++itemID, ShieldMaterials.TOOL_GRAVIITE, "grav", gravArmor))
 			.withTags(ItemTags.PREVENT_CREATIVE_MINING);
 
 		valkyrieShield = new ItemBuilder(MOD_ID)

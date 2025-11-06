@@ -1,18 +1,21 @@
-package mizurin.shieldmod.entities;
+package mizurin.shieldmod.compat.aether.entities;
 
 import net.minecraft.core.entity.Mob;
-import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.Projectile;
 import net.minecraft.core.item.Items;
-import net.minecraft.core.util.helper.DamageType;
+import net.minecraft.core.sound.SoundCategory;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
+import teamport.aether.AetherMod;
+import teamport.aether.entity.animal.aerbunny.MobAerbunny;
+import teamport.aether.helper.ParticleMaker;
 
 import java.util.List;
 
 public class EntityHoming extends Projectile {
+	public String[] particles = {"explode", "lightning", "lightning"};
 	private Mob target;
 	private static final float homingPower = 0.15F;
 	private static final float topSpeed = 0.4F;
@@ -34,8 +37,24 @@ public class EntityHoming extends Projectile {
 		this.setSize(1.0F, 1.0F);
 		this.modelItem = Items.AMMO_SNOWBALL;
 	}
+	public void doExplosion() {
+		if (target != null) {
+			for (int particle = 0; particle < 16; particle++) {
+				double XParticle = target.x + ((double) world.rand.nextFloat()) - ((double) world.rand.nextFloat() * 0.375F);
+				double YParticle = target.y + 0.5F + ((double) world.rand.nextFloat()) - ((double) world.rand.nextFloat() * 0.375F);
+				double ZParticle = target.z + ((double) world.rand.nextFloat()) - ((double) world.rand.nextFloat() * 0.375F);
+
+				ParticleMaker.spawnParticle(world, particles[world.rand.nextInt(particles.length)], XParticle, YParticle, ZParticle, 0, 0, 0, 0);
+			}
+
+			world.playSoundEffect(target, SoundCategory.ENTITY_SOUNDS, target.x, target.y - 1, target.z, "aether:zap", 0.5F, (1.3F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F) * 0.7F);
+		}
+	}
 	@Override
 	public void tick() {
+		for (int j = 0; j < 2; j++) {
+			ParticleMaker.spawnParticle(world, "lightning", this.x, this.y + 0.5, this.z, world.rand.nextFloat() * 0.25F * (world.rand.nextBoolean() ? -1 : 1), world.rand.nextFloat() * 0.25F * -1, world.rand.nextFloat() * 0.25F * (world.rand.nextBoolean() ? -1 : 1), 0);
+		}
 		++this.ticksInAir;
 		if (ticksInAir > 100) {
 			remove();
@@ -49,9 +68,11 @@ public class EntityHoming extends Projectile {
 			AABB searchBox = AABB.getPermanentBB(this.x - 2.0, this.y - 2.0, this.z - 2.0, this.x + 2.0, this.y + 2.0, this.z + 2.0);
 			List<Mob> entities = this.world.getEntitiesWithinAABB(Mob.class, searchBox);
 			entities.remove(this.owner);
+			//I do not like this code
+			entities.removeAll(this.world.getEntitiesWithinAABB(MobAerbunny.class, searchBox));
 			Mob closestMob = null;
 			for (Mob entity : entities) {
-				if (entity instanceof Mob && entity.isAlive() &! (entity instanceof Player)) {
+				if (entity instanceof Mob && entity.isAlive()) {
 					double distance = this.distanceTo(entity);
 					if (distance < 32.0f) {
 						closestMob = entity;
@@ -94,8 +115,9 @@ public class EntityHoming extends Projectile {
 				}
 			}
 				if (hitResult.entity instanceof Mob) {
-					hitResult.entity.hurt(this.owner, this.damage, DamageType.FALL);
+					hitResult.entity.hurt(this.owner, this.damage, AetherMod.LIGHTNING);
 					this.remove();
+					doExplosion();
 					return;
 				}
 		}

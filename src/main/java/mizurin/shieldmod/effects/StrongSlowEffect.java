@@ -1,4 +1,5 @@
 package mizurin.shieldmod.effects;
+
 import mizurin.shieldmod.ShieldMod;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
@@ -7,8 +8,8 @@ import sunsetsatellite.catalyst.effects.api.modifier.Modifier;
 
 import java.util.List;
 
-public class SlowEffect extends Effect {
-	public SlowEffect(String nameKey, String id, List<Modifier<?>> modifiers, EffectTimeType effectTimeType, int maxStack) {
+public class StrongSlowEffect extends Effect {
+	public StrongSlowEffect(String nameKey, String id, List<Modifier<?>> modifiers, EffectTimeType effectTimeType, int maxStack) {
 		super(nameKey, id, modifiers, effectTimeType, maxStack);
 	}
 	@Override
@@ -22,8 +23,8 @@ public class SlowEffect extends Effect {
 	}
 	@Override
 	public <T> void expired(EffectStack effectStack, EffectContainer<T> effectContainer) {
-		effectContainer.remove(ShieldEffects.slowEffect);
-		EffectStack newStack = new EffectStack((IHasEffects) effectContainer.getParent(), ShieldEffects.slowEffect, effectStack.getAmount() - 1);
+		effectContainer.remove(ShieldEffects.strongSlowEffect);
+		EffectStack newStack = new EffectStack((IHasEffects) effectContainer.getParent(), ShieldEffects.strongSlowEffect, effectStack.getAmount() - 1);
 		newStack.start(effectContainer);
 		effectContainer.add(newStack);
 	}
@@ -46,6 +47,9 @@ public class SlowEffect extends Effect {
 		if (mob.tickCount > 0) {
 			mob.xd *= 0.90D;
 			mob.zd *= 0.90D;
+			if (!mob.onGround && !mob.isInWater() && !mob.isInLava() && mob.yd < 0.0 && !mob.isSneaking()) {
+				mob.yd *= 2.0f;
+			}
 
 			float width = 1.0f;
 			double dx = mob.world.rand.nextGaussian() * 0.002;

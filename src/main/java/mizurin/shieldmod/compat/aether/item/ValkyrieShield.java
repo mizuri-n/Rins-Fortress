@@ -1,15 +1,17 @@
 package mizurin.shieldmod.compat.aether.item;
 
-import mizurin.shieldmod.entities.EntityHoming;
+import mizurin.shieldmod.compat.aether.entities.EntityHoming;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.material.ToolMaterial;
+import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
+import teamport.aether.AetherMod;
+import teamport.aether.items.AetherHasCustomDamageType;
 
-public class ValkyrieShield extends ShieldItem {
+public class ValkyrieShield extends ShieldItem implements AetherHasCustomDamageType {
 	public ValkyrieShield(String name, String namespaceID, int id, ShieldMaterials shieldMaterials) {
 		super(name, namespaceID, id, shieldMaterials);
 	}
@@ -38,5 +40,8 @@ public class ValkyrieShield extends ShieldItem {
 
 		}
 
+	}
+	public DamageType getDamageType() {
+		return AetherMod.HOLY;
 	}
 }

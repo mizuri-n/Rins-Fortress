@@ -8,6 +8,8 @@
   ],
   "server": [],
   "mixins": [
+    "PendantMixin",
+    "SilverTreasureMixin",
     "SkyrootShieldDropMultiplier"
   ]
 }

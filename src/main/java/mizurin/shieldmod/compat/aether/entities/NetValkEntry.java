@@ -1,6 +1,7 @@
-package mizurin.shieldmod.entities;
+package mizurin.shieldmod.compat.aether.entities;
 
 import com.mojang.nbt.tags.CompoundTag;
+import mizurin.shieldmod.entities.EntityShield;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.net.entity.EntityTracker;

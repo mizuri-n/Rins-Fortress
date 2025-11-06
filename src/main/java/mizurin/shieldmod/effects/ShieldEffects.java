@@ -77,6 +77,7 @@ public class ShieldEffects {
 	public static Effect poisonEffect;
 	public static Effect webEffect;
 	public static Effect slowEffect;
+	public static Effect strongSlowEffect;
 	public static Effect weaknessEffect;
 	public static Effect extraHealthEffect;
 
@@ -116,6 +117,14 @@ public class ShieldEffects {
 			1
 		).setDefaultDuration(100);
 
+		strongSlowEffect = new StrongSlowEffect(
+			"effect.shieldmod.slow.strong",
+			MOD_ID + ":slower",
+			new ArrayList<>(),
+			EffectTimeType.KEEP,
+			1
+		).setDefaultDuration(100);
+
 		weaknessEffect = new WeakEffect(
 			"effect.shieldmod.weak",
 			MOD_ID + ":weak",
@@ -132,6 +141,7 @@ public class ShieldEffects {
 		effects.register(poisonEffect.id, poisonEffect);
 		effects.register(webEffect.id, webEffect);
 		effects.register(slowEffect.id, slowEffect);
+		effects.register(strongSlowEffect.id, strongSlowEffect);
 		effects.register(weaknessEffect.id, weaknessEffect);
 		effects.register(extraHealthEffect.id, weaknessEffect);
 
@@ -145,6 +155,8 @@ public class ShieldEffects {
 		dispatcher.addDispatch(webEffect, new EffectRenderer<>(webEffect).setIcon("icon_web.png"));
 
 		dispatcher.addDispatch(slowEffect, new EffectRenderer<>(slowEffect).setIcon("icon_slow.png"));
+
+		dispatcher.addDispatch(strongSlowEffect, new EffectRenderer<>(strongSlowEffect).setIcon("icon_slow.png"));
 
 		dispatcher.addDispatch(weaknessEffect, new EffectRenderer<>(weaknessEffect).setIcon("icon_weakness.png"));
 

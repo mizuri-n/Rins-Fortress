@@ -67,6 +67,8 @@ public class RFAetherCompatibility implements PreLaunchEntrypoint, GameStartEntr
 	public void beforeGameStart() {
 		if (IS_AETHER_LOADED) {
 			callInit("mizurin.shieldmod.compat.aether.item.RFAetherItems", "init");
+			callInit("mizurin.shieldmod.compat.aether.entities.RFAetherEntities", "init");
+
 		}
 	}
 

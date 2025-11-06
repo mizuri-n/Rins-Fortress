@@ -114,12 +114,6 @@ public class RFModelEntryPoint implements ModelEntrypoint {
 			return er;
 		});
 
-		ModelHelper.setEntityModel(EntityHoming.class, () -> {
-			final EntityRenderer<?> er = new EntityRendererSprite<EntityHoming>(Items.AMMO_SNOWBALL).setScale(4.0F);
-			er.init(dispatcher);
-			return er;
-		});
-
 	}
 
 	@Override

@@ -60,14 +60,13 @@ public class ShieldMod implements ModInitializer, GameStartEntrypoint {
 
 		paintingSeal = new ArtType("paintingSeal", "The Orb", "Rin", "shieldmod:art/seal", 32, 32);
 		paintingRice = new ArtType("paintingRice", "Lunch", "Rin", "shieldmod:art/onigiri", 32, 32);
-		// TODO need to assign models with the model entrypoint and model helper now
+
 		EntityHelper.createEntity(EntityShield.class, NamespaceID.getPermanent(MOD_ID, "ammo_shield"), null, "ammoShield", entityID);
 		EntityHelper.createEntity(EntityPB.class, NamespaceID.getPermanent(MOD_ID, "poison_bottle"), null, "poisonBottle", ++entityID);
 		EntityHelper.createEntity(EntityRock.class, NamespaceID.getPermanent(MOD_ID, "shield_pebble"), null, "pebbleShield", ++entityID);
 		EntityHelper.createEntity(EntityFire.class, NamespaceID.getPermanent(MOD_ID, "fire"), null, "entityFire", ++entityID);
 		EntityHelper.createEntity(EntityWeb.class, NamespaceID.getPermanent(MOD_ID, "web"), null, "entityWeb", ++entityID);
 		EntityHelper.createEntity(EntityIceBall.class, NamespaceID.getPermanent(MOD_ID, "ammo_snow"), null, "ammoSnow", ++entityID);
-		EntityHelper.createEntity(EntityHoming.class, NamespaceID.getPermanent(MOD_ID, "homing"), null, "homingMass", ++entityID);
 
 		NetEntityHandler.registerNetworkEntry(new NetShieldEntry(), 8000);
 		NetEntityHandler.registerNetworkEntry(new NetPotionEntry(), 8001);
