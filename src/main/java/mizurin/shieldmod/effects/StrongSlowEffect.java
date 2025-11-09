@@ -47,8 +47,11 @@ public class StrongSlowEffect extends Effect {
 		if (mob.tickCount > 0) {
 			mob.xd *= 0.90D;
 			mob.zd *= 0.90D;
-			if (!mob.onGround && !mob.isInWater() && !mob.isInLava() && mob.yd < 0.0 && !mob.isSneaking()) {
-				mob.yd *= 2.0f;
+			if(mob.yd > 0.0){
+				mob.yd *= 0.90D;
+			}
+			if (!mob.onGround && !mob.isInWater() && !mob.isInLava() && mob.yd < 0.0) {
+				mob.yd *= 1.1D;
 			}
 
 			float width = 1.0f;

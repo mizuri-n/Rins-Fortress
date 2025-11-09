@@ -35,7 +35,7 @@ public class SlotArmorMixin extends Slot{
 		ItemStack chest_item = this.menu.inventory.armorItemInSlot(IArmorItem.PIECE_CHEST);
 		if (this.menu.inventory != null) {
 			if (chest_item != null && chest_item.getItem().equals(RFItems.regenAmulet)) {
-				ShieldEffects.add(this.menu.inventory.player, ShieldEffects.extraHealthEffect, 1);
+				ShieldEffects.add(this.menu.inventory.player, ShieldEffects.extraHealthEffect, 1, 1);
 			}
 		}
 	}

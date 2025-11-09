@@ -33,8 +33,9 @@ public class GravititeShield extends ShieldItem implements AetherHasCustomDamage
 			MobUtil.knockback(target, player, 0.4F, 0.5F);
 		}
 		if ((target.hurtTime == 10 || target instanceof Player) && !target.onGround) {
-			ShieldEffects.add(target, ShieldEffects.strongSlowEffect, 1);
+			ShieldEffects.add(target, ShieldEffects.strongSlowEffect, 1, 200);
 		}
+		itemstack.damageItem(1, player);
 
 		return true;
 	}

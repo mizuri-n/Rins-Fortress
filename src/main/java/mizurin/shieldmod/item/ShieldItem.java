@@ -35,7 +35,7 @@ public class ShieldItem extends ItemToolSword {
 				target.fling(target.xd * 0.2, target.yd * 0, target.zd * 0.2, 0.5F);
 			}
 			if (itemstack.getItem() == RFItems.goldShield) {
-				ShieldEffects.add((Mob) target, ShieldEffects.slowEffect, 1);
+				ShieldEffects.add((Mob) target, ShieldEffects.slowEffect, 1, 100);
 				target.fling(target.xd * 0.2, target.yd * 0, target.zd * 0.2, 0.5F);
 			}
 

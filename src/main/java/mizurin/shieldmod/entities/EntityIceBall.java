@@ -28,7 +28,7 @@ public class EntityIceBall extends Projectile {
 	public void onHit(HitResult hitResult) {
 		if (hitResult.entity instanceof Mob) {
 			hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
-			ShieldEffects.add((Mob) hitResult.entity, ShieldEffects.weaknessEffect, 1);
+			ShieldEffects.add((Mob) hitResult.entity, ShieldEffects.weaknessEffect, 1, 100);
 			if (this.modelItem != null) {
 				for(int j = 0; j < 8; ++j) {
 					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_SNOWBALL.id);

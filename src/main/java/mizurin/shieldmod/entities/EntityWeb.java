@@ -32,7 +32,7 @@ public class EntityWeb extends Projectile {
 	@Override
 	public void onHit(HitResult hitResult) {
 		if (hitResult.entity instanceof Mob) {
-			ShieldEffects.add((Mob) hitResult.entity, ShieldEffects.webEffect, random.nextInt(1) + 1);
+			ShieldEffects.add((Mob) hitResult.entity, ShieldEffects.webEffect, 1, 100);
 
 			//Applies my custom status effect from the IFreeze interface.
 		}

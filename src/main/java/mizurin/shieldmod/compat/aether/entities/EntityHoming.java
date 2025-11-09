@@ -31,7 +31,7 @@ public class EntityHoming extends Projectile {
 
 	@Override
 	public void initProjectile() {
-		this.damage = 7;
+		this.damage = 5;
 		this.defaultGravity = 0.0F;
 		this.defaultProjectileSpeed = 1.0F;
 		this.setSize(1.0F, 1.0F);
@@ -56,7 +56,7 @@ public class EntityHoming extends Projectile {
 			ParticleMaker.spawnParticle(world, "lightning", this.x, this.y + 0.5, this.z, world.rand.nextFloat() * 0.25F * (world.rand.nextBoolean() ? -1 : 1), world.rand.nextFloat() * 0.25F * -1, world.rand.nextFloat() * 0.25F * (world.rand.nextBoolean() ? -1 : 1), 0);
 		}
 		++this.ticksInAir;
-		if (ticksInAir > 100) {
+		if (ticksInAir > 150) {
 			remove();
 			world.spawnParticle("explode", this.x, this.y + 1, this.z, 0.0, 0.0, 0.0, 0);
 			world.spawnParticle("smoke", this.x, this.y + 1, this.z, 0.0, 0.0, 0.0, 0);
@@ -65,7 +65,7 @@ public class EntityHoming extends Projectile {
 		}
 
 		if (this.target == null || !this.target.isAlive()) {
-			AABB searchBox = AABB.getPermanentBB(this.x - 2.0, this.y - 2.0, this.z - 2.0, this.x + 2.0, this.y + 2.0, this.z + 2.0);
+			AABB searchBox = AABB.getPermanentBB(this.x - 2.5, this.y - 2.5, this.z - 2.5, this.x + 2.5, this.y + 2.5, this.z + 2.5);
 			List<Mob> entities = this.world.getEntitiesWithinAABB(Mob.class, searchBox);
 			entities.remove(this.owner);
 			//I do not like this code

@@ -12,6 +12,7 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.ProjectileSnowball;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
+import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.util.phys.Vec3;
@@ -140,9 +141,10 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 
 				this.yRot = (float) (Math.atan2(dZ, dX) * 180.0 / Math.PI) - 90.0F;
 				this.hasAttacked = true;
-			} else if (distance <= 4.0F) {
-				super.attackEntity(entity, distance);
-				ShieldEffects.add((Mob) target, ShieldEffects.weaknessEffect, 1);
+			} else if (distance <= 4.0F && attackTime <= 0) {
+				this.attackTime = 20;
+				entity.hurt(this, this.attackStrength, DamageType.COMBAT);
+				ShieldEffects.add((Mob) target, ShieldEffects.weaknessEffect, 1, 100);
 			}
 		} else {
 			if (distance < 8.0F && distance > 4.0F) {
@@ -170,7 +172,6 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 				this.hasAttacked = true;
 			} else if (distance <= 4.0F) {
 				super.attackEntity(entity, distance);
-				ShieldEffects.add((Mob) target, ShieldEffects.weaknessEffect, 1);
 			}
 		}
 	}

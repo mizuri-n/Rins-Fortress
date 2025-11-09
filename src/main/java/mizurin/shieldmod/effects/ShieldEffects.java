@@ -99,7 +99,7 @@ public class ShieldEffects {
 			new ArrayList<>(),
 			EffectTimeType.KEEP,
 			1
-		).setDefaultDuration(200);
+		).setDefaultDuration(100);
 
 		webEffect = new WebEffect(
 			"effect.shieldmod.web",
@@ -190,9 +190,9 @@ public class ShieldEffects {
 	 * Returns always false if a given effect is locked.
 	 * @see ILockInteractable
 	 */
-	public static boolean add(Entity entity, Effect newEffect, int amount) {
+	public static boolean add(Entity entity, Effect newEffect, int amount, int duration) {
 		if (!(entity instanceof IHasEffects)) return false;
-		EffectStack stack = new EffectStack((IHasEffects<?>) entity, newEffect, amount);
+		EffectStack stack = new EffectStack((IHasEffects<?>) entity, newEffect, duration, amount);
 		return ShieldEffects.add(entity, stack);
 	}
 

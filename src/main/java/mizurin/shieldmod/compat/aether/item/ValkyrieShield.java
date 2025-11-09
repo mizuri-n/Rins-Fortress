@@ -27,13 +27,13 @@ public class ValkyrieShield extends ShieldItem implements AetherHasCustomDamageT
 	@Override
 	public void onBlock(ItemStack itemstack, World world, Player entityplayer) {
 		if (entityplayer.isSneaking() && ((ParryInterface)entityplayer).shieldmod$getFireTicks() == 0){
-				itemstack.damageItem(16, entityplayer);
+				itemstack.damageItem(4, entityplayer);
 			if (!world.isClientSide) {
 				double lookX = entityplayer.getLookAngle().x;
 				double lookY = entityplayer.getLookAngle().y;
 				double lookZ = entityplayer.getLookAngle().z;
 				EntityHoming ball = new EntityHoming(world, entityplayer);
-				ball.setHeading(lookX, lookY, lookZ, 1.0f, 0.0f);
+				ball.setHeading(lookX, lookY + entityplayer.getHeadHeight(), lookZ, 0.5f, 0.0f);
 				world.entityJoinedWorld(ball);
 			}
 				((ParryInterface)entityplayer).shieldmod$Fire(35);

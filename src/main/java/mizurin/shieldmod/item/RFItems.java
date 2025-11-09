@@ -14,6 +14,8 @@ import turniplabs.halplibe.helper.ArmorHelper;
 import turniplabs.halplibe.helper.ItemBuilder;
 
 import static mizurin.shieldmod.ShieldMod.itemID;
+import static mizurin.shieldmod.item.ArmorMaterials.heartAmulet;
+import static mizurin.shieldmod.item.ArmorMaterials.rockyArmor;
 
 public class RFItems {
 	public static final String MOD_ID = ShieldMod.MOD_ID;
@@ -33,8 +35,8 @@ public class RFItems {
 	public static Item rockyHelmet;
 	public static Item regenAmulet;
 
-	public static ArmorMaterial rockyArmor = ArmorHelper.createArmorMaterial(MOD_ID, "stone", 240, 30f, 30f, 30f, 30f);
-	public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "amulet", 120, 5f, 5f, 5f, 5f);
+	//public static ArmorMaterial rockyArmor = ArmorHelper.createArmorMaterial(MOD_ID, "stone", 240, 30f, 30f, 30f, 30f);
+	//public static ArmorMaterial heartAmulet = ArmorHelper.createArmorMaterial(MOD_ID, "amulet", 240, 0f, 0f, 30f, 30f);
 
 
 	@SuppressWarnings("unchecked")
