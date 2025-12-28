@@ -18,13 +18,11 @@ import teamport.aether.item.AetherItems;
 import turniplabs.halplibe.helper.ModelHelper;
 import turniplabs.halplibe.util.ModelEntrypoint;
 
-public class RFAetherModels implements ModelEntrypoint {
-	@Override
+public class RFAetherModels {
 	public void initBlockModels(BlockModelDispatcher dispatcher) {
 
 	}
 
-	@Override
 	public void initItemModels(ItemModelDispatcher dispatcher) {
 		dispatcher.addDispatch(new ItemModelShield(RFAetherItems.valkyrieShield,
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/valkyrie_shield"), RFModelEntryPoint::white)).setFull3D());
@@ -42,7 +40,6 @@ public class RFAetherModels implements ModelEntrypoint {
 			new ItemModelColored.ColoredTextureEntry(TextureRegistry.getTexture("shieldmod:item/gravitite_shield"), RFModelEntryPoint::white)).setFull3D());
 	}
 
-	@Override
 	public void initEntityModels(EntityRenderDispatcher dispatcher) {
 		ModelHelper.setEntityModel(EntityHoming.class, () -> {
 			final EntityRenderer<?> er = new EntityRendererSprite<EntityHoming>(AetherItems.PROJECTILE_LIGHTNING).setScale(4.0F);
@@ -51,12 +48,10 @@ public class RFAetherModels implements ModelEntrypoint {
 		});
 	}
 
-	@Override
 	public void initTileEntityModels(TileEntityRenderDispatcher dispatcher) {
 
 	}
-
-	@Override
+	
 	public void initBlockColors(BlockColorDispatcher dispatcher) {
 
 	}
