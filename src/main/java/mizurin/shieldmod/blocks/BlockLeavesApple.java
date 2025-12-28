@@ -1,12 +1,12 @@
 package mizurin.shieldmod.blocks;
 
-import java.util.Random;
-
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.BlockLogicLeavesBase;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.season.Seasons;
+
+import java.util.Random;
 
 public class BlockLeavesApple extends BlockLogicLeavesBase {
 	public BlockLeavesApple(Block<?> block) {

@@ -5,7 +5,6 @@ import mizurin.shieldmod.interfaces.IThrownItem;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.world.World;
 
 public class ThrowShield extends ShieldItem{

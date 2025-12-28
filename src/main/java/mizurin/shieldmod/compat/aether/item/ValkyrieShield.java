@@ -9,7 +9,7 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
 import teamport.aether.AetherMod;
-import teamport.aether.items.AetherHasCustomDamageType;
+import teamport.aether.item.AetherHasCustomDamageType;
 
 public class ValkyrieShield extends ShieldItem implements AetherHasCustomDamageType {
 	public ValkyrieShield(String name, String namespaceID, int id, ShieldMaterials shieldMaterials) {

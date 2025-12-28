@@ -1,7 +1,6 @@
 package mizurin.shieldmod.item;
 
 import mizurin.shieldmod.interfaces.IColorable;
-import net.minecraft.core.item.material.ToolMaterial;
 
 //Colored Shield, same as Light Shield for movement speed but implements IColorable.
 public class ShieldColored extends ShieldItem implements IColorable {

@@ -3,6 +3,7 @@ package mizurin.shieldmod.effects;
 import mizurin.shieldmod.effects.render.PoisonEffectRenderer;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
+import org.jspecify.annotations.Nullable;
 import sunsetsatellite.catalyst.effects.api.attribute.Attributes;
 import sunsetsatellite.catalyst.effects.api.attribute.type.IntAttribute;
 import sunsetsatellite.catalyst.effects.api.effect.*;
@@ -12,7 +13,6 @@ import sunsetsatellite.catalyst.effects.api.modifier.ModifierType;
 import sunsetsatellite.catalyst.effects.api.modifier.type.IntModifier;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
-import javax.annotation.Nullable;
 import java.util.*;
 
 import static mizurin.shieldmod.ShieldMod.MOD_ID;

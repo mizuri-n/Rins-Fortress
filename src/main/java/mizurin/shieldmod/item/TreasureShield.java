@@ -3,7 +3,6 @@ package mizurin.shieldmod.item;
 import mizurin.shieldmod.interfaces.ParryInterface;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.util.helper.DamageType;
 
 //For the Diamond Shield.

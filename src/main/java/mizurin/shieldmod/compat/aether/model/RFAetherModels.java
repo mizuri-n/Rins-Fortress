@@ -14,7 +14,7 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererSprite;
 import net.minecraft.client.render.item.model.ItemModelDispatcher;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
-import teamport.aether.items.AetherItems;
+import teamport.aether.item.AetherItems;
 import turniplabs.halplibe.helper.ModelHelper;
 import turniplabs.halplibe.util.ModelEntrypoint;
 

@@ -1,4 +1,5 @@
 package mizurin.shieldmod.effects;
+
 import mizurin.shieldmod.ShieldMod;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
@@ -6,6 +7,7 @@ import net.minecraft.core.entity.monster.MobZombie;
 import net.minecraft.core.util.helper.DamageType;
 import sunsetsatellite.catalyst.effects.api.effect.*;
 import sunsetsatellite.catalyst.effects.api.modifier.Modifier;
+
 import java.util.List;
 import java.util.Random;
 

@@ -1,4 +1,5 @@
 package mizurin.shieldmod.effects;
+
 import mizurin.shieldmod.ShieldMod;
 import mizurin.shieldmod.item.ItemAmulet;
 import net.minecraft.core.entity.Entity;
@@ -7,7 +8,6 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import sunsetsatellite.catalyst.effects.api.effect.*;
 import sunsetsatellite.catalyst.effects.api.modifier.Modifier;
-import sunsetsatellite.catalyst.effects.helper.HealthHelper;
 
 import java.util.List;
 import java.util.Random;

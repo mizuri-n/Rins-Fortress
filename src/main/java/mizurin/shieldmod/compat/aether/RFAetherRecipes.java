@@ -2,8 +2,8 @@ package mizurin.shieldmod.compat.aether;
 
 import mizurin.shieldmod.compat.aether.item.RFAetherItems;
 import net.minecraft.core.item.ItemStack;
-import teamport.aether.blocks.AetherBlocks;
-import teamport.aether.items.AetherItems;
+import teamport.aether.block.AetherBlocks;
+import teamport.aether.item.AetherItems;
 import turniplabs.halplibe.helper.RecipeBuilder;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 

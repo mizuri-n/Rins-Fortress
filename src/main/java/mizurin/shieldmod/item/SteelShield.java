@@ -2,12 +2,11 @@ package mizurin.shieldmod.item;
 
 import mizurin.shieldmod.entities.EntityFire;
 import mizurin.shieldmod.interfaces.ParryInterface;
+import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
-import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
-import net.minecraft.core.entity.player.Player;
 
 
 
