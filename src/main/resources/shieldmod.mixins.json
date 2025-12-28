@@ -1,8 +1,10 @@
 {
   "required": true,
-  "minVersion": "0.8",
   "package": "mizurin.shieldmod.mixins",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_${java}",
+  "injectors": {
+    "defaultRequire": 1
+  },
   "mixins": [
     "BonusHealthMixin",
     "FieldMixin",
@@ -30,8 +32,5 @@
     "client.LivingRendererMixin",
     "client.PaintingMixin",
     "client.PlayerRendererMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+  ]
 }

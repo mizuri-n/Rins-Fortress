@@ -11,10 +11,10 @@ import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
 import net.minecraft.core.util.helper.DamageType;
 import org.jetbrains.annotations.Nullable;
-import teamport.aether.helper.MobUtil;
-import teamport.aether.items.AetherHasCustomDamageType;
-import teamport.aether.items.AetherItemTags;
-import teamport.aether.items.accessory.IAccessory;
+import teamport.aether.entity.MobUtil;
+import teamport.aether.item.AetherHasCustomDamageType;
+import teamport.aether.item.AetherItemTags;
+import teamport.aether.item.accessory.IAccessory;
 
 public class GravititeShield extends ShieldItem implements AetherHasCustomDamageType, IAccessory, IArmorItem {
 	public final String name;

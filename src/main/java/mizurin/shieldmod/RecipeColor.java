@@ -3,6 +3,7 @@ package mizurin.shieldmod;
 import com.mojang.nbt.tags.CompoundTag;
 import goocraft4evr.nonamedyes.item.ModItems;
 import mizurin.shieldmod.interfaces.IColorable;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.data.registry.recipe.SearchQuery;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryCraftingDynamic;
 import net.minecraft.core.item.Item;
@@ -20,7 +21,7 @@ import java.util.Map;
 //Special thanks to UselessBullets for being extremely awesome https://github.com/UselessBullets/Lunacy/tree/7.1
 //Mixin for custom recipe colors.
 public class RecipeColor extends RecipeEntryCraftingDynamic {
-	public static boolean nonamedyesOn = /*ModVersionHelper.isModPresent("nonamedyes")*/false; // TODO replace with fabric loader mod check since this helper is dead :(
+	public static boolean nonamedyesOn = FabricLoader.getInstance().isModLoaded("nonamedyes");
 
 	public static HashMap<Item, Map<Integer, Color>> dyeMap = new HashMap<>();
 	private static final Map<Integer, Color> vanillaDye;
