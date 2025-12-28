@@ -1,11 +1,11 @@
 package mizurin.shieldmod.mixins;
 
 import mizurin.shieldmod.effects.ShieldEffects;
-import mizurin.shieldmod.entities.*;
+import mizurin.shieldmod.entities.EntityRock;
 import mizurin.shieldmod.interfaces.ParryInterface;
+import mizurin.shieldmod.item.RFItems;
 import mizurin.shieldmod.item.ShieldItem;
 import mizurin.shieldmod.item.ShieldMaterials;
-import mizurin.shieldmod.item.RFItems;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;

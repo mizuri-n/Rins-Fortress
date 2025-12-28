@@ -2,10 +2,10 @@ package mizurin.shieldmod.entities;
 
 import mizurin.shieldmod.effects.ShieldEffects;
 import net.minecraft.core.entity.Mob;
-import net.minecraft.core.item.Items;
-import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.entity.projectile.Projectile;
+import net.minecraft.core.item.Items;
 import net.minecraft.core.util.helper.DamageType;
+import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.world.World;
 
 public class EntityIceBall extends Projectile {

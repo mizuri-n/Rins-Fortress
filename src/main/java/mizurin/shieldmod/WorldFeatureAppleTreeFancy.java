@@ -1,7 +1,5 @@
 package mizurin.shieldmod;
 
-import java.util.Random;
-
 import mizurin.shieldmod.blocks.RFBlocks;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.block.tag.BlockTags;
@@ -10,6 +8,8 @@ import net.minecraft.core.world.World;
 import net.minecraft.core.world.generate.feature.MethodParametersAnnotation;
 import net.minecraft.core.world.generate.feature.WorldFeature;
 import net.minecraft.core.world.generate.feature.tree.WorldFeatureTree;
+
+import java.util.Random;
 
 public class WorldFeatureAppleTreeFancy extends WorldFeature {
 	protected int leavesID;

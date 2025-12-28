@@ -8,9 +8,6 @@ import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import turniplabs.halplibe.helper.ParticleHelper;
 import turniplabs.halplibe.util.ClientStartEntrypoint;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 import static mizurin.shieldmod.ShieldMod.LOGGER;
 import static mizurin.shieldmod.ShieldMod.MOD_ID;
 
