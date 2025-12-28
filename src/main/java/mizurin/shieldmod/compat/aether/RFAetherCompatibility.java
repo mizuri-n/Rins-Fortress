@@ -37,11 +37,6 @@ public class RFAetherCompatibility implements PreLaunchEntrypoint, GameStartEntr
 			Mixins.addConfiguration("compat/shieldmod/aether/aether.mixins.json");
 
 			try {
-				modelEntryPointDelegate = (ModelEntrypoint) Class
-					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
-					.getConstructor()
-					.newInstance();
-
 				recipeEntrypointDelegate = (RecipeEntrypoint) Class
 					.forName("mizurin.shieldmod.compat.aether.RFAetherRecipes")
 					.getConstructor()
@@ -79,27 +74,77 @@ public class RFAetherCompatibility implements PreLaunchEntrypoint, GameStartEntr
 
 	@Override
 	public void initBlockColors(BlockColorDispatcher dispatcher) {
-		if (IS_AETHER_LOADED) modelEntryPointDelegate.initBlockColors(dispatcher);
+		if (IS_AETHER_LOADED) {
+			try {
+				modelEntryPointDelegate = (ModelEntrypoint) Class
+					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
+					.getConstructor()
+					.newInstance();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			modelEntryPointDelegate.initBlockColors(dispatcher);
+		}
 	}
 
 	@Override
 	public void initBlockModels(BlockModelDispatcher dispatcher) {
-		if (IS_AETHER_LOADED) modelEntryPointDelegate.initBlockModels(dispatcher);
+		if (IS_AETHER_LOADED) {
+			try {
+				modelEntryPointDelegate = (ModelEntrypoint) Class
+					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
+					.getConstructor()
+					.newInstance();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			modelEntryPointDelegate.initBlockModels(dispatcher);
+		}
 	}
 
 	@Override
 	public void initItemModels(ItemModelDispatcher dispatcher) {
-		if (IS_AETHER_LOADED) modelEntryPointDelegate.initItemModels(dispatcher);
+		if (IS_AETHER_LOADED) {
+			try {
+				modelEntryPointDelegate = (ModelEntrypoint) Class
+					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
+					.getConstructor()
+					.newInstance();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			modelEntryPointDelegate.initItemModels(dispatcher);
+		}
 	}
 
 	@Override
 	public void initEntityModels(EntityRenderDispatcher dispatcher) {
-		if (IS_AETHER_LOADED) modelEntryPointDelegate.initEntityModels(dispatcher);
+		if (IS_AETHER_LOADED) {
+			try {
+				modelEntryPointDelegate = (ModelEntrypoint) Class
+					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
+					.getConstructor()
+					.newInstance();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			modelEntryPointDelegate.initEntityModels(dispatcher);
+		}
 	}
 
 	@Override
 	public void initTileEntityModels(TileEntityRenderDispatcher dispatcher) {
-		if (IS_AETHER_LOADED) modelEntryPointDelegate.initTileEntityModels(dispatcher);
+		if (IS_AETHER_LOADED) {
+			try {
+				modelEntryPointDelegate = (ModelEntrypoint) Class
+					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
+					.getConstructor()
+					.newInstance();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			modelEntryPointDelegate.initTileEntityModels(dispatcher);
+		}
 	}
 
 	@Override
