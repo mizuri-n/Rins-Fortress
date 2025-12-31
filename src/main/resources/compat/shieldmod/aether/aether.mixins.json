@@ -11,6 +11,7 @@
     "ArmorMaterialMixin",
     "PendantMixin",
     "SilverTreasureMixin",
-    "SkyrootShieldDropMultiplier"
+    "SkyrootShieldDropMultiplier",
+    "TrinketMixin"
   ]
 }

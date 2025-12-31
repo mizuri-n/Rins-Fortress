@@ -16,7 +16,7 @@ import teamport.aether.item.AetherHasCustomDamageType;
 import teamport.aether.item.AetherItemTags;
 import teamport.aether.item.accessory.IAccessory;
 
-public class GravititeShield extends ShieldItem implements AetherHasCustomDamageType, IAccessory, IArmorItem {
+public class GravititeShield extends ShieldItem implements AetherHasCustomDamageType, IArmorItem {
 	public final String name;
 	public final ArmorMaterial material;
 	public final float knockbackStrength;
@@ -25,7 +25,7 @@ public class GravititeShield extends ShieldItem implements AetherHasCustomDamage
 		this.name = name;
 		this.material = material;
 		this.knockbackStrength = 1.0F;
-		this.withTags(AetherItemTags.TRINKET);
+		this.withTags(RFItemTags.TRINKETCUSTOM);
 	}
 	@Override
 	public boolean hitEntity(ItemStack itemstack, Mob target, Mob player) {
@@ -60,13 +60,9 @@ public class GravititeShield extends ShieldItem implements AetherHasCustomDamage
 
 	@Override
 	public int getArmorPiece() {
-		return 0;
+		return -1;
 	}
 
-	@Override
-	public String name() {
-		return name;
-	}
 	@Override
 	public int armorPieceProtection() {
 		return 1;

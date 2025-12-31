@@ -1,5 +1,6 @@
 package mizurin.shieldmod.compat.aether;
 
+import mizurin.shieldmod.compat.aether.model.RFAetherModels;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
 import net.minecraft.client.render.EntityRenderDispatcher;
@@ -23,7 +24,7 @@ public class RFAetherCompatibility implements PreLaunchEntrypoint, GameStartEntr
 
 	public static boolean IS_AETHER_LOADED = false;
 
-	public static ModelEntrypoint modelEntryPointDelegate;
+	public static RFAetherModels modelEntryPointDelegate;
 	public static RecipeEntrypoint recipeEntrypointDelegate;
 
 
@@ -76,7 +77,7 @@ public class RFAetherCompatibility implements PreLaunchEntrypoint, GameStartEntr
 	public void initBlockColors(BlockColorDispatcher dispatcher) {
 		if (IS_AETHER_LOADED) {
 			try {
-				modelEntryPointDelegate = (ModelEntrypoint) Class
+				modelEntryPointDelegate = (RFAetherModels) Class
 					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
 					.getConstructor()
 					.newInstance();
@@ -91,7 +92,7 @@ public class RFAetherCompatibility implements PreLaunchEntrypoint, GameStartEntr
 	public void initBlockModels(BlockModelDispatcher dispatcher) {
 		if (IS_AETHER_LOADED) {
 			try {
-				modelEntryPointDelegate = (ModelEntrypoint) Class
+				modelEntryPointDelegate = (RFAetherModels) Class
 					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
 					.getConstructor()
 					.newInstance();
@@ -106,7 +107,7 @@ public class RFAetherCompatibility implements PreLaunchEntrypoint, GameStartEntr
 	public void initItemModels(ItemModelDispatcher dispatcher) {
 		if (IS_AETHER_LOADED) {
 			try {
-				modelEntryPointDelegate = (ModelEntrypoint) Class
+				modelEntryPointDelegate = (RFAetherModels) Class
 					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
 					.getConstructor()
 					.newInstance();
@@ -121,7 +122,7 @@ public class RFAetherCompatibility implements PreLaunchEntrypoint, GameStartEntr
 	public void initEntityModels(EntityRenderDispatcher dispatcher) {
 		if (IS_AETHER_LOADED) {
 			try {
-				modelEntryPointDelegate = (ModelEntrypoint) Class
+				modelEntryPointDelegate = (RFAetherModels) Class
 					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
 					.getConstructor()
 					.newInstance();
@@ -136,7 +137,7 @@ public class RFAetherCompatibility implements PreLaunchEntrypoint, GameStartEntr
 	public void initTileEntityModels(TileEntityRenderDispatcher dispatcher) {
 		if (IS_AETHER_LOADED) {
 			try {
-				modelEntryPointDelegate = (ModelEntrypoint) Class
+				modelEntryPointDelegate = (RFAetherModels) Class
 					.forName("mizurin.shieldmod.compat.aether.model.RFAetherModels")
 					.getConstructor()
 					.newInstance();
