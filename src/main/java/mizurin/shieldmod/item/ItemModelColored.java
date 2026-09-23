@@ -1,6 +1,7 @@
 package mizurin.shieldmod.item;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.option.GameSettings;
 import net.minecraft.client.render.EntityRenderDispatcher;
 import net.minecraft.client.render.Font;
 import net.minecraft.client.render.TextureManager;
@@ -60,7 +61,7 @@ public class ItemModelColored extends ItemModelStandard {
 		float g;
 		float b;
 
-		if (mc.gameSettings.items3D.value) {
+		if (GameSettings.ITEMS_3D.value) {
 			GL11.glPushMatrix();
 			GL11.glScaled(1.0, 1.0, 1.0);
 			GL11.glRotated(yaw, 0.0, 1.0, 0.0);

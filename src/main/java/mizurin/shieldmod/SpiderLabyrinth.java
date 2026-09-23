@@ -1,525 +1,525 @@
-package mizurin.shieldmod;
-
-import mizurin.shieldmod.blocks.RFBlocks;
-import mizurin.shieldmod.item.RFItems;
-import net.minecraft.core.WeightedRandomBag;
-import net.minecraft.core.WeightedRandomLootObject;
-import net.minecraft.core.block.BlockLogicRotatable;
-import net.minecraft.core.block.Blocks;
-import net.minecraft.core.block.entity.TileEntityChest;
-import net.minecraft.core.block.entity.TileEntityDispenser;
-import net.minecraft.core.block.entity.TileEntityMobSpawner;
-import net.minecraft.core.block.material.Material;
-import net.minecraft.core.block.tag.BlockTags;
-import net.minecraft.core.item.Item;
-import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.Items;
-import net.minecraft.core.world.World;
-import net.minecraft.core.world.generate.feature.WorldFeature;
-
-import java.util.Random;
-
-public class SpiderLabyrinth extends WorldFeature {
-	int dungeonSize = 0;
-	int dungeonLimit;
-	int dungeonCount = 0;
-	boolean treasureGenerated = false;
-	boolean libraryGenerated = false;
-	int wallBlockA;
-	int wallBlockB;
-	int brickBlockA;
-	int brickBlockB;
-	int slabBlock;
-	public ItemStack treasureItem;
-	public WeightedRandomBag<WeightedRandomLootObject> chestLoot;
-	public WeightedRandomBag<WeightedRandomLootObject> dispenserLoot;
-	public WeightedRandomBag<String> spawnerMonsters;
-
-	public SpiderLabyrinth() {
-			this.wallBlockA = Blocks.BASALT.id();
-			this.wallBlockB = Blocks.COBBLE_BASALT.id();
-			this.brickBlockA = Blocks.BRICK_BASALT.id();
-			this.brickBlockB = Blocks.BRICK_BASALT.id();
-			this.slabBlock = Blocks.SLAB_PLANKS_PAINTED.id();
-	}
-
-	public boolean place(World world, Random random, int x, int y, int z) {
-
-		this.chestLoot = new WeightedRandomBag<>();
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_IRON.getDefaultStack(), 1, 6), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_GOLD.getDefaultStack(), 1, 4), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(RFBlocks.saplingApple.getDefaultStack(), 1, 3), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.DIAMOND.getDefaultStack(), 1, 4), 2.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.FOOD_APPLE_GOLD.getDefaultStack()), 2.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.DUST_REDSTONE.getDefaultStack(), 1, 4), 100.0);
-
-		for(int i = 0; i < 9; ++i) {
-			this.chestLoot.addEntry(new WeightedRandomLootObject(new ItemStack(Item.itemsList[Items.RECORD_13.id + i])), 1.0);
-		}
-
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.FOOD_APPLE_GOLD.getDefaultStack()), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Blocks.WOOL.getDefaultStack(), 1, 2), 100.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.HANDCANNON_LOADED.getDefaultStack()), 0.5);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.HANDCANNON_UNLOADED.getDefaultStack()), 4.5);
-		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_HELMET_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.ARMOR_HELMET_CHAINMAIL.getMaxDamage() / 2, Items.ARMOR_HELMET_CHAINMAIL.getMaxDamage()), 20.0);
-		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_CHESTPLATE_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.ARMOR_CHESTPLATE_CHAINMAIL.getMaxDamage() / 2, Items.ARMOR_CHESTPLATE_CHAINMAIL.getMaxDamage()), 20.0);
-		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_LEGGINGS_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.ARMOR_LEGGINGS_CHAINMAIL.getMaxDamage() / 2, Items.ARMOR_LEGGINGS_CHAINMAIL.getMaxDamage()), 20.0);
-		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_BOOTS_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.INGOT_STEEL_CRUDE.getMaxDamage() / 2, Items.INGOT_STEEL_CRUDE.getMaxDamage()), 20.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_STEEL_CRUDE.getDefaultStack()), 10.0);
-		this.chestLoot.addEntry(new WeightedRandomLootObject((ItemStack)null), 892.0);
-		this.dispenserLoot = new WeightedRandomBag<>();
-		this.dispenserLoot.addEntry(new WeightedRandomLootObject(Items.AMMO_ARROW.getDefaultStack(), 5, 7), 300.0);
-		this.dispenserLoot.addEntry(new WeightedRandomLootObject(Items.AMMO_ARROW_GOLD.getDefaultStack()), 10.0);
-		this.dispenserLoot.addEntry(new WeightedRandomLootObject(Items.AMMO_CHARGE_EXPLOSIVE.getDefaultStack()), 0.5);
-		this.dispenserLoot.addEntry(new WeightedRandomLootObject((ItemStack)null), 289.5);
-		this.spawnerMonsters = new WeightedRandomBag<>();
-		this.spawnerMonsters.addEntry("Spider", 3.0);
-		this.spawnerMonsters.addEntry("ArmouredZombie", 1.0);
-		int r = random.nextInt(5);
-		switch (r) {
-			case 0:
-			case 1:
-				this.treasureItem = (new ItemStack(RFItems.tearShield));
-				break;
-			case 2:
-			case 3:
-				this.treasureItem = (new ItemStack(RFItems.rockyHelmet));
-				break;
-			case 4:
-				this.treasureItem = (new ItemStack(RFItems.regenAmulet));
-				break;
-		}
-
-		if (this.canReplace(world, x, y, z)) {
-			this.dungeonLimit = 1;
-			this.generateBranch(world, random, x, y, z);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public void generateBranch(World world, Random random, int blockX, int blockY, int blockZ) {
-		boolean generateTrapOnWall = false;
-
-		int x;
-		for(x = blockX - 2; x <= blockX + 2; ++x) {
-			boolean xWallCheck = x == blockX - 2 || x == blockX + 2;
-
-			for(int y = blockY - 2; y <= blockY + 1; ++y) {
-				boolean yWallCheck = y == blockY - 2;
-
-				for(int z = blockZ - 2; z <= blockZ + 2; ++z) {
-					boolean zWallCheck = z == blockZ - 2 || z == blockZ + 2;
-					if (this.canReplace(world, x, y, z)) {
-						if (xWallCheck && zWallCheck) {
-							world.setBlockWithNotify(x, y, z, random.nextInt(4) == 0 ? this.brickBlockB : this.brickBlockA);
-						} else if (!xWallCheck && !zWallCheck) {
-							if (yWallCheck) {
-								world.setBlockWithNotify(x, y, z, this.wallBlockB);
-							} else {
-								world.setBlockWithNotify(x, y, z, 0);
-							}
-						} else {
-							world.setBlockWithNotify(x, y, z, this.wallBlockB);
-						}
-
-						if (!generateTrapOnWall && (xWallCheck || zWallCheck) && (x == blockZ || z == blockZ) && y == blockY) {
-							world.setBlockWithNotify(x, y, z, Blocks.MOTION_SENSOR_IDLE.id());
-							BlockLogicRotatable.setDefaultDirection(world, x, y, z);
-							world.setBlockWithNotify(x, y - 1, z, Blocks.DISPENSER_COBBLE_STONE.id());
-							BlockLogicRotatable.setDefaultDirection(world, x, y - 1, z);
-							TileEntityDispenser tileEntityDispenser = (TileEntityDispenser)world.getTileEntity(x, blockY - 1, z);
-
-							for(int k4 = 0; k4 < 3; ++k4) {
-								ItemStack itemstack = this.pickDispenserLootItem(random);
-								if (itemstack != null) {
-									tileEntityDispenser.setItem(random.nextInt(tileEntityDispenser.getContainerSize()), itemstack);
-								}
-							}
-
-							generateTrapOnWall = true;
-						}
-					}
-				}
-			}
-		}
-
-		if (this.dungeonSize < 10) {
-			++this.dungeonSize;
-			x = random.nextInt(4);
-
-			for(int i = 0; i <= x; ++i) {
-				this.createCorridor(world, random, blockX, blockY, blockZ, random.nextInt(4), 0);
-			}
-		}
-
-	}
-
-	public void generateDrop(World world, Random random, int blockX, int blockY, int blockZ) {
-		if (random.nextBoolean()) {
-			this.generateDungeon(world, random, blockX, blockY, blockZ, false);
-		}
-
-		int dropHeight = random.nextInt(10) + 10;
-
-		int x;
-		int y;
-		for(x = blockX - 2; x <= blockX + 2; ++x) {
-			for(y = blockY - dropHeight; y <= blockY + 1; ++y) {
-				for(int z = blockZ - 2; z <= blockZ + 2; ++z) {
-					boolean xWallCheck = x == blockX - 2 || x == blockX + 2;
-					boolean zWallCheck = z == blockZ - 2 || z == blockZ + 2;
-					boolean yWallCheck = y == blockY - dropHeight;
-					if (this.canReplace(world, x, y, z)) {
-						if (!xWallCheck && !zWallCheck) {
-							if (yWallCheck) {
-								world.setBlockWithNotify(x, y, z, this.wallBlockB);
-								if (this.dungeonSize >= 10) {
-									world.setBlockWithNotify(x, y + 1, z, Blocks.SPIKES.id());
-								}
-							} else if (x != blockX && z != blockZ && random.nextInt(20) == 0 && world.getBlockId(x, y + 1, z) != this.slabBlock) {
-								world.setBlockAndMetadataWithNotify(x, y, z, this.slabBlock, 12 << 4);
-							} else {
-								world.setBlockWithNotify(x, y, z, 0);
-							}
-						} else {
-							world.setBlockWithNotify(x, y, z, this.wallBlockB);
-						}
-					}
-				}
-			}
-		}
-
-		if (this.dungeonSize < 10) {
-			++this.dungeonSize;
-			x = random.nextInt(4) + 1;
-
-			for(y = 1; y <= x; ++y) {
-				this.createCorridor(world, random, blockX, blockY - (dropHeight - 2), blockZ, random.nextInt(4), 0);
-			}
-		}
-
-	}
-
-	private boolean canReplace(World world, int x, int y, int z) {
-		if (y <= 11) {
-			return false;
-		} else if (world.getBlockId(x, y, z) != this.brickBlockA && world.getBlockId(x, y, z) != Blocks.PLANKS_OAK_PAINTED.id() && world.getBlockId(x, y, z) != Blocks.COBWEB.id() && world.getBlockId(x, y, z) != Blocks.BOOKSHELF_PLANKS_OAK.id() && world.getBlockId(x, y, z) != Blocks.MOBSPAWNER.id() && world.getBlockId(x, y, z) != this.brickBlockB) {
-			if (world.getBlockId(x, y, z) != Blocks.MOTION_SENSOR_IDLE.id() && world.getBlockId(x, y, z) != Blocks.DISPENSER_COBBLE_STONE.id() && world.getBlockId(x, y, z) != Blocks.MOTION_SENSOR_ACTIVE.id()) {
-				return BlockTags.CAVES_CUT_THROUGH.appliesTo(world.getBlock(x, y, z)) || world.getBlockMaterial(x, y, z) == Material.grass || world.getBlockMaterial(x, y, z) == Material.dirt || world.getBlockMaterial(x, y, z).isStone() || world.getBlockMaterial(x, y, z) == Material.sand || world.getBlockMaterial(x, y, z) == Material.moss;
-			} else {
-				world.removeBlockTileEntity(x, y, z);
-				world.setBlockWithNotify(x, y, z, 0);
-				return true;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	private void generateCorridor(World world, Random random, int blockX, int blockY, int blockZ, int rot, int corridorIteration) {
-		byte height = 2;
-		int width = 2;
-		int length = 2;
-
-		for(int x = blockX - width; x <= blockX + width; ++x) {
-			boolean xWallCheck = x == blockX - width || x == blockX + width;
-
-			for(int y = blockY - height; y <= blockY + (height - 1); ++y) {
-				boolean yWallCheck = y == blockY - height;
-
-				for(int z = blockZ - length; z <= blockZ + length; ++z) {
-					boolean zWallCheck = z == blockZ - length || z == blockZ + length;
-					if (this.canReplace(world, x, y, z) && (!xWallCheck && !zWallCheck && !yWallCheck || world.getBlockId(x, y + 1, z) != 0 || random.nextInt(3) <= 0)) {
-						if (rot == 0) {
-							if (xWallCheck) {
-								world.setBlockWithNotify(x, y, z, this.wallBlockA);
-							} else if (z == blockZ + length) {
-								world.setBlockWithNotify(x, y, z, this.wallBlockA);
-							} else if (yWallCheck) {
-								if (random.nextInt(3) == 0) {
-									world.setBlockWithNotify(x, y, z, this.wallBlockB);
-								} else {
-									world.setBlockWithNotify(x, y, z, this.wallBlockA);
-								}
-							} else {
-								world.setBlockWithNotify(x, y, z, 0);
-							}
-						} else if (rot == 1) {
-							if (x == blockX - width) {
-								world.setBlockWithNotify(x, y, z, this.wallBlockA);
-							} else if (zWallCheck) {
-								world.setBlockWithNotify(x, y, z, this.wallBlockA);
-							} else if (yWallCheck) {
-								if (random.nextInt(3) == 0) {
-									world.setBlockWithNotify(x, y, z, this.wallBlockB);
-								} else {
-									world.setBlockWithNotify(x, y, z, this.wallBlockA);
-								}
-							} else {
-								world.setBlockWithNotify(x, y, z, 0);
-							}
-						} else if (rot == 2) {
-							if (xWallCheck) {
-								world.setBlockWithNotify(x, y, z, this.wallBlockA);
-							} else if (z == blockZ - length) {
-								world.setBlockWithNotify(x, y, z, this.wallBlockA);
-							} else if (yWallCheck) {
-								if (random.nextInt(3) == 0) {
-									world.setBlockWithNotify(x, y, z, this.wallBlockB);
-								} else {
-									world.setBlockWithNotify(x, y, z, this.wallBlockA);
-								}
-							} else {
-								world.setBlockWithNotify(x, y, z, 0);
-							}
-						} else if (x == blockX + width) {
-							world.setBlockWithNotify(x, y, z, this.wallBlockA);
-						} else if (zWallCheck) {
-							world.setBlockWithNotify(x, y, z, this.wallBlockA);
-						} else if (yWallCheck) {
-							if (random.nextInt(3) == 0) {
-								world.setBlockWithNotify(x, y, z, this.wallBlockB);
-							} else {
-								world.setBlockWithNotify(x, y, z, this.wallBlockA);
-							}
-						} else {
-							world.setBlockWithNotify(x, y, z, 0);
-						}
-
-						if (y == blockY + (height - 3) && !zWallCheck && !xWallCheck && random.nextInt(5) == 0) {
-							world.setBlockWithNotify(x, y, z, Blocks.COBWEB.id());
-						}
-						if (y == blockY + (height - 2) && !zWallCheck && !xWallCheck && random.nextInt(20) == 0) {
-							world.setBlockWithNotify(x, y, z, Blocks.COBWEB.id());
-						}
-					}
-				}
-			}
-		}
-
-		if (random.nextInt(2) == 0 && corridorIteration > 1) {
-			if (random.nextInt(2) == 0) {
-				this.generateBranch(world, random, blockX, blockY, blockZ);
-			} else {
-				this.generateDrop(world, random, blockX, blockY, blockZ);
-			}
-		} else if ((random.nextInt(2) != 0 || corridorIteration <= 1 || this.dungeonSize <= 3) && (this.dungeonSize < 10 || this.dungeonCount >= this.dungeonLimit)) {
-			if (random.nextInt(10) == 0 && corridorIteration > 1 && this.dungeonSize > 5) {
-				return;
-			}
-
-			this.createCorridor(world, random, blockX, blockY, blockZ, rot, corridorIteration + 1);
-		} else {
-			this.createDungeon(world, random, blockX, blockY, blockZ, rot);
-			++this.dungeonCount;
-		}
-
-	}
-
-	private void createCorridor(World world, Random random, int blockX, int blockY, int blockZ, int rot, int size) {
-		if (rot == 0) {
-			this.generateCorridor(world, random, blockX, blockY, blockZ + 4, 0, size);
-		}
-
-		if (rot == 1) {
-			this.generateCorridor(world, random, blockX - 4, blockY, blockZ, 1, size);
-		}
-
-		if (rot == 2) {
-			this.generateCorridor(world, random, blockX, blockY, blockZ - 4, 2, size);
-		}
-
-		if (rot == 3) {
-			this.generateCorridor(world, random, blockX + 4, blockY, blockZ, 3, size);
-		}
-
-	}
-
-	private void generateDungeon(World world, Random random, int blockX, int blockY, int blockZ, boolean doSpawner) {
-		int size = 4;
-		byte height = 2;
-		if (blockY >= 10) {
-			int x;
-			int y;
-			for(x = blockX - size; x <= blockX + size; ++x) {
-				for(y = blockY - 2; y <= blockY + 2; ++y) {
-					for(int z = blockZ - size; z <= blockZ + size; ++z) {
-						boolean xWallCheck = x == blockX - size || x == blockX + size;
-						boolean zWallCheck = z == blockZ - size || z == blockZ + size;
-						boolean yWallCheck = y == blockY - 2;
-						if (this.canReplace(world, x, y, z)) {
-							if (!xWallCheck && !zWallCheck) {
-								if (yWallCheck) {
-									if (random.nextInt(5) == 0) {
-										world.setBlockWithNotify(x, y, z, this.wallBlockB);
-									} else {
-										world.setBlockWithNotify(x, y, z, this.wallBlockA);
-									}
-								} else {
-									world.setBlockWithNotify(x, y, z, 0);
-								}
-							} else {
-								world.setBlockWithNotify(x, y, z, this.wallBlockB);
-							}
-							if (y == blockY + (height - 3) && !zWallCheck && !xWallCheck && random.nextInt(5) == 0) {
-								world.setBlockWithNotify(x, y, z, Blocks.COBWEB.id());
-							}
-							if (y == blockY + (height - 2) && !zWallCheck && !xWallCheck && random.nextInt(20) == 0) {
-								world.setBlockWithNotify(x, y, z, Blocks.COBWEB.id());
-							}
-						}
-					}
-				}
-			}
-
-			x = blockX + random.nextInt(size - 1) - (size - 1);
-			y = blockZ + random.nextInt(size - 1) - (size - 1);
-			if (this.canReplace(world, x, blockY - 2, y)) {
-				world.setBlockAndMetadataWithNotify(x, blockY - 1, y, Blocks.CHEST_PLANKS_OAK.id(), 12 << 4);
-				TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(x, blockY - 1, y);
-
-				for(int k4 = 0; k4 < 10; ++k4) {
-					ItemStack itemstack = this.pickCheckLootItem(random);
-					if (itemstack != null) {
-						tileentitychest.setItem(random.nextInt(tileentitychest.getContainerSize()), itemstack);
-					}
-				}
-			}
-
-			if (doSpawner) {
-				world.setBlockWithNotify(blockX, blockY - 1, blockZ, Blocks.MOBSPAWNER.id());
-				TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)world.getTileEntity(blockX, blockY - 1, blockZ);
-				if (tileentitymobspawner != null) {
-					tileentitymobspawner.setMobId(this.pickMobSpawner(random));
-				}
-			}
-
-		}
-	}
-
-	private void generateLibrary(World world, Random random, int blockX, int blockY, int blockZ) {
-		int size = 10;
-		int sideFacing = random.nextInt(2);
-		if (blockY >= 10) {
-			for(int x = blockX - size; x <= blockX + size; ++x) {
-				for(int y = blockY - 2; y <= blockY + 3; ++y) {
-					for(int z = blockZ - size; z <= blockZ + size; ++z) {
-						int xRoom = x - blockX + size;
-						int zRoom = z - blockZ + size;
-						boolean xWallCheck = x == blockX - size || x == blockX + size;
-						boolean zWallCheck = z == blockZ - size || z == blockZ + size;
-						boolean yWallCheck = y == blockY - 2;
-						if (this.canReplace(world, x, y, z)) {
-							if (xWallCheck) {
-								if (zRoom % 4 != 0) {
-									world.setBlockWithNotify(x, y, z, this.wallBlockB);
-								} else {
-									world.setBlockWithNotify(x, y, z, this.brickBlockA);
-								}
-							} else if (zWallCheck) {
-								if (xRoom % 4 != 0) {
-									world.setBlockWithNotify(x, y, z, this.wallBlockB);
-								} else {
-									world.setBlockWithNotify(x, y, z, this.brickBlockA);
-								}
-							} else if (yWallCheck) {
-								if ((x <= blockX - 2 || x >= blockX + 2) && (z <= blockZ - 2 || z >= blockZ + 2)) {
-									if (random.nextInt(5) == 0) {
-										world.setBlockWithNotify(x, y, z, this.wallBlockB);
-									} else {
-										world.setBlockWithNotify(x, y, z, this.wallBlockA);
-									}
-								} else {
-									world.setBlockAndMetadataWithNotify(x, y, z, Blocks.PLANKS_OAK_PAINTED.id(), 12);
-								}
-
-								if (x > blockX - 3 && x < blockX + 3 && z > blockZ - 3 && z < blockZ + 3) {
-									world.setBlockWithNotify(x, y, z, this.wallBlockB);
-								}
-							} else if (y == blockY + 3) {
-								if (random.nextInt(5) == 0) {
-									world.setBlockWithNotify(x, y, z, this.wallBlockB);
-								} else {
-									world.setBlockWithNotify(x, y, z, this.wallBlockA);
-								}
-							} else if (x > blockX - size && x < blockX + size || z > blockZ - size && z < blockX + size) {
-								if (xRoom % 4 != 0 && zRoom % 2 == 0 && (x <= blockX - 2 || x >= blockX + 2) && (z <= blockZ - 1 || z >= blockZ + 1) && y < blockY + 2) {
-									if (xRoom % 2 == 0) {
-										world.setBlockWithNotify(x, y, z, Blocks.BOOKSHELF_PLANKS_OAK.id());
-									} else if (random.nextInt(5) == 0) {
-										world.setBlockWithNotify(x, y, z, Blocks.LOG_PINE.id());
-									}
-									else {
-										world.setBlockWithNotify(x, y, z, Blocks.LOG_PINE.id());
-									}
-								} else {
-									world.setBlockWithNotify(x, y, z, 0);
-								}
-							} else {
-								world.setBlockWithNotify(x, y, z, 0);
-							}
-
-							if (zRoom % 2 == 0 && (x == blockX - 2 || x == blockX + 2) && (z == blockZ - 2 || z == blockZ + 2)) {
-								world.setBlockWithNotify(x, y, z, this.brickBlockA);
-							}
-							if (y == blockY + (2) && !zWallCheck && !xWallCheck && random.nextInt(20) == 0) {
-								world.setBlockWithNotify(x, y, z, Blocks.COBWEB.id());
-							}
-						}
-					}
-				}
-			}
-
-			this.generateDrop(world, random, blockX, blockY, blockZ);
-		}
-	}
-
-	private void createDungeon(World world, Random random, int blockX, int blockY, int blockZ, int rot) {
-		int dx = 0;
-		int dz = 0;
-		if (rot == 0) {
-			dz = 1;
-		}
-
-		if (rot == 1) {
-			dx = -1;
-		}
-
-		if (rot == 2) {
-			dz = -1;
-		}
-
-		if (rot == 3) {
-			dx = 1;
-		}
-
-		if (this.canReplace(world, blockX + dx * 5, blockY, blockZ + dz * 5)) {
-			if (this.dungeonSize == 10 && !this.libraryGenerated) {
-				this.libraryGenerated = true;
-				this.generateLibrary(world, random, blockX + dx * 4, blockY, blockZ + dz * 4);
-			} else {
-				this.generateDungeon(world, random, blockX + dx * 4, blockY, blockZ + dz * 4, true);
-			}
-		}
-
-	}
-
-	private ItemStack pickDispenserLootItem(Random random) {
-		return ((WeightedRandomLootObject)this.dispenserLoot.getRandom(random)).getItemStack(random);
-	}
-
-	private ItemStack pickCheckLootItem(Random random) {
-		if (!this.treasureGenerated && this.dungeonSize > 7) {
-			this.treasureGenerated = true;
-			return this.treasureItem.copy();
-		} else {
-			return ((WeightedRandomLootObject)this.chestLoot.getRandom(random)).getItemStack(random);
-		}
-	}
-
-	private String pickMobSpawner(Random random) {
-		return (String)this.spawnerMonsters.getRandom(random);
-	}
-}
+//package mizurin.shieldmod;
+//
+//import mizurin.shieldmod.blocks.RFBlocks;
+//import mizurin.shieldmod.item.RFItems;
+//import net.minecraft.core.WeightedRandomBag;
+//import net.minecraft.core.WeightedRandomLootObject;
+//import net.minecraft.core.block.BlockLogicRotatable;
+//import net.minecraft.core.block.Blocks;
+//import net.minecraft.core.block.entity.TileEntityChest;
+//import net.minecraft.core.block.entity.TileEntityDispenser;
+//import net.minecraft.core.block.entity.TileEntityMobSpawner;
+//import net.minecraft.core.block.material.Material;
+//import net.minecraft.core.block.tag.BlockTags;
+//import net.minecraft.core.item.Item;
+//import net.minecraft.core.item.ItemStack;
+//import net.minecraft.core.item.Items;
+//import net.minecraft.core.world.World;
+//import net.minecraft.core.world.generate.feature.WorldFeature;
+//
+//import java.util.Random;
+//
+//public class SpiderLabyrinth extends WorldFeature {
+//	int dungeonSize = 0;
+//	int dungeonLimit;
+//	int dungeonCount = 0;
+//	boolean treasureGenerated = false;
+//	boolean libraryGenerated = false;
+//	int wallBlockA;
+//	int wallBlockB;
+//	int brickBlockA;
+//	int brickBlockB;
+//	int slabBlock;
+//	public ItemStack treasureItem;
+//	public WeightedRandomBag<WeightedRandomLootObject> chestLoot;
+//	public WeightedRandomBag<WeightedRandomLootObject> dispenserLoot;
+//	public WeightedRandomBag<String> spawnerMonsters;
+//
+//	public SpiderLabyrinth() {
+//			this.wallBlockA = Blocks.BASALT.id();
+//			this.wallBlockB = Blocks.COBBLE_BASALT.id();
+//			this.brickBlockA = Blocks.BRICK_BASALT.id();
+//			this.brickBlockB = Blocks.BRICK_BASALT.id();
+//			this.slabBlock = Blocks.SLAB_PLANKS_PAINTED.id();
+//	}
+//
+//	public boolean place(World world, Random random, int x, int y, int z) {
+//
+//		this.chestLoot = new WeightedRandomBag<>();
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_IRON.getDefaultStack(), 1, 6), 100.0);
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_GOLD.getDefaultStack(), 1, 4), 100.0);
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(RFBlocks.saplingApple.getDefaultStack(), 1, 3), 100.0);
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.DIAMOND.getDefaultStack(), 1, 4), 2.0);
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.FOOD_APPLE_GOLD.getDefaultStack()), 2.0);
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.DUST_REDSTONE.getDefaultStack(), 1, 4), 100.0);
+//
+//		for(int i = 0; i < 9; ++i) {
+//			this.chestLoot.addEntry(new WeightedRandomLootObject(new ItemStack(Item.itemsList[Items.RECORD_13.id + i])), 1.0);
+//		}
+//
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.FOOD_APPLE_GOLD.getDefaultStack()), 100.0);
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(Blocks.WOOL.getDefaultStack(), 1, 2), 100.0);
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.HANDCANNON_LOADED.getDefaultStack()), 0.5);
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.HANDCANNON_UNLOADED.getDefaultStack()), 4.5);
+//		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_HELMET_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.ARMOR_HELMET_CHAINMAIL.getMaxDamage() / 2, Items.ARMOR_HELMET_CHAINMAIL.getMaxDamage()), 20.0);
+//		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_CHESTPLATE_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.ARMOR_CHESTPLATE_CHAINMAIL.getMaxDamage() / 2, Items.ARMOR_CHESTPLATE_CHAINMAIL.getMaxDamage()), 20.0);
+//		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_LEGGINGS_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.ARMOR_LEGGINGS_CHAINMAIL.getMaxDamage() / 2, Items.ARMOR_LEGGINGS_CHAINMAIL.getMaxDamage()), 20.0);
+//		this.chestLoot.addEntry((new WeightedRandomLootObject(Items.ARMOR_BOOTS_CHAINMAIL.getDefaultStack())).setRandomMetadata(Items.INGOT_STEEL_CRUDE.getMaxDamage() / 2, Items.INGOT_STEEL_CRUDE.getMaxDamage()), 20.0);
+//		this.chestLoot.addEntry(new WeightedRandomLootObject(Items.INGOT_STEEL_CRUDE.getDefaultStack()), 10.0);
+//		this.chestLoot.addEntry(new WeightedRandomLootObject((ItemStack)null), 892.0);
+//		this.dispenserLoot = new WeightedRandomBag<>();
+//		this.dispenserLoot.addEntry(new WeightedRandomLootObject(Items.AMMO_ARROW.getDefaultStack(), 5, 7), 300.0);
+//		this.dispenserLoot.addEntry(new WeightedRandomLootObject(Items.AMMO_ARROW_GOLD.getDefaultStack()), 10.0);
+//		this.dispenserLoot.addEntry(new WeightedRandomLootObject(Items.AMMO_CHARGE_EXPLOSIVE.getDefaultStack()), 0.5);
+//		this.dispenserLoot.addEntry(new WeightedRandomLootObject((ItemStack)null), 289.5);
+//		this.spawnerMonsters = new WeightedRandomBag<>();
+//		this.spawnerMonsters.addEntry("Spider", 3.0);
+//		this.spawnerMonsters.addEntry("ArmouredZombie", 1.0);
+//		int r = random.nextInt(5);
+//		switch (r) {
+//			case 0:
+//			case 1:
+//				this.treasureItem = (new ItemStack(RFItems.tearShield));
+//				break;
+//			case 2:
+//			case 3:
+//				this.treasureItem = (new ItemStack(RFItems.rockyHelmet));
+//				break;
+//			case 4:
+//				this.treasureItem = (new ItemStack(RFItems.regenAmulet));
+//				break;
+//		}
+//
+//		if (this.canReplace(world, x, y, z)) {
+//			this.dungeonLimit = 1;
+//			this.generateBranch(world, random, x, y, z);
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
+//
+//	public void generateBranch(World world, Random random, int blockX, int blockY, int blockZ) {
+//		boolean generateTrapOnWall = false;
+//
+//		int x;
+//		for(x = blockX - 2; x <= blockX + 2; ++x) {
+//			boolean xWallCheck = x == blockX - 2 || x == blockX + 2;
+//
+//			for(int y = blockY - 2; y <= blockY + 1; ++y) {
+//				boolean yWallCheck = y == blockY - 2;
+//
+//				for(int z = blockZ - 2; z <= blockZ + 2; ++z) {
+//					boolean zWallCheck = z == blockZ - 2 || z == blockZ + 2;
+//					if (this.canReplace(world, x, y, z)) {
+//						if (xWallCheck && zWallCheck) {
+//							world.setBlockWithNotify(x, y, z, random.nextInt(4) == 0 ? this.brickBlockB : this.brickBlockA);
+//						} else if (!xWallCheck && !zWallCheck) {
+//							if (yWallCheck) {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//							} else {
+//								world.setBlockWithNotify(x, y, z, 0);
+//							}
+//						} else {
+//							world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//						}
+//
+//						if (!generateTrapOnWall && (xWallCheck || zWallCheck) && (x == blockZ || z == blockZ) && y == blockY) {
+//							world.setBlockWithNotify(x, y, z, Blocks.MOTION_SENSOR_IDLE.id());
+//							BlockLogicRotatable.setDefaultDirection(world, x, y, z);
+//							world.setBlockWithNotify(x, y - 1, z, Blocks.DISPENSER_COBBLE_STONE.id());
+//							BlockLogicRotatable.setDefaultDirection(world, x, y - 1, z);
+//							TileEntityDispenser tileEntityDispenser = (TileEntityDispenser)world.getTileEntity(x, blockY - 1, z);
+//
+//							for(int k4 = 0; k4 < 3; ++k4) {
+//								ItemStack itemstack = this.pickDispenserLootItem(random);
+//								if (itemstack != null) {
+//									tileEntityDispenser.setItem(random.nextInt(tileEntityDispenser.getContainerSize()), itemstack);
+//								}
+//							}
+//
+//							generateTrapOnWall = true;
+//						}
+//					}
+//				}
+//			}
+//		}
+//
+//		if (this.dungeonSize < 10) {
+//			++this.dungeonSize;
+//			x = random.nextInt(4);
+//
+//			for(int i = 0; i <= x; ++i) {
+//				this.createCorridor(world, random, blockX, blockY, blockZ, random.nextInt(4), 0);
+//			}
+//		}
+//
+//	}
+//
+//	public void generateDrop(World world, Random random, int blockX, int blockY, int blockZ) {
+//		if (random.nextBoolean()) {
+//			this.generateDungeon(world, random, blockX, blockY, blockZ, false);
+//		}
+//
+//		int dropHeight = random.nextInt(10) + 10;
+//
+//		int x;
+//		int y;
+//		for(x = blockX - 2; x <= blockX + 2; ++x) {
+//			for(y = blockY - dropHeight; y <= blockY + 1; ++y) {
+//				for(int z = blockZ - 2; z <= blockZ + 2; ++z) {
+//					boolean xWallCheck = x == blockX - 2 || x == blockX + 2;
+//					boolean zWallCheck = z == blockZ - 2 || z == blockZ + 2;
+//					boolean yWallCheck = y == blockY - dropHeight;
+//					if (this.canReplace(world, x, y, z)) {
+//						if (!xWallCheck && !zWallCheck) {
+//							if (yWallCheck) {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//								if (this.dungeonSize >= 10) {
+//									world.setBlockWithNotify(x, y + 1, z, Blocks.SPIKES.id());
+//								}
+//							} else if (x != blockX && z != blockZ && random.nextInt(20) == 0 && world.getBlockId(x, y + 1, z) != this.slabBlock) {
+//								world.setBlockAndMetadataWithNotify(x, y, z, this.slabBlock, 12 << 4);
+//							} else {
+//								world.setBlockWithNotify(x, y, z, 0);
+//							}
+//						} else {
+//							world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//						}
+//					}
+//				}
+//			}
+//		}
+//
+//		if (this.dungeonSize < 10) {
+//			++this.dungeonSize;
+//			x = random.nextInt(4) + 1;
+//
+//			for(y = 1; y <= x; ++y) {
+//				this.createCorridor(world, random, blockX, blockY - (dropHeight - 2), blockZ, random.nextInt(4), 0);
+//			}
+//		}
+//
+//	}
+//
+//	private boolean canReplace(World world, int x, int y, int z) {
+//		if (y <= 11) {
+//			return false;
+//		} else if (world.getBlockId(x, y, z) != this.brickBlockA && world.getBlockId(x, y, z) != Blocks.PLANKS_OAK_PAINTED.id() && world.getBlockId(x, y, z) != Blocks.COBWEB.id() && world.getBlockId(x, y, z) != Blocks.BOOKSHELF_PLANKS_OAK.id() && world.getBlockId(x, y, z) != Blocks.MOBSPAWNER.id() && world.getBlockId(x, y, z) != this.brickBlockB) {
+//			if (world.getBlockId(x, y, z) != Blocks.MOTION_SENSOR_IDLE.id() && world.getBlockId(x, y, z) != Blocks.DISPENSER_COBBLE_STONE.id() && world.getBlockId(x, y, z) != Blocks.MOTION_SENSOR_ACTIVE.id()) {
+//				return BlockTags.CAVES_CUT_THROUGH.appliesTo(world.getBlock(x, y, z)) || world.getBlockMaterial(x, y, z) == Material.grass || world.getBlockMaterial(x, y, z) == Material.dirt || world.getBlockMaterial(x, y, z).isStone() || world.getBlockMaterial(x, y, z) == Material.sand || world.getBlockMaterial(x, y, z) == Material.moss;
+//			} else {
+//				world.removeBlockTileEntity(x, y, z);
+//				world.setBlockWithNotify(x, y, z, 0);
+//				return true;
+//			}
+//		} else {
+//			return false;
+//		}
+//	}
+//
+//	private void generateCorridor(World world, Random random, int blockX, int blockY, int blockZ, int rot, int corridorIteration) {
+//		byte height = 2;
+//		int width = 2;
+//		int length = 2;
+//
+//		for(int x = blockX - width; x <= blockX + width; ++x) {
+//			boolean xWallCheck = x == blockX - width || x == blockX + width;
+//
+//			for(int y = blockY - height; y <= blockY + (height - 1); ++y) {
+//				boolean yWallCheck = y == blockY - height;
+//
+//				for(int z = blockZ - length; z <= blockZ + length; ++z) {
+//					boolean zWallCheck = z == blockZ - length || z == blockZ + length;
+//					if (this.canReplace(world, x, y, z) && (!xWallCheck && !zWallCheck && !yWallCheck || world.getBlockId(x, y + 1, z) != 0 || random.nextInt(3) <= 0)) {
+//						if (rot == 0) {
+//							if (xWallCheck) {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//							} else if (z == blockZ + length) {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//							} else if (yWallCheck) {
+//								if (random.nextInt(3) == 0) {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//								} else {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//								}
+//							} else {
+//								world.setBlockWithNotify(x, y, z, 0);
+//							}
+//						} else if (rot == 1) {
+//							if (x == blockX - width) {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//							} else if (zWallCheck) {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//							} else if (yWallCheck) {
+//								if (random.nextInt(3) == 0) {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//								} else {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//								}
+//							} else {
+//								world.setBlockWithNotify(x, y, z, 0);
+//							}
+//						} else if (rot == 2) {
+//							if (xWallCheck) {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//							} else if (z == blockZ - length) {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//							} else if (yWallCheck) {
+//								if (random.nextInt(3) == 0) {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//								} else {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//								}
+//							} else {
+//								world.setBlockWithNotify(x, y, z, 0);
+//							}
+//						} else if (x == blockX + width) {
+//							world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//						} else if (zWallCheck) {
+//							world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//						} else if (yWallCheck) {
+//							if (random.nextInt(3) == 0) {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//							} else {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//							}
+//						} else {
+//							world.setBlockWithNotify(x, y, z, 0);
+//						}
+//
+//						if (y == blockY + (height - 3) && !zWallCheck && !xWallCheck && random.nextInt(5) == 0) {
+//							world.setBlockWithNotify(x, y, z, Blocks.COBWEB.id());
+//						}
+//						if (y == blockY + (height - 2) && !zWallCheck && !xWallCheck && random.nextInt(20) == 0) {
+//							world.setBlockWithNotify(x, y, z, Blocks.COBWEB.id());
+//						}
+//					}
+//				}
+//			}
+//		}
+//
+//		if (random.nextInt(2) == 0 && corridorIteration > 1) {
+//			if (random.nextInt(2) == 0) {
+//				this.generateBranch(world, random, blockX, blockY, blockZ);
+//			} else {
+//				this.generateDrop(world, random, blockX, blockY, blockZ);
+//			}
+//		} else if ((random.nextInt(2) != 0 || corridorIteration <= 1 || this.dungeonSize <= 3) && (this.dungeonSize < 10 || this.dungeonCount >= this.dungeonLimit)) {
+//			if (random.nextInt(10) == 0 && corridorIteration > 1 && this.dungeonSize > 5) {
+//				return;
+//			}
+//
+//			this.createCorridor(world, random, blockX, blockY, blockZ, rot, corridorIteration + 1);
+//		} else {
+//			this.createDungeon(world, random, blockX, blockY, blockZ, rot);
+//			++this.dungeonCount;
+//		}
+//
+//	}
+//
+//	private void createCorridor(World world, Random random, int blockX, int blockY, int blockZ, int rot, int size) {
+//		if (rot == 0) {
+//			this.generateCorridor(world, random, blockX, blockY, blockZ + 4, 0, size);
+//		}
+//
+//		if (rot == 1) {
+//			this.generateCorridor(world, random, blockX - 4, blockY, blockZ, 1, size);
+//		}
+//
+//		if (rot == 2) {
+//			this.generateCorridor(world, random, blockX, blockY, blockZ - 4, 2, size);
+//		}
+//
+//		if (rot == 3) {
+//			this.generateCorridor(world, random, blockX + 4, blockY, blockZ, 3, size);
+//		}
+//
+//	}
+//
+//	private void generateDungeon(World world, Random random, int blockX, int blockY, int blockZ, boolean doSpawner) {
+//		int size = 4;
+//		byte height = 2;
+//		if (blockY >= 10) {
+//			int x;
+//			int y;
+//			for(x = blockX - size; x <= blockX + size; ++x) {
+//				for(y = blockY - 2; y <= blockY + 2; ++y) {
+//					for(int z = blockZ - size; z <= blockZ + size; ++z) {
+//						boolean xWallCheck = x == blockX - size || x == blockX + size;
+//						boolean zWallCheck = z == blockZ - size || z == blockZ + size;
+//						boolean yWallCheck = y == blockY - 2;
+//						if (this.canReplace(world, x, y, z)) {
+//							if (!xWallCheck && !zWallCheck) {
+//								if (yWallCheck) {
+//									if (random.nextInt(5) == 0) {
+//										world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//									} else {
+//										world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//									}
+//								} else {
+//									world.setBlockWithNotify(x, y, z, 0);
+//								}
+//							} else {
+//								world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//							}
+//							if (y == blockY + (height - 3) && !zWallCheck && !xWallCheck && random.nextInt(5) == 0) {
+//								world.setBlockWithNotify(x, y, z, Blocks.COBWEB.id());
+//							}
+//							if (y == blockY + (height - 2) && !zWallCheck && !xWallCheck && random.nextInt(20) == 0) {
+//								world.setBlockWithNotify(x, y, z, Blocks.COBWEB.id());
+//							}
+//						}
+//					}
+//				}
+//			}
+//
+//			x = blockX + random.nextInt(size - 1) - (size - 1);
+//			y = blockZ + random.nextInt(size - 1) - (size - 1);
+//			if (this.canReplace(world, x, blockY - 2, y)) {
+//				world.setBlockAndMetadataWithNotify(x, blockY - 1, y, Blocks.CHEST_PLANKS_OAK.id(), 12 << 4);
+//				TileEntityChest tileentitychest = (TileEntityChest)world.getTileEntity(x, blockY - 1, y);
+//
+//				for(int k4 = 0; k4 < 10; ++k4) {
+//					ItemStack itemstack = this.pickCheckLootItem(random);
+//					if (itemstack != null) {
+//						tileentitychest.setItem(random.nextInt(tileentitychest.getContainerSize()), itemstack);
+//					}
+//				}
+//			}
+//
+//			if (doSpawner) {
+//				world.setBlockWithNotify(blockX, blockY - 1, blockZ, Blocks.MOBSPAWNER.id());
+//				TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)world.getTileEntity(blockX, blockY - 1, blockZ);
+//				if (tileentitymobspawner != null) {
+//					tileentitymobspawner.setMobId(this.pickMobSpawner(random));
+//				}
+//			}
+//
+//		}
+//	}
+//
+//	private void generateLibrary(World world, Random random, int blockX, int blockY, int blockZ) {
+//		int size = 10;
+//		int sideFacing = random.nextInt(2);
+//		if (blockY >= 10) {
+//			for(int x = blockX - size; x <= blockX + size; ++x) {
+//				for(int y = blockY - 2; y <= blockY + 3; ++y) {
+//					for(int z = blockZ - size; z <= blockZ + size; ++z) {
+//						int xRoom = x - blockX + size;
+//						int zRoom = z - blockZ + size;
+//						boolean xWallCheck = x == blockX - size || x == blockX + size;
+//						boolean zWallCheck = z == blockZ - size || z == blockZ + size;
+//						boolean yWallCheck = y == blockY - 2;
+//						if (this.canReplace(world, x, y, z)) {
+//							if (xWallCheck) {
+//								if (zRoom % 4 != 0) {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//								} else {
+//									world.setBlockWithNotify(x, y, z, this.brickBlockA);
+//								}
+//							} else if (zWallCheck) {
+//								if (xRoom % 4 != 0) {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//								} else {
+//									world.setBlockWithNotify(x, y, z, this.brickBlockA);
+//								}
+//							} else if (yWallCheck) {
+//								if ((x <= blockX - 2 || x >= blockX + 2) && (z <= blockZ - 2 || z >= blockZ + 2)) {
+//									if (random.nextInt(5) == 0) {
+//										world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//									} else {
+//										world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//									}
+//								} else {
+//									world.setBlockAndMetadataWithNotify(x, y, z, Blocks.PLANKS_OAK_PAINTED.id(), 12);
+//								}
+//
+//								if (x > blockX - 3 && x < blockX + 3 && z > blockZ - 3 && z < blockZ + 3) {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//								}
+//							} else if (y == blockY + 3) {
+//								if (random.nextInt(5) == 0) {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockB);
+//								} else {
+//									world.setBlockWithNotify(x, y, z, this.wallBlockA);
+//								}
+//							} else if (x > blockX - size && x < blockX + size || z > blockZ - size && z < blockX + size) {
+//								if (xRoom % 4 != 0 && zRoom % 2 == 0 && (x <= blockX - 2 || x >= blockX + 2) && (z <= blockZ - 1 || z >= blockZ + 1) && y < blockY + 2) {
+//									if (xRoom % 2 == 0) {
+//										world.setBlockWithNotify(x, y, z, Blocks.BOOKSHELF_PLANKS_OAK.id());
+//									} else if (random.nextInt(5) == 0) {
+//										world.setBlockWithNotify(x, y, z, Blocks.LOG_PINE.id());
+//									}
+//									else {
+//										world.setBlockWithNotify(x, y, z, Blocks.LOG_PINE.id());
+//									}
+//								} else {
+//									world.setBlockWithNotify(x, y, z, 0);
+//								}
+//							} else {
+//								world.setBlockWithNotify(x, y, z, 0);
+//							}
+//
+//							if (zRoom % 2 == 0 && (x == blockX - 2 || x == blockX + 2) && (z == blockZ - 2 || z == blockZ + 2)) {
+//								world.setBlockWithNotify(x, y, z, this.brickBlockA);
+//							}
+//							if (y == blockY + (2) && !zWallCheck && !xWallCheck && random.nextInt(20) == 0) {
+//								world.setBlockWithNotify(x, y, z, Blocks.COBWEB.id());
+//							}
+//						}
+//					}
+//				}
+//			}
+//
+//			this.generateDrop(world, random, blockX, blockY, blockZ);
+//		}
+//	}
+//
+//	private void createDungeon(World world, Random random, int blockX, int blockY, int blockZ, int rot) {
+//		int dx = 0;
+//		int dz = 0;
+//		if (rot == 0) {
+//			dz = 1;
+//		}
+//
+//		if (rot == 1) {
+//			dx = -1;
+//		}
+//
+//		if (rot == 2) {
+//			dz = -1;
+//		}
+//
+//		if (rot == 3) {
+//			dx = 1;
+//		}
+//
+//		if (this.canReplace(world, blockX + dx * 5, blockY, blockZ + dz * 5)) {
+//			if (this.dungeonSize == 10 && !this.libraryGenerated) {
+//				this.libraryGenerated = true;
+//				this.generateLibrary(world, random, blockX + dx * 4, blockY, blockZ + dz * 4);
+//			} else {
+//				this.generateDungeon(world, random, blockX + dx * 4, blockY, blockZ + dz * 4, true);
+//			}
+//		}
+//
+//	}
+//
+//	private ItemStack pickDispenserLootItem(Random random) {
+//		return ((WeightedRandomLootObject)this.dispenserLoot.getRandom(random)).getItemStack(random);
+//	}
+//
+//	private ItemStack pickCheckLootItem(Random random) {
+//		if (!this.treasureGenerated && this.dungeonSize > 7) {
+//			this.treasureGenerated = true;
+//			return this.treasureItem.copy();
+//		} else {
+//			return ((WeightedRandomLootObject)this.chestLoot.getRandom(random)).getItemStack(random);
+//		}
+//	}
+//
+//	private String pickMobSpawner(Random random) {
+//		return (String)this.spawnerMonsters.getRandom(random);
+//	}
+//}

@@ -18,13 +18,13 @@ public class EntityRock extends ProjectilePebble {
 		this.defaultGravity = 0.03F;
 	}
 	public void onHit(HitResult hitResult) {
-		if (hitResult.entity != null) {
-			hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
+		if (hitResult instanceof HitResult.Entity hitResult1) {
+			hitResult1.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
 		}
 
 		if (this.modelItem != null) {
 			for(int j = 0; j < 8; ++j) {
-				this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_PEBBLE.id);
+				this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_PEBBLE.id, 5, false);
 			}
 		}
 		this.remove();

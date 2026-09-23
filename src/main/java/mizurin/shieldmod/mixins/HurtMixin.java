@@ -10,6 +10,7 @@ import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.Projectile;
+import net.minecraft.core.enums.HumanArmorShape;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.gamemode.Gamemode;
 import net.minecraft.core.player.inventory.container.ContainerInventory;
@@ -17,6 +18,7 @@ import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
+import org.joml.primitives.AABBdc;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -127,9 +129,9 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 		);
 
 
-		List<Projectile> projectileList = player.world.getEntitiesWithinAABB(Projectile.class, aabb1);
+		List<Projectile> projectileList = player.world.getEntitiesWithinAABB(Projectile.class, (AABBdc) aabb1);
 		for (Projectile projectile : projectileList) {
-			world.spawnParticle("largesmoke", projectile.x, projectile.y, projectile.z, 0.0, 0.0, 0.0, 0);
+			world.spawnParticle("largesmoke", projectile.x, projectile.y, projectile.z, 0.0, 0.0, 0.0, 0, 5, false);
 			Vec3 lookAngle = player.getLookAngle();
 			if (lookAngle != null) {
 				projectile.setHeading(lookAngle.x, lookAngle.y, lookAngle.z, 1.0F, 0);
@@ -156,9 +158,9 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 		// check if we are holding the shield item.
 		ItemStack stack = getHeldItem();
 		//check if we are wearing the helmet.
-		ItemStack helmet_item = this.inventory.armorItemInSlot(3);
+		ItemStack helmet_item = this.inventory.armorItemInSlot(HumanArmorShape.HEAD);
 		if ((helmet_item != null && helmet_item.getItem().equals(RFItems.rockyHelmet)) && attacker != this) {
-			if (!this.gamemode.isPlayerInvulnerable()) {
+			if (!this.gamemode.hasInvulnerablePlayer()) {
 				if(getHealth() == getMaxHealth() && attacker != null){
 					damage = damage / 3;
 				}
@@ -178,7 +180,7 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 					if (attacker != null) {
 						World world = attacker.world;
 
-						if (!this.gamemode.isPlayerInvulnerable()) {
+						if (!this.gamemode.hasInvulnerablePlayer()) {
 							if(shield.tool == ShieldMaterials.TOOL_TEAR && getHealth() <= getMaxHealth() * 0.5){
 								damage = Math.round(damage * 0.65f);
 							}
@@ -236,7 +238,7 @@ public abstract class HurtMixin extends Mob implements ParryInterface{
 										this.x + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
 										this.y - this.bbHeight + (double) (world.rand.nextFloat() * width),
 										this.z + (double) (world.rand.nextFloat() * width * 2.0F) - (double) width,
-										dx, dy, dz, 0
+										dx, dy, dz, 0, 5, false
 									);
 								}
 								stack.damageItem((int)Math.ceil((double)orgDamage *4/5), this);

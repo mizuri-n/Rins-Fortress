@@ -3,7 +3,6 @@ package mizurin.shieldmod.mixins.world;
 import mizurin.shieldmod.WorldFeatureTreeApple;
 import mizurin.shieldmod.blocks.RFBlocks;
 import net.minecraft.core.block.Blocks;
-import net.minecraft.core.world.biome.BiomeSeasonalForest;
 import net.minecraft.core.world.generate.feature.WorldFeature;
 import net.minecraft.core.world.generate.feature.tree.WorldFeatureTree;
 import net.minecraft.core.world.generate.feature.tree.WorldFeatureTreeCherry;
@@ -17,9 +16,9 @@ import java.util.Random;
 
 import static mizurin.shieldmod.ShieldMod.appleGenerate;
 
-@Mixin(value = BiomeSeasonalForest.class, remap = false)
+@Mixin(value = net.minecraft.core.world.biome.overworld.BiomeSeasonalForest.class, remap = false)
 public class SeasonalMixin {
-	@Inject(method = "getRandomWorldGenForTrees(Ljava/util/Random;)Lnet/minecraft/core/world/generate/feature/WorldFeature;", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "getTreeFeature(Ljava/util/Random;)Lnet/minecraft/core/world/generate/feature/WorldFeature;", at = @At("HEAD"), cancellable = true)
 	void injectSeasonal(Random random, CallbackInfoReturnable<WorldFeature> cir) {
 		if (random.nextInt(3) == 0) {
 			cir.setReturnValue ((WorldFeature)(random.nextInt(2) == 0 ? new WorldFeatureTreeFancy(Blocks.LEAVES_OAK.id(), Blocks.LOG_OAK.id()) : new WorldFeatureTree(Blocks.LEAVES_OAK.id(), Blocks.LOG_OAK.id(), 4)));

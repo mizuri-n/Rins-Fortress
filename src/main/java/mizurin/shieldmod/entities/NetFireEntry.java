@@ -29,7 +29,7 @@ public class NetFireEntry
 	}
 
 	@Override
-	public int getPacketDelay() {
+	public int getMovementPacketDelay() {
 		return 1;
 	}
 

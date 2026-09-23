@@ -26,12 +26,12 @@ public class EntityIceBall extends Projectile {
 
 	@Override
 	public void onHit(HitResult hitResult) {
-		if (hitResult.entity instanceof Mob) {
-			hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
-			ShieldEffects.add((Mob) hitResult.entity, ShieldEffects.weaknessEffect, 1, 100);
+		if (hitResult instanceof HitResult.Entity hitResult1) {
+			hitResult1.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
+			ShieldEffects.add((Mob) hitResult1.entity, ShieldEffects.weaknessEffect, 1, 100);
 			if (this.modelItem != null) {
 				for(int j = 0; j < 8; ++j) {
-					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_SNOWBALL.id);
+					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_SNOWBALL.id, 5, false);
 				}
 			}
 			this.remove();

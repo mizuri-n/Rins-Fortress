@@ -15,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //Mixin for the throwable shield.
 @Mixin(value = Player.class, remap = false)
 public abstract class FieldMixin implements IThrownItem {
-	@Shadow
 	public abstract ChunkCoordinates getLastDeathCoordinate();
 
 	@Unique

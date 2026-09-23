@@ -16,7 +16,7 @@ public class SteelShield extends ShieldItem{
 	}
 
 	@Override
-	public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
+	public ItemStack onUse(ItemStack itemstack, World world, Player entityplayer) {
 		((ParryInterface)entityplayer).shieldmod$setIsBlock(true);
 		((ParryInterface)entityplayer).shieldmod$Block(5);
 		onBlock(itemstack, world, entityplayer);

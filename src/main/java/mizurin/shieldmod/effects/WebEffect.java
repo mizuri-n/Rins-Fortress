@@ -59,7 +59,7 @@ public class WebEffect extends Effect {
 				mob.x + (double) (mob.world.rand.nextFloat() * width * 2.0F) - (double) width,
 				mob.y + mob.getHeadHeight() - mob.bbHeight + (double) (mob.world.rand.nextFloat() * width),
 				mob.z + (double) (mob.world.rand.nextFloat() * width * 2.0F) - (double) width,
-				dx, dy, dz, 0
+				dx, dy, dz, 0, 5, false
 			);
 		}
 	}

@@ -30,17 +30,17 @@ public class ShieldMaterials extends ToolMaterial {
 	public static final ShieldMaterials TOOL_TEAR = (ShieldMaterials) new ShieldMaterials().setGuard(0.60f).setDurability(512).setDamage(2);
 	public static final ShieldMaterials TOOL_VALK = (ShieldMaterials) new ShieldMaterials().setGuard(0.75f).setDurability(768).setDamage(2);
 	public static final ShieldMaterials TOOL_SKY = (ShieldMaterials) new ShieldMaterials().setGuard(0.80f).setDurability(64).setDamage(0).setBlockHitDelay(4);
-	public static final ShieldMaterials TOOL_HOLYSTONE = (ShieldMaterials) new ShieldMaterials().setGuard(0.70f).setDurability(128).setDamage(1);
-	public static final ShieldMaterials TOOL_ZANITE = (ShieldMaterials) new ShieldMaterials().setGuard(0.60f).setDurability(384).setDamage(1);
-	public static final ShieldMaterials TOOL_GRAVIITE = (ShieldMaterials) new ShieldMaterials().setGuard(0.50f).setDurability(1536).setDamage(1);
+//	public static final ShieldMaterials TOOL_HOLYSTONE = (ShieldMaterials) new ShieldMaterials().setGuard(0.70f).setDurability(128).setDamage(1);
+//	public static final ShieldMaterials TOOL_ZANITE = (ShieldMaterials) new ShieldMaterials().setGuard(0.60f).setDurability(384).setDamage(1);
+//	public static final ShieldMaterials TOOL_GRAVIITE = (ShieldMaterials) new ShieldMaterials().setGuard(0.50f).setDurability(1536).setDamage(1);
 
-	public static boolean isHoldingSkyRootTool(Player player) {
-		ItemStack held = player.getHeldItem();
-		if (held == null)
-			return false;
-		else if (held.getItem() instanceof ItemTool && (((ItemTool) held.getItem()).getMaterial() == ShieldMaterials.TOOL_SKY)) {
-			return true;
-		} else
-			return held.getItem() instanceof ItemToolSword && ((ItemToolSwordAccessor) held.getItem()).getMaterial() == ShieldMaterials.TOOL_SKY;
-	}
+//	public static boolean isHoldingSkyRootTool(Player player) {
+//		ItemStack held = player.getHeldItem();
+//		if (held == null)
+//			return false;
+//		else if (held.getItem() instanceof ItemTool && (((ItemTool) held.getItem()).getMaterial() == ShieldMaterials.TOOL_SKY)) {
+//			return true;
+//		} else
+//			return held.getItem() instanceof ItemToolSword && ((ItemToolSwordAccessor) held.getItem()).getMaterial() == ShieldMaterials.TOOL_SKY;
+//	}
 }

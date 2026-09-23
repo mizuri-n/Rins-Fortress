@@ -12,13 +12,13 @@ import net.minecraft.core.entity.monster.MobMonster;
 import net.minecraft.core.entity.monster.MobSnowman;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.entity.projectile.ProjectileSnowball;
-import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.item.Items;
+import net.minecraft.core.item.*;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.MathHelper;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
+import org.joml.primitives.AABBdc;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -36,7 +36,7 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 	@Override
 	public void dropDeathItems() {
 		if (this.random.nextInt(900) == 0 && expertMode) {
-			this.dropItem(Items.BUCKET_ICECREAM.id, 1);
+			this.dropItem(Items.BUCKET_IRON.id, 1); //change to icecream
 		}
 		if(expertMode && random.nextInt(10) == 0){
 			this.dropItem(Blocks.ICE.id(), 1);
@@ -77,7 +77,7 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 		} else {
 			//else statement for regular snowmen without carved pumpkins.
 			Player entityplayer = this.world.getClosestPlayerToEntity(this, 16.0);
-			return entityplayer != null && this.canEntityBeSeen(entityplayer) && entityplayer.getGamemode().areMobsHostile() ? entityplayer : null;
+			return entityplayer != null && this.canEntityBeSeen(entityplayer) && entityplayer.getGamemode().hasHostileMobs() ? entityplayer : null;
 		}
 	}
 
@@ -101,9 +101,9 @@ public abstract class EntitySnowManMixin extends MobMonster implements IShieldZo
 			//creates a bounding box and grabs a list of monsters to attack.
 			//doing just monsters causes the snowman to attack itself, I also want to exclude creepers from being attacked.
 
-			List<MobMonster> nearbyMon = this.world.getEntitiesWithinAABB(MobMonster.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0));
-			nearbyMon.removeAll(this.world.getEntitiesWithinAABB(MobSnowman.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
-			nearbyMon.removeAll(this.world.getEntitiesWithinAABB(MobCreeper.class, AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
+			List<MobMonster> nearbyMon = this.world.getEntitiesWithinAABB(MobMonster.class, (AABBdc) AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0));
+			nearbyMon.removeAll(this.world.getEntitiesWithinAABB(MobSnowman.class, (AABBdc) AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
+			nearbyMon.removeAll(this.world.getEntitiesWithinAABB(MobCreeper.class, (AABBdc) AABB.getTemporaryBB(this.x, this.y, this.z, this.x + 1.0, this.y + 1.0, this.z + 1.0).grow(16.0, 4.0, 16.0)));
 			if (!nearbyMon.isEmpty()) {
 				this.setTarget((Entity)nearbyMon.get(this.world.rand.nextInt(nearbyMon.size())));
 			}

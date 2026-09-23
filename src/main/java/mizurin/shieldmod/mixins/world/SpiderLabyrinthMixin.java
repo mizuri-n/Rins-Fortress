@@ -1,7 +1,7 @@
 package mizurin.shieldmod.mixins.world;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import mizurin.shieldmod.SpiderLabyrinth;
+import mizurin.shieldmod.WorldFeatureSpiderLabyrinth;
 import net.minecraft.core.world.World;
 import net.minecraft.core.world.biome.Biome;
 import net.minecraft.core.world.biome.Biomes;
@@ -27,7 +27,7 @@ public class SpiderLabyrinthMixin {
 	public boolean redirect(WorldFeatureLabyrinth instance, World world, Random lRand, int x, int y, int z, @Local(name = "biome") Biome biome) {
 		boolean isBoreal = (biome == Biomes.OVERWORLD_BOREAL_FOREST || biome == Biomes.OVERWORLD_MEADOW);
 		if (isBoreal) {
-			return new SpiderLabyrinth().place(this.world, lRand, x, y, z);
+			return new WorldFeatureSpiderLabyrinth().place(this.world, lRand, x, y, z);
 		}
 		return instance.place(world, lRand, x, y, z);
 	}

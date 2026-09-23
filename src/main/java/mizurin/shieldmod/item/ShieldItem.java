@@ -8,6 +8,7 @@ import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.tool.ItemToolSword;
 import net.minecraft.core.world.World;
+import org.jetbrains.annotations.NotNull;
 
 public class ShieldItem extends ItemToolSword {
 	public ShieldMaterials tool;
@@ -45,7 +46,7 @@ public class ShieldItem extends ItemToolSword {
 		return true;
 	}
 
-	public int getDamageVsEntity(Entity entity, ItemStack is) {
+	public int getDamageVsEntity(@NotNull ItemStack selfStack, @NotNull Entity entity) {
 		return this.weaponDamage;
 	}
 
@@ -55,7 +56,7 @@ public class ShieldItem extends ItemToolSword {
 
 	//Activates ticks that determine if the player is blocking.
 	@Override
-	public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
+	public ItemStack onUse(ItemStack itemstack, World world, Player entityplayer) {
 		//Set to true then add the ticks to the data.
 		((ParryInterface)entityplayer).shieldmod$setIsBlock(true);
 		((ParryInterface)entityplayer).shieldmod$Block(5);

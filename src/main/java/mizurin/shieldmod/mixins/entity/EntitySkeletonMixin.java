@@ -28,7 +28,7 @@ public class EntitySkeletonMixin extends MobMonster {
 
 	protected void dropDeathItems() {
 		if (this.random.nextInt(900) == 0 && expertMode) {
-			this.dropItem(Items.BUCKET_MILK.id, 1);
+			this.dropItem(Items.BUCKET_IRON.id, 1); //change to milk
 		}
 
 		super.dropDeathItems();

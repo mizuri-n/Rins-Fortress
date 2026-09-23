@@ -57,7 +57,7 @@ public class PoisonEffect extends Effect {
 				mob.x + (double) (mob.world.rand.nextFloat() * width * 2.0F) - (double) width,
 				mob.y + mob.getHeadHeight() - 1 + (double) (mob.world.rand.nextFloat() * width),
 				mob.z + (double) (mob.world.rand.nextFloat() * width * 2.0F) - (double) width,
-				dx, dy, dz, 0
+				dx, dy, dz, 0, 5, false
 			);
 		}
 	}

@@ -1,23 +1,23 @@
-package mizurin.shieldmod.blocks;
-
-import net.minecraft.core.block.Block;
-import net.minecraft.core.block.BlockLogicLeavesBase;
-import net.minecraft.core.block.material.Material;
-import net.minecraft.core.world.World;
-import net.minecraft.core.world.season.Seasons;
-
-import java.util.Random;
-
-public class BlockLeavesApple extends BlockLogicLeavesBase {
-	public BlockLeavesApple(Block<?> block) {
-		super(block, Material.leaves, RFBlocks.saplingApple);
-	}
-
-	public void animationTick(World world, int x, int y, int z, Random rand) {
-		if (world.getSeasonManager().getCurrentSeason() != null && world.getSeasonManager().getCurrentSeason() == Seasons.OVERWORLD_FALL && rand.nextInt(40) == 0) {
-			world.spawnParticle("fallingleaf", (double)x, (double)y - 0.10000000149011612, (double)z, 0.0, 0.0, 0.0, 0);
-		}
-
-	}
-
-}
+//package mizurin.shieldmod.blocks;
+//
+//import net.minecraft.core.block.Block;
+//import net.minecraft.core.block.BlockLogicLeavesBase;
+//import net.minecraft.core.block.material.Material;
+//import net.minecraft.core.world.World;
+//import net.minecraft.core.world.season.Seasons;
+//
+//import java.util.Random;
+//
+//public class BlockLeavesApple extends BlockLogicLeavesBase {
+//	public BlockLeavesApple(Block<?> block) {
+//		super(block, Material.leaves, RFBlocks.saplingApple);
+//	}
+//
+//	public void animationTick(World world, int x, int y, int z, Random rand) {
+//		if (world.getSeasonManager().getCurrentSeason() != null && world.getSeasonManager().getCurrentSeason() == Seasons.OVERWORLD_FALL && rand.nextInt(40) == 0) {
+//			world.spawnParticle("fallingleaf", (double)x, (double)y - 0.10000000149011612, (double)z, 0.0, 0.0, 0.0, 0);
+//		}
+//
+//	}
+//
+//}

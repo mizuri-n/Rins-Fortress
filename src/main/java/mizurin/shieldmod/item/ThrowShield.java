@@ -19,7 +19,7 @@ public class ThrowShield extends ShieldItem{
 
 	}
 	@Override
-	public ItemStack onUseItem(ItemStack itemstack, World world, Player entityplayer) {
+	public ItemStack onUse(ItemStack itemstack, World world, Player entityplayer) {
 		((ParryInterface)entityplayer).shieldmod$setIsBlock(true);
 		((ParryInterface)entityplayer).shieldmod$Block(5);
 		onBlock(itemstack, world, entityplayer);
@@ -33,7 +33,7 @@ public class ThrowShield extends ShieldItem{
 			((IThrownItem)entityplayer).setThrownItem(itemstack);
 			//Sets the shield to the player's thrown item.
 
-			entityplayer.inventory.setItem(entityplayer.inventory.getCurrentItemIndex(), null);
+			entityplayer.inventory.setItem(entityplayer.inventory.getCurrentSlot(), null);
 			//Sets the shield to null to hide it and act as a cooldown.
 			world.playSoundAtEntity(null, entityplayer, "mob.ghast.fireball", 0.3F, 1.0F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			if (!world.isClientSide) {

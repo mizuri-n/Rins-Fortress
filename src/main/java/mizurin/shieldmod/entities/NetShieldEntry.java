@@ -29,7 +29,7 @@ public class NetShieldEntry
 	}
 
 	@Override
-	public int getPacketDelay() {
+	public int getMovementPacketDelay() {
 		return 20;
 	}
 

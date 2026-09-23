@@ -3,6 +3,7 @@ package mizurin.shieldmod.mixins;
 
 import mizurin.shieldmod.effects.ShieldEffects;
 import mizurin.shieldmod.item.RFItems;
+import net.minecraft.core.enums.HumanArmorShape;
 import net.minecraft.core.item.IArmorItem;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.player.inventory.container.Container;
@@ -32,7 +33,7 @@ public class SlotArmorMixin extends Slot{
 
 	@Inject(method = "setChanged()V", at = @At(value = "HEAD"))
 	public void injectSlot(final CallbackInfo ci) {
-		ItemStack chest_item = this.menu.inventory.armorItemInSlot(IArmorItem.PIECE_CHEST);
+		ItemStack chest_item = this.menu.inventory.armorItemInSlot(HumanArmorShape.CHEST);
 		if (this.menu.inventory != null) {
 			if (chest_item != null && chest_item.getItem().equals(RFItems.regenAmulet)) {
 				ShieldEffects.add(this.menu.inventory.player, ShieldEffects.extraHealthEffect, 1, 1);
@@ -46,7 +47,7 @@ public class SlotArmorMixin extends Slot{
 	}
 
 	@Inject(method = "<init>", at = @At("TAIL"))
-	public void initInject(final MenuInventory menu, final Container container, final int index, final int x, final int y, final int armorType, final CallbackInfo ci) {
+	public void initInject(MenuInventory menu, Container container, int index, int x, int y, HumanArmorShape armorShape, CallbackInfo ci) {
 		this.lastItem = getItemStack();
 	}
 }

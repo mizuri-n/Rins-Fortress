@@ -1,5 +1,6 @@
 package mizurin.shieldmod.item;
 
+import net.minecraft.core.enums.IArmorShape;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ItemAmulet extends ItemArmor implements IItemWithModifiers {
-	public ItemAmulet(String name, String namespaceId, int id, ArmorMaterial material, int armorPiece) {
+	public ItemAmulet(String name, String namespaceId, int id, ArmorMaterial material, IArmorShape armorPiece) {
 		super(name, namespaceId, id, material, armorPiece);
 	}
 

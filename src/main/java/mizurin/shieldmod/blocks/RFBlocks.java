@@ -25,8 +25,7 @@ public class RFBlocks {
 			.setHardness(0.2F)
 			.setResistance(0.2F)
 			.setFlammability(30, 60)
-			.setTickOnLoad()
-			.setVisualUpdateOnMetadata()
+			.setTicking(true)
 			.setTags(BlockTags.MINEABLE_BY_AXE, BlockTags.MINEABLE_BY_HOE, BlockTags.MINEABLE_BY_SWORD, BlockTags.MINEABLE_BY_SHEARS, BlockTags.SHEARS_DO_SILK_TOUCH);
 
 
@@ -46,10 +45,10 @@ public class RFBlocks {
 		logApple = log
 			.build("log.apple", ++blockID, BlockLogicLog::new);
 		leavesApple = leaves
-			.build("leaves.apple", ++blockID, BlockLeavesApple::new);
+			.build("leaves.apple", ++blockID, BlockLogicLeavesApple::new);
 		leavesAppleFlowering = leaves
-			.build("leaves.apple.flowering", ++blockID, BlockLeavesAppleFlowering::new);
+			.build("leaves.apple.flowering", ++blockID, BlockLogicLeavesAppleFlowering::new);
 		saplingApple = sapling
-			.build("sapling.apple", ++blockID, BlockSaplingApple::new);
+			.build("sapling.apple", ++blockID, BlockLogicSaplingApple::new);
 	}
 }

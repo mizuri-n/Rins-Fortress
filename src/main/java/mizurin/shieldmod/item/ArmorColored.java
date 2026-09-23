@@ -4,6 +4,7 @@ import com.mojang.nbt.tags.CompoundTag;
 import mizurin.shieldmod.ColoredArmorTexture;
 import mizurin.shieldmod.interfaces.IColorable;
 import mizurin.shieldmod.interfaces.IColoredArmor;
+import net.minecraft.core.enums.IArmorShape;
 import net.minecraft.core.item.ItemArmor;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ArmorMaterial;
@@ -11,7 +12,7 @@ import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.util.helper.Color;
 
 public class ArmorColored extends ItemArmor implements IColoredArmor, IColorable {
-	public ArmorColored(String name, String nameSpaceID, int id, ArmorMaterial material, int armorPiece) {
+	public ArmorColored(String name, String nameSpaceID, int id, ArmorMaterial material, IArmorShape armorPiece) {
 		super(name, nameSpaceID, id, material, armorPiece);
 	}
 	public static int getColor(ItemStack itemStack){

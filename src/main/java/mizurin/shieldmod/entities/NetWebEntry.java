@@ -28,7 +28,7 @@ public class NetWebEntry
 	}
 
 	@Override
-	public int getPacketDelay() {
+	public int getMovementPacketDelay() {
 		return 1;
 	}
 

@@ -7,6 +7,8 @@ import net.minecraft.core.item.Items;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
+import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3d;
 
 public class EntityWeb extends Projectile {
 	public EntityWeb(World world, Mob owner) {
@@ -30,15 +32,15 @@ public class EntityWeb extends Projectile {
 
 	}
 	@Override
-	public void onHit(HitResult hitResult) {
-		if (hitResult.entity instanceof Mob) {
-			ShieldEffects.add((Mob) hitResult.entity, ShieldEffects.webEffect, 1, 100);
+	public void onHit(@NotNull HitResult hitResult) {
+		if (hitResult instanceof HitResult.Entity hitResult1) {
+			ShieldEffects.add((Mob) hitResult1.entity, ShieldEffects.webEffect, 1, 100);
 
 			//Applies my custom status effect from the IFreeze interface.
 		}
 		if (this.modelItem != null) {
 			for(int j = 0; j < 8; ++j) {
-				this.world.spawnParticle("snowshovel", this.x, this.y, this.z, 0.0, 0.0, 0.0, 0);
+				this.world.spawnParticle("snowshovel", this.x, this.y, this.z, 0.0, 0.0, 0.0, 0, 5, false);
 				//This does a loop to spawn particles on impact.
 			}
 		}
@@ -47,11 +49,9 @@ public class EntityWeb extends Projectile {
 
 	@Override
 	public HitResult getHitResult() {
-		Vec3 currentPos = Vec3.getTempVec3(this.x, this.y, this.z);
-		Vec3 nextPos = Vec3.getTempVec3(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
-		assert this.world != null;
-		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true, false);
-		return hit;
+		Vector3d currentPos = new Vector3d(this.x, this.y, this.z);
+		Vector3d nextPos = new Vector3d(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
+		return this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true, false);
 	}
 
 }

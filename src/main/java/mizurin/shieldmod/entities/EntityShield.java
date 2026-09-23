@@ -16,6 +16,9 @@ import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
+import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3d;
+import org.joml.primitives.AABBd;
 
 import java.util.List;
 
@@ -66,38 +69,38 @@ public class EntityShield extends ProjectilePebble {
 		}
 
 		velocity = MathHelper.sqrt(this.xd * this.xd + this.yd * this.yd + this.zd * this.zd);
-		Vec3 currentPos = Vec3.getTempVec3(this.x, this.y, this.z);
-		Vec3 nextPos = Vec3.getTempVec3(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
+		Vector3d currentPos = new Vector3d(this.x, this.y, this.z);
+		Vector3d nextPos = new Vector3d(this.x + this.xd, this.y + this.yd - (double)0.25F, this.z + this.zd);
 		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true, false);
 		float otherAxisScale;
 		float deceleration;
 		//This section is used to invert the velocity of the entity after it hits a tile. inverting it basically turns it around.
-		if (hit != null && hit.hitType == HitResult.HitType.TILE) {
+		if (hit != null && hit instanceof HitResult.Tile hitTile) {
 			float bounceAxisScale = 0.4F;
 			otherAxisScale = 0.6F;
 			deceleration = 0.2F;
-			Side side = hit.side;
+			Side side = hitTile.side;
 			if (side == Side.TOP && (Math.abs(this.yd) < 0.25 || velocity < deceleration)) {
 				this.yd = 0.0;
-				this.y = (double) ((float) hit.y + 1.0F + 0.25F);
+				this.y = (double) ((float) hitTile.tilePos.y() + 1.0F + 0.25F);
 				this.xd = 0.0;
 				this.zd = 0.0;
 				return;
 			}
 
-			if (side.getAxis() == Axis.Y) {
+			if (side.axis() == Axis.Y) {
 				this.yd = -this.yd * (double) bounceAxisScale;
 				this.xd *= (double) otherAxisScale;
 				this.zd *= (double) otherAxisScale;
 			}
 
-			if (side.getAxis() == Axis.X) {
+			if (side.axis() == Axis.X) {
 				this.xd = -this.xd * (double) bounceAxisScale;
 				this.yd *= (double) otherAxisScale;
 				this.zd *= (double) otherAxisScale;
 			}
 
-			if (side.getAxis() == Axis.Z) {
+			if (side.axis() == Axis.Z) {
 				this.zd = -this.zd * (double) bounceAxisScale;
 				this.xd *= (double) otherAxisScale;
 				this.yd *= (double) otherAxisScale;
@@ -106,7 +109,7 @@ public class EntityShield extends ProjectilePebble {
 		}
 
 
-		List<Entity> collidingEntities = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.cloneMove(this.xd, this.yd, this.zd).expand(0.5, 0.5, 0.5));
+		List<Entity> collidingEntities = this.world.getEntitiesWithinAABBExcludingEntity(this, this.bb.translate(this.xd, this.yd, this.zd, new AABBd())); //grow by 0.5
 		if ((collidingEntities == null || collidingEntities.size() <= 0) && this.bounce > 0 || collidingEntities != null && collidingEntities.size() == 1 && collidingEntities.get(0) == this.owner && this.tickCount < 4) {
 			//This grabs a list of entities inside the bounding box
 			this.x += this.xd;
@@ -137,7 +140,7 @@ public class EntityShield extends ProjectilePebble {
 			if (this.isInWater()) {
 				for (int i = 0; i < 4; ++i) {
 					double particleDistance = 0.25;
-					this.world.spawnParticle("bubble", this.x - this.xd * particleDistance, this.y - this.yd * particleDistance, this.z - this.zd * particleDistance, this.xd, this.yd, this.zd, 0);
+					this.world.spawnParticle("bubble", this.x - this.xd * particleDistance, this.y - this.yd * particleDistance, this.z - this.zd * particleDistance, this.xd, this.yd, this.zd, 0, 5, false);
 				}
 
 				deceleration = 0.8F;
@@ -159,8 +162,8 @@ public class EntityShield extends ProjectilePebble {
 		} else {
 			if (this.modelItem != null) {
 				for (int j = 0; j < 8; ++j) {
-					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_SNOWBALL.id);
-					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, this.modelItem.id);
+					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_SNOWBALL.id, 5, false);
+					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, this.modelItem.id, 5, false);
 					//spawns particles on impact.
 				}
 			}
@@ -183,21 +186,21 @@ public class EntityShield extends ProjectilePebble {
 	}
 
 	//this is all leftover code for the original throwing mechanic. will be added to a config in the future.
-	public void onHit(HitResult hitResult) {
+	public void onHit(@NotNull HitResult hitResult) {
 		damage = ticksInAir /3 + 3;
 		if (damage > 14){
 			damage = 14;
 		}
-		if (hitResult.entity != null) {
-			hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
+		if (hitResult instanceof HitResult.Entity hitResult1) {
+			hitResult1.entity.hurt(this.owner, this.damage, DamageType.COMBAT);
 		}
 				if (!this.world.isClientSide) {
 					this.world.playSoundAtEntity((Entity) null, this, "mob.ghast.fireball", 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
 				}
 			if (this.modelItem != null) {
 				for(int j = 0; j < 8; ++j) {
-					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_SNOWBALL.id);
-					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, this.modelItem.id);
+					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, Items.AMMO_SNOWBALL.id, 5, false);
+					this.world.spawnParticle("item", this.x, this.y, this.z, 0.0, 0.0, 0.0, this.modelItem.id, 5, false);
 				}
 			}
 		this.remove();
@@ -207,8 +210,8 @@ public class EntityShield extends ProjectilePebble {
 		}
 	@Override
 	public HitResult getHitResult() {
-		Vec3 currentPos = Vec3.getTempVec3(this.x, this.y, this.z);
-		Vec3 nextPos = Vec3.getTempVec3(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
+		Vector3d currentPos = new Vector3d(this.x, this.y, this.z);
+		Vector3d nextPos = new Vector3d(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
 		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true, false);
 		return hit;
 	}

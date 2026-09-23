@@ -9,6 +9,8 @@ import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.phys.HitResult;
 import net.minecraft.core.util.phys.Vec3;
 import net.minecraft.core.world.World;
+import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3d;
 
 public class EntityFire extends Projectile {
 
@@ -40,16 +42,15 @@ public class EntityFire extends Projectile {
 		this.defaultProjectileSpeed = 0.115F;
 	}
 
-	public void onHit(HitResult hitResult) {
-		if (hitResult.hitType == HitResult.HitType.ENTITY && hitResult.entity != this.owner) {
-			hitResult.entity.hurt(this.owner, this.damage, DamageType.FIRE);
+	public void onHit(@NotNull HitResult hitResult) {
+		if (hitResult instanceof HitResult.Entity hitEntity && hitEntity.entity != this.owner){
+			hitEntity.entity.hurt(this.owner, this.damage, DamageType.FIRE);
+			hitEntity.entity.xd *= .33;
+			hitEntity.entity.yd = 0.0;
+			hitEntity.entity.zd *= .33;
 
-			hitResult.entity.xd *= .33;
-			hitResult.entity.yd = 0.0;
-			hitResult.entity.zd *= .33;
-
-			hitResult.entity.remainingFireTicks = 100;
-			if (hitResult.entity instanceof Player){
+			hitEntity.entity.remainingFireTicks = 100;
+			if (hitEntity.entity instanceof Player){
 				remove();
 			}
 		}
@@ -78,15 +79,13 @@ public class EntityFire extends Projectile {
 		}
 
 		if(this.tickCount > 1) {
-			world.spawnParticle("flame", this.x, this.y, this.z, this.random.nextFloat()*.1, this.random.nextFloat()*.1, this.random.nextFloat()*.1, 0);
+			world.spawnParticle("flame", this.x, this.y, this.z, this.random.nextFloat()*.1, this.random.nextFloat()*.1, this.random.nextFloat()*.1, 0, 5, false);
 		}
 	}
 	@Override
 	public HitResult getHitResult() {
-		Vec3 currentPos = Vec3.getTempVec3(this.x, this.y, this.z);
-		Vec3 nextPos = Vec3.getTempVec3(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
-		assert this.world != null;
-		HitResult hit = this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true, false);
-		return hit;
+		Vector3d currentPos = new Vector3d(this.x, this.y, this.z);
+		Vector3d nextPos = new Vector3d(this.x + this.xd, this.y + this.yd - 0.25, this.z + this.zd);
+		return this.world.checkBlockCollisionBetweenPoints(currentPos, nextPos, false, true, false);
 	}
 }

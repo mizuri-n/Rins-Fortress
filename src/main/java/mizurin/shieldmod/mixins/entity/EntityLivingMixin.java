@@ -24,7 +24,7 @@ public class EntityLivingMixin {
 				entityKilledBy.world.spawnParticle(
 					"explode",
 					entityKilledBy.x, entityKilledBy.y + entityKilledBy.getHeadHeight(), entityKilledBy.z,
-					0.0, 0.0, 0.0, 0
+					0.0, 0.0, 0.0, 0, 5, false
 				);
 			}
 		}

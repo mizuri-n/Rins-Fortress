@@ -1,5 +1,6 @@
 package mizurin.shieldmod.mixins.world;
 import net.minecraft.core.entity.player.Player;
+import net.minecraft.core.enums.HumanArmorShape;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import net.minecraft.core.world.World;
@@ -38,10 +39,10 @@ public class WorldMixin {
 
 				boolean plyInvis = false;
 
-				ItemStack bootSlot = entityPlayer1.inventory.armorItemInSlot(0); //1
-				ItemStack leggingsSlot = entityPlayer1.inventory.armorItemInSlot(1); //2
-				ItemStack chestplateSlot = entityPlayer1.inventory.armorItemInSlot(2); //4
-				ItemStack helmetSlot = entityPlayer1.inventory.armorItemInSlot(3); //1
+				ItemStack bootSlot = entityPlayer1.inventory.armorItemInSlot(HumanArmorShape.BOOTS); //1
+				ItemStack leggingsSlot = entityPlayer1.inventory.armorItemInSlot(HumanArmorShape.LEGS); //2
+				ItemStack chestplateSlot = entityPlayer1.inventory.armorItemInSlot(HumanArmorShape.CHEST); //4
+				ItemStack helmetSlot = entityPlayer1.inventory.armorItemInSlot(HumanArmorShape.HEAD); //1
 
 
 				if (helmetSlot != null && helmetSlot.itemID == Items.ARMOR_HELMET_LEATHER.id){

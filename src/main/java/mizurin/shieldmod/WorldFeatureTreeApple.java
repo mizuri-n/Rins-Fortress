@@ -18,7 +18,7 @@ public class WorldFeatureTreeApple extends WorldFeatureTree {
 
 	public void placeLeaves(World world, int x, int y, int z, Random rand) {
 		if (rand.nextInt(5) == 0) {
-			world.setBlockAndMetadataWithNotify(x, y, z, RFBlocks.leavesAppleFlowering.id(), world.seasonManager.getCurrentSeason() == Seasons.OVERWORLD_FALL ? 1 : 0);
+			world.setBlockAndMetadataWithNotify(x, y, z, RFBlocks.leavesAppleFlowering.id(), world.getSeasonManager().getCurrentSeason() == Seasons.OVERWORLD_FALL ? 1 : 0);
 		} else {
 			world.setBlockWithNotify(x, y, z, RFBlocks.leavesApple.id());
 		}

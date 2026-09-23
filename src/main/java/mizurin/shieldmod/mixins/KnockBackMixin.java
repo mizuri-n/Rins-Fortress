@@ -32,7 +32,6 @@ public abstract class KnockBackMixin {
 	@Shadow
 	public abstract boolean interact(Player entityplayer);
 
-	@Shadow
 	public abstract @Nullable ItemStack getHeldItem();
 
 	@Inject(method = "knockBack(Lnet/minecraft/core/entity/Entity;IDD)V", at = @At("HEAD"), cancellable = true)
